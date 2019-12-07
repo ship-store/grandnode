@@ -4763,8 +4763,6 @@ namespace Grand.Services.Installation
                                            IncludeInSitemap = false,
                                            IsPasswordProtected = false,
                                            DisplayOrder = 1,
-                                           Title = "Welcome to our store",
-                                           Body = "<p>Online shopping is the process consumers go through to purchase products or services over the Internet. You can edit this in the admin site.</p><p>If you have questions, see the <a href=\"http://www.grandnode.com/\">Documentation</a>, or post in the <a href=\"http://www.grandnode.com/boards/\">Forums</a> at <a href=\"http://www.grandnode.com\">grandnode.com</a></p>",
                                            TopicTemplateId = defaultTopicTemplate.Id
                                        },
                                    new Topic
