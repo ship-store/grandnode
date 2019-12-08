@@ -4,8 +4,13 @@ Thank you for choosing GrandNode! It's an open source, free, cross-platform e-co
 
 It can be used for any kind of online store. GrandNode is a perfect choice for people who want to sell simple products. It's solution dedicated for the most demanding users. You can also create auctions, booking/reservation products or product kits. GrandNode became a mature solution especially for developers who want to develop a modern, functional and high performance e-commerce system. 
 
+<<<<<<< HEAD
+## How to install GrandNode ##
+## How to install GrandNode SIMPLY ##
+===============================================
 ## How to install o3 ##
 
+>>>>>>> fde2f4487c33880c780f7195eba71b3a23ce783d
 You can install GrandNode in two different ways.
 1. Download the GrandNode package from our GitHub and install it: [Installation Guide](http://docs.grandnode.com/how-to-install-grandnode)
 2. Second way is to install GrandNode with Docker: [Docker installation guide](https://grandnode.com/weekly-tips-4-build-and-run-the-grandnode-with-docker-for-linux-containers)
