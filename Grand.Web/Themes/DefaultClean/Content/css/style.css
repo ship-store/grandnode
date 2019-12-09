@@ -5685,3 +5685,8 @@ blockquote.administration-response p {
 h5.administration-response-header {
 	color: #0091b5
 }
+
+/* O3 Styles */
+.footer-lower, #footer-block-about-us {
+	display: none;
+}
