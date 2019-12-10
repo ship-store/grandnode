@@ -6,29 +6,51 @@
     Html.AddTitleParts(T("PageTitle.Search").Text);
 }
 
-    <form action="~/Catalog/AddItem" method="post">
 
-        Name
-        @Html.TextBoxFor(m => m.Name)
+    <div class="form-row" action="~/Catalog/AddItem" method="post">
+        <div class="container-fluid"> 
+            <div class="row pt-2">
+                <div class="col-12">
+                    <label class="col-form-label pt-1 pb-1">Name</label>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control mt-1" })
+                </div>
+            </div>
 
-        Description
-        @Html.TextBoxFor(m => m.ShortDescription)
+            <div class="row  pt-2">
+                <div class="col-12">
+                    <label class="col-form-label">Description</label>
+                     <span class=" pt-1 pb-1"></span>
+                    @Html.TextAreaFor(m => m.ShortDescription, new { @class = "form-control mt-1" })
+                </div>
+            </div>
 
+            <div class="row  pt-2">
+                <div class="col-12">
+                    <label class="col-form-label pt-1 pd-1">Vender</label>
+                    <select asp-for="VendorId" asp-items="Model.AvailableVendors" class="custom-select form-control mt-1"></select>
+                    <span class="field-validation-valid" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
+                </div>
+            </div>
 
-        <label class="col-form-label">Vendor:</label>
-        <select asp-for="VendorId" asp-items="Model.AvailableVendors" class="custom-select form-control"></select>
+            <div class="row  pt-2">
+                <div class="col-12">
+                    <label class="col-form-label pt-1 pd-1">Categories</label>
+                    <admin-input asp-for="Categories" class="form-control mt-1" />
+                    <span asp-validation-for="Categories"></span>
+                </div>
+            </div>
 
+           
+            <div class="row  pt-2">
+                <div class="col-12">
+                    <input type="submit" class="btn btn-primary mt-1" />
+                </div>
+            </div>
 
-        <admin-label asp-for="Categories" />
-        <div class="col-md-9 col-sm-9">
-            <admin-input asp-for="Categories" />
-            <span asp-validation-for="Categories"></span>
         </div>
+     </div>
 
-        <input type="submit" value="Submit" />
-    </form>
-
-<script asp-location="Footer">
+        <script asp-location="Footer">
     @{
         //TODO move to Model
         var productTags = Model.AvailableCategories;
@@ -60,12 +82,12 @@
             placeholder: 'Enter categories ...'
         });
     });
-</script>
+        </script>
 
-@{
+        @{
 
-    //resources for product tags input
-    Html.AppendCssFileParts("~/content/tagEditor/jquery.tag-editor.css", excludeFromBundle: true);
-    Html.AppendScriptParts(ResourceLocation.Footer,"~/scripts/tagEditor/jquery.tag-editor.min.js", excludeFromBundle: true);
-    Html.AppendScriptParts(ResourceLocation.Footer,"~/scripts/tagEditor/jquery.caret.min.js", excludeFromBundle: true);
-}
+            //resources for product tags input
+            Html.AppendCssFileParts("~/content/tagEditor/jquery.tag-editor.css", excludeFromBundle: true);
+            Html.AppendScriptParts(ResourceLocation.Footer, "~/scripts/tagEditor/jquery.tag-editor.min.js", excludeFromBundle: true);
+            Html.AppendScriptParts(ResourceLocation.Footer, "~/scripts/tagEditor/jquery.caret.min.js", excludeFromBundle: true);
+        }
