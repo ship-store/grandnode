@@ -531,6 +531,28 @@ namespace Grand.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> PortWiseReport()
+        {
+            if (!await _permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
+                return AccessDeniedView();
+
+            string storeId = "";
+            if (_workContext.CurrentCustomer.IsStaff())
+                storeId = _workContext.CurrentCustomer.StaffStoreId;
+
+            var model = new CountryReportModel {
+                //order statuses
+                AvailableOrderStatuses = OrderStatus.Pending.ToSelectList(false).ToList()
+            };
+            model.AvailableOrderStatuses.Insert(0, new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "" });
+
+            //payment statuses
+            model.AvailablePaymentStatuses = PaymentStatus.Pending.ToSelectList(false).ToList();
+            model.AvailablePaymentStatuses.Insert(0, new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "" });
+
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CountryReportList(DataSourceRequest command, CountryReportModel model)
         {
