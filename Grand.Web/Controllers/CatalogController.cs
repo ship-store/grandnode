@@ -16,13 +16,16 @@ using Grand.Services.Orders;
 using Grand.Services.Security;
 using Grand.Services.Stores;
 using Grand.Services.Vendors;
+using Grand.Web.Areas.Admin.Models.Catalog;
 using Grand.Web.Interfaces;
 using Grand.Web.Models.Catalog;
 using Grand.Web.Models.Vendors;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Net.Http.Headers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,7 +36,7 @@ namespace Grand.Web.Controllers
         #region Fields
 
         private readonly ICatalogViewModelService _catalogViewModelService;
-        private readonly IProductViewModelService _productViewModelService;        
+        private readonly IProductViewModelService _productViewModelService;
         private readonly IVendorService _vendorService;
         private readonly IWorkContext _workContext;
         private readonly IStoreContext _storeContext;
@@ -47,7 +50,9 @@ namespace Grand.Web.Controllers
         private readonly ICustomerActionEventService _customerActionEventService;
         private readonly IVendorViewModelService _vendorViewModelService;
         private readonly VendorSettings _vendorSettings;
-        
+        private readonly ICategoryService _categoryService;
+        private readonly Grand.Web.Areas.Admin.Interfaces.IProductViewModelService _adminProductViewModelService;
+
         #endregion
 
         #region Constructors
@@ -55,18 +60,21 @@ namespace Grand.Web.Controllers
         public CatalogController(ICatalogViewModelService catalogViewModelService,
             IProductViewModelService productViewModelService,
             IVendorService vendorService,
-            IWorkContext workContext, 
+            IWorkContext workContext,
             IStoreContext storeContext,
             ILocalizationService localizationService,
-            IWebHelper webHelper, 
+            IWebHelper webHelper,
             IGenericAttributeService genericAttributeService,
             IAclService aclService,
             IStoreMappingService storeMappingService,
-            IPermissionService permissionService, 
+            IPermissionService permissionService,
             ICustomerActivityService customerActivityService,
             ICustomerActionEventService customerActionEventService,
             IVendorViewModelService vendorViewModelService,
-            VendorSettings vendorSettings)
+            VendorSettings vendorSettings,
+            ICategoryService categoryService,
+            Grand.Web.Areas.Admin.Interfaces.IProductViewModelService adminProductViewModelService
+            )
         {
             this._catalogViewModelService = catalogViewModelService;
             this._productViewModelService = productViewModelService;
@@ -83,6 +91,8 @@ namespace Grand.Web.Controllers
             this._customerActionEventService = customerActionEventService;
             this._vendorViewModelService = vendorViewModelService;
             this._vendorSettings = vendorSettings;
+            this._categoryService = categoryService;
+            this._adminProductViewModelService = adminProductViewModelService;
         }
 
         #endregion
@@ -257,7 +267,7 @@ namespace Grand.Web.Controllers
         [FormValueRequired("add-review")]
         [PublicAntiForgery]
         [ValidateCaptcha]
-        public virtual async Task<IActionResult> VendorReviewsAdd(string vendorId, VendorReviewsModel model, bool captchaValid, 
+        public virtual async Task<IActionResult> VendorReviewsAdd(string vendorId, VendorReviewsModel model, bool captchaValid,
             [FromServices] IOrderService orderService, [FromServices] IMediator eventPublisher, [FromServices] CaptchaSettings captchaSettings)
         {
             var vendor = await _vendorService.GetVendorById(vendorId);
@@ -350,8 +360,7 @@ namespace Grand.Web.Controllers
             else
             {
                 //insert new helpfulness
-                prh = new VendorReviewHelpfulness
-                {
+                prh = new VendorReviewHelpfulness {
                     VendorReviewId = vendorReview.Id,
                     CustomerId = customer.Id,
                     WasHelpful = washelpful,
@@ -413,7 +422,7 @@ namespace Grand.Web.Controllers
         {
             //'Continue shopping' URL
             await SaveLastContinueShoppingPage(_workContext.CurrentCustomer);
-            
+
             //Prepare model
             var searchmodel = await _catalogViewModelService.PrepareSearch(model, command);
 
@@ -426,10 +435,63 @@ namespace Grand.Web.Controllers
                 return Content("");
 
             var result = await _catalogViewModelService.PrepareSearchAutoComplete(term, categoryId);
-            
+
             return Json(result);
         }
 
         #endregion
+
+        public virtual async Task<IActionResult> AddItem()
+        {
+            var model = new ProductAddItemViewModel {
+                AvailableVendors = new List<SelectListItem>()
+            };
+
+            model.AvailableCategories = new List<string>();
+            var categories = await _categoryService.GetAllCategories();
+            foreach (var item in categories)
+            {
+                model.AvailableCategories.Add(item.Name);
+            }
+
+            model.AvailableVendors.Add(new SelectListItem {
+                Text = _localizationService.GetResource("Admin.Catalog.Products.Fields.Vendor.None"),
+                Value = ""
+            });
+            var vendors = await _vendorService.GetAllVendors(showHidden: true);
+            foreach (var vendor in vendors)
+            {
+                model.AvailableVendors.Add(new SelectListItem {
+                    Text = vendor.Name,
+                    Value = vendor.Id.ToString()
+                });
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual async Task<IActionResult> AddItem(ProductAddItemViewModel productAddItemViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var model = new ProductModel();
+                model.Name = productAddItemViewModel.Name;
+                model.ShortDescription = productAddItemViewModel.ShortDescription;
+                model.VendorId = productAddItemViewModel.VendorId;
+
+                model.Published = true;
+
+                var insertedProduct = await _adminProductViewModelService.InsertProductModel(model);
+                SuccessNotification(_localizationService.GetResource("Admin.Catalog.Products.Added"));
+
+                //Categories
+
+
+                return View();
+            }
+            return View();
+        }
     }
 }

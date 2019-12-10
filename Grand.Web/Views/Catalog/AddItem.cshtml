@@ -1,0 +1,71 @@
+﻿@model ProductAddItemViewModel
+@{
+    Layout = "_ColumnsTwo";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Search").Text);
+}
+
+    <form action="~/Catalog/AddItem" method="post">
+
+        Name
+        @Html.TextBoxFor(m => m.Name)
+
+        Description
+        @Html.TextBoxFor(m => m.ShortDescription)
+
+
+        <label class="col-form-label">Vendor:</label>
+        <select asp-for="VendorId" asp-items="Model.AvailableVendors" class="custom-select form-control"></select>
+
+
+        <admin-label asp-for="Categories" />
+        <div class="col-md-9 col-sm-9">
+            <admin-input asp-for="Categories" />
+            <span asp-validation-for="Categories"></span>
+        </div>
+
+        <input type="submit" value="Submit" />
+    </form>
+
+<script asp-location="Footer">
+    @{
+        //TODO move to Model
+        var productTags = Model.AvailableCategories;
+        var productTagsSb = new System.Text.StringBuilder();
+        productTagsSb.Append("var initialCategories = [");
+        for (int i = 0; i < productTags.Count; i++)
+        {
+            var tag = productTags[i];
+            productTagsSb.Append("'");
+            productTagsSb.Append(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(tag));
+            productTagsSb.Append("'");
+            if (i != productTags.Count - 1)
+            {
+                productTagsSb.Append(",");
+            }
+        }
+        productTagsSb.Append("]");
+    }
+    //tags
+    $(document).ready(function () {
+        @Html.Raw(productTagsSb.ToString())
+        $("#@Html.FieldIdFor(model => model.Categories)").tagEditor({
+            autocomplete: {
+            delay: 0,
+            //position: { collision: 'flip' },
+            source: initialCategories
+            },
+            delimiter: ',',
+            placeholder: 'Enter categories ...'
+        });
+    });
+</script>
+
+@{
+
+    //resources for product tags input
+    Html.AppendCssFileParts("~/content/tagEditor/jquery.tag-editor.css", excludeFromBundle: true);
+    Html.AppendScriptParts(ResourceLocation.Footer,"~/scripts/tagEditor/jquery.tag-editor.min.js", excludeFromBundle: true);
+    Html.AppendScriptParts(ResourceLocation.Footer,"~/scripts/tagEditor/jquery.caret.min.js", excludeFromBundle: true);
+}
