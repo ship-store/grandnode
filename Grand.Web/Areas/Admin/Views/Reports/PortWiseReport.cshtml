@@ -42,10 +42,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <admin-label asp-for="PaymentStatusId" />
+                                        <label class="control-label col-md-3 col-sm-3">
+                                            Products
+                                            <i class="help icon-question" data-placement="left" data-toggle="tooltip" title="" data-original-title=""></i>
+                                        </label>
                                         <div class="col-md-9 col-sm-9">
-                                            <admin-select asp-for="PaymentStatusId" asp-items="Model.AvailablePaymentStatuses" />
-                                        </div>
+                                                <select data-val="true" id="ProductId" class="form-control k-input ">
+                                                    <option value="">All</option>
+                                                    <option value="10">ScanSafari 005</option>
+                                                    <option value="20">AIR FRESHENER 420ML </option>
+                                                    <option value="30">ASH TRAY STAINLESS STEEL, DIVIDE & DROP 120MM DIAM</option>
+                                                    <option value="35">Baby/Toddler Insert for Insulated Immersion Suit SCAA/YC</option>
+                                                    <option value="40">ScanSafeBelt</option>
+                                                    <option value="50">BATH TOWEL</option>
+                                                </select>
+                                        </div>  
                                     </div>
                                 </div>
                                 <div class="form-actions">
@@ -58,7 +69,7 @@
                                     </div>
                                 </div>
                                 <div class="x_content">
-                                    <div id="countryreport-grid"></div>
+                                    <div id="osm-map"></div>
                                 </div>
                             </div>
                         </div>
@@ -69,75 +80,29 @@
     </div>
 </div>
 
+<script src="//unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+<link href="//unpkg.com/leaflet@1.0.1/dist/leaflet.css" rel="stylesheet" />
+<script>
+    // Where you want to render the map.
+    var element = document.getElementById('osm-map');
 
-    <script>
-        $(document).ready(function () {
-            $("#countryreport-grid").kendoGrid({
-                dataSource: {
-                    transport: {
-                        read: {
-                            url: "@Html.Raw(Url.Action("CountryReportList", "Reports"))",
-                            type: "POST",
-                            dataType: "json",
-                            data: additionalData
-                        }
-                    },
-                    schema: {
-                        data: "Data",
-                        total: "Total",
-                        errors: "Errors"
-                    },
-                    error: function(e) {
-                        display_kendoui_grid_error(e);
-                        // Cancel the changes
-                        this.cancelChanges();
-                    },
-                    serverPaging: true,
-                    serverFiltering: true,
-                    serverSorting: true
-                },
-                pageable: {
-                    refresh: true,
-                    numeric: false,
-                    previousNext: false,
-                    info: false
-                },
-                scrollable: false,
-                columns: [{
-                    field: "CountryName",
-                    title: "@T("Admin.Reports.Country.Fields.CountryName")"
-                }, {
-                    field: "TotalOrders",
-                    title: "@T("Admin.Reports.Country.Fields.TotalOrders")"
-                },{
-                    field: "SumOrders",
-                    title: "@T("Admin.Reports.Country.Fields.SumOrders")"
-                }]
-            });
-        });
-    </script>
+    // Height has to be set. You can do this in CSS too.
+    element.style = 'height:400px;';
 
-    <script type="text/javascript">
+    // Create Leaflet map on map element.
+    var map = L.map(element);
 
-        $(document).ready(function () {
+    // Add OSM tile leayer to the Leaflet map.
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
 
-            $('#search-countryreport').click(function () {
-                var grid = $('#countryreport-grid').data('kendoGrid');
-                grid.dataSource.read();
-                return false;
-            });
+    // Target's GPS coordinates.
+    var target = L.latLng('25.0236', '55.0403');
 
-        });
+    // Set map's center to target with zoom 14.
+    map.setView(target, 2);
 
-        function additionalData() {
-            var data = {
-                StartDate: $('#@Html.FieldIdFor(model => model.StartDate)').val(),
-                EndDate: $('#@Html.FieldIdFor(model => model.EndDate)').val(),
-                OrderStatusId: $('#OrderStatusId').val(),
-                PaymentStatusId: $('#PaymentStatusId').val()
-            };
-            addAntiForgeryToken(data);
-            return data;
-        }
-
-    </script>
+    // Place a marker on the same location.
+    L.marker(target).addTo(map).bindPopup("<b>1 requisition(s)</b><br />Port of Jebel Ali, Dubai").openPopup();
+</script>

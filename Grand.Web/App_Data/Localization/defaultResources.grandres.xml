@@ -14541,6 +14541,9 @@
   <LocaleResource Name="Admin.Reports.Country">
     <Value>Country report</Value>
   </LocaleResource>
+  <LocaleResource Name="Admin.Reports.Portwise">
+    <Value>Portwise report</Value>
+  </LocaleResource>
   <LocaleResource Name="Admin.Reports.Country.EndDate">
     <Value>End date</Value>
   </LocaleResource>
