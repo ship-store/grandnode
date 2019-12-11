@@ -77,6 +77,14 @@ namespace Grand.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> NewList(int? orderStatusId = null,
+    int? paymentStatusId = null, int? shippingStatusId = null, DateTime? startDate = null)
+        {
+            var model = await _orderViewModelService.PrepareOrderListModel(orderStatusId, paymentStatusId, shippingStatusId, startDate, _workContext.CurrentCustomer.StaffStoreId);
+            return View(model); 
+        }
+        
+
         [HttpPost]
         public async Task<IActionResult> OrderList(DataSourceRequest command, OrderListModel model)
         {
