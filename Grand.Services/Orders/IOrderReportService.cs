@@ -28,6 +28,7 @@ namespace Grand.Services.Orders
             PaymentStatus? ps = null, ShippingStatus? ss = null,
             DateTime? startTimeUtc = null, DateTime? endTimeUtc = null);
 
+        Task<IList<Order>> GetAllOrders(string storeId = "", OrderStatus? os = null, PaymentStatus? ps = null, ShippingStatus? ss = null, DateTime? startTimeUtc = null, DateTime? endTimeUtc = null);
 
         /// <summary>
         /// Get "order by time" report

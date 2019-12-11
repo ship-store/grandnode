@@ -1,7 +1,7 @@
-﻿@model CountryReportModel
+﻿@model PortwiseReportModel
 @{
     //page title
-    ViewBag.Title = T("Admin.Reports.Country").Text;
+    ViewBag.Title = T("Admin.Reports.Portwise").Text;
 }
 
 <antiforgery-token />
@@ -39,6 +39,9 @@
                                         <admin-label asp-for="OrderStatusId" />
                                         <div class="col-md-9 col-sm-9">
                                             <admin-select asp-for="OrderStatusId" asp-items="Model.AvailableOrderStatuses" />
+                                            <script>
+                                                document.getElementById("OrderStatusId").value = 10;
+                                            </script>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -47,22 +50,22 @@
                                             <i class="help icon-question" data-placement="left" data-toggle="tooltip" title="" data-original-title=""></i>
                                         </label>
                                         <div class="col-md-9 col-sm-9">
-                                                <select data-val="true" id="ProductId" class="form-control k-input ">
-                                                    <option value="">All</option>
-                                                    <option value="10">ScanSafari 005</option>
-                                                    <option value="20">AIR FRESHENER 420ML </option>
-                                                    <option value="30">ASH TRAY STAINLESS STEEL, DIVIDE & DROP 120MM DIAM</option>
-                                                    <option value="35">Baby/Toddler Insert for Insulated Immersion Suit SCAA/YC</option>
-                                                    <option value="40">ScanSafeBelt</option>
-                                                    <option value="50">BATH TOWEL</option>
-                                                </select>
-                                        </div>  
+                                            <select data-val="true" id="ProductId" class="form-control k-input ">
+                                                <option value="">All</option>
+                                                <option value="10">ScanSafari 005</option>
+                                                <option value="20">AIR FRESHENER 420ML </option>
+                                                <option value="30">ASH TRAY STAINLESS STEEL, DIVIDE & DROP 120MM DIAM</option>
+                                                <option value="35">Baby/Toddler Insert for Insulated Immersion Suit SCAA/YC</option>
+                                                <option value="40">ScanSafeBelt</option>
+                                                <option value="50">BATH TOWEL</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-sm-offset-3 col-md-9 col-sm-9">
-                                            <button class="btn btn-success filter-submit" id="search-countryreport">
+                                            <button class="btn btn-success filter-submit" id="search-countryreport" onclick="onReportRun()">
                                                 <i class="fa fa-search"></i> @T("Admin.Reports.Country.RunReport")
                                             </button>
                                         </div>
@@ -90,19 +93,37 @@
     element.style = 'height:400px;';
 
     // Create Leaflet map on map element.
-    var map = L.map(element);
+    var map = L.map(element, {
+        center: [51.505, -0.09],
+        zoom: 2
+    });
 
     // Add OSM tile leayer to the Leaflet map.
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Target's GPS coordinates.
-    var target = L.latLng('25.0236', '55.0403');
+    var markerGroup = L.layerGroup().addTo(map);
+    //var target = L.latLng('25.0236', '55.0403');
+    //map.setView(target, 2);
+    //L.marker(target).addTo(markerGroup).bindPopup("<b>1 requisition(s)</b><br />Port of Jebel Ali, Dubai").openPopup();
+    onReportRun();
 
-    // Set map's center to target with zoom 14.
-    map.setView(target, 2);
-
-    // Place a marker on the same location.
-    L.marker(target).addTo(map).bindPopup("<b>1 requisition(s)</b><br />Port of Jebel Ali, Dubai").openPopup();
+    function onReportRun() {
+        $.getJSON("@Url.Action("PortWiseReportList")", {
+                StartDate: $('#@Html.FieldIdFor(model => model.StartDate)').val(),
+                EndDate: $('#@Html.FieldIdFor(model => model.EndDate)').val(),
+                OrderStatusId: $('#OrderStatusId').val(),
+                PaymentStatusId: $('#PaymentStatusId').val()
+        }, function (result) {
+            markerGroup.remove();
+            markerGroup = L.layerGroup().addTo(map);
+            console.log(result);
+            for (var i = 0; i < result.length; i++) {
+                var item = result[i];
+                var target = L.latLng('25.0236', '55.0403');
+                L.marker(target).addTo(markerGroup).bindPopup("<a href='/Admin/Order/List'><b>" + item.NoOfVessels + " requisition(s)</b></a><br />" + item.PortName.replace("Port Of Delivery: ","")).openPopup();
+            }
+        });
+    }
 </script>
