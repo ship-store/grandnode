@@ -1,0 +1,203 @@
+﻿
+
+@using Grand.Framework;
+@using Grand.Core;
+@using Grand.Framework.UI;
+@{
+    //page title
+    ViewBag.Title = "Import Products";
+
+    //register CSS and JS
+    Html.AddCssFileParts("~/scripts/fineuploader/fineuploader-4.2.2.min.css", excludeFromBundle: true);
+    Html.AddScriptParts("~/scripts/fineuploader/jquery.fineuploader-4.2.2.min.js", excludeFromBundle: true);
+}
+<antiforgery-token />
+<div class="row">
+    <div class="col-md-12">
+        <div class="x_panel light form-fit">
+            <div class="x_title">
+                <div class="caption">
+                    <i class="fa fa-list-alt"></i>
+                    @T("Plugins.DataTools.ImportProducts")
+                </div>
+                <div class="actions btn-group btn-group-devided">
+                  
+                    <input type="button" id="importfile" class="btn btn-success" value="Upload Excel" />
+                </div>
+            </div>
+
+            <div class="x_content form">
+                <div class="note note-info">
+                    <h4>Import Products Wizard:</h4>
+                    <ol>
+                        <li>Make sure the file is <b>.xlsx</b>.</li>
+                        <li>Make sure there is NO Formula in the excel.</li>
+                        <li>Categories : Multiple categories can be entered by seperating with semicolon (;)</li>
+                        <li>Import can take up to several minutes.</li>
+                    </ol>
+                   
+                </div>
+            </div>
+
+            <div class="x_content form">
+                <div id="importproducts-grid"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //import plugin
+        $("#importfile").click(function (e) {
+            e.preventDefault();
+            var window = $("#importfile-window");
+            if (!window.data("kendoWindow")) {
+                window.kendoWindow({
+                    modal: true,
+                    title: "@T("Admin.Configuration.Plugins.Upload")",
+                    actions: ["Close"]
+                });
+            }
+            window.data('kendoWindow').center().open();
+        });
+
+        //import pic plugin
+        $("#importPictures").click(function (e) {
+            e.preventDefault();
+            var window = $("#importPictures-window");
+            if (!window.data("kendoWindow")) {
+                window.kendoWindow({
+                    modal: true,
+                    title: "Upload Pictures",
+                    actions: ["Close"]
+                });
+            }
+            window.data('kendoWindow').center().open();
+        });
+
+        $("#importproducts-grid").kendoGrid({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "@Html.Raw(Url.Action("List", "ImportProducts"))",
+                        type: "POST",
+                        dataType: "json",
+                        data: addAntiForgeryToken
+                    }
+                },
+                schema: {
+                    data: "Data",
+                    total: "Total",
+                    errors: "Errors"
+                },
+                error: function (e) {
+                    display_kendoui_grid_error(e);
+                    // Cancel the changes
+                    this.cancelChanges();
+                },
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true
+            },
+            pageable: {
+                refresh: true,
+                numeric: false,
+                previousNext: false,
+                info: false
+            },
+            editable: {
+                confirmation: false,
+                mode: "inline"
+            },
+            scrollable: false,
+            columns: [{
+                field: "Name",
+                title: "Name",
+            }, {
+                field: "Status",
+                title: "Status",
+                template: '<a class="k-link" href="ImportProducts/#if(Name.endsWith(".xlsx")){#ViewDetails#}else{#ViewDetailsPic#}#/#=Id#">#=Status#</a>'
+            }, {
+                field: "ImportedCount",
+                title: "Imported Rows"
+            }, {
+                field: "TotalCount",
+                title: "Total Rows"
+            }, {
+                field: "CustomerName",
+                title: "Uploaded By",
+            }, {
+                field: "CreatedOnUtc",
+                title: "Uploaded On",
+                type: "date",
+                format:"{0:dd-MMM-yyyy HH:mm:ss}"
+            }]
+        });
+    });
+</script>
+
+<div class="modal-dialog" id="importfile-window" style="display:none; padding: 0 10px;">
+    <form asp-controller="SparepartImport" asp-action="ImportExcel" method="post" enctype="multipart/form-data">
+        <antiforgery-token />
+        <ul class="common-list">
+            <li>
+                <strong>NOTE: It can take up to several minutes.</strong>
+            </li>
+        </ul>
+        <div class="form-group">
+            <div class="col-md-2" style="margin-top: 7px; height: 34px; padding-left: 25px;">
+                <label class="control-label">
+                    Excel file
+                </label>
+            </div>
+            <div class="col-md-10">
+                <input id="importfiledialog" name="zippedFile" class="form-control" type="file">
+            </div>
+        </div>
+        <div class="form-group">
+            &nbsp;
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                &nbsp;
+            </div>
+            <div class="col-md-10 text-right mt-10">
+                <input id="importfilesubmit" class="btn btn-success" value="@T("Admin.Configuration.Plugins.Upload")" type="submit">
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-dialog" id="importPictures-window" style="display:none; padding: 0 10px;">
+    <form asp-controller="ImportProducts" asp-action="ImportPicture" method="post" enctype="multipart/form-data">
+        <antiforgery-token />
+        <ul class="common-list">
+            <li>
+                <strong>NOTE: It can take up to several minutes.</strong>
+            </li>
+        </ul>
+        <div class="form-group">
+            <div class="col-md-2" style="margin-top: 7px; height: 34px; padding-left: 25px;">
+                <label class="control-label">
+                    Zip file
+                </label>
+            </div>
+            <div class="col-md-10">
+                <input id="importPicturedialog" name="zippedFile" class="form-control" type="file">
+            </div>
+        </div>
+        <div class="form-group">
+            &nbsp;
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                &nbsp;
+            </div>
+            <div class="col-md-10 text-right mt-10">
+                <input id="importPicturesubmit" class="btn btn-success" value="Upload Pictures" type="submit">
+            </div>
+        </div>
+    </form>
+</div>

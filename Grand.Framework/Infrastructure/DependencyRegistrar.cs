@@ -18,6 +18,7 @@ using Grand.Services.Affiliates;
 using Grand.Services.Authentication;
 using Grand.Services.Authentication.External;
 using Grand.Services.Blogs;
+using Grand.Services.BreakdownJob;
 using Grand.Services.Catalog;
 using Grand.Services.Cms;
 using Grand.Services.Common;
@@ -25,14 +26,18 @@ using Grand.Services.Configuration;
 using Grand.Services.Customers;
 using Grand.Services.Directory;
 using Grand.Services.Discounts;
+using Grand.Services.Equipments;
 using Grand.Services.ExportImport;
 using Grand.Services.Forums;
 using Grand.Services.Helpers;
 using Grand.Services.Infrastructure;
 using Grand.Services.Installation;
+using Grand.Services.JobMaster;
+using Grand.Services.Jobplan;
 using Grand.Services.Knowledgebase;
 using Grand.Services.Localization;
 using Grand.Services.Logging;
+using Grand.Services.Maker;
 using Grand.Services.Media;
 using Grand.Services.Messages;
 using Grand.Services.News;
@@ -40,14 +45,19 @@ using Grand.Services.Orders;
 using Grand.Services.Payments;
 using Grand.Services.Polls;
 using Grand.Services.PushNotifications;
+using Grand.Services.register;
 using Grand.Services.Security;
 using Grand.Services.Seo;
 using Grand.Services.Shipping;
+using Grand.Services.Spareparts;
 using Grand.Services.Stores;
 using Grand.Services.Tasks;
 using Grand.Services.Tax;
 using Grand.Services.Topics;
+using Grand.Services.UnplannedJobs;
 using Grand.Services.Vendors;
+using Grand.Services.Vessel;
+
 using Microsoft.AspNetCore.StaticFiles;
 using MongoDB.Driver;
 using System;
@@ -149,6 +159,18 @@ namespace Grand.Framework.Infrastructure
             builder.RegisterType<AuctionService>().As<IAuctionService>().InstancePerLifetimeScope();
 
             builder.RegisterType<SpecificationAttributeService>().As<ISpecificationAttributeService>().InstancePerLifetimeScope();
+
+            builder.RegisterType<VesselService>().As<IVesselService>().InstancePerLifetimeScope();
+            builder.RegisterType<RegisterService>().As<IRegisterService>().InstancePerLifetimeScope();
+            builder.RegisterType<BreakdownJobService>().As<IBreakdownJobService>().InstancePerLifetimeScope();
+            builder.RegisterType<UnplannedJobService>().As<IUnplannedJobService>().InstancePerLifetimeScope();
+            builder.RegisterType<MakerService>().As<IMakerService>().InstancePerLifetimeScope();
+            builder.RegisterType<MakerService1>().As<IMakerService1>().InstancePerLifetimeScope();
+            builder.RegisterType<EquipmentService>().As<IEquipmentService>().InstancePerLifetimeScope();
+            builder.RegisterType<JobplanService>().As<IJobplanService>().InstancePerLifetimeScope();
+            builder.RegisterType<SparepartService>().As<ISparepartService>().InstancePerLifetimeScope();
+            builder.RegisterType<JobMasterService>().As<IJobMasterService>().InstancePerLifetimeScope();
+
 
             builder.RegisterType<ProductTemplateService>().As<IProductTemplateService>().InstancePerLifetimeScope();
             builder.RegisterType<CategoryTemplateService>().As<ICategoryTemplateService>().InstancePerLifetimeScope();

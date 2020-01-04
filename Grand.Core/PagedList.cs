@@ -83,6 +83,7 @@ namespace Grand.Core
         {
             var pagelist = new PagedList<T>();
             await pagelist.InitializeAsync(source, pageIndex, pageSize);
+            
             return pagelist;
         }
 

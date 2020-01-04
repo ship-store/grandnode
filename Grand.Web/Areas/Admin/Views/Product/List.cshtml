@@ -317,7 +317,7 @@
 
                 $.ajax({
                     cache: false,
-                    type: "POST",
+                    type: "GET",
                     url: "@(Url.Action("DeleteSelected", "Product"))",
                     data: postData,
                     complete: function(data) {

@@ -2,6 +2,9 @@ using Autofac;
 using Grand.Core.Configuration;
 using Grand.Core.Infrastructure;
 using Grand.Core.Infrastructure.DependencyManagement;
+using Grand.Web.Areas.Maintenance.DomainModels;
+using Grand.Web.Areas.Maintenance.Interfaces;
+using Grand.Web.Areas.Maintenance.Services;
 using Grand.Web.Infrastructure.Installation;
 using Grand.Web.Interfaces;
 using Grand.Web.Services;
@@ -71,7 +74,33 @@ namespace Grand.Web.Infrastructure
 
             //vendor service
             builder.RegisterType<VendorViewModelService>().As<IVendorViewModelService>().InstancePerLifetimeScope();
-           
+
+            //Vessel
+            builder.RegisterType<VesselViewModelService>().As<IVesselViewModelService>().InstancePerLifetimeScope();
+
+            //Register
+            builder.RegisterType<RegisterViewModelService>().As<IRegisterViewModelService>().InstancePerLifetimeScope();
+
+            //breakdown Service
+            builder.RegisterType<BreakdownJobViewModelService>().As<IBreakdownJobViewModelService>().InstancePerLifetimeScope();
+
+            //unplanned Service
+            builder.RegisterType<UnplannedJobViewModelService>().As<IUnplannedJobViewModelService>().InstancePerLifetimeScope();
+
+            //Maker Service
+            builder.RegisterType<MakerViewModelService>().As<IMakerViewModelService>().InstancePerLifetimeScope();
+            builder.RegisterType<MakerViewModelService1>().As<IMakerViewModelService1>().InstancePerLifetimeScope();
+            //Equipment Service
+            builder.RegisterType<ImportFileService>().As<IImportFileService>().InstancePerLifetimeScope();
+            builder.RegisterType<EquipmentImportManger>().As<EquipmentImportManger>().InstancePerLifetimeScope();
+            //Jobplan Service
+            builder.RegisterType<JobplanImportManger>().As<IJobplanImportManger>().InstancePerLifetimeScope();
+            //Sparepart Service
+            builder.RegisterType<SparepartImportManger>().As<ISparepartImportManger>().InstancePerLifetimeScope();
+
+            //Jobmaster Service
+            builder.RegisterType<JobMasterViewModelService>().As<IJobMasterViewModelService>().InstancePerLifetimeScope();
+
         }
 
         public int Order

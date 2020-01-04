@@ -1,0 +1,138 @@
+﻿@model UnplannedJobDisplayModel
+
+
+@Html.BeginForm("EditItem", "UnplannedJobs", FormMethod.Get, new { id = Model.UnplannedJobID })
+
+
+
+   
+<input type="hidden" value="@Model.UnplannedJobID" name="unplannedjobId" class="form-control" />
+
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+        <div class="header">
+            <h2>
+                Unplanned Job
+            </h2>
+            <ul class="header-dropdown m-r--5">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:void(0);">Action</a></li>
+                        <li><a href="javascript:void(0);">Another action</a></li>
+                        <li><a href="javascript:void(0);">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <div class="body">
+            <form action="AddUnplannedJobDetails" method="get">
+
+                <div class="container-fluid" style="width: 80%;">
+                    <div class="table-responsive">
+
+                        <table class="table">
+
+                            <tr>
+                                <td><label for="EquipmentName">Equipment Name</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                           
+                                            <input type="text" value="@Model.EquipmentName" name="EquipmentName" class="form-control" />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><label for="Job Order">JobOrder</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            
+                                            <input type="text" value="@Model.JobOrder" name="JobOrder" class="form-control" />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Title">Title</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                           
+                                            <input type="text" value="@Model.Title" name="Title" class="form-control" />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><label for="JobReportedDate">Job Reported Date</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                        
+                                            <input type="date" value="@Model.JobReportedDate" name="JobReportedDate" class="form-control" />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><label for="ReportedBy">Reported By</label></td>
+                                <td>
+                                    <select class="form-control show-tick"  value="@Model.ReportedBy" name="ReportedBy">
+                                      
+
+                                        <option disabled selected>@Model.ReportedBy</option>
+                                        <option>Chief Engineer</option>
+                                        <option>Second Engineer</option>
+                                        <option>Third Engineer</option>
+                                        <option>Fourth Engineer</option>
+
+
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><label for="Status">Status</label></td>
+                                <td>
+                                    <select class="form-control show-tick" value="@Model.Status" name="Status">
+                                       
+                                        <option disabled selected>@Model.Status</option>
+                                        <option >Completed</option>
+                                        <option >In progress</option>
+                                        <option >Pending</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td>
+                                    <input type="submit" value="Edit" class="btn btn-primary" />
+                                </td>
+                             
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

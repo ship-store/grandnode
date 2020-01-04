@@ -1,0 +1,359 @@
+﻿@model BreakdownJobListModel
+@inject Grand.Core.Domain.Common.AdminAreaSettings adminAreaSettings
+@{
+    //page title
+
+    Layout = "~/Areas/Maintenance/Views/Shared/_AdminLayout.cshtml";
+
+
+}
+
+<antiforgery-token />
+<div class="row">
+    <div class="col-md-12">
+        <div class="x_panel light form-fit">
+            <div class="x_title">
+                <div class="caption">
+                    <i class="fa fa-cubes"></i>
+                    @*@T("Maintenance.Vendors")*@
+                    @T("Maintenance.BreakdownJob")
+                </div>
+                <div class="actions btn-group btn-group-devided">
+                    <a href="@Url.Action("AddBreakdownJob")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+                    <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+                </div>
+            </div>
+            <div class="x_content form">
+                <div class="form-horizontal">
+                    <div class="form-body col-md-6 advanced-filter">
+                        <div class="form-group">
+                            <label class="control-label col-xs-3 col-md-4 col-sm-4"> @T("maintenance.breakdownjob.list.searchname")</label>
+                            <div class="col-xs-9 col-md-8 col-sm-8">
+                                <admin-input asp-for="SearchName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-body col-md-6 advanced-filter">
+                        <div class="form-group">
+                            <div class="col-xs-12 col-md-12 col-sm-12">
+                                <div id="ExtendFilter">
+                                    <button class="btn btn-success filter-submit" id="search-products">
+                                        <i class="fa fa-search"></i> @T("Admin.Common.Search")
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="x_content">
+                <div id="vendors-grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        $(document).ready(function () {
+            $("#vendors-grid").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "@Html.Raw(Url.Action("List", "BreakdownJob","Maintenance"))",
+                            type: "POST",
+                            dataType: "json",
+                            data: additionalData
+                        }
+                    },
+                    schema: {
+                        data: "Data",
+                        total: "Total",
+                        errors: "Errors"
+                    },
+                    error: function(e) {
+                        display_kendoui_grid_error(e);
+                        // Cancel the changes
+                        this.cancelChanges();
+                    },
+                    pageSize: @(adminAreaSettings.DefaultGridPageSize),
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: [@(adminAreaSettings.GridPageSizes)]
+                },
+                editable: {
+                    confirmation: false,
+                    mode: "inline"
+                },
+                scrollable: false,
+                columns: [{
+                    field: "EquipmentName",
+                    title: "@T("maintenance.breakdownjob.fields.equipment_name")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:EquipmentName#</a>',
+                }, {
+                    field: "JobOrder",
+                    title: "@T("maintenance.breakdownjob.fields.job_order")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:JobOrder#</a>',
+                    },
+                    {
+                    field: "Title",
+                    title: "@T("maintenance.breakdownjob.fields.title")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Title#</a>',
+                    },
+                    {
+                    field: "JobReportedDate",
+                    title: "@T("maintenance.breakdownjob.fields.jobreported_date")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:JobReportedDate#</a>',
+                    },
+                    {
+                    field: "ReportedBy",
+                    title: "@T("maintenance.breakdownjob.fields.reported_by")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:ReportedBy#</a>',
+                    },
+                    {
+                    field: "Status",
+                    title: "@T("maintenance.breakdownjob.fields.status")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Status#</a>',
+                    },
+                ]
+            });
+        });
+</script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            //search button
+            $('#search-vendors').click(function () {
+                //search
+                var grid = $('#vendors-grid').data('kendoGrid');
+                grid.dataSource.page(1); //new search. Set page size to 1
+                //grid.dataSource.read(); we already loaded the grid above using "page" function
+                return false;
+            });
+
+            $("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
+                if (event.keyCode == 13) {
+                    $("#search-vendors").click();
+                    return false;
+                }
+            });
+        });
+
+        function additionalData() {
+            var data = {
+                SearchName: $('#@Html.FieldIdFor(model => model.SearchName)').val()
+            };
+            addAntiForgeryToken(data);
+            return data;
+        }
+</script>
+
+
+@*<h3>Breakdown Jobs List</h3>
+
+    <table class="table" >
+        <tr style="font-size:large">
+            <td>Equipment Name</td>
+            <td>Job Order</td>
+            <td>Title</td>
+            <td>Job reported date</td>
+            <td>Reported By</td>
+            <td>Status</td>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.EquipmentName</td>
+                <td>@item.JobOrder</td>
+                <td>@item.Title</td>
+                <td>@item.JobReportedDate</td>
+                <td>@item.ReportedBy</td>
+                <td>@item.Status</td>
+
+            </tr>
+        }
+
+    </table>*@
+
+@*<h1 align="center">Welcome to Vessel </h1>
+    <antiforgery-token /><div class="row">
+        <div class="col-md-12">
+            <div class="x_panel light form-fit">
+                <div class="x_title">
+                    <div class="caption">
+                        <i class="fa fa-cubes"></i>
+                        Vessel
+                    </div>
+                    <div class="actions btn-group btn-group-devided">
+                        <a href="@Url.Action("Create")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> Add New </span></a>
+                        <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+                    </div>
+                </div>
+                <div class="x_content form">
+                    <div class="form-horizontal">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <admin-label asp-for="SearchName" />
+                                <div class="col-md-4 col-sm-6">
+                                    <admin-input asp-for="SearchName" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-sm-offset-3 col-md-9 col-sm-9">
+                                    <button class="btn btn-success filter-submit" id="search-Vessels">
+                                        <i class="fa fa-search"> Search</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="x_content">
+                    <div id="Vessels-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+            $(document).ready(function () {
+                $("#Vessels-grid").kendoGrid({
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: "@Html.Raw(Url.Action("List", "Vessel","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                            }
+                        },
+                        schema: {
+                            data: "Data",
+                            total: "Total",
+                            errors: "Errors"
+                        },
+                        error: function(e) {
+                            display_kendoui_grid_error(e);
+                            // Cancel the changes
+                            this.cancelChanges();
+                        },
+                        pageSize: @(adminAreaSettings.DefaultGridPageSize),
+                        serverPaging: true,
+                        serverFiltering: true,
+                        serverSorting: true
+                    },
+                    pageable: {
+                        refresh: true,
+                        pageSizes: [@(adminAreaSettings.GridPageSizes)]
+                    },
+                    editable: {
+                        confirmation: false,
+                        mode: "inline"
+                    },
+                    scrollable: false
+                    columns: [{
+                        field: "Vessel_name",
+                        title: "@T("Admin.Vessels.Fields.Vessel_name")",
+                        width: 300,
+                        template: '<a class="k-link" href="Edit/#=Id#">#:Vessel_name#</a>',
+                    }, {
+                        field: "Vessel_type",
+                        title: "@T("Admin.Vessels.Fields.Vessel_type")",
+                        width: 300,
+                        template: '<a class="k-link" href="Edit/#=Id#">#:Vessel_type#</a>',
+                        },
+                         {
+                        field: "Class",
+                        title: "@T("Admin.Vessels.Fields.Class")",
+                        width: 300,
+                        template: '<a class="k-link" href="Edit/#=Id#">#:Class#</a>',
+                        },
+                          {
+                        field: "Flag",
+                        title: "@T("Admin.Vessels.Fields.Flag")",
+                        width: 300,
+                        template: '<a class="k-link" href="Edit/#=Id#">#:Flag#</a>',
+                        },
+                           {
+                        field: "Auxiliary_Engine",
+                        title: "@T("Admin.Vessels.Fields.Auxiliary_Engine")",
+                        width: 300,
+                        template: '<a class="k-link" href="Edit/#=Id#">#:Auxiliary_Engine#</a>',
+                        },
+                           {
+                        field: "Vessel_type",
+                        title: "@T("Admin.Vessels.Fields.Vessel_type")",
+                        width: 300,
+                        template: '<a class="k-link" href="Edit/#=Id#">#:Vessel_type#</a>',
+                        },
+                              {
+                        field: "Shipyard",
+                        title: "@T("Admin.Vessels.Fields.Shipyard")",
+                        width: 300,
+                        template: '<a class="k-link" href="Edit/#=Id#">#:Shipyard#</a>',
+                        },
+                                    {
+                        field: "Auxiliary_Engine",
+                        title: "@T("Admin.Vessels.Fields.Auxiliary_Engine")",
+                        width: 300,
+                        template: '<a class="k-link" href="Edit/#=Id#">#:Auxiliary_Engine#</a>',
+                        },
+                        {
+                        field: "Main_Engine",
+                        title: "@T("Admin.Vessels.Fields.Main_Engine")",
+                        width: 300,
+                        template: '<a class="k-link" href="Edit/#=Id#">#:Main_Engine#</a>',
+                        },
+                        {
+                        field: "Hull_no",
+                        title: "@T("Admin.Vessels.Fields.Hull_no")",
+                        width: 300,
+                        template: '<a class="k-link" href="Edit/#=Id#">#:Hull_no#</a>',
+                    },
+                        ]
+                });
+            });
+    </script>
+
+    <script type="text/javascript">
+                $(document).ready(function () {
+                    //search button
+                    $('#search-Vessels').click(function () {
+                        //search
+                        var grid = $('#Vessels-grid').data('kendoGrid');
+                        grid.dataSource.page(1); //new search. Set page size to 1
+                        //grid.dataSource.read(); we already loaded the grid above using "page" function
+                        return false;
+                    });
+
+                    $("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
+                        if (event.keyCode == 13) {
+                            $("#search-Vessels").click();
+                            return false;
+                        }
+                    });
+
+                        });
+
+                function additionalData() {
+                    var data = {
+                        SearchName: "Vishu Kumar test"
+                    };
+                  //  addAntiForgeryToken(data);
+                    return data;
+                }
+    </script>*@

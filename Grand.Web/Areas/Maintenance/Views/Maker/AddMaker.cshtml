@@ -1,0 +1,115 @@
+﻿
+@{
+    //page title
+    // ViewBag.Title = T("Admin.Catalog.Products.AddNew").Text;
+    //@model ProductModel
+    //Layout = "~/Areas/Maintenance/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Maker
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Action</a></li>
+                            <li><a href="javascript:void(0);">Another action</a></li>
+                            <li><a href="javascript:void(0);">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <br>
+            <div class="body">
+                <form action="AddMakerDetails" method="get">
+
+                    <div class="container-fluid" style="width: 80%;">
+                        <div class="table-responsive">
+
+                            <table class="table">
+
+                                <tr>
+                                    <td><label for="EquipmentName">Name</label></td>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="Name" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><label for="Code">Code</label></td>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="Code" />
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="Country">Country</label></td>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="Country"/>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Add" /></td>
+                                    @*<td><button class="btn btn-primary m-t-15 waves-effect">SUBMIT</button></td>*@
+
+                                </tr>
+
+                            </table>
+
+
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+@*<form action="AddMakerDetails" method="get">
+    <div class="container-fluid">
+        <div class="row pt-2">
+            <div class="col-md-6">
+                <label>Name</label>
+                <input type="text" class="form-control" name="Name" />
+            </div>
+        </div>
+        <div class="row pt-2">
+            <div class="col-md-6">
+                <label>Code</label>
+                <input type="text" class="form-control" name="Code" />
+            </div>
+        </div>
+        <div class="row pt-2">
+            <div class="col-md-6">
+                <label>Country</label>
+                <input type="text" class="form-control" name="Country" />
+            </div>
+        </div>
+
+        <div class="row pt-2">
+            <div class="col-md-6">
+                <label></label>
+                <input type="submit" class="btn btn-primary" value="Add" />
+            </div>
+        </div>
+    </div>
+</form>*@

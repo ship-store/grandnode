@@ -4,6 +4,7 @@ using Grand.Core;
 using Grand.Core.Infrastructure;
 using Grand.Services.Localization;
 using Grand.Services.Security;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.IO;
@@ -12,6 +13,7 @@ using System.Xml;
 
 namespace Grand.Framework.Menu
 {
+    //[Area("Maintenance")]
     public class XmlSiteMap
     {
         public XmlSiteMap()
@@ -87,7 +89,8 @@ namespace Grand.Framework.Menu
                 siteMapNode.ControllerName = controllerName;
                 siteMapNode.ActionName = actionName;
 
-                siteMapNode.RouteValues = new RouteValueDictionary { { "area", "Admin" } };
+                siteMapNode.RouteValues = new RouteValueDictionary { { "area", "Maintenance" } };
+                //siteMapNode.RouteValues = new RouteValueDictionary { { "area", "Admin" } };
             }
             else if (!string.IsNullOrEmpty(url))
             {

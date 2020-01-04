@@ -1,0 +1,691 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="icon" href="~/MaintenanceAdmin/img/logo2.png" type="image/x-icon">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>O3 | MAINTENANCE</title>
+    <!-- Favicon-->
+    <link rel="icon" href="#" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="~/MaintenanceAdmin/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="~/MaintenanceAdmin/plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="~/MaintenanceAdmin/plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Morris Chart Css-->
+    <link href="~/MaintenanceAdmin/plugins/morrisjs/morris.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="~/MaintenanceAdmin/css/style.css" rel="stylesheet">
+
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="~/MaintenanceAdmin/css/themes/all-themes.css" rel="stylesheet" />
+
+
+
+
+    <!-- Add Kendo Grid CSS Reference-->
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2018.2.620/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2018.2.620/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2018.2.620/styles/kendo.material.mobile.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Add Kendo Grid Js Reference -->
+    <script src="//kendo.cdn.telerik.com/2018.2.620/js/jquery.min.js"></script> <!-- jszip required for export to excel-->
+    <script src="//kendo.cdn.telerik.com/2018.2.620/js/jszip.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
+</head>
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+
+
+                <img onclick="window.location='home.html';" class="logo1" width="60px" height="60px" src="~/MaintenanceAdmin/img/logo2.png">
+                <a class="hed1" href="index.html">O3 Maintenance</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <br>
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Profile -->
+                    <!-- #END# Notifications -->
+                    <!-- Notifications -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">chat</i>
+                            <!-- <span class="label-count">7</span> -->
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">NOTIFICATIONS</li>
+                            <li class="body">
+                                <ul class="menu">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">person_add</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>Total Vessels</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 14 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+                    <!--dASH-->
+                    <li class="dropdown">
+                        <a href="home.html" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">trending_up</i>
+                            <!-- <span class="label-count">7</span> -->
+                        </a>
+
+                    </li>
+
+                    <!-- Notifications -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">notifications</i>
+                            <!-- <span class="label-count">7</span> -->
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">ALERTS</li>
+                            <li class="body">
+                                <ul class="menu">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">
+                                                    location_searching
+                                                </i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>AUXILARY ENGINE NO.2 pending</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 14 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-red">
+                                                <i class="material-icons">delete_forever</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b></b> Alert</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Alerts</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <div class="prof">
+
+                            <div class="prof1">
+
+                                <img class="propic" src="~/MaintenanceAdmin/img/sunil.jpg">
+
+
+                            </div>
+
+                            <div class="prof2">
+
+                                <div>
+
+                                    <span><b>Sunil</b></span><br>
+                                    <span>Chief Engineer</span>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </li>
+
+
+                    <!-- Profile End -->
+                    <!-- <li class="nav-item dropdown no-arrow">
+                            <div class="user-info">
+
+                                    <div class="info-container">
+                                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
+                                        <div class="email">Cheaf Engineer   </div>
+
+                                    </div>
+                                </div>
+                          </li>
+                          <li> -->
+                    <!--PROFILE-->
+                    <!-- <div class="btn-group user-helper-dropdown">
+                                    <img class="logo1" width="50px" height="60px" src="logo.png">
+                                    <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                                            <li role="separator" class="divider"></li>
+
+
+                                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                                        </ul>
+
+                            </div>
+                    </li>
+                             -->
+                    <!--END-->
+                    <!-- <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li> -->
+                    <!-- #END# Call Search -->
+                    <!-- Notifications -->
+                    <!-- #END# Notifications -->
+                    <!-- Tasks -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">person_outline</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Profile</a></li>
+                            <li><a href="index.html">Logout</a></li>
+
+                        </ul>
+                        <!--<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">flag</i>
+                            <span class="label-count">9</span>
+                        </a>-->
+                        <!-- #END# Tasks -->
+                        <!-- <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
+                        </ul> -->
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, ul, li, a, i, txtValue, div;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName('li');
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+    <section>
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <!-- User Info -->
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="active">
+                        <br><br>
+                        <a href="home.html">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <!--<li class="header">Services</li>-->
+                    <li>
+                        <div class="inner-addon left-addon">
+                            <i class="glyphicon glyphicon-search"></i>
+                            <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Search...." />
+                        </div>
+                    </li>
+                    <li id="myUL">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Equipment Master</span>
+                        </a>
+                        <ul class="ml-menu">
+
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>218-STERN APPRANGMENT</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>230-TANKS GENERAL</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>231-OTHER SPACES</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>253-DECK SUPERSTRUCTURES</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>301-CARGO HATCH COVERS</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>317-CONTAINER SECURING</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>335-DAVITS</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>403-STEERING GEAR</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>404-BOW THRUSTERS</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>410-SATELLITE LOGGING</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>500-RESCUE BOAT DAVIT</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>501-LIFEBOAT EQUIPMENTS</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>502-LIFE RAFTS</span>
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+
+                                    <span>601-MAIN ENGINE</span>
+                                </a>
+                                <ul class="ml-menu">
+
+                                    <li>
+                                        <a href="general.html">601.01-ME CYLINDER COVER</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.02-ME PISTON RODE</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.03-ME PISTON AND RINGS</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.04-ME CYLINDER LINERS</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.O5-ME CRANKPIN BEARING</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">601.07-ME CRANKSHAFT </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.08-ME MECHANICAL GEAR </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.09-ME FUEL OIL SYSTEM </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.10-ME LUBE OIL SYSTEM </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.12-ME EXHAUST SYSTEM</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.13-ME STARTING AIR</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.14-ME ASSEMBLY </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.15-ME TURBOCHARGER</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.16-ME TURNING GEAR</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.17-ME SAFETY SYSTEM </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">601.19-OTHERS </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>632-SHAFT</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>644-AUXILIARY BOILER</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>668-ALTERNATOR</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>701-FUEL OIL TRANSFER</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>705-DO FUEL SYSTEM</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Planned / Unplanned Jobs</span>
+                        </a>
+                        <ul class="ml-menu">
+
+
+                            <li>
+                                <a href="unplanned.html" class="menu-toggle" href="#">
+                                    <span>Unplanned Jobs</span>
+                                </a>
+
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle" href="#">
+                                    <span>Planned Jobs</span>
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Breakdown Jobs</span>
+                        </a>
+                        <ul class="ml-menu">
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Job Orders</span>
+                        </a>
+                        <ul class="ml-menu">
+
+                            <!-- <li>
+                                    <a href="javascript:void(0);" class="menu-toggle" href="#">
+                                        <span>Tabular</span>
+                                    </a>
+
+                                </li> -->
+                            <li>
+                                <!-- <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Infobox</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="#">Infobox-1</a>
+                                    </li>
+                                </ul> -->
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Due Job Orders</span>
+                        </a>
+                        <ul class="ml-menu">
+
+                            <li>
+                                <a href="tabular.html" class="menu-toggle">
+                                    <span>Tabular</span>
+                                    <a href="#"></a>
+                                </a>
+
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="runningh.html" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Running Hours</span>
+                        </a>
+                        <ul class="ml-menu">
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="postPoned.html" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Postponed Jobs</span>
+                        </a>
+                        <ul class="ml-menu">
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Analysis</span>
+                        </a>
+                        <ul class="ml-menu">
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i style="color: #0f5f86;" class="material-icons">widgets</i>
+                            <span style="color: #0f5f86;">Utilities</span>
+                            <!-- <i class="material-icons" style="color: #ff0000;">star_border</i> -->
+                        </a>
+                        <ul class="ml-menu">
+
+
+                            <li>
+                                <a href="VesselCreation.html" class="menu-toggle" href="#">
+                                    <span>Vessel Creation</span>
+                                </a>
+
+                            </li>
+
+                            <li>
+                                <a href="equipmentImport.html" class="menu-toggle" href="#">
+                                    <span>Equipment Import</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="SparePartsCreation.html" class="menu-toggle" href="#">
+                                    <span>Spare Parts Import</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="jobPlanImport.html" class="menu-toggle" href="#">
+                                    <span>Job Plan Import</span>
+                                </a>
+
+                            </li>
+
+
+                        </ul>
+
+                    </li>
+
+
+
+                </ul>
+            </div>
+            <!-- Side #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+
+            </div>
+
+        </aside>
+        <!-- #END# Right Sidebar -->
+    </section>
+    <br>
+    <section class="content">
+        <div class="container-fluid">
+
+
+
+            @RenderBody()
+
+
+
+        </div>
+    </section>
+
+    <!-- Jquery Core Js -->
+    <script src="~/MaintenanceAdmin/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="~/MaintenanceAdmin/plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="~/MaintenanceAdmin/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="~/MaintenanceAdmin/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="~/MaintenanceAdmin/plugins/node-waves/waves.js"></script>
+
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="~/MaintenanceAdmin/plugins/jquery-countto/jquery.countTo.js"></script>
+
+    <!-- Morris Plugin Js -->
+    <script src="~/MaintenanceAdmin/plugins/raphael/raphael.min.js"></script>
+    <script src="~/MaintenanceAdmin/plugins/morrisjs/morris.js"></script>
+
+    <!-- ChartJs -->
+    <script src="~/MaintenanceAdmin/plugins/chartjs/Chart.bundle.js"></script>
+
+    <!-- Flot Charts Plugin Js -->
+    <script src="~/MaintenanceAdmin/plugins/flot-charts/jquery.flot.js"></script>
+    <script src="~/MaintenanceAdmin/plugins/flot-charts/jquery.flot.resize.js"></script>
+    <script src="~/MaintenanceAdmin/plugins/flot-charts/jquery.flot.pie.js"></script>
+    <script src="~/MaintenanceAdmin/plugins/flot-charts/jquery.flot.categories.js"></script>
+    <script src="~/MaintenanceAdmin/plugins/flot-charts/jquery.flot.time.js"></script>
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script src="~/MaintenanceAdmin/plugins/jquery-sparkline/jquery.sparkline.js"></script>
+
+    <!-- Custom Js -->
+    <script src="~/MaintenanceAdmin/js/admin.js"></script>
+    <script src="~/MaintenanceAdmin/js/pages/index.js"></script>
+
+    <!-- Demo Js -->
+    <script src="~/MaintenanceAdmin/js/demo.js"></script>
+</body>
+
+</html>

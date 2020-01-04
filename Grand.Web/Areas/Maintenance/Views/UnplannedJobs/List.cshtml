@@ -1,0 +1,211 @@
+﻿@model UnplannedJobListModel
+@inject Grand.Core.Domain.Common.AdminAreaSettings adminAreaSettings
+@{
+    //page title
+    ViewBag.Title = T("Maintenance.UnplannedJobs").Text;
+    
+}
+
+<antiforgery-token />
+<div class="row">
+    <div class="col-md-12">
+        <div class="x_panel light form-fit">
+            <div class="x_title">
+                <div class="caption">
+                    <i class="fa fa-cubes"></i>
+                    @*@T("Maintenance.Vendors")*@
+                    @T("Maintenance.UnplannedJobs")
+                </div>
+                <div class="actions btn-group btn-group-devided">
+                    <a href="@Url.Action("AddUnplannedJobs")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+                    <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+                </div>
+            </div>
+            <div class="x_content form">
+                <div class="form-horizontal">
+                    <div class="form-body col-md-6 advanced-filter">
+                        <div class="form-group">
+                            <label class="control-label col-xs-3 col-md-4 col-sm-4"> @T("maintenance.unplannedjobs.list.search_name")</label>
+                            <div class="col-xs-9 col-md-8 col-sm-8">
+                                <admin-input asp-for="SearchName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-body col-md-6 advanced-filter">
+                        <div class="form-group">
+                            <div class="col-xs-12 col-md-12 col-sm-12">
+                                <div id="ExtendFilter">
+                                    <button class="btn btn-success filter-submit" id="search-products">
+                                        <i class="fa fa-search"></i> @T("Admin.Common.Search")
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="x_content">
+                <div id="vendors-grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="form-body">
+            <div class="form-group">
+
+                <admin-label asp-for="SearchName" /
+                <div class="col-md-4 col-sm-6">
+                    <label>@T("maintenance.vessel.list.search_name")</label>
+
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <admin-input asp-for="SearchName" />
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-sm-offset-3 col-md-9 col-sm-9">
+                    <button class="btn btn-success filter-submit" id="search-vendors">
+                        <i class="fa fa-search"></i> @T("Admin.Common.Search")
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+<script>
+        $(document).ready(function () {
+            $("#vendors-grid").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "@Html.Raw(Url.Action("List", "UnplannedJobs","Maintenance"))",
+                            type: "POST",
+                            dataType: "json",
+                            data: additionalData
+                        }
+                    },
+                    schema: {
+                        data: "Data",
+                        total: "Total",
+                        errors: "Errors"
+                    },
+                    error: function(e) {
+                        display_kendoui_grid_error(e);
+                        // Cancel the changes
+                        this.cancelChanges();
+                    },
+                    pageSize: @(adminAreaSettings.DefaultGridPageSize),
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: [@(adminAreaSettings.GridPageSizes)]
+                },
+                editable: {
+                    confirmation: false,
+                    mode: "inline"
+                },
+                scrollable: false,
+                columns: [{
+                    field: "EquipmentName",
+                    title: "@T("maintenance.unplannedjobs.fields.equipment_name")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:EquipmentName#</a>',
+                }, {
+                    field: "JobOrder",
+                    title: "@T("maintenance.unplannedjobs.fields.job_order")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:JobOrder#</a>',
+                    },
+                    {
+                    field: "Title",
+                    title: "@T("maintenance.unplannedjobs.fields.title")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Title#</a>',
+                    },
+                    {
+                    field: "JobReportedDate",
+                    title: "@T("maintenance.unplannedjobs.fields.jobreported_date")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:JobReportedDate#</a>',
+                    },
+                    { 
+                    field: "ReportedBy",
+                    title: "@T("maintenance.unplannedjobs.fields.reported_by")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:ReportedBy#</a>',
+                    },
+                    {
+                    field: "Status",
+                    title: "@T("maintenance.unplannedjobs.fields.status")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Status#</a>',
+                    },   
+                ]
+            });
+        });
+</script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            //search button
+            $('#search-vendors').click(function () {
+                //search
+                var grid = $('#vendors-grid').data('kendoGrid');
+                grid.dataSource.page(1); //new search. Set page size to 1
+                //grid.dataSource.read(); we already loaded the grid above using "page" function
+                return false;
+            });
+
+            $("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
+                if (event.keyCode == 13) {
+                    $("#search-vendors").click();
+                    return false;
+                }
+            });
+        });
+
+        function additionalData() {
+            var data = {
+                SearchName: $('#@Html.FieldIdFor(model => model.SearchName)').val()
+            };
+            addAntiForgeryToken(data);
+            return data;
+        }
+</script>
+
+
+@*<h3>Unplanned Jobs List</h3>
+
+    <table class="table">
+        <tr style="font-size:large">
+            <td>Equipment Name</td>
+            <td>Job Order</td>
+            <td>Title</td>
+            <td>Job reported date</td>
+            <td>Reported By</td>
+            <td>Status</td>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.EquipmentName</td>
+                <td>@item.JobOrder</td>
+                <td>@item.Title</td>
+                <td>@item.JobReportedDate</td>
+                <td>@item.ReportedBy</td>
+                <td>@item.Status</td>
+            </tr>
+        }
+
+    </table>*@

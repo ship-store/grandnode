@@ -1,0 +1,136 @@
+﻿
+@*<div>
+    <form action="AddJobMaster" method="get">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>JobCode</label><input type="text" name="JobCode" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>JobType</label><input type="text" name="JobType" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>JobTitle</label><input type="text" name="JobTitle" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>JobDescription</label><input type="text" name="JobDescription" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label></label><input type="submit" />
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>*@
+
+
+
+
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+        <div class="header">
+           
+                <h2>
+                    ADD JOB MASTER
+                </h2>
+           
+
+
+
+            <ul class="header-dropdown m-r--5">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:void(0);">Action</a></li>
+                        <li><a href="javascript:void(0);">Another action</a></li>
+                        <li><a href="javascript:void(0);">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <div class="body">
+            <form action="AddJobMaster" method="get">
+
+                <div class="container-fluid" style="width: 80%;">
+                    <div class="table-responsive">
+
+                        <table class="table">
+
+                            <tr>
+                                <td><label for="JobCode">JobCode</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="JobCode" />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><label for="JobType">JobType</label></td>
+                                <td>
+                                    <select class="form-control show-tick" name="JobType">
+                                        <option selected disabled value="">Select JobType </option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><label for="JobTitle">JobTitle</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="JobTitle" />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><label for="JobDescription">JobDescription</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="JobDescription" />
+
+                                        </div>
+                                    </div>
+
+                            <tr>
+                                @*<td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="ADD JOB MASTER" /></td>*@
+                               <td><button class="btn btn-primary m-t-15 waves-effect">SUBMIT</button></td>
+
+                            </tr>
+
+                     </table>
+                    </div>
+</div>
+                </form>
+</div>
+    
+    </div>
+</div>

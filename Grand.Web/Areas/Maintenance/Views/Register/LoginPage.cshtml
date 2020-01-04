@@ -1,0 +1,75 @@
+﻿@model Grand.Web.Areas.Maintenance.DomainModels.RegisterModel
+
+@{
+    ViewData["Title"] = "LoginPage";
+    Layout = "~/Areas/Maintenance/Views/Shared/RegistrationLogin_Layout.cshtml";
+}
+
+
+
+@*<div class="limiter">
+    <div class="container-login100">
+        <form action="Login" method="Get">
+            <div class="wrap-login100">
+                <div class="login100-form-title" style="background-image:url(images/bg-01.jpg)">
+                    <span class="login100-form-title-1">
+                        Sign In
+                    </span>
+                </div>
+
+                <div class="login100-form validate-form">
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                        <label asp-for="Email" class="label-input100"></label>
+                        <input asp-for="Email" class="input100" type="text" name="Email" placeholder="Enter email" />
+                        <span asp-validation-for="Username" class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                        <label asp-for="Password" class="label-input100"></label>
+                        <input asp-for="Password" class="input100" type="password" name="Password" placeholder="Enter password" />
+                        <span asp-validation-for="Password" class="focus-input100"></span>
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <input type="submit" value="Create" class="login100-form-btn" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>*@
+
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('MaintenanceAdmin/login/images/bg.jpg');">
+        <div class="wrap-login100">
+            <form action="Login" method="Get" class="login100-form validate-form">
+                <span class="login100-form-logo">
+                    <img width="80%" height="70%" src="~/MaintenanceAdmin/img/logo2.png">
+                </span>
+
+                <span class="login100-form-title p-b-34 p-t-27">
+                    O3 Maintenance Login
+                </span>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter username">
+
+                 <input asp-for="Email" class="input100" type="text" name="Email" placeholder="Enter email" />
+                 <span asp-validation-for="Username" class="focus-input100"></span>
+                    
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <input asp-for="Password" class="input100" type="password" name="Password" placeholder="Enter password" />
+                    <span asp-validation-for="Password" class="focus-input100"></span>
+                </div>
+
+
+                <div class="container-login100-form-btn">
+                    <input type="submit" value="Login" class="login100-form-btn" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="@Url.Action("AddRegister")" class="login100-form-btn">SignUp</a>
+                    @*<button " class="login100-form-btn">SignUp</button>*@
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
