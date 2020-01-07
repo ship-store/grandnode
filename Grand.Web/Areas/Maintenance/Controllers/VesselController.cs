@@ -25,33 +25,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IVesselViewModelService _vesselViewModelService;
         public VesselController(IVesselViewModelService _vesselViewModelService, IVesselService _vesselService, IHostingEnvironment env)
         {
-            
             this._vesselViewModelService = _vesselViewModelService;
             this._vesselService = _vesselService;
             this.env = env;
-           
         }
 
         // list
         public IActionResult Index() => RedirectToAction("List");
         public async Task<IActionResult> List()
         {
-
-            //var model = new VesselListModel();
-            //  await Task.FromResult(0);          
-
-            //var vessels = await _vesselService.GetAllVessels("Vishnu", 0, 500, true);
-
-
-            //List<Vessel> vesselList = vessels.ToList();
-            //var gridModel = new DataSourceResult {
-            //    Data = vessels.ToList()
-
-            //};
-
-            //return View(vesselList);
            return View();
-
         }
 
 
@@ -59,17 +42,11 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> List(DataSourceRequest command, VesselListModel model)
         {
             var vessels = await _vesselService.GetAllVessels(model.SearchName, command.Page - 1, command.PageSize, true);
-
             var gridModel = new DataSourceResult {
                 Data = vessels.ToList()
-
             };
             return Json(gridModel);
         }
-
-
-
-
         [HttpGet]
         public async Task<IActionResult> AddVessel()
         {
@@ -85,22 +62,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return RedirectToAction("List", "Vessel");
             
         }
-
-
         public async Task<IActionResult> Edit(string id)
         {
             var vessel = await _vesselService.GetVesselById(id);
-            // VesselModel model = new VesselModel() { Id = vessel.Id, Vessel_name = vessel.Vessel_name, Vessel_type = vessel.Vessel_type };
             VesselForDisplay display = new VesselForDisplay { VesselID = vessel.Id,Hull_no = vessel.Hull_no,Auxiliary_Engine=vessel.Auxiliary_Engine, Main_Engine = vessel.Main_Engine, Shipyard = vessel.Shipyard, Flag = vessel.Flag, IMO = vessel.IMO, Class = vessel.Class, Vessel_name = vessel.Vessel_name, Vessel_type = vessel.Vessel_type };
 
             if (vessel == null)
-                //No product found with the specified id
                 return RedirectToAction("List");
 
             return View(display);
         }
-
-
         [HttpGet]
         public async Task<IActionResult> EditItem(VesselForDisplay vesselForDisplay, string id)
         {
@@ -120,9 +91,26 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _vesselService.UpdateVessel(vessel);
             return RedirectToAction("List");
         }
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelected(string selectedIds)
+        {
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
 
 
+                    var vessel = await _vesselService.GetVesselById(strlist[i].Trim(new char[] { (char)39 }));
 
 
+                    await _vesselViewModelService.DeleteVessel(vessel);
+                }
+            }
+
+            return Json(new { Result = true });
+        }
     }
 }

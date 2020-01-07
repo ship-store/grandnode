@@ -30,8 +30,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly EquipmentImportManger _equipmentImportManger;
         private readonly IImportFileService _importFileService;
         private readonly IEquipmentService _equipmentService;
-
-
         public ImportEquipmentController(EquipmentImportManger _equipmentImportManger, IImportFileService _importFileService,
             IEquipmentService _equipmentService, IVesselService _vesselService, IHostingEnvironment env)
         {
@@ -43,8 +41,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
         public IActionResult Index()
         {
-
-
             return View("List");
         }
         public async Task<ActionResult> List()
@@ -75,9 +71,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return View();
         }
 
-
-
-
         [HttpPost]
         public async Task<IActionResult> ImportExcel()// add to mogodb
         {
@@ -101,19 +94,13 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                             Content = equipmentImportModel.Content,
                             Status = "Pending",
                             TotalCount = equipmentImportModel.TotalCount,
-                            // CustomerId = _workContext.CurrentCustomer.Id
-                        });
-
-
+                    });
 
                         SuccessNotification("File uploaded successfully.");
-                        // return RedirectToAction("ViewDetails", new { id = importFile.Id });
-                        // return View("~/Plugins/Utilities.DataTools/Views/View.cshtml");
                         return RedirectToAction("Map", new { id = importFile.Id });
                     }
                     else
                     {
-                        //ErrorNotification(_localizationService.GetResource("Admin.Common.UploadFile"));
                         return RedirectToAction("List");
                     }
                 }
@@ -136,8 +123,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             if (importFile.Status == "Pending")
             {
                 dynamic allItems = JsonConvert.DeserializeObject(importFile.Content);
-
-
 
                 foreach (var item in allItems)
                 {
@@ -179,7 +164,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             };
 
             return View("View", importFileMapModel);
-            //return View("~/Areas/Maintenance/Views/ImportEquipment/View.cshtml");
         }
 
         public static List<string> GetFieldNames(dynamic input)
@@ -188,16 +172,11 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
             try
             {
-                // Deserialize the input json string to an object
                 input = Newtonsoft.Json.JsonConvert.DeserializeObject(input);
-
-                // Json Object could either contain an array or an object or just values
-                // For the field names, navigate to the root or the first element
                 input = input.Root ?? input.First ?? input;
 
                 if (input != null)
                 {
-                    // Get to the first element in the array
                     bool isArray = true;
                     while (isArray)
                     {
@@ -209,17 +188,13 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                             isArray = false;
                     }
 
-                    // check if the object is of type JObject. 
-                    // If yes, read the properties of that JObject
                     if (input.GetType() == typeof(Newtonsoft.Json.Linq.JObject))
                     {
                         // Create JObject from object
                         Newtonsoft.Json.Linq.JObject inputJson =
                             Newtonsoft.Json.Linq.JObject.FromObject(input);
-
                         // Read Properties
                         var properties = inputJson.Properties();
-
                         // Loop through all the properties of that JObject
                         foreach (var property in properties)
                         {
@@ -281,8 +256,5 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             return JsonConvert.DeserializeObject<DataTable>(json);
         }
-
-
-
     }
 }

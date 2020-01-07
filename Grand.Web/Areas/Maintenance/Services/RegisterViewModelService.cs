@@ -39,29 +39,8 @@ namespace Grand.Web.Areas.Maintenance.Services
             catch (Exception ex)
             {
                 
-  
             }
         }
-
-        //public virtual async Task PrepareLoginModel(RegisterModel model1, object p, bool v)
-        //{
-            //try
-            //{
-            //    var login = model1.ToEntity();
-            //    await _loginService.FetchRegister(login);
-            //}
-            //catch (Exception ex)
-            //{
-            //    var logObj = new mLoginD();
-
-            //    logObj.Email = model1.Email;
-            //    logObj.Password = model1.Password;
-               
-            //    await _registerService.FetchRegister(logObj);
-
-            //}
-
-        //}
 
         public Task PrepareRegisterModel(RegisterModel model, RegisterModel Register, bool setPredefinedvalues, bool excludeProperties)
         {

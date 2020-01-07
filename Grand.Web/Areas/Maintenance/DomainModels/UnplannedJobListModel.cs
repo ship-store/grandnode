@@ -10,7 +10,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
     public class UnplannedJobListModel : BaseGrandModel
     {
         [GrandResourceDisplayName("maintenance.unplannedjob.list.search_name")]
-
         public string SearchName { get; set; }
     }
 }

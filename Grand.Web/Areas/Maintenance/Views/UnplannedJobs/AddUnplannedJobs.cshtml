@@ -1,13 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
-
-@{
-    //page title
-    ViewBag.Title = ("Admin.Catalog.Products.AddNew");
-    //@model
-    //Layout = "~/Areas/Maintenance/Views/Shared/_AdminLayout.cshtml";
+﻿@{
+        ViewBag.Title = T("Maintenance.Title.AddUnplannedJobs").Text;
 }
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -31,7 +23,7 @@
         </div>
         <br>
         <div class="body">
-            <form action="AddUnplannedJobDetails" method="get">
+            <form action="AddUnplannedJobDetails" method="get" id="myForm" onsubmit="return Validation() && Clear()">
 
                 <div class="container-fluid" style="width: 80%;">
                     <div class="table-responsive">
@@ -43,7 +35,7 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="EquipmentName" required />
+                                            <input type="text" class="form-control" name="EquipmentName"  id="n1" />
 
                                         </div>
                                     </div>
@@ -55,7 +47,7 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="JobOrder" required/>
+                                            <input type="text" class="form-control" name="JobOrder" id="n2"/>
 
                                         </div>
                                     </div>
@@ -66,7 +58,7 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="Title" required/>
+                                            <input type="text" class="form-control" name="Title" id="n3"/>
 
                                         </div>
                                     </div>
@@ -78,7 +70,7 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="date" class="form-control" name="JobReportedDate" required/>
+                                            <input type="date" class="form-control" name="JobReportedDate" id="n4"/>
                                         </div>
                                     </div>
                                 </td>
@@ -87,7 +79,7 @@
                             <tr>
                                 <td><label for="ReportedBy">Reported By</label></td>
                                 <td>
-                                    <select class="form-control show-tick" name="ReportedBy" required>
+                                    <select class="form-control show-tick" name="ReportedBy" id="n5">
                                         <option value=""></option>
                                         <option>Chief Engineer</option>
                                         <option>Second Engineer</option>
@@ -102,29 +94,18 @@
                             <tr>
                                 <td><label for="Status">Status</label></td>
                                 <td>
-                                    <select class="form-control show-tick" name="Status" required>
+                                    <select class="form-control show-tick" name="Status"  id="n6">
                                         <option value=""></option>
                                         <option>Completed</option>
                                         <option>In progress</option>
                                         <option>Pending</option>
-
-
                                     </select>
                                 </td>
                             </tr>
-
-
-
                             <tr>
-                                <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Add" /></td>
-                                @*<td><button class="btn btn-primary m-t-15 waves-effect">SUBMIT</button></td>*@
-
-                            </tr>
-
+                                <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Add"  id="myBtn" /></td>
+                               </tr>
                         </table>
-
-
-
                     </div>
                 </div>
             </form>
@@ -132,63 +113,3 @@
     </div>
 </div>
 
-@*<h3>Unplanned Jobs</h3>
-
-<form action="AddUnplannedJobDetails" method="get">
-    <div class="container-fluid">
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label>Equipment Name</label>
-                <input type="text" class="form-control" name="EquipmentName" />
-            </div>
-        </div>
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label>Job Order</label>
-                <input type="text" class="form-control" name="JobOrder" />
-            </div>
-        </div>
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label>Title</label>
-                <input type="text" class="form-control" name="Title" />
-            </div>
-        </div>
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label>Job Reported Date</label>
-                <input type="date" class="form-control" name="JobReportedDate" />
-            </div>
-        </div>
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label>Reported By</label>
-                <select class="form-control" name="ReportedBy">
-                    <option disabled selected>-- Select --</option>
-                    <option>Chief Engineer</option>
-                    <option>Second Engineer</option>
-                    <option>Third Engineer</option>
-                    <option>Fourth Engineer</option>
-                </select>
-            </div>
-        </div>
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label>Status</label>
-                <select class="form-control" name="Status">
-                    <option disabled selected>-- Select --</option>
-                    <option>Completed</option>
-                    <option>In progress</option>
-                    <option>Pending</option>
-                </select>
-            </div>
-        </div>
-        <br />
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label></label>
-                <input type="submit" class="btn btn-primary" value="Add" />
-            </div>
-        </div>
-    </div>
-</form>*@

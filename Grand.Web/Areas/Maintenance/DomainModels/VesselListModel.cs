@@ -11,7 +11,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
     public class VesselListModel : BaseGrandModel
     {
         [GrandResourceDisplayName("Maintenance.Vessel.List.SearchName")]
-
         public string SearchName { get; set; }
     }
 }

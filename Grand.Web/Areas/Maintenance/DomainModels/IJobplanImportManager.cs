@@ -17,12 +17,9 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
     public interface IJobplanImportManger
     {
         EquipmentImportModel ImportFromXlsx(Stream stream);
-
     }
-
     public class JobplanImportManger : IJobplanImportManger
     {
-
         public EquipmentImportModel ImportFromXlsx(Stream stream)
         {
             using (var xlPackage = new ExcelPackage(stream))
@@ -36,7 +33,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
                 }
             }
         }
-
         DataTable GetDataTableFromExcel(ExcelPackage pck)
         {
             var ws = pck.Workbook.Worksheets.First();
@@ -57,7 +53,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
             }
             return tbl;
         }
-
         string DataTableToJson(DataTable table)
         {
             var jsonString = JsonConvert.SerializeObject(table);

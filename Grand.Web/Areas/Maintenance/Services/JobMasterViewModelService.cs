@@ -13,12 +13,9 @@ namespace Grand.Web.Areas.Maintenance.Services
     public partial class JobMasterViewModelService : IJobMasterViewModelService
     {
         private readonly Grand.Services.JobMaster.IJobMasterService _jobmasterService;
-
-
         public JobMasterViewModelService(Grand.Services.JobMaster.IJobMasterService _jobmasterService)
         {
             this._jobmasterService = _jobmasterService;
-
         }
         public virtual async Task<JobMaster>InsertJobMasterModel(JobMasterModel newJobMaster)
         {
@@ -29,9 +26,8 @@ namespace Grand.Web.Areas.Maintenance.Services
             addNewJobMaster.JobTitle = newJobMaster.JobTitle;
             addNewJobMaster.JobDescription= newJobMaster.JobDescription;
         
-                await _jobmasterService.InsertJobMaster(addNewJobMaster);
+            await _jobmasterService.InsertJobMaster(addNewJobMaster);
             return addNewJobMaster;
-             
             }
            internal static Task GetAllJobMaster(object searchName,int v1,int pageSize,bool v2)
         {

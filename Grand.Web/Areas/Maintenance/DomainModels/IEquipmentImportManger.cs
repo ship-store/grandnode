@@ -22,7 +22,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 
     public class EquipmentImportManger : IEquipmentImportManger
     {
-
         public EquipmentImportModel ImportFromXlsx(Stream stream)
         {
             using (var xlPackage = new ExcelPackage(stream))
@@ -57,7 +56,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
             }
             return tbl;
         }
-
         string DataTableToJson(DataTable table)
         {
             var jsonString = JsonConvert.SerializeObject(table);

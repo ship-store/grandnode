@@ -22,7 +22,6 @@ namespace Grand.Web.Areas.Maintenance.Services
         {
             throw new NotImplementedException();
         }
-
         Task<IPagedList<UnplannedJob>> IUnplannedJobViewModelService.GetAllUnplannedJobsAsList(string id)
         {
             throw new NotImplementedException();
@@ -42,8 +41,7 @@ namespace Grand.Web.Areas.Maintenance.Services
                 unplannedJob.Status = model1.Status;
     
                 await _unplannedJobService.InsertUnplannedJob(unplannedJob);
-                // var vessel = model1.ToEntity();
-                //await _unplannedJobService.InsertUnplannedJob(unplannedJob);
+               
             }
             catch (Exception)
             {
@@ -59,10 +57,10 @@ namespace Grand.Web.Areas.Maintenance.Services
 
             }
         }
-        //public virtual async Task PrepareUnplannedJobModel(UnplannedJobModel model, UnplannedJobModel UnplannedJob, bool setPredefinedValues, bool excludeProperties)
-        //{
-        //    await Task.FromResult(0);
-        //}
+        public async Task DeleteUnplannedJob(UnplannedJob unplannedjob)
+        {
+            await _unplannedJobService.DeleteUnplannedJob(unplannedjob);
+        }
     }
 }
 

@@ -1,5 +1,7 @@
 ﻿@model BreakdownJobDisplayModel
-
+@{ 
+    ViewBag.Title = T("Maintenance.Title.BreakdownJob").Text;
+}
 
 @Html.BeginForm("EditItem", "BreakdownJob", FormMethod.Get, new { id = Model.BreakdownJobID })
 
@@ -9,7 +11,7 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
         <div class="header">
-            
+
             <ul class="header-dropdown m-r--5">
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -86,7 +88,7 @@
                             <tr>
                                 <td><label for="ReportedBy">Reported By</label></td>
                                 <td>
-                                    <select class="form-control show-tick"  name="ReportedBy" >
+                                    <select class="form-control show-tick" name="ReportedBy">
 
                                         <option disabled selected>@Model.ReportedBy</option>
                                         <option>Chief Engineer</option>
@@ -101,7 +103,7 @@
                             <tr>
                                 <td><label for="Status">Status</label></td>
                                 <td>
-                                    <select class="form-control show-tick"  name="Status" >
+                                    <select class="form-control show-tick" name="Status">
 
                                         <option disabled selected>@Model.Status</option>
                                         <option>Completed</option>

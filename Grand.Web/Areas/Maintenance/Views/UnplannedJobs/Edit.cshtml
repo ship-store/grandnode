@@ -2,13 +2,11 @@
 
 
 @Html.BeginForm("EditItem", "UnplannedJobs", FormMethod.Get, new { id = Model.UnplannedJobID })
+@{ 
+            ViewBag.Title = T("Maintenance.Title.AddUnplannedJobs").Text;
 
-
-
-   
+}
 <input type="hidden" value="@Model.UnplannedJobID" name="unplannedjobId" class="form-control" />
-
-
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
         <div class="header">
@@ -42,7 +40,7 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                           
+
                                             <input type="text" value="@Model.EquipmentName" name="EquipmentName" class="form-control" />
 
                                         </div>
@@ -55,9 +53,7 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            
                                             <input type="text" value="@Model.JobOrder" name="JobOrder" class="form-control" />
-
                                         </div>
                                     </div>
                                 </td>
@@ -67,20 +63,19 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                           
+
                                             <input type="text" value="@Model.Title" name="Title" class="form-control" />
 
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td><label for="JobReportedDate">Job Reported Date</label></td>
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                        
+
                                             <input type="date" value="@Model.JobReportedDate" name="JobReportedDate" class="form-control" />
 
                                         </div>
@@ -91,16 +86,14 @@
                             <tr>
                                 <td><label for="ReportedBy">Reported By</label></td>
                                 <td>
-                                    <select class="form-control show-tick"  value="@Model.ReportedBy" name="ReportedBy">
-                                      
+                                    <select class="form-control show-tick" value="@Model.ReportedBy" name="ReportedBy">
+
 
                                         <option disabled selected>@Model.ReportedBy</option>
                                         <option>Chief Engineer</option>
                                         <option>Second Engineer</option>
                                         <option>Third Engineer</option>
                                         <option>Fourth Engineer</option>
-
-
                                     </select>
                                 </td>
                             </tr>
@@ -109,27 +102,20 @@
                                 <td><label for="Status">Status</label></td>
                                 <td>
                                     <select class="form-control show-tick" value="@Model.Status" name="Status">
-                                       
-                                        <option disabled selected>@Model.Status</option>
-                                        <option >Completed</option>
-                                        <option >In progress</option>
-                                        <option >Pending</option>
 
+                                        <option disabled selected>@Model.Status</option>
+                                        <option>Completed</option>
+                                        <option>In progress</option>
+                                        <option>Pending</option>
                                     </select>
                                 </td>
                             </tr>
-
-
-
                             <tr>
                                 <td>
                                     <input type="submit" value="Edit" class="btn btn-primary" />
                                 </td>
-                             
                             </tr>
-
                         </table>
-
                     </div>
                 </div>
             </form>

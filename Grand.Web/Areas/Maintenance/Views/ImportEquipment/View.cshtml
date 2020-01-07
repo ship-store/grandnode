@@ -1,5 +1,7 @@
 ﻿@model Grand.Web.Areas.Maintenance.DomainModels.ImportFileMapModel
-
+@{ 
+    ViewBag.Title = T("Maintenance.Title.ImportEquipment").Text;
+}
 <form asp-controller="" asp-action="" method="post">
     <antiforgery-token />
     <div asp-validation-summary="All"></div>
@@ -9,29 +11,16 @@
                 <div class="x_title">
                     <div class="caption">
                         <i class="fa fa-tag"></i>
-                        
-                      
                     </div>
-                    
                 </div>
-
                 <div class="x_content form">
                     <div class="form-horizontal">
                         <div class="form-body">
-                          
-                               
-                                
                                     <a href="@Url.Action("DownloadExcelResult","ImportEquipment", new { id = Model.ImportFile.Id })">click here to view result</a>
-                                
                             </div>
                         </div>
                     </div>
                 </div>
-
-                
             </div>
-
         </div>
-    </div>
-
 </form>

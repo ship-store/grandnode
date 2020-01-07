@@ -1,11 +1,8 @@
-﻿
-@{
-    ViewData["Title"] = "Success";
+﻿@{
+    ViewBag.Title = T("Maintenance.Title.Success").Text;
+
     //Layout = "~/Areas/Maintenance_Admin/Views/Shared/MaintenanceMasterLayout.cshtml";
 }
-
-
-
 
 <!DOCTYPE html>
 
@@ -16,12 +13,6 @@
 </head>
 
 <body>
-
-    @*<h3>
-            Logged In Successfully
-        </h3>*@
-
-    <h1 align="center">Welcome  login Success</h1>
 
     <section class="content">
         <div class="container-fluid">
@@ -76,11 +67,8 @@
                     </div>
                 </div>
             </div>
-           
+        </div>
     </section>
-
-    <br />
-    <a asp-controller="Register" asp-action="LoginPage">Logout</a>
 </body>
 </html>
 

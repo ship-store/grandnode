@@ -13,12 +13,7 @@ namespace Grand.Web.Areas.Maintenance.Interfaces
     {
         Task<IPagedList<Maker>> GetAllMakers(string name = "",
              int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
-
         Task<IPagedList<Maker>> GetAllMakersAsList(string id);
-        //Task PrepareMakerModel(MakerModel addNewMaker, string v1, bool v2);
-
         Task PrepareMakerModel(MakerModel model1, object p, bool v);
-
-
     }
 }

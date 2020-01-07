@@ -18,5 +18,6 @@ namespace Grand.Services.BreakdownJob
         Task InsertBreakdownJob(Core.Domain.BreakdownJob.BreakdownJob vessel);
         Task<Core.Domain.BreakdownJob.BreakdownJob> GetBreakdownJobById(string Id);
         Task UpdateBreakdownJob(Core.Domain.BreakdownJob.BreakdownJob breakdownjob);
+        Task DeleteBreakdownJob(Core.Domain.BreakdownJob.BreakdownJob breakdownjob);
     }
 }

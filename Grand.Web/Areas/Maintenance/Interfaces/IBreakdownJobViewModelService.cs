@@ -13,12 +13,8 @@ namespace Grand.Web.Areas.Maintenance.Interfaces
     {
         Task<IPagedList<BreakdownJob>> GetAllBreakdownJobs(string name = "",
              int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
-
         Task<IPagedList<BreakdownJob>> GetAllBreakdownJobsAsList(string id);
-        //Task PrepareVesselModel(VesselModel addNewVessel, string v1, bool v2);
-
         Task PrepareBreakdownJobModel(BreakdownJobModel model1, object p, bool v);
-
-
+        Task DeleteBreakdownJob(BreakdownJob breakdownjob);
     }
 }

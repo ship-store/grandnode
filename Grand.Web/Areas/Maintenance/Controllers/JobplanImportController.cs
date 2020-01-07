@@ -22,12 +22,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
     [Area("Maintenance")]
     public class JobplanImportController : BaseAdminController
     {
-
         private readonly IJobplanImportManger _jobplanImportManger;
         private readonly IImportFileService _importFileService;
         private readonly IJobplanService _jobplanService;
-
-
         public JobplanImportController(IJobplanImportManger _jobplanImportManger, IImportFileService _importFileService,
             IJobplanService _jobplanService)
         {
@@ -39,8 +36,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             return View("~/Areas/Maintenance/Views/JobplanImport/List.cshtml");
         }
-
-      
         [HttpPost]
         public async Task<IActionResult> ImportExcel()// add to mogodb
         {
@@ -64,19 +59,12 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                             Content = equipmentImportModel.Content,
                             Status = "Pending",
                             TotalCount = equipmentImportModel.TotalCount,
-                           // CustomerId = _workContext.CurrentCustomer.Id
                         });
-
-
-
                         SuccessNotification("File uploaded successfully.");
-                        // return RedirectToAction("ViewDetails", new { id = importFile.Id });
-                       // return View("~/Plugins/Utilities.DataTools/Views/View.cshtml");
                         return RedirectToAction("Map", new { id = importFile.Id });
                     }
                     else
                     {
-                        //ErrorNotification(_localizationService.GetResource("Admin.Common.UploadFile"));
                         return RedirectToAction("List");
                     }
                 }
@@ -90,8 +78,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 return RedirectToAction("List");
             }
         }
-
-
         public async Task<IActionResult> Map(string id)
         {
             await Task.FromResult(0);
@@ -99,9 +85,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             if (importFile.Status == "Pending")
             {
                 dynamic allItems = JsonConvert.DeserializeObject(importFile.Content);
-
-
-
                 foreach (var item in allItems)
                 {
                     Jobplan job = new Jobplan();
@@ -120,14 +103,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     job.NEXT_DUE_DATE = item["NEXT_DUE_DATE"];
                     job.Job_Type = item["Job_Type"];
                     job.Maintenance_Type = item["Maintenance_Type"];
-                   
-
-                    // write Service
-
                     await _jobplanService.InsertJobplan(job);
                 }
-                //return Content("Already imported, Contact Admin");
-               
             }
 
             var properties = GetFieldNames(importFile.Content);
@@ -139,7 +116,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             };
 
             return View("~/Areas/Maintenance/Views/JobplanImport/View.cshtml", importFileMapModel);
-            //return View("~/Areas/Maintenance/Views/ImportEquipment/View.cshtml");
         }
 
         public static List<string> GetFieldNames(dynamic input)
@@ -148,11 +124,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
             try
             {
-                // Deserialize the input json string to an object
                 input = Newtonsoft.Json.JsonConvert.DeserializeObject(input);
-
-                // Json Object could either contain an array or an object or just values
-                // For the field names, navigate to the root or the first element
                 input = input.Root ?? input.First ?? input;
 
                 if (input != null)
@@ -236,13 +208,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 return File(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
         }
-
         public DataTable GetDataTableFromJsonString(string json)
         {
             return JsonConvert.DeserializeObject<DataTable>(json);
         }
-
-
-
     }
 }

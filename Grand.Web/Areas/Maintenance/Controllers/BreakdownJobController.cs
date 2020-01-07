@@ -71,7 +71,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             BreakdownJobDisplayModel display = new BreakdownJobDisplayModel { BreakdownJobID = breakdownjob.Id, EquipmentName = breakdownjob.EquipmentName, JobOrder = breakdownjob.JobOrder, Title = breakdownjob.Title, JobReportedDate = breakdownjob.JobReportedDate, ReportedBy = breakdownjob.ReportedBy, Status = breakdownjob.Status };
 
             if (breakdownjob == null)
-                //No product found with the specified id
+               
                 return RedirectToAction("List");
 
             return View(display);
@@ -94,6 +94,23 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
             await _breakdownJobService.UpdateBreakdownJob(vessel);
             return RedirectToAction("List");
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelected(string selectedIds)
+        {
+            string[] strlist = selectedIds.Split(",");
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+                    var breakdownjob = await _breakdownJobService.GetBreakdownJobById(strlist[i].Trim(new char[] { (char)39 }));
+                    await _breakdownJobViewModelService.DeleteBreakdownJob(breakdownjob);
+                }
+
+            }
+
+            return Json(new { Result = true });
         }
 
 

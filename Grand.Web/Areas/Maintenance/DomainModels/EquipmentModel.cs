@@ -1,4 +1,5 @@
 ﻿using Grand.Core;
+using Grand.Framework.Mvc.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Grand.Web.Areas.Maintenance.DomainModels
 {
-    public class EquipmentModel:BaseEntity
+    public class EquipmentModel: BaseGrandEntityModel
     {
         public string Sub1_number { get; set; }
         public string Sub1_description { get; set; }

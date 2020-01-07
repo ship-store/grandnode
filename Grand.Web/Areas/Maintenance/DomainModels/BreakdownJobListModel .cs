@@ -11,7 +11,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
     public class BreakdownJobListModel : BaseGrandModel
     {
         [GrandResourceDisplayName("Maintenance.BreakdownJob.List.SearchName")]
-
         public string SearchName { get; set; }
     }
 }

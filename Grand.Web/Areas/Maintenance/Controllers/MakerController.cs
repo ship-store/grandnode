@@ -38,24 +38,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
 
             var model = new MakerListModel();
-            //   await Task.FromResult(0);          
-
             var makers = await _makerService.GetAllMakers("Vishnu", 0, 500, true);
-
-
             List<Maker> makerList = makers.ToList();
             var gridModel = new DataSourceResult {
                 Data = makers.ToList()
-
             };
 
             return View(makerList);
-            // return View();
-
         }
-
-
-        [HttpPost]
+       [HttpPost]
         public async Task<IActionResult> List(DataSourceRequest command, MakerListModel model)
         {
             var makers = await _makerService.GetAllMakers(model.SearchName, command.Page - 1, command.PageSize, true);
@@ -66,27 +57,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             };
             return Json(gridModel);
         }
-
-
-        //[HttpGet]
-        //public async Task<IActionResult> List()
-        //{
-
-        //    // Vessel obj = new Vessel() { Id = "1212", Hull_no = "1213", Vessel_name = "Vishnu" };                     
-
-        //    var vessels = await _vesselService.GetAllVesselAsList();
-        //var gridModel = new DataSourceResult {
-        //    Data = vessels.ToList()
-
-        //};
-        //    return Json(gridModel);
-
-
-        //}
-
-
-
-
+      
         [HttpGet]
         public async Task<IActionResult> AddMaker()
         {
@@ -101,16 +72,11 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _makerViewModelService.PrepareMakerModel(addNewMaker, "Vishnu", true);
             return RedirectToAction("AddMaker", "Maker");
         }
-
-
         [HttpGet]
         public async Task<IActionResult> AddMakerDetails1(MakerModel1 addNewMaker1)
         {
             await _makerViewModelService1.PrepareMakerModel(addNewMaker1, "Vishnu", true);
             return RedirectToAction("List", "Maker");
         }
-
-
-
     }
 }

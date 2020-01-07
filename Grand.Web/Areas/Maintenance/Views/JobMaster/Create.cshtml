@@ -1,56 +1,13 @@
-﻿
-@*<div>
-    <form action="AddJobMaster" method="get">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <label>JobCode</label><input type="text" name="JobCode" />
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <label>JobType</label><input type="text" name="JobType" />
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <label>JobTitle</label><input type="text" name="JobTitle" />
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <label>JobDescription</label><input type="text" name="JobDescription" />
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <label></label><input type="submit" />
-                </div>
-            </div>
-
-        </div>
-    </form>
-</div>*@
-
-
-
-
-
+﻿@{  
+    ViewBag.Title = T("Maintenance.Title.JobMaster").Text;
+}
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
         <div class="header">
-           
-                <h2>
-                    ADD JOB MASTER
-                </h2>
-           
 
-
-
+            <h2>
+                ADD JOB MASTER
+            </h2>
             <ul class="header-dropdown m-r--5">
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -121,16 +78,13 @@
                                     </div>
 
                             <tr>
-                                @*<td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="ADD JOB MASTER" /></td>*@
-                               <td><button class="btn btn-primary m-t-15 waves-effect">SUBMIT</button></td>
-
+                                <td><button class="btn btn-primary m-t-15 waves-effect">SUBMIT</button></td>
                             </tr>
-
-                     </table>
+                        </table>
                     </div>
-</div>
-                </form>
-</div>
-    
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>

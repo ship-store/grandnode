@@ -11,7 +11,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
     public class MakerListModel : BaseGrandModel
     {
         [GrandResourceDisplayName("Maintenance.Maker.List.SearchName")]
-
         public string SearchName { get; set; }
     }
 }

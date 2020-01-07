@@ -4,10 +4,7 @@
 @using Grand.Core;
 @using Grand.Framework.UI;
 @{
-    //page title
-    ViewBag.Title = "Import Products";
-
-    //register CSS and JS
+    ViewBag.Title = T("Maintenance.Title.SparepartImport").Text;
     Html.AddCssFileParts("~/scripts/fineuploader/fineuploader-4.2.2.min.css", excludeFromBundle: true);
     Html.AddScriptParts("~/scripts/fineuploader/jquery.fineuploader-4.2.2.min.js", excludeFromBundle: true);
 }
@@ -18,14 +15,12 @@
             <div class="x_title">
                 <div class="caption">
                     <i class="fa fa-list-alt"></i>
-                    @T("Plugins.DataTools.ImportProducts")
                 </div>
                 <div class="actions btn-group btn-group-devided">
                   
                     <input type="button" id="importfile" class="btn btn-success" value="Upload Excel" />
                 </div>
             </div>
-
             <div class="x_content form">
                 <div class="note note-info">
                     <h4>Import Products Wizard:</h4>
@@ -37,10 +32,6 @@
                     </ol>
                    
                 </div>
-            </div>
-
-            <div class="x_content form">
-                <div id="importproducts-grid"></div>
             </div>
 
         </div>
@@ -112,28 +103,6 @@
                 mode: "inline"
             },
             scrollable: false,
-            columns: [{
-                field: "Name",
-                title: "Name",
-            }, {
-                field: "Status",
-                title: "Status",
-                template: '<a class="k-link" href="ImportProducts/#if(Name.endsWith(".xlsx")){#ViewDetails#}else{#ViewDetailsPic#}#/#=Id#">#=Status#</a>'
-            }, {
-                field: "ImportedCount",
-                title: "Imported Rows"
-            }, {
-                field: "TotalCount",
-                title: "Total Rows"
-            }, {
-                field: "CustomerName",
-                title: "Uploaded By",
-            }, {
-                field: "CreatedOnUtc",
-                title: "Uploaded On",
-                type: "date",
-                format:"{0:dd-MMM-yyyy HH:mm:ss}"
-            }]
         });
     });
 </script>

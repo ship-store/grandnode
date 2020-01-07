@@ -16,14 +16,12 @@ namespace Grand.Web.Areas.Maintenance.Services
         private readonly IRepository<ImportFile> _repository;
         private readonly IRepository<Category> _categoryRepository;
         private readonly IRepository<SpecificationAttribute> _specificationAttributeRepository;
-            
         public ImportFileService(IRepository<ImportFile> repository, IRepository<Category> categoryRepository, IRepository<SpecificationAttribute> specificationAttributeRepository)
         {
             _repository = repository;
             _categoryRepository = categoryRepository;
             _specificationAttributeRepository = specificationAttributeRepository;
         }
-
         public virtual async Task Delete(ImportFile record)
         {
             if (record == null)
@@ -36,7 +34,6 @@ namespace Grand.Web.Areas.Maintenance.Services
         {
             return await _repository.Table.ToListAsync();
         }
-
         public virtual async Task<ImportFile> GetById(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -44,7 +41,6 @@ namespace Grand.Web.Areas.Maintenance.Services
 
             return await _repository.GetByIdAsync(id);
         }
-
         public virtual async Task<ImportFile> Insert(ImportFile record)
         {
             if (record == null)
@@ -54,7 +50,6 @@ namespace Grand.Web.Areas.Maintenance.Services
 
             return await _repository.InsertAsync(record);
         }
-
         public virtual async Task<ImportFile> Update(ImportFile record)
         {
             if (record == null)
@@ -62,17 +57,14 @@ namespace Grand.Web.Areas.Maintenance.Services
 
             return await _repository.UpdateAsync(record);
         }
-
         public virtual async Task<IList<Category>> GetAllCategory()
         {
             return await _categoryRepository.Table.ToListAsync();
         }
-
         public virtual async Task<Category> GetCategoryByName(string name)
         {
             return await _categoryRepository.Collection.Find(f => f.Name == name).FirstOrDefaultAsync();
         }
-
         public virtual async Task<SpecificationAttribute> GetSpecificationAttributeByName(string name)
         {
             return await _specificationAttributeRepository.Collection.Find(f => f.Name == name).FirstOrDefaultAsync();

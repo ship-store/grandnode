@@ -19,7 +19,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         EquipmentImportModel ImportFromXlsx(Stream stream);
 
     }
-
     public class SparepartImportManger : ISparepartImportManger
     {
 
@@ -36,7 +35,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
                 }
             }
         }
-
         DataTable GetDataTableFromExcel(ExcelPackage pck)
         {
             var ws = pck.Workbook.Worksheets.First();
@@ -57,7 +55,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
             }
             return tbl;
         }
-
         string DataTableToJson(DataTable table)
         {
             var jsonString = JsonConvert.SerializeObject(table);

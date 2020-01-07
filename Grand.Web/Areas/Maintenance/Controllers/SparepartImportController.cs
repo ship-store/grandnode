@@ -27,12 +27,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
     [Area("Maintenance")]
     public class SparepartImportController : BaseAdminController
     {
-
         private readonly ISparepartImportManger _sparepartImportManger;
         private readonly IImportFileService _importFileService;
         private readonly ISparepartService _sparepartService;
-
-
         public SparepartImportController(ISparepartImportManger _sparepartImportManger, IImportFileService _importFileService,
             ISparepartService _sparepartService)
         {
@@ -44,12 +41,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             return View("List");
         }
-
-      
         [HttpPost]
         public async Task<IActionResult> ImportExcel()// add to mogodb
         {
-
             try
             {
                 var files = Request.Form.Files;
@@ -69,19 +63,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                             Content = equipmentImportModel.Content,
                             Status = "Pending",
                             TotalCount = equipmentImportModel.TotalCount,
-                           // CustomerId = _workContext.CurrentCustomer.Id
                         });
 
 
 
                         SuccessNotification("File uploaded successfully.");
-                        // return RedirectToAction("ViewDetails", new { id = importFile.Id });
-                       // return View("~/Plugins/Utilities.DataTools/Views/View.cshtml");
                         return RedirectToAction("Map", new { id = importFile.Id });
                     }
                     else
                     {
-                        //ErrorNotification(_localizationService.GetResource("Admin.Common.UploadFile"));
                         return RedirectToAction("List");
                     }
                 }
@@ -118,14 +108,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     sparepart.DRAWING_NO = item["DRAWING_NO"];
                     sparepart.SPECIFICATION = item["SPECIFICATION"];
                     sparepart.POSITION_NUMBER = item["POSITION_NUMBER"];
-                  
-
-                    // write Service
-
                     await _sparepartService.InsertSparepart(sparepart);
                 }
-                //return Content("Already imported, Contact Admin");
-               
             }
 
             var properties = GetFieldNames(importFile.Content);
@@ -137,7 +121,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             };
 
             return View("View", importFileMapModel);
-            //return View("~/Areas/Maintenance/Views/ImportEquipment/View.cshtml");
         }
 
         public static List<string> GetFieldNames(dynamic input)
@@ -234,13 +217,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 return File(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
         }
-
         public DataTable GetDataTableFromJsonString(string json)
         {
             return JsonConvert.DeserializeObject<DataTable>(json);
         }
-
-
-
     }
 }

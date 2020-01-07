@@ -59,5 +59,17 @@ namespace Grand.Services.UnplannedJobs
         {
             return _unplannedJobRepository.GetByIdAsync(unplannedjobId);
         }
+        public virtual async Task DeleteUnplannedJob(Core.Domain.UnplannedJobs.UnplannedJob unplannedjob)
+        {
+            if (unplannedjob == null)
+                throw new ArgumentNullException("Unplannedjob");
+
+
+            //deleted product
+            await _unplannedJobRepository.DeleteAsync(unplannedjob);
+
+
+
+        }
     }
 }

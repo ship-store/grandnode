@@ -16,27 +16,21 @@ namespace Grand.Web.Areas.Maintenance.Services
         {
             this._equipmentService = _equipmentService;
         }
-
-       
-
         async Task IEquipmentViewModelService.PrepareEquipmentModel(EquipmentModel equipmentModel, object p, bool v)
         {
             try
             {
-
                 var equipment = new Equipment();
                 equipment.Sub1_number = equipmentModel.Sub1_number;
                 equipment.Sub1_description = equipmentModel.Sub1_description;
                 equipment.Sub2_number = equipmentModel.Sub2_number;
-
-                await _equipmentService.InsertEquipment(equipment);
-
-
+                equipment.Sub2_description = equipmentModel.Sub2_description;
+                equipment.Sub3_number = equipmentModel.Sub3_number;
+                equipment.Sub3_description = equipmentModel.Sub3_description;
+              
             }
             catch (Exception ex)
             {
-
-
             }
         }
     }

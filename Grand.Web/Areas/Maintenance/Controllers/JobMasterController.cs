@@ -17,26 +17,20 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IJobMasterService _JobMasterService;
         public JobMasterController(IJobMasterViewModelService _jobmasterViewModelService, IJobMasterService _JobMasterService)
         {
-
             this._jobmasterViewModelService = _jobmasterViewModelService;
             this._JobMasterService = _JobMasterService;
-
         }
-
-
         [HttpGet]
         public IActionResult Create()
          {
               return View();
          }
-
         [HttpGet]
         public IActionResult AddJobMaster(JobMasterModel addJobMaster)
            {
             _jobmasterViewModelService.InsertJobMasterModel(addJobMaster);
             return RedirectToAction("Create");
            }
-
     }
 }
 

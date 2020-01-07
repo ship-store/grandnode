@@ -60,5 +60,19 @@ namespace Grand.Services.BreakdownJob
         {
             await _breakdownJobRepository.UpdateAsync(breakdownjob);
         }
+        public virtual async Task DeleteBreakdownJob(Core.Domain.BreakdownJob.BreakdownJob breakdownjob)
+        {
+            if (breakdownjob == null)
+                throw new ArgumentNullException("BreakdownJob");
+
+
+            //deleted product
+            await _breakdownJobRepository.DeleteAsync(breakdownjob);
+
+
+
+        }
+
+
     }
 }

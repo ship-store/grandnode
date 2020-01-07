@@ -18,5 +18,6 @@ namespace Grand.Services.UnplannedJobs
         Task InsertUnplannedJob(Core.Domain.UnplannedJobs.UnplannedJob vessel);
         Task<Core.Domain.UnplannedJobs.UnplannedJob> GetUnplannedJobById(string Id);
         Task UpdateUnplannedJob(Core.Domain.UnplannedJobs.UnplannedJob unplannedJob);
+        Task DeleteUnplannedJob(Core.Domain.UnplannedJobs.UnplannedJob unplannedJob);
     }
 }

@@ -151,9 +151,9 @@
                 <div class="top_nav">
                     <div class="nav_menu">
                         <nav>
-                            @*<div class="nav toggle">
+                            <div class="nav toggle">
                                     <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                                </div>*@
+                                </div>
 
                             @if (currentCustomer.IsAdmin())
                             {
@@ -168,9 +168,13 @@
                             }
                             <vc:admin-widget widget-zone="header_toggle_after" additional-data="null" />
                             <ul class="nav navbar-nav navbar-right">
-
                                 <li class="dropdown" role="presentation">
-                                    <a href="@Url.Action("Index", "Home", new { area = "" })" class="dropdown-toggle">
+                                    <a href="@Url.Action("List", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
+                                        <i class="fa fa-ship"></i>
+                                    </a>
+                                </li>
+                                <li class="dropdown" role="presentation">
+                                    <a href="@Url.Action("Success", "Register", new { area = "Maintenance" })" class="dropdown-toggle">
                                         <i class="icon-home"></i>
                                     </a>
                                 </li>
@@ -250,8 +254,8 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="@Url.Action("Logout", "Customer", new { area = "" }, null)">
-                                                <i class="icon-logout"></i> @T("Admin.Header.Logout")
+                                            <a href="@Url.Action("Logout", "Register", new { area = "Maintenance" }, null)">
+                                                <i class="icon-logout"></i> @*@T("Admin.Header.Logout")*@Logout
                                             </a>
                                         </li>
                                     </ul>
@@ -295,14 +299,14 @@
 
     @Html.GrandCssFiles(this.Url, ResourceLocation.Footer)
     @Html.GrandScripts(this.Url, ResourceLocation.Footer)
-    <div class="page-footer">
+    @*<div class="page-footer">
         <div class="page-footer-inner">
             <a href="https://grandnode.com/" target="_blank">2019 © Powered by GrandNode.</a>
         </div>
         <div class="scroll-to-top">
             <i class="icon-arrow-up"></i>
         </div>
-    </div>
+    </div>*@
     <script>
             $(document).ready(function () {
                 $("#restart-application").click(function (e) {

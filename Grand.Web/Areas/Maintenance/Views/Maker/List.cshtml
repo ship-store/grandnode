@@ -3,75 +3,8 @@
 
 @inject Grand.Core.Domain.Common.AdminAreaSettings adminAreaSettings
 @{
-    //page title
-
-    Layout = "~/Areas/Maintenance/Views/Shared/_AdminLayout.cshtml";
-
-
+    ViewBag.Title = T("Maintenance.Title.Maker").Text;
 }
-
-@*<table class="table">
-    <tr>
-        <td>Name</td>
-        <td>Code</td>
-        <td>Country</td>
-
-    </tr>*@
-
-
-@*<tr>
-        <td>@item.Name</td>
-        <td>@item.Code</td>
-        <td>@item.Country</td>
-
-    </tr>*@
-@*</table>*@
-
-@*<select name="cars">
-        @foreach (var item in Model)
-        {
-            <option value="Name">@item.Name</option>
-        }
-
-    </select>*@
-
-@*<form action="AddMakerDetails1" method="get">
-        <div class="container-fluid">
-            <div class="row pt-2">
-                <div class="col-md-6">
-                    <label>Maker</label>
-                    <select name="Maker" class="form-control">
-                        @foreach (var item in Model)
-                        {
-                            <option value=@item.Name name=@item.Name>@item.Name</option>
-                        }
-
-                    </select>
-                </div>
-            </div>
-            <div class="row pt-2">
-                <div class="col-md-6">
-                    <label>Model</label>
-                    <input type="text" class="form-control" name="Model" />
-                </div>
-            </div>
-            <div class="row pt-2">
-                <div class="col-md-6">
-                    <label>Remark</label>
-                    <input type="text" class="form-control" name="Remark" />
-                </div>
-            </div>
-
-            <div class="row pt-2">
-                <div class="col-md-6">
-                    <label></label>
-                    <input type="submit" class="btn btn-primary" value="Add" />
-                </div>
-            </div>
-        </div>
-    </form>*@
-
-
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
@@ -110,11 +43,9 @@
                                             <option value=@item.Name name=@item.Name>@item.Name</option>
                                         }
 
-
                                     </select>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td><label for="Code">Model</label></td>
                                 <td>
@@ -139,14 +70,8 @@
                             </tr>
                             <tr>
                                 <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Add" /></td>
-                                @*<td><button class="btn btn-primary m-t-15 waves-effect">SUBMIT</button></td>*@
-
                             </tr>
-
                         </table>
-
-
-
                     </div>
                 </div>
             </form>
@@ -154,137 +79,5 @@
     </div>
 </div>
 
-<antiforgery-token />
-<div class="row">
-    <div class="col-md-12">
-        <div class="x_panel light form-fit">
-            <div class="x_title">
-                <div class="caption">
-                    <i class="fa fa-cubes"></i>
-                    @*@T("Maintenance.Vendors")*@
-                    @T("Maintenance.Maker")
-                </div>
-                <div class="actions btn-group btn-group-devided">
-                    <a href="@Url.Action("Create")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
-                    <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                </div>
-            </div>
-            <div class="x_content form">
-                <div class="form-horizontal">
-                    <div class="form-body col-md-6 advanced-filter">
-                        <div class="form-group">
-                            <label class="control-label col-xs-3 col-md-4 col-sm-4"> @T("maintenance.Maker.list.searchname")</label>
-                            <div class="col-xs-9 col-md-8 col-sm-8">
-                                @*<admin-input asp-for="SearchName" />*@
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-body col-md-6 advanced-filter">
-                        <div class="form-group">
-                            <div class="col-xs-12 col-md-12 col-sm-12">
-                                <div id="ExtendFilter">
-                                    <button class="btn btn-success filter-submit" id="search-products">
-                                        <i class="fa fa-search"></i> @T("Admin.Common.Search")
-                                    </button>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="x_content">
-                <div id="vendors-grid"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-        $(document).ready(function () {
-            $("#vendors-grid").kendoGrid({
-                dataSource: {
-                    transport: {
-                        read: {
-                            url: "@Html.Raw(Url.Action("List", "Maker","Maintenance"))",
-                            type: "POST",
-                            dataType: "json",
-                            data: additionalData
-                        }
-                    },
-                    schema: {
-                        data: "Data",
-                        total: "Total",
-                        errors: "Errors"
-                    },
-                    error: function(e) {
-                        display_kendoui_grid_error(e);
-                        // Cancel the changes
-                        this.cancelChanges();
-                    },
-                    pageSize: @(adminAreaSettings.DefaultGridPageSize),
-                    serverPaging: true,
-                    serverFiltering: true,
-                    serverSorting: true
-                },
-                pageable: {
-                    refresh: true,
-                    pageSizes: [@(adminAreaSettings.GridPageSizes)]
-                },
-                editable: {
-                    confirmation: false,
-                    mode: "inline"
-                },
-                scrollable: false,
-                columns: [{
-                    field: "Maker",
-                    title: "@T("maintenance.breakdownjob.fields.equipment_name")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:EquipmentName#</a>',
-                }, {
-                    field: "Model",
-                    title: "@T("maintenance.breakdownjob.fields.job_order")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:JobOrder#</a>',
-                    },
-                    {
-                    field: "Remark",
-                    title: "@T("maintenance.breakdownjob.fields.title")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Title#</a>',
-                    },
-                ]
-            });
-        });
-</script>
-<script type="text/javascript">
-        $(document).ready(function () {
-            //search button
-            $('#search-vendors').click(function () {
-                //search
-                var grid = $('#vendors-grid').data('kendoGrid');
-                grid.dataSource.page(1); //new search. Set page size to 1
-                //grid.dataSource.read(); we already loaded the grid above using "page" function
-                return false;
-            });
-
-            @*$("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
-                if (event.keyCode == 13) {
-                    $("#search-vendors").click();
-                    return false;
-                }
-            });*@
-        });
-
-        function additionalData() {
-            var data = {
-                @*SearchName: $('#@Html.FieldIdFor(model => model.SearchName)').val()*@
-            };
-            addAntiForgeryToken(data);
-            return data;
-        }
-</script>
 
 

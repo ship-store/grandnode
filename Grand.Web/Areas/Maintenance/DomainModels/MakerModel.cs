@@ -10,13 +10,8 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 {
     public class MakerModel : BaseGrandEntityModel
     {
-
-
-
         public string Name { get; set; }
         public string Code { get; set; }
         public string Country { get; set; }
-       
-
     }
 }

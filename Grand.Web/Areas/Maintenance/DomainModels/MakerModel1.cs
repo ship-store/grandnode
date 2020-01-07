@@ -11,14 +11,11 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 {
     public class MakerModel1 : MakerModel
     {
-
-
         public string Maker { get; set; }
         public string Model { get; set; }
         public string Remark { get; set; }
 
         [GrandResourceDisplayName("Maintenance.Maker.List.SearchName")]
         public string SearchName { get; set; }
-
     }
 }

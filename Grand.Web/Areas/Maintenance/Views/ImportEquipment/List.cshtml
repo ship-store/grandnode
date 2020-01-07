@@ -1,10 +1,7 @@
 ﻿@inject Grand.Core.Domain.Common.AdminAreaSettings adminAreaSettings
 @{
-    //page title
 
-    Layout = "~/Areas/Maintenance/Views/Shared/_AdminLayout.cshtml";
-
-
+    ViewBag.Title = T("Maintenance.Title.ImportEquipment").Text;
 }
 @using Grand.Framework;
 @using Grand.Core;
@@ -24,22 +21,9 @@
             <div class="x_title">
                 <div class="caption">
                     <i class="fa fa-list-alt"></i>
-                    @T("Plugins.DataTools.ImportProducts")
+                    Import Equipment
                 </div>
-
-                @*<form method="get" action="~/vesselList.xls">
-                        <button type="submit" id="downloadfile" class="btn btn-success">Download File</button>
-                    </form>*@
                 <div class="actions btn-group btn-group-devided util-btn-margin-bottom-5">
-                    @*<div class="actions btn-group btn-group-devided">
-                            <input type="button" id="importfile" class="btn btn-success" value="Upload Excel" />
-                            <button type="submit" id="importfile" class="btn btn-success">Upload Excel</button>
-                            <button type="submit" id="downloadfile" class="btn btn-success">Download</button>
-                            <form method="get" action="~/vesselList.xls">
-
-                            </form>
-
-                        </div>*@
 
                     <table>
                         <tr>
@@ -58,20 +42,6 @@
                         </tr>
                     </table>
 
-                    @*<div class="actions btn-group btn-group-devided">
-                            <form method="get" action="~/vesselList.xls">
-                                <button type="submit" id="downloadfile" class="btn btn-success">Download File</button>
-                            </form>
-                        </div>*@
-                    @*<button type="button" id="importfile" class="btn btn-success">
-                            Upload Excel
-                        </button>
-
-
-                            <button type="button" id="downloadfile" class="btn btn-success">
-                                Download File
-                            </button>*@
-
                 </div>
             </div>
 
@@ -87,11 +57,6 @@
 
                 </div>
             </div>
-
-            <div class="x_content form">
-                <div id="importproducts-grid"></div>
-            </div>
-
         </div>
     </div>
 </div>
@@ -161,28 +126,7 @@
                 mode: "inline"
             },
             scrollable: false,
-            columns: [{
-                field: "Name",
-                title: "Name",
-            }, {
-                field: "Status",
-                title: "Status",
-                template: '<a class="k-link" href="ImportProducts/#if(Name.endsWith(".xlsx")){#ViewDetails#}else{#ViewDetailsPic#}#/#=Id#">#=Status#</a>'
-            }, {
-                field: "ImportedCount",
-                title: "Imported Rows"
-            }, {
-                field: "TotalCount",
-                title: "Total Rows"
-            }, {
-                field: "CustomerName",
-                title: "Uploaded By",
-            }, {
-                field: "CreatedOnUtc",
-                title: "Uploaded On",
-                type: "date",
-                format:"{0:dd-MMM-yyyy HH:mm:ss}"
-            }]
+
         });
     });
 </script>
@@ -250,4 +194,7 @@
         </div>
     </form>
 </div>
+
+
+
 

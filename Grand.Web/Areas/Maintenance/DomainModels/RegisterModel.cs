@@ -11,7 +11,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 {
     public class RegisterModel: BaseGrandEntityModel
     {
-        
         [BsonElement]
         [Required(ErrorMessage = "Required Field")]
          public string Firstname { get; set; }

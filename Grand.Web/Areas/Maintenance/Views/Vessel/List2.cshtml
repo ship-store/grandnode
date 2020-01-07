@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Grand.Web.Areas.Maintenance.DomainModels.VesselListModel>
+﻿@*@model IEnumerable<Grand.Web.Areas.Maintenance.DomainModels.VesselListModel>
 @inject Grand.Core.Domain.Common.AdminAreaSettings adminAreaSettings
 @{
     //page title
@@ -89,7 +89,7 @@
                     mode: "inline"
                 },
                 scrollable: false
-                @*columns: [{
+                columns: [{
                     field: "Vessel_name",
                     title: "@T("Admin.Vessels.Fields.Vessel_name")",
                     width: 300,
@@ -147,7 +147,7 @@
                     title: "@T("Admin.Vessels.Fields.Hull_no")",
                     width: 300,
                     template: '<a class="k-link" href="Edit/#=Id#">#:Hull_no#</a>',
-                },*@
+                },
                     ]
             });
         });
@@ -164,12 +164,12 @@
                     return false;
                 });
 
-                @*$("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
+                $("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
                     if (event.keyCode == 13) {
                         $("#search-Vessels").click();
                         return false;
                     }
-                });*@
+                });
 
                     });
 
@@ -180,4 +180,4 @@
               //  addAntiForgeryToken(data);
                 return data;
             }
-</script>
+</script>*@

@@ -14,7 +14,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public int ImportedCount { get; set; }
         public string CustomerName { get; set; }
     }
-
     public class ImportFileMapModel : BaseGrandEntityModel
     {
         public ImportFile ImportFile { get; set; }

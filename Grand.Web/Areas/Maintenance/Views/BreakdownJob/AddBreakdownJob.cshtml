@@ -1,12 +1,7 @@
 ﻿@inherits Grand.Framework.Mvc.Razor.GrandRazorPage<TModel>
 @{
-    //page title
-    // ViewBag.Title = T("Admin.Catalog.Products.AddNew").Text;
-    //@model ProductModel
-    //Layout = "~/Areas/Maintenance/Views/Shared/_AdminLayout.cshtml";
-
-
-}
+    ViewBag.Title = T("Maintenance.Title.BreakdownJob").Text;
+ }
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
@@ -14,9 +9,6 @@
                 <h2>
                     Breakdown Jobs
                 </h2>
-
-
-
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -118,7 +110,6 @@
 
                                 <tr>
                                     <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Add" /></td>
-                                    @*<td><button class="btn btn-primary m-t-15 waves-effect">SUBMIT</button></td>*@
 
                                 </tr>
 
@@ -132,65 +123,3 @@
             </div>
         </div>
     </div>
-
-@*<h3>Breakdown Jobs</h3>
-<form action="AddBreakdownJobDetails" method="get">
-    <div class="container-fluid">
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label>Equipment Name</label>
-                <input type="text" class="form-control" name="EquipmentName" />
-            </div>
-        </div>
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label>Job Order</label>
-                <input type="text" class="form-control" name="JobOrder" />
-            </div>
-        </div>
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label>Title</label>
-                <input type="text" class="form-control" name="Title" />
-            </div>
-        </div>
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label>Job Reported Date</label>
-                <input type="date" class="form-control" name="JobReportedDate" />
-            </div>
-        </div>
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label>Reported By</label>
-                <select class="form-control" name="ReportedBy">
-                    <option disabled selected>-- Select --</option>
-                    <option>Chief Engineer</option>
-                    <option>Second Engineer</option>
-                    <option>Third Engineer</option>
-                    <option>Fourth Engineer</option>
-                </select>
-                
-            </div>
-        </div>
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label>Status</label>
-                <select class="form-control" name="Status">
-                    <option disabled selected>-- Select --</option>
-                    <option>Completed</option>
-                    <option>In progress</option>
-                    <option>Pending</option>
-                </select>
-
-            </div>
-        </div>
-        <br />
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <label></label>
-                <input type="submit" class="btn btn-primary" value="Add" />
-            </div>
-        </div>
-    </div>
-</form>*@
