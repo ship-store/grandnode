@@ -24,7 +24,7 @@
             </div>
             <br>
             <div class="body">
-                <form action="AddMakerDetails" method="get">
+                <form action="AddMakerDetails" method="post">
 
                     <div class="container-fluid" style="width: 80%;">
                         <div class="table-responsive">
@@ -65,6 +65,7 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    @Html.AntiForgeryToken()
                                     <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Add" /></td>
                                 </tr>
                             </table>

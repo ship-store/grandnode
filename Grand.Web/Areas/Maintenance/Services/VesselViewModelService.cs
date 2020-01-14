@@ -64,6 +64,8 @@ namespace Grand.Web.Areas.Maintenance.Services
                 vessel.Hull_no = addNewVessel.Hull_no;
                 vessel.Auxiliary_Engine = addNewVessel.Auxiliary_Engine;
                 vessel.Main_Engine = addNewVessel.Main_Engine;
+                vessel.file = addNewVessel.file.FileName;
+                vessel.file = addNewVessel.file.FileName;
                 await  _vesselService.InsertVessel(vessel);
 
             }
@@ -79,6 +81,8 @@ namespace Grand.Web.Areas.Maintenance.Services
                 vessel.Hull_no = addNewVessel.Hull_no;
                 vessel.Auxiliary_Engine = addNewVessel.Auxiliary_Engine;
                 vessel.Main_Engine = addNewVessel.Main_Engine;
+                vessel.file = addNewVessel.file.FileName;
+                vessel.file = addNewVessel.file.FileName;
                 await _vesselService.InsertVessel(vessel);
 
             }

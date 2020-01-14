@@ -1,4 +1,5 @@
 ﻿using Grand.Core;
+using Grand.Framework.Mvc.ModelBinding;
 using Grand.Framework.Mvc.Models;
 using System;
 using System.Collections.Generic;
@@ -29,5 +30,9 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string Equipment_Status { get; set; }
         public string Remark { get; set; }
         public string Vessel { get; set; }
+        public string Type { get; set; }
+        [GrandResourceDisplayName("Maintenance.Vessel.List.SearchName")]
+        public string SearchName { get; set; }
     }
+
 }

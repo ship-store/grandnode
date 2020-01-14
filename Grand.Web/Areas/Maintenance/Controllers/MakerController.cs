@@ -66,7 +66,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddMakerDetails(MakerModel addNewMaker)
         {
             await _makerViewModelService.PrepareMakerModel(addNewMaker, "Vishnu", true);

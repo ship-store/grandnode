@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grand.Framework.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Http;
 
 namespace Grand.Web.Areas.Maintenance.DomainModels
 {
@@ -39,6 +40,8 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         [GrandResourceDisplayName("Maintenance.Vessel.Fields.Auxiliary_Engine")]
         public string Auxiliary_Engine { get; set; }
 
+        [GrandResourceDisplayName("Maintenance.Vessel.Fields.Image")]
+        public IFormFile file { get; set; }
     }
     public class VesselForDisplay : BaseGrandEntityModel
     {
@@ -71,6 +74,9 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 
         [GrandResourceDisplayName("Maintenance.Vessel.Fields.Auxiliary_Engine")]
         public string Auxiliary_Engine { get; set; }
+
+        [GrandResourceDisplayName("Maintenance.Vessel.List.SearchName")]
+        public string SearchName { get; set; }
     }
     
 }

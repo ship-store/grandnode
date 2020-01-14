@@ -337,9 +337,13 @@ body {
     text-shadow: 1px 1px #000
 }
 
-.menu_section>ul {
+.menu_section ul {
     margin-top: 10px
 }
+
+
+
+
 
 .profile_pic {
     width: 35%;

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Grand.Core;
 using Grand.Core.Data;
-
+using Grand.Core.Domain.Equipment;
 
 namespace Grand.Services.Equipments
 {
@@ -14,11 +15,24 @@ namespace Grand.Services.Equipments
         {
             this._equipmentRepository = _equipmentRepository;
         }
-       
+
+        public Task<Equipment> GetEquipmentById(string Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual async Task InsertEquipment(Grand.Core.Domain.Equipment.Equipment equipment)
         {
             await _equipmentRepository.InsertAsync(equipment);
 
         }
+
+        async Task<IPagedList<Grand.Core.Domain.Equipment.Equipment>> IEquipmentService.GetAllEquipment(string name, int pageIndex, int pageSize, bool showHidden)
+        {
+            var query = _equipmentRepository.Table;
+
+            return await PagedList<Grand.Core.Domain.Equipment.Equipment>.Create(query, pageIndex, pageSize);
+        }
+
     }
 }

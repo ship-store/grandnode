@@ -1,9 +1,9 @@
-﻿@model VesselListModel
+﻿@model EquipmentModel
 @inject Grand.Core.Domain.Common.AdminAreaSettings adminAreaSettings
 @{
-    ViewBag.Title = T("Maintenance.Vessel").Text;
+  
 }
-<form asp-controller="Vessel" asp-action="List" method="get">
+<form asp-controller="ImportEquipment" asp-action="List1" method="get">
     <antiforgery-token />
     <div class="row" id="SearchSection">
         <div class="col-md-12">
@@ -11,10 +11,10 @@
                 <div class="x_title">
                     <div class="caption">
                         <i class="fa fa-cubes"></i>
-                        @T("Maintenance.Vessel")
+                        @T("Maintenance.importEquipment")
                     </div>
                     <div class="actions btn-group btn-group-devided">
-                        <a href="@Url.Action("AddVessel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+                        <a href="@Url.Action("ImportExcel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
                         <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
                         <button type="button" name="delete-selected" id="delete-selected" class="btn red">
                             <i class="fa fa-trash-o"></i>
@@ -55,7 +55,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: "@Html.Raw(Url.Action("List", "Vessel","Maintenance"))",
+                            url: "@Html.Raw(Url.Action("List1", "ImportEquipment","Maintenance"))",
                             type: "POST",
                             dataType: "json",
                             data: additionalData
@@ -92,66 +92,57 @@
                         template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
                         width: 30
                     },
-                     {
-                    field: "file",
-                    title: "@T("Maintenance.Vessel.Fields.Image")",
-                    template: '<a class="k-link" href="Edit/#=Id#"><img src="#=file#" class="img-fluid" style="width:100px;height:60px"/></a>',
-                    width: 92
-                    },
                     {
-                    field: "Vessel_name",
-                    title: "@T("maintenance.vessel.fields.vessel_name")",
+                    field: "Sub1_number",
+                    title: "@T("maintenance.importequipment.fields.Sub1_number")",
                     width: 600,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Vessel_name#</a>',
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Sub1_number#</a>',
                 }, {
-                    field: "Vessel_type",
-                    title: "@T("maintenance.vessel.fields.vessel_type")",
+                    field: "Sub1_description",
+                    title: "@T("maintenance.importequipment.fields.Sub1_description")",
                     width: 200,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Vessel_type#</a>',
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Sub1_description#</a>',
                     },
                     {
-                    field: "Class",
-                    title: "@T("maintenance.vessel.fields.class")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Class#</a>',
+                    field: "Sub2_number",
+                    title: "@T("maintenance.importequipment.fields.Sub2_number")",
+                    width: 600,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Sub2_number#</a>',
+                }, {
+                    field: "Sub2_description",
+                    title: "@T("maintenance.importequipment.fields.Sub2_description")",
+                    width: 200,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Sub2_description#</a>',
                     },
-                    {
-                    field: "Flag",
-                    title: "@T("maintenance.vessel.fields.flag")",
-                    width: 150,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Flag#</a>',
+                     {
+                    field: "Sub3_number",
+                    title: "@T("maintenance.importequipment.fields.Sub3_number")",
+                    width: 600,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Sub3_number#</a>',
+                }, {
+                    field: "Sub3_description",
+                    title: "@T("maintenance.importequipment.fields.Sub3_description")",
+                    width: 200,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Sub3_description#</a>',
                     },
-                    {
-                    field: "Auxiliary_Engine",
-                    title: "@T("maintenance.vessel.fields.auxiliary_engine")",
-                    width: 350,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Auxiliary_Engine#</a>',
+                      {
+                    field: "Sub4_number",
+                    title: "@T("maintenance.importequipment.fields.Sub4_number")",
+                    width: 600,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Sub4_number#</a>',
+                }, {
+                    field: "Sub5_description",
+                    title: "@T("maintenance.importequipment.fields.Sub5_description")",
+                    width: 200,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Sub5_description#</a>',
                     },
-                    {
-                    field: "Main_Engine",
-                    title: "@T("maintenance.vessel.fields.main_engine")",
-                    width: 500,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Main_Engine#</a>',
+                      
+                       {
+                    field: "Vessel",
+                    title: "@T("maintenance.importequipment.fields.Vessel")",
+                    width: 200,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Vessel#</a>',
                     },
-                    {
-                    field: "Hull_no",
-                    title: "@T("maintenance.vessel.fields.hull_no")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Hull_no#</a>',
-                    },
-                    {
-                    field: "Shipyard",
-                    title: "@T("maintenance.vessel.fields.shipyard")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Shipyard#</a>',
-                    },
-                    {
-                    field: "IMO",
-                    title: "@T("Maintenance.Vessel.Fields.IMO")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:IMO#</a>',
-                    },
-                    
                 ]
             });
         });

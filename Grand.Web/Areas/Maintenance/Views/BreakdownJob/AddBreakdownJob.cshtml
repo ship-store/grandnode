@@ -1,125 +1,127 @@
-﻿@inherits Grand.Framework.Mvc.Razor.GrandRazorPage<TModel>
-@{
-    ViewBag.Title = T("Maintenance.Title.BreakdownJob").Text;
- }
+﻿@{ 
+    ViewBag.Title = T("Maintenance.BreakdownJobs").Text;
+}
 
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="header">
-                <h2>
-                    Breakdown Jobs
-                </h2>
-                <ul class="header-dropdown m-r--5">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);">Action</a></li>
-                            <li><a href="javascript:void(0);">Another action</a></li>
-                            <li><a href="javascript:void(0);">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <br>
-            <div class="body">
-                <form action="AddBreakdownJobDetails" method="get">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+        <div class="header">
+            <h2>
+                Breakdown Jobs
+            </h2>
+            <ul class="header-dropdown m-r--5">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:void(0);">Action</a></li>
+                        <li><a href="javascript:void(0);">Another action</a></li>
+                        <li><a href="javascript:void(0);">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <br>
 
-                    <div class="container-fluid" style="width: 80%;">
-                        <div class="table-responsive">
-
-                            <table class="table">
-
-                                <tr>
-                                    <td><label for="EquipmentName">Equipment Name</label></td>
-                                    <td>
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="text" class="form-control" name="EquipmentName" required/>
-
-                                            </div>
+        <div class="body">
+            <form action="AddBreakdownJobDetails" method="post" name="contact_form" id="first_form">
+                <div class="container-fluid" style="width: 80%;">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <td><label for="EquipmentName">Equipment Name</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="EquipmentName" id="n1" />
                                         </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><label for="Job Order">JobOrder</label></td>
-                                    <td>
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="text" class="form-control" name="JobOrder" required/>
-
-                                            </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Job Order">Job Order</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="JobOrder" id="n2" />
                                         </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><label for="Title">Title</label></td>
-                                    <td>
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="text" class="form-control" name="Title" required/>
-
-                                            </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Title">Title</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="Title" id="n3" />
                                         </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><label for="JobReportedDate">Job Reported Date</label></td>
-                                    <td>
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="date" class="form-control" name="JobReportedDate" required/>
-                                            </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="JobReportedDate">Job Reported Date</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="date" class="form-control valid" name="JobReportedDate" id="n4" />
                                         </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><label for="ReportedBy">Reported By</label></td>
-                                    <td>
-                                        <select class="form-control show-tick" name="ReportedBy" required>
-                                            <option value=""></option>
-                                            <option>Chief Engineer</option>
-                                            <option>Second Engineer</option>
-                                            <option>Third Engineer</option>
-                                            <option>Fourth Engineer</option>
-
-
-                                        </select>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><label for="Status">Status</label></td>
-                                    <td>
-                                        <select class="form-control show-tick" name="Status" required>
-                                            <option value=""></option>
-                                            <option>Completed</option>
-                                            <option>In progress</option>
-                                            <option>Pending</option>
-
-
-                                        </select>
-                                    </td>
-                                </tr>
-
-                               
-
-                                <tr>
-                                    <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Add" /></td>
-
-                                </tr>
-
-                            </table>
-
-
-
-                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="ReportedBy">Reported By</label></td>
+                                <td>
+                                    <select class="form-control show-tick valid" name="ReportedBy" id="n5">
+                                        <option value=""></option>
+                                        <option>Chief Engineer</option>
+                                        <option>Second Engineer</option>
+                                        <option>Third Engineer</option>
+                                        <option>Fourth Engineer</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Status">Status</label></td>
+                                <td>
+                                    <select class="form-control show-tick valid" name="Status" id="n6">
+                                        <option value=""></option>
+                                        <option>Completed</option>
+                                        <option>In progress</option>
+                                        <option>Pending</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                @Html.AntiForgeryToken()
+                                <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Submit" id="submit" /></td>
+                            </tr>
+                        </table>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("form").on('submit', function (e) {
+            $(".valid").each(function () {
+                 
+                var input = $(this);
+                if (input.val() == "") {
+                    swal($(this).attr("name") + " Cannot be blank");
+                   e.preventDefault();
+                    return false;
+                }
+                else {
+                    swal({
+                        title: "Success!",
+                        text: "Submitting Form!",
+                        icon: "success",
+                        button: "Ok",
+                    });
+                }
+            });
+        });
+    });
+</script>

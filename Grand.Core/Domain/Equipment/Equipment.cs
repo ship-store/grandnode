@@ -28,5 +28,6 @@ namespace Grand.Core.Domain.Equipment
         public string Equipment_Status { get; set; }
         public string Remark { get; set; }
         public string Vessel { get; set; }
+        public string Type { get; set; }
     }
 }

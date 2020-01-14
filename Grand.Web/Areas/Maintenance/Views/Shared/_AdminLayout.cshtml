@@ -74,7 +74,7 @@
     string adminPageTitle = "";
     if (!String.IsNullOrWhiteSpace(ViewBag.Title))
     {
-        adminPageTitle = ViewBag.Title + " / ";
+        adminPageTitle = ViewBag.Title + " | ";
     }
     adminPageTitle += T("Admin.PageTitle").Text;
 
@@ -152,8 +152,8 @@
                     <div class="nav_menu">
                         <nav>
                             <div class="nav toggle">
-                                    <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                                </div>
+                                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                            </div>
 
                             @if (currentCustomer.IsAdmin())
                             {
@@ -300,13 +300,13 @@
     @Html.GrandCssFiles(this.Url, ResourceLocation.Footer)
     @Html.GrandScripts(this.Url, ResourceLocation.Footer)
     @*<div class="page-footer">
-        <div class="page-footer-inner">
-            <a href="https://grandnode.com/" target="_blank">2019 © Powered by GrandNode.</a>
-        </div>
-        <div class="scroll-to-top">
-            <i class="icon-arrow-up"></i>
-        </div>
-    </div>*@
+            <div class="page-footer-inner">
+                <a href="https://grandnode.com/" target="_blank">2019 © Powered by GrandNode.</a>
+            </div>
+            <div class="scroll-to-top">
+                <i class="icon-arrow-up"></i>
+            </div>
+        </div>*@
     <script>
             $(document).ready(function () {
                 $("#restart-application").click(function (e) {
@@ -320,5 +320,8 @@
                 });
             });
     </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.2.0/sweetalert2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.2.0/sweetalert2.min.js"></script>
+
 </body>
 </html>

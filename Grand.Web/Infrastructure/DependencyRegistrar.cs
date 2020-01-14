@@ -95,11 +95,15 @@ namespace Grand.Web.Infrastructure
             builder.RegisterType<EquipmentImportManger>().As<EquipmentImportManger>().InstancePerLifetimeScope();
             //Jobplan Service
             builder.RegisterType<JobplanImportManger>().As<IJobplanImportManger>().InstancePerLifetimeScope();
+
             //Sparepart Service
             builder.RegisterType<SparepartImportManger>().As<ISparepartImportManger>().InstancePerLifetimeScope();
 
             //Jobmaster Service
             builder.RegisterType<JobMasterViewModelService>().As<IJobMasterViewModelService>().InstancePerLifetimeScope();
+
+            //Equipment view model service
+            builder.RegisterType<EquipmentViewModelService>().As<IEquipmentViewModelService>().InstancePerLifetimeScope();
 
         }
 

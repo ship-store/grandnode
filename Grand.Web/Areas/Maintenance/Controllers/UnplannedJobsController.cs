@@ -52,7 +52,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddUnplannedJobDetails(UnplannedJobModel addNewUnplannedJob)
         {
             await _unplannedJobViewModelService.PrepareUnplannedJobModel(addNewUnplannedJob, "Vishnu", true);

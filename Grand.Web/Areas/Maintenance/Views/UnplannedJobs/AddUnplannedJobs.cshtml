@@ -1,12 +1,12 @@
-﻿@{
-        ViewBag.Title = T("Maintenance.Title.AddUnplannedJobs").Text;
+﻿@{ 
+    ViewBag.Title = T("Maintenance.Title.AddUnplannedJobs").Text;
 }
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
         <div class="header">
             <h2>
-                Unplanned Job
+                Breakdown Job
             </h2>
             <ul class="header-dropdown m-r--5">
                 <li class="dropdown">
@@ -22,33 +22,28 @@
             </ul>
         </div>
         <br>
-        <div class="body">
-            <form action="AddUnplannedJobDetails" method="get" id="myForm" onsubmit="return Validation() && Clear()">
 
+        <div class="body">
+            <form action="AddUnplannedJobDetails" method="post" name="contact_form" id="first_form">
                 <div class="container-fluid" style="width: 80%;">
                     <div class="table-responsive">
-
                         <table class="table">
-
                             <tr>
                                 <td><label for="EquipmentName">Equipment Name</label></td>
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="EquipmentName"  id="n1" />
-
+                                            <input type="text" class="form-control valid" name="EquipmentName" id="n1" />
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-
                             <tr>
-                                <td><label for="Job Order">JobOrder</label></td>
+                                <td><label for="Job Order">Job Order</label></td>
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="JobOrder" id="n2"/>
-
+                                            <input type="text" class="form-control valid" name="JobOrder" id="n2" />
                                         </div>
                                     </div>
                                 </td>
@@ -58,43 +53,37 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="Title" id="n3"/>
-
+                                            <input type="text" class="form-control valid" name="Title" id="n3" />
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td><label for="JobReportedDate">Job Reported Date</label></td>
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="date" class="form-control" name="JobReportedDate" id="n4"/>
+                                            <input type="date" class="form-control valid" name="JobReportedDate" id="n4" />
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td><label for="ReportedBy">Reported By</label></td>
                                 <td>
-                                    <select class="form-control show-tick" name="ReportedBy" id="n5">
+                                    <select class="form-control show-tick valid" name="ReportedBy" id="n5">
                                         <option value=""></option>
                                         <option>Chief Engineer</option>
                                         <option>Second Engineer</option>
                                         <option>Third Engineer</option>
                                         <option>Fourth Engineer</option>
-
-
                                     </select>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td><label for="Status">Status</label></td>
                                 <td>
-                                    <select class="form-control show-tick" name="Status"  id="n6">
+                                    <select class="form-control show-tick valid" name="Status" id="n6">
                                         <option value=""></option>
                                         <option>Completed</option>
                                         <option>In progress</option>
@@ -103,8 +92,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Add"  id="myBtn" /></td>
-                               </tr>
+                                @Html.AntiForgeryToken()
+                                <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Submit" id="submit" /></td>
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -112,4 +102,20 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        $("form").on('submit', function (e) {
+            $(".valid").each(function () {
+              
+                var input = $(this);
+                if (input.val() == "") {
+                    swal($(this).attr("name") + " Cannot be blank");
+                      e.preventDefault();
+                    return false;
+                }
+                
+                }
+            });
+        });
+    });
+</script>

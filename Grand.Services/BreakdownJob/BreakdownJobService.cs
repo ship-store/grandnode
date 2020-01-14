@@ -13,45 +13,30 @@ namespace Grand.Services.BreakdownJob
     public class BreakdownJobService : IBreakdownJobService
     {
         private readonly IRepository<Grand.Core.Domain.BreakdownJob.BreakdownJob> _breakdownJobRepository;
-        
         public BreakdownJobService(IRepository<Grand.Core.Domain.BreakdownJob.BreakdownJob> _breakdownJobRepository)
         {
             this._breakdownJobRepository = _breakdownJobRepository;
         }
-       
         async Task<IPagedList<Core.Domain.BreakdownJob.BreakdownJob>> IBreakdownJobService.GetAllBreakdownJobs(string name, int pageIndex, int pageSize, bool showHidden)
         {
             var query = _breakdownJobRepository.Table;
-         
             return await PagedList< Grand.Core.Domain.BreakdownJob.BreakdownJob>.Create(query, pageIndex, pageSize);
         }
-        
-         //TODO
+        // TO DO
         // page size paramater need tobe setted
         async Task<IList<Core.Domain.BreakdownJob.BreakdownJob>> IBreakdownJobService.GetAllBreakdownJobsAsList()
         {
             var query = _breakdownJobRepository.Table;
-
-
-           
-
             return await PagedList<Grand.Core.Domain.BreakdownJob.BreakdownJob>.Create(query ,0,15);
         }
-
         Task IBreakdownJobService.PrepareBreakdownJobModel(Core.Domain.BreakdownJob.BreakdownJob model1, object p, bool v)
         {
             throw new NotImplementedException();
         }
-
         public virtual async Task InsertBreakdownJob(Core.Domain.BreakdownJob.BreakdownJob vessel)
         {
-
-
             await _breakdownJobRepository.InsertAsync(vessel);
-
-
         }
-
         public virtual Task<Core.Domain.BreakdownJob.BreakdownJob> GetBreakdownJobById(string breakdownjobId)
         {
             return _breakdownJobRepository.GetByIdAsync(breakdownjobId);
@@ -64,15 +49,7 @@ namespace Grand.Services.BreakdownJob
         {
             if (breakdownjob == null)
                 throw new ArgumentNullException("BreakdownJob");
-
-
-            //deleted product
             await _breakdownJobRepository.DeleteAsync(breakdownjob);
-
-
-
         }
-
-
     }
 }

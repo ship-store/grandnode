@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Grand.Core
 {
@@ -13,5 +14,7 @@ namespace Grand.Core
         int TotalPages { get; }
         bool HasPreviousPage { get; }
         bool HasNextPage { get; }
+
+       
     }
 }

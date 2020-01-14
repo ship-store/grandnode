@@ -18,7 +18,7 @@ using Grand.Core.Domain.Equipment;
 using Grand.Core.Domain.Vessel;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
-
+using Grand.Framework.Kendoui;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -30,14 +30,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly EquipmentImportManger _equipmentImportManger;
         private readonly IImportFileService _importFileService;
         private readonly IEquipmentService _equipmentService;
+        private readonly IEquipmentViewModelService _equipmentViewModelService;
         public ImportEquipmentController(EquipmentImportManger _equipmentImportManger, IImportFileService _importFileService,
-            IEquipmentService _equipmentService, IVesselService _vesselService, IHostingEnvironment env)
+            IEquipmentService _equipmentService, IVesselService _vesselService, IHostingEnvironment env, IEquipmentViewModelService _equipmentViewModelService)
         {
             this._equipmentImportManger = _equipmentImportManger;
             this._importFileService = _importFileService;
             this._equipmentService = _equipmentService;
             this._vesselService = _vesselService;
             this.env = env;
+            this._equipmentViewModelService = _equipmentViewModelService;
         }
         public IActionResult Index()
         {
@@ -74,7 +76,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         [HttpPost]
         public async Task<IActionResult> ImportExcel()// add to mogodb
         {
-
             try
             {
                 var files = Request.Form.Files;
@@ -86,8 +87,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     {
                         DateTime now = DateTime.Now;
                         var equipmentImportModel = _equipmentImportManger.ImportFromXlsx(importexcelfile.OpenReadStream());
-
-
                         var importFile = await _importFileService.Insert(new Grand.Web.Areas.Maintenance.DomainModels.ImportFile {
                             Name = importexcelfile.FileName,
                             CreatedOnUtc = now,
@@ -95,7 +94,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                             Status = "Pending",
                             TotalCount = equipmentImportModel.TotalCount,
                     });
-
                         SuccessNotification("File uploaded successfully.");
                         return RedirectToAction("Map", new { id = importFile.Id });
                     }
@@ -104,7 +102,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                         return RedirectToAction("List");
                     }
                 }
-
                 SuccessNotification("Plesae select a file.");
                 return RedirectToAction("List");
             }
@@ -116,6 +113,25 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
 
 
+        // list
+      //  public IActionResult Index() => RedirectToAction("List");
+        public async Task<IActionResult> List1()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> List1(DataSourceRequest command, EquipmentModel model)
+        {
+            var vessels = await _equipmentService.GetAllEquipment(model.SearchName, command.Page - 1, command.PageSize, true);
+            var gridModel = new DataSourceResult {
+                Data = vessels.ToList()
+            };
+            return Json(gridModel);
+        }
+
         public async Task<IActionResult> Map(string id)
         {
             await Task.FromResult(0);
@@ -123,7 +139,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             if (importFile.Status == "Pending")
             {
                 dynamic allItems = JsonConvert.DeserializeObject(importFile.Content);
-
                 foreach (var item in allItems)
                 {
                     Equipment newEquipment = new Equipment();
@@ -146,18 +161,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     newEquipment.Equipment_Status = item["Equipment_Status"];
                     newEquipment.Remark = item["Remark"];
                     newEquipment.Vessel = item["Vessel"];
-
+                    newEquipment.Type = item["Type"];
                     // write Service
 
                     await _equipmentService.InsertEquipment(newEquipment);
                 }
                 //return Content("Already imported, Contact Admin");
-
             }
-
             var properties = GetFieldNames(importFile.Content);
             var propertyMap = new Dictionary<string, string>();
-
             var importFileMapModel = new ImportFileMapModel() {
                 ImportFile = importFile,
                 PropertyMap = propertyMap

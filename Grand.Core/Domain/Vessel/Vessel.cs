@@ -2,6 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Grand.Core.Domain.Vessel
@@ -20,7 +21,10 @@ namespace Grand.Core.Domain.Vessel
         public string Main_Engine { get; set; }
         public string Auxiliary_Engine { get; set; }
 
-
+        [DataType(DataType.Upload)]
+        [Display(Name = "Upload File")]
+        [Required(ErrorMessage = "Please choose file to upload.")]
+        public string file { get; set; }
 
     }
 }

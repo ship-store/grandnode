@@ -52,5 +52,11 @@
   <ItemGroup>
     <Compile Remove="Areas\Maintenance\DomainModels\VesselList.cs" />
   </ItemGroup>  
+  <ItemGroup>
+    <None Include="Areas\Maintenance\Views\EquipmentMaster\List.cshtml" />
+  </ItemGroup>  
+  <ItemGroup>
+    <Folder Include="wwwroot\Maintenance\Vessel\" />
+  </ItemGroup>  
  
 </Project>

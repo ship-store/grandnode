@@ -170,8 +170,6 @@ namespace Grand.Framework.Infrastructure
             builder.RegisterType<JobplanService>().As<IJobplanService>().InstancePerLifetimeScope();
             builder.RegisterType<SparepartService>().As<ISparepartService>().InstancePerLifetimeScope();
             builder.RegisterType<JobMasterService>().As<IJobMasterService>().InstancePerLifetimeScope();
-
-
             builder.RegisterType<ProductTemplateService>().As<IProductTemplateService>().InstancePerLifetimeScope();
             builder.RegisterType<CategoryTemplateService>().As<ICategoryTemplateService>().InstancePerLifetimeScope();
             builder.RegisterType<ManufacturerTemplateService>().As<IManufacturerTemplateService>().InstancePerLifetimeScope();
