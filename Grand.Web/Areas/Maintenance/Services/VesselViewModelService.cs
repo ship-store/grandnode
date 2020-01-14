@@ -52,7 +52,7 @@ namespace Grand.Web.Areas.Maintenance.Services
         {
             try
             {
-
+                // AutoMapper need 
                 var vessel = new Vessel();
 
                 vessel.Vessel_name = addNewVessel.Vessel_name;
@@ -64,22 +64,13 @@ namespace Grand.Web.Areas.Maintenance.Services
                 vessel.Hull_no = addNewVessel.Hull_no;
                 vessel.Auxiliary_Engine = addNewVessel.Auxiliary_Engine;
                 vessel.Main_Engine = addNewVessel.Main_Engine;
+                vessel.ActiveStatus = 1;
                 await  _vesselService.InsertVessel(vessel);
 
             }
-            catch (Exception )
+            catch (Exception  ex)
             {
-                var vessel = new Vessel();
-                vessel.Vessel_name = addNewVessel.Vessel_name;
-                vessel.Vessel_type = addNewVessel.Vessel_type;
-                vessel.IMO = addNewVessel.IMO;
-                vessel.Shipyard = addNewVessel.Shipyard;
-                vessel.Flag = addNewVessel.Flag;
-                vessel.Class = addNewVessel.Class;
-                vessel.Hull_no = addNewVessel.Hull_no;
-                vessel.Auxiliary_Engine = addNewVessel.Auxiliary_Engine;
-                vessel.Main_Engine = addNewVessel.Main_Engine;
-                await _vesselService.InsertVessel(vessel);
+               
 
             }
         }

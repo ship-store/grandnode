@@ -38,6 +38,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 
         [GrandResourceDisplayName("Maintenance.Vessel.Fields.Auxiliary_Engine")]
         public string Auxiliary_Engine { get; set; }
+        public int ActiveStatus { get; set; }
 
     }
     public class VesselForDisplay : BaseGrandEntityModel
@@ -71,6 +72,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 
         [GrandResourceDisplayName("Maintenance.Vessel.Fields.Auxiliary_Engine")]
         public string Auxiliary_Engine { get; set; }
+        public int ActiveStatus { get; set; }
     }
     
 }

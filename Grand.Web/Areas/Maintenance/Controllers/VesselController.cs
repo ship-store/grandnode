@@ -43,7 +43,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             var vessels = await _vesselService.GetAllVessels(model.SearchName, command.Page - 1, command.PageSize, true);
             var gridModel = new DataSourceResult {
-                Data = vessels.ToList()
+                Data = vessels.Where(x=>x.ActiveStatus==1).ToList()
+
             };
             return Json(gridModel);
         }

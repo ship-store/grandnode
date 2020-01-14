@@ -88,21 +88,16 @@ namespace Grand.Services.Vessel
 
         }
 
-        //public Task DeleteVessel(Core.Domain.Vessel.Vessel vessel)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        
         public virtual async Task DeleteVessel(Core.Domain.Vessel.Vessel vessel)
         {
             if (vessel == null)
-                throw new ArgumentNullException("Vessel");
-
-
-            //deleted product
-            await _vesselRepository.DeleteAsync(vessel);
-
-            
-
+                throw new ArgumentNullException("Vessel");      
+            //Soft deleting Vessel
+            vessel.ActiveStatus = 0;
+            await _vesselRepository.UpdateAsync(vessel);
+           
+            //await _vesselRepository.DeleteAsync(vessel); hard delte 
         }
         public virtual async Task UpdateVessel(Core.Domain.Vessel.Vessel vessel)
         {
