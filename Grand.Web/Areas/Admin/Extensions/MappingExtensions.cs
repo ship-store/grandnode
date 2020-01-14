@@ -18,6 +18,7 @@ using Grand.Core.Domain.Stores;
 using Grand.Core.Domain.Tax;
 using Grand.Core.Domain.Topics;
 using Grand.Core.Domain.Vendors;
+using Grand.Core.Domain.Vessel;
 using Grand.Core.Infrastructure.Mapper;
 using Grand.Core.Plugins;
 using Grand.Services.Authentication.External;
@@ -52,6 +53,7 @@ using Grand.Web.Areas.Admin.Models.Tax;
 using Grand.Web.Areas.Admin.Models.Templates;
 using Grand.Web.Areas.Admin.Models.Topics;
 using Grand.Web.Areas.Admin.Models.Vendors;
+using Grand.Web.Areas.Maintenance.DomainModels;
 using System;
 using System.Threading.Tasks;
 
@@ -1721,6 +1723,28 @@ namespace Grand.Web.Areas.Admin.Extensions
         }
 
         #endregion
+
+
+
+        #region Vessel From Maintenance
+
+        public static VesselModel ToModel(this Vessel entity)
+        {
+            return entity.MapTo<Vessel, VesselModel>();
+        }
+
+        public static Vessel ToEntity(this VesselModel model)
+        {
+            return model.MapTo<VesselModel, Vessel>();
+        }
+
+        public static Vessel ToEntity(this VesselModel model, Vessel destination)
+        {
+            return model.MapTo(destination);
+        }
+
+        #endregion
+
 
     }
 }

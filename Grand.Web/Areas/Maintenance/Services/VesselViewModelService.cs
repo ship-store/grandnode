@@ -1,7 +1,7 @@
 ﻿using Grand.Core;
 using Grand.Core.Domain.Vessel;
 using Grand.Services.Vessel;
-
+using Grand.Web.Areas.Admin.Extensions;
 using Grand.Web.Areas.Maintenance.DomainModels;
 using Grand.Web.Areas.Maintenance.Interfaces;
 using System;
@@ -48,31 +48,11 @@ namespace Grand.Web.Areas.Maintenance.Services
             throw new NotImplementedException();
         }
 
-        async Task IVesselViewModelService.PrepareVesselModel(VesselModel addNewVessel, object p, bool v)
-        {
-            try
-            {
-                // AutoMapper need 
-                var vessel = new Vessel();
-
-                vessel.Vessel_name = addNewVessel.Vessel_name;
-                vessel.Vessel_type = addNewVessel.Vessel_type;
-                vessel.IMO = addNewVessel.IMO;
-                vessel.Shipyard = addNewVessel.Shipyard;
-                vessel.Flag = addNewVessel.Flag;
-                vessel.Class = addNewVessel.Class;
-                vessel.Hull_no = addNewVessel.Hull_no;
-                vessel.Auxiliary_Engine = addNewVessel.Auxiliary_Engine;
-                vessel.Main_Engine = addNewVessel.Main_Engine;
+        async Task IVesselViewModelService.PrepareVesselModel(VesselModel vesselModel)
+        {                
+               var vessel= vesselModel.ToEntity();        
                 vessel.ActiveStatus = 1;
                 await  _vesselService.InsertVessel(vessel);
-
-            }
-            catch (Exception  ex)
-            {
-               
-
-            }
         }
     }
 }

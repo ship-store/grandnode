@@ -2,7 +2,6 @@
 using Grand.Core.Caching;
 using Grand.Core.Data;
 using Grand.Core.Domain.Vessel;
-
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
@@ -16,7 +15,7 @@ namespace Grand.Services.Vessel
     {
         private readonly IRepository<Grand.Core.Domain.Vessel.Vessel> _vesselRepository;
         private readonly ICacheManager _cacheManager;
-        private string key;
+       
 
         public VesselService(IRepository<Grand.Core.Domain.Vessel.Vessel> _vesselRepository,
             ICacheManager cacheManager)
@@ -32,15 +31,11 @@ namespace Grand.Services.Vessel
             return await PagedList< Grand.Core.Domain.Vessel.Vessel>.Create(query, pageIndex, pageSize);
         }
         
-         //TODO
-        // page size paramater need tobe setted
+         
+       
         async Task<IList<Core.Domain.Vessel.Vessel>> IVesselService.GetAllVesselAsList()
         {
-            var query = _vesselRepository.Table;
-
-
-           
-
+            var query = _vesselRepository.Table;  
             return await PagedList<Grand.Core.Domain.Vessel.Vessel>.Create(query ,0,15);
         }
 

@@ -34,6 +34,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public IActionResult Index() => RedirectToAction("List");
         public async Task<IActionResult> List()
         {
+            await Task.FromResult(0);
            return View();
         }
 
@@ -56,10 +57,11 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> AddVesselDetails(VesselModel addNewVessel)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddVesselDetails(VesselModel newVessel)
         {
-            await _vesselViewModelService.PrepareVesselModel(addNewVessel, "Vessel", true);
+            await _vesselViewModelService.PrepareVesselModel(newVessel);
             return RedirectToAction("List", "Vessel");
             
         }
