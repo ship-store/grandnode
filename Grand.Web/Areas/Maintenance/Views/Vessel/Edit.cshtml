@@ -3,7 +3,7 @@
     ViewBag.Title = T("Maintenance.Title.AddVessel").Text;
 }
 
-@Html.BeginForm("EditItem", "Vessel", FormMethod.Get, new { id = Model.VesselID })
+@Html.BeginForm("EditItem", "Vessel", FormMethod.Post, new { id = Model.VesselID , enctype = "multipart/form-data"})
 <input type="hidden" value="@Model.VesselID" name="VesselId" class="form-control" />
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
@@ -131,6 +131,19 @@
                                     </div>
                                 </td>
                             </tr>
+                            @*<tr>
+                                <td><label for="file">Upload Picture</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="file" class="form-control" name="file" />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>*@
+                            <tr>
+                                @Html.AntiForgeryToken()
                             <tr>
                                 <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Save" /></td>
                             </tr>

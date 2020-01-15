@@ -77,6 +77,9 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 
         [GrandResourceDisplayName("Maintenance.Vessel.List.SearchName")]
         public string SearchName { get; set; }
+
+        [GrandResourceDisplayName("Maintenance.Vessel.Fields.Image")]
+        public IFormFile file { get; set; }
     }
     
 }

@@ -166,9 +166,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditItem(VesselForDisplay vesselForDisplay, string id)
         {
+            //var fileName = Path.GetFileName(vesselForDisplay.file.FileName);
+            //string uniqueFileName = Path.GetFileNameWithoutExtension(fileName) + Path.GetExtension(fileName);
+            //var Maintenance = Path.Combine(env.WebRootPath, "Maintenance", "Vessel");
+            //var filePath = Path.Combine(Maintenance, uniqueFileName);
+            //vesselForDisplay.file.CopyTo(new FileStream(filePath, FileMode.Create));
             id = vesselForDisplay.VesselID;
             var vessel = await _vesselService.GetVesselById(id);
             vessel.Vessel_type = vesselForDisplay.Vessel_type;
@@ -181,7 +187,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             vessel.Flag = vesselForDisplay.Flag;
             vessel.Main_Engine = vesselForDisplay.Main_Engine;
             vessel.Auxiliary_Engine = vesselForDisplay.Auxiliary_Engine;
-
+            //vessel.file = vesselForDisplay.file.FileName;
             await _vesselService.UpdateVessel(vessel);
             return RedirectToAction("List");
         }

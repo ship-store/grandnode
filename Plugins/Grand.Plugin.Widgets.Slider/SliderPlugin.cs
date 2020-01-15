@@ -68,7 +68,7 @@ namespace Grand.Plugin.Widgets.Slider
                 FullWidth = true,
                 Published = true,
                 PictureId = pic1.Id,
-                Description = "<div class=\"row slideRow\"><div class=\"col-lg-6 offset-lg-6 col-12 offset-0 d-flex flex-column justify-content-center align-items-center px-0\"> <div class=\"slide-title grandslide animated fadeInRight delay-1s\"> <h2 class=\"mb-0 text-white\">GrandNode 4.50 Release</h2> </div> <div class=\"slide-content grandslide mt-lg-3 mt-1 animated fadeInRight delay-1-5s\"> <p style=\"text-align: center; margin-bottom: 0;\">Open Source Cross Platform E-Commerce Solution based on .NET Core 2.2</p></div><div class=\"slide-button mt-lg-3 mt-1 animated fadeInRight delay-2s\"><a class=\"btn btn-outline-white\" href=\"https://grandnode.com\">Read More</a></div></div></div>"
+                Description = "<div class=\"row slideRow\"><div class=\"col-lg-6 offset-lg-6 col-12 offset-0 d-flex flex-column justify-content-center align-items-center px-0\"> <div class=\"slide-title grandslide animated fadeInRight delay-1s\"> <h2 class=\"mb-0 text-white\"></h2> </div> <div class=\"slide-content grandslide mt-lg-3 mt-1 animated fadeInRight delay-1-5s\"> <p style=\"text-align: center; margin-bottom: 0;\">Open Source Cross Platform E-Commerce Solution based on .NET Core 2.2</p></div><div class=\"slide-button mt-lg-3 mt-1 animated fadeInRight delay-2s\"><a class=\"btn btn-outline-white\" href=\"https://grandnode.com\">Read More</a></div></div></div>"
             });
 
             await _pictureSliderRepository.InsertAsync(new PictureSlider()
