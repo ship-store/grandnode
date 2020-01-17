@@ -2,59 +2,61 @@
 @inject Grand.Core.Domain.Common.AdminAreaSettings adminAreaSettings
 @{
     ViewBag.Title = T("Maintenance.UnplannedJobs").Text;
+   
+
 }
 
-    <form asp-controller="UnplannedJobs" asp-action="List" method="get">
-        <antiforgery-token />
-        <div class="row" id="SearchSection">
-            <div class="col-md-12">
-                <div class="x_panel light form-fit">
-                    <div class="x_title">
-                        <div class="caption">
-                            <i class="fa fa-cubes"></i>
+<form asp-controller="UnplannedJobs" asp-action="List" method="get">
+    <antiforgery-token />
+    <div class="row" id="SearchSection">
+        <div class="col-md-12">
+            <div class="x_panel light form-fit">
+                <div class="x_title">
+                    <div class="caption">
+                        <i class="fa fa-cubes"></i>
 
-                            @T("Maintenance.UnplannedJobs")
-                        </div>
-                        <div class="actions btn-group btn-group-devided">
-                            <a href="@Url.Action("AddUnplannedJobs")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
-                            <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                            <button type="button" name="delete-selected" id="delete-selected" class="btn red">
-                                <i class="fa fa-trash-o"></i>
-                                @T("Admin.Common.Delete.Selected")
-                            </button>
-                        </div>
-
+                        @T("Maintenance.UnplannedJobs")
                     </div>
-                    <div class="x_content form">
-                        <div class="form-horizontal">
-                            <div class="form-body col-md-6 advanced-filter">
-                                <div class="form-group">
+                    <div class="actions btn-group btn-group-devided">
+                        <a href="@Url.Action("AddUnplannedJobs")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+                        <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+                        <button type="button" name="delete-selected" id="delete-selected" class="btn red">
+                            <i class="fa fa-trash-o"></i>
+                            @T("Admin.Common.Delete.Selected")
+                        </button>
+                    </div>
 
-                                    <div class="col-xs-9 col-md-8 col-sm-8">
-                                        <input id="SearchInput" type="text" placeholder="Search.." class="form-control">
-                                    </div>
-                                    <div id="ExtendFilter">
-                                        <button class="btn btn-success filter-submit" id="search-vessel">
-                                            <i class="fa fa-search"></i> @T("Admin.Common.Search")
-                                        </button>
+                </div>
+                <div class="x_content form">
+                    <div class="form-horizontal">
+                        <div class="form-body col-md-6 advanced-filter">
+                            <div class="form-group">
 
-                                    </div>
+                                <div class="col-xs-9 col-md-8 col-sm-8">
+                                    <input id="SearchInput" type="text" placeholder="Search.." class="form-control">
                                 </div>
-                            </div>
-                            <div class="form-body col-md-6 advanced-filter">
-                                <div class="form-group">
+                                <div id="ExtendFilter">
+                                    <button class="btn btn-success filter-submit" id="search-vessel">
+                                        <i class="fa fa-search"></i> @T("Admin.Common.Search")
+                                    </button>
+
                                 </div>
                             </div>
                         </div>
+                        <div class="form-body col-md-6 advanced-filter">
+                            <div class="form-group">
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="x_content">
-                        <div id="vessel-grid"></div>
-                    </div>
+                <div class="x_content">
+                    <div id="vessel-grid"></div>
                 </div>
             </div>
         </div>
-        <script>
+    </div>
+    <script>
         $(document).ready(function () {
             $("#vessel-grid").kendoGrid({
                 dataSource: {
@@ -134,8 +136,8 @@
                 ]
             });
         });
-        </script>
-        <script type="text/javascript">
+    </script>
+    <script type="text/javascript">
             var selectedIds = [];
         $(document).ready(function () {
             //search button
@@ -211,15 +213,15 @@
             addAntiForgeryToken(data);
             return data;
         }
-        </script>
-    </form>
-    <script>
-        $(document).ready(function () {
-            $("#SearchInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#SearchSection tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
+    </script>
+</form>
+<script>
+    $(document).ready(function () {
+        $("#SearchInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#SearchSection tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
-    </script>
+    });
+</script>

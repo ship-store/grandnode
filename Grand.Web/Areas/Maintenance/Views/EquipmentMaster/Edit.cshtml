@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
     //Layout = "~/Areas/Maintenance_Admin/Views/Shared/MaintenanceMasterLayout.cshtml";
+    var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
 }
 
 @*@Html.BeginForm("Edit", "Vessel", FormMethod.Get, new { id = Model.VesselID })*@

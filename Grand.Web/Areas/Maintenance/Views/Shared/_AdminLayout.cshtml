@@ -6,6 +6,7 @@
 @inject LocalizationSettings localizationSettings
 @inject AdminAreaSettings adminAreaSettings
 @inject Grand.Core.Configuration.GrandConfig grandConfig
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 @using System.Text.Encodings.Web
 @using Grand.Core.Domain.Customers
@@ -14,7 +15,10 @@
 @using Grand.Core.Domain.Localization
 @using Grand.Services.Security;
 @using Grand.Core.Domain.Common;
+@using Microsoft.AspNetCore.Http;
 @{
+    var vessel = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+    var currentUser = @HttpContextAccessor.HttpContext.Session.GetString("email");
     var currentCustomer = this.WorkContext.CurrentCustomer;
     var usernamesEnabled = customerSettings.UsernamesEnabled;
     var currentVersion = GrandVersion.CurrentVersion;
@@ -31,7 +35,7 @@
     }
     else
     {
-      
+
         Html.AppendCssFileParts("~/Maintenance/administration/build/css/custom.css", excludeFromBundle: true);
     }
     Html.AppendCssFileParts(string.Format("~/Maintenance/content/kendo/{0}/kendo.common-material.min.css", kendoVersion), excludeFromBundle: true);
@@ -39,7 +43,7 @@
     Html.AppendCssFileParts($"~/Maintenance/content/kendo/{kendoVersion}/kendo.material.mobile.min.css", excludeFromBundle: true);
     Html.AppendCssFileParts("~/Maintenance/content/jquery-ui-themes/smoothness/jquery-ui-1.10.3.custom.min.css", excludeFromBundle: true);
     Html.AddScriptParts(location: ResourceLocation.Footer, src: "~/Maintenance/content/tinymce/tinymce.min.js", excludeFromBundle: true);
-    
+
     //administration
 
     Html.AppendScriptParts(location: ResourceLocation.Footer, src: "~/Maintenance/administration/build/js/custom.js", excludeFromBundle: true);
@@ -69,7 +73,7 @@
     Html.AppendCssFileParts("~/Maintenance/administration/bootstrap/css/daterangepicker.min.css", excludeFromBundle: true);
     Html.AppendScriptParts("~/Maintenance/administration/build/js/moment.min.js", excludeFromBundle: true);
     Html.AppendScriptParts("~/Maintenance/administration/build/js/jquery.min.js", excludeFromBundle: true);
-    
+
     //page title
     string adminPageTitle = "";
     if (!String.IsNullOrWhiteSpace(ViewBag.Title))
@@ -157,22 +161,51 @@
 
                             @if (currentCustomer.IsAdmin())
                             {
-                                <div class="admin-search-input-container" style="padding-left:50px">
-                                    <input id="searchInput" type="text" class="form-control" placeholder="@T("Maintenance.AdminSearch.Placeholder")">
-                                    <script>
-                                      $(document).ready(function () {
-                                        Admin.Search.init("@(Url.Action("Search", "AdminSearch"))");
-                                      });
-                                    </script>
+                                <div class="class="nav toggle"" style="padding-left:50px">
+                                    <ul class="nav navbar-nav">
+                                        <li class="dropdown" role="presentation">
+                                            <a href="@Url.Action("VesselList", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
+                                                <i class="fa fa-ship"></i>&nbsp;&nbsp;@vessel
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
                             }
                             <vc:admin-widget widget-zone="header_toggle_after" additional-data="null" />
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="dropdown" role="presentation">
-                                    <a href="@Url.Action("List", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
-                                        <i class="fa fa-ship"></i>
+
+                                <li>
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <img src="~/administration/build/images/avatar.png" alt="">
+
+                                        @*@if (currentCustomer != null && currentCustomer.IsRegistered())
+                {*@
+                                        <div class="username-hide-on-mobile">
+                                            @currentUser  @*@(usernamesEnabled ? currentCustomer.Username : currentCustomer.Email)*@
+                                        </div>
+
+                                        @*}*@
+                                        <span class="fa fa-angle-down"></span>
                                     </a>
+
+                                    <ul class="dropdown-menu dropdown-menu-default">
+                                        <li>
+                                            <a href="@Url.Action("Edit", "Customer", new { id = currentCustomer.Id, area = "Admin" })">
+                                                <i class="icon-user"></i> @T("Admin.Header.Profile")
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Logout", "Register", new { area = "Maintenance" }, null)">
+                                                <i class="icon-logout"></i> @*@T("Admin.Header.Logout")*@Logout
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
+                                @*<li class="dropdown" role="presentation">
+            <a href="@Url.Action("VesselList", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
+                <i class="fa fa-ship"></i>&nbsp;&nbsp;@vessel
+            </a>
+        </li>*@
                                 <li class="dropdown" role="presentation">
                                     <a href="@Url.Action("Success", "Register", new { area = "Maintenance" })" class="dropdown-toggle">
                                         <i class="icon-home"></i>
@@ -196,10 +229,10 @@
                                             </a>
                                         </li>
                                         @*<li>
-                                            <a href="javascript:;">
-                                                <i class="fa fa-dot-circle-o"></i> 
-                                            </a>
-                                        </li>*@
+                    <a href="javascript:;">
+                        <i class="fa fa-dot-circle-o"></i>
+                    </a>
+                </li>*@
                                     </ul>
                                 </li>
                                 <li role="presentation" class="dropdown">
@@ -233,33 +266,15 @@
                                         }
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <img src="~/administration/build/images/avatar.png" alt="">
+                                @*<li>
+                @if (ViewBag.VesselName != null)
+                {
+            <h3>
+                @ViewBag.VesselName
+            </h3>
+                }
+        </li>*@
 
-                                        @if (currentCustomer != null && currentCustomer.IsRegistered())
-                                        {
-                                            <div class="username-hide-on-mobile">
-                                                @(usernamesEnabled ? currentCustomer.Username : currentCustomer.Email)
-                                            </div>
-
-                                        }
-                                        <span class="fa fa-angle-down"></span>
-                                    </a>
-
-                                    <ul class="dropdown-menu dropdown-menu-default">
-                                        <li>
-                                            <a href="@Url.Action("Edit", "Customer", new { id = currentCustomer.Id, area = "Admin" })">
-                                                <i class="icon-user"></i> @T("Admin.Header.Profile")
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="@Url.Action("Logout", "Register", new { area = "Maintenance" }, null)">
-                                                <i class="icon-logout"></i> @*@T("Admin.Header.Logout")*@Logout
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
 
 
                                 @await Component.InvokeAsync("CommonLanguageSelector")

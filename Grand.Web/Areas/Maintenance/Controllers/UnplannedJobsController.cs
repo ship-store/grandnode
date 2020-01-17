@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -35,13 +36,25 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         [HttpPost]
         public async Task<IActionResult> List(DataSourceRequest command, UnplannedJobListModel model)
         {
-            var unplannedJobs = await _unplannedJobService.GetAllUnplannedJobs(model.SearchName, command.Page - 1, command.PageSize, true);
+            var VesselName = HttpContext.Session.GetString("VesselName").ToString();
+            if (VesselName != null)
+            {
 
-            var gridModel = new DataSourceResult {
-                Data = unplannedJobs.ToList()
-
-            };
-            return Json(gridModel);
+                var unplannedJobs = await _unplannedJobService.GetAllUnplannedJobs(model.SearchName, command.Page - 1, command.PageSize, true);
+                List<UnplannedJob> unplannedlist = new List<UnplannedJob>();
+                foreach (UnplannedJob item in unplannedJobs.Where(x => x.Vessel == VesselName))
+                {
+                    unplannedlist.Add(item);
+                }
+                var gridModel = new DataSourceResult { Data = unplannedlist };
+                return Json(gridModel);
+                
+            }
+            else
+            {
+                return RedirectToAction("Success", "Register");
+            }
+            
         }
 
         [HttpGet]

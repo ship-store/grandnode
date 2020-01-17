@@ -41,6 +41,11 @@ namespace Grand.Web
         /// <param name="services">Collection of service descriptors</param>
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
+            services.AddDistributedMemoryCache();
+            // services.AddSession(option => option.IdleTimeout = TimeSpan.FromSeconds(3600));
+            services.AddSession();
+
             return services.ConfigureApplicationServices(Configuration);
         }
 
@@ -50,6 +55,7 @@ namespace Grand.Web
         /// <param name="application">Builder for configuring an application's request pipeline</param>
         public void Configure(IApplicationBuilder application)
         {
+            application.UseSession();
             application.ConfigureRequestPipeline();
         }
     }

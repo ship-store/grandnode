@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
     [Area("Maintenance")]
@@ -20,11 +21,13 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IBreakdownJobService _breakdownJobService;
 
         private readonly IBreakdownJobViewModelService _breakdownJobViewModelService;
+       
         public BreakdownJobController(IBreakdownJobViewModelService _breakdownJobViewModelService, IBreakdownJobService _breakdownJobService)
         {
 
             this._breakdownJobViewModelService = _breakdownJobViewModelService;
             this._breakdownJobService = _breakdownJobService;
+        
 
         }
 
@@ -39,14 +42,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> List(DataSourceRequest command, BreakdownJobListModel model)
+        public async Task<IActionResult> List(DataSourceRequest command, BreakdownJobListModel model, string id)
         {
+            var VesselName = HttpContext.Session.GetString("VesselName").ToString();
             var breakdownJobs = await _breakdownJobService.GetAllBreakdownJobs(model.SearchName, command.Page - 1, command.PageSize, true);
-
-            var gridModel = new DataSourceResult {
-                Data = breakdownJobs.ToList()
-
-            };
+            List<BreakdownJob> breakdownlist = new List<BreakdownJob>();
+            foreach (BreakdownJob item in breakdownJobs.Where(x => x.Vessel == VesselName))
+            {
+                breakdownlist.Add(item);
+            }
+            var gridModel = new DataSourceResult { Data = breakdownlist };
             return Json(gridModel);
         }
 

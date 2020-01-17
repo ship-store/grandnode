@@ -14,6 +14,7 @@ namespace Grand.Core.Domain.UnplannedJobs
         public string JobReportedDate { get; set; }
         public string ReportedBy { get; set; }
         public string Status { get; set; }
+        public string Vessel { get; set; }
 
     }
 }

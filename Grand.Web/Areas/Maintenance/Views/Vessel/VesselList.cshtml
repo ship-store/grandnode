@@ -1,12 +1,9 @@
-﻿@model BreakdownJobListModel
+﻿@model VesselListModel
 @inject Grand.Core.Domain.Common.AdminAreaSettings adminAreaSettings
-
 @{
-    ViewBag.Title = T("Maintenance.Title.BreakdownJob").Text;
-    var vessel = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+    ViewBag.Title = T("Maintenance.Vessel").Text;
 }
-
-<form asp-controller="BreakdownJob" asp-action="List" method="get">
+<form asp-controller="Vessel" asp-action="VesselList" method="get">
     <antiforgery-token />
     <div class="row" id="SearchSection">
         <div class="col-md-12">
@@ -14,24 +11,22 @@
                 <div class="x_title">
                     <div class="caption">
                         <i class="fa fa-cubes"></i>
-
-                        @T("Maintenance.BreakdownJob")
+                        @T("Maintenance.Vessel")
                     </div>
-                    <div class="actions btn-group btn-group-devided">
-                        <a href="@Url.Action("AddBreakdownJob")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+                    @*<div class="actions btn-group btn-group-devided">
+                        <a href="@Url.Action("AddVessel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
                         <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
                         <button type="button" name="delete-selected" id="delete-selected" class="btn red">
                             <i class="fa fa-trash-o"></i>
                             @T("Admin.Common.Delete.Selected")
                         </button>
-                    </div>
+                    </div>*@
 
                 </div>
                 <div class="x_content form">
                     <div class="form-horizontal">
                         <div class="form-body col-md-6 advanced-filter">
                             <div class="form-group">
-
                                 <div class="col-xs-9 col-md-8 col-sm-8">
                                     <input id="SearchInput" type="text" placeholder="Search.." class="form-control">
                                 </div>
@@ -39,14 +34,15 @@
                                     <button class="btn btn-success filter-submit" id="search-vessel">
                                         <i class="fa fa-search"></i> @T("Admin.Common.Search")
                                     </button>
-
                                 </div>
                             </div>
                         </div>
-
+                        <div class="form-body col-md-6 advanced-filter">
+                            <div class="form-group">
+                            </div>
+                        </div>
                     </div>
                 </div>
-
                 <div class="x_content">
                     <div id="vessel-grid"></div>
                 </div>
@@ -59,7 +55,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: "@Html.Raw(Url.Action("List", "BreakdownJob","Maintenance"))",
+                            url: "@Html.Raw(Url.Action("VesselList", "Vessel","Maintenance"))",
                             type: "POST",
                             dataType: "json",
                             data: additionalData
@@ -80,57 +76,82 @@
                     serverFiltering: true,
                     serverSorting: true
                 },
-                pageable: {
+                @*pageable: {
                     refresh: true,
                     pageSizes: [@(adminAreaSettings.GridPageSizes)]
                 },
                 editable: {
                     confirmation: false,
                     mode: "inline"
-                },
+                },*@
                 scrollable: false,
                 columns: [
-                    {
-                        field: "Id",
-                        headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
-                        template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
-                        width: 50
+                    //{
+                    //    field: "Id",
+                    //    headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
+                    //    template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
+                    //    width: 30
+                    //},
+                     {
+                    field: "file",
+                    title: "@T("Maintenance.Vessel.Fields.Image")",
+                    template: '<a class="k-link" href="VesselSession/#=Id#"><img src="#=file#" class="img-fluid" style="width:100px;height:60px"/></a>',
+                    width: 92
                     },
                     {
-                    field: "EquipmentName",
-                    title: "@T("maintenance.breakdownjob.fields.equipment_name")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:EquipmentName#</a>',
-                }, {
-                    field: "JobOrder",
-                    title: "@T("maintenance.breakdownjob.fields.job_order")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:JobOrder#</a>',
+                    field: "Vessel_name",
+                    title: "@T("maintenance.vessel.fields.vessel_name")",
+                    width: 600,
+                    template: '<a class="k-link" href="VesselSession/#=Id#">#:Vessel_name#</a>',
+                }, @*{
+                    field: "Vessel_type",
+                    title: "@T("maintenance.vessel.fields.vessel_type")",
+                    width: 200,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Vessel_type#</a>',
                     },
                     {
-                    field: "Title",
-                    title: "@T("maintenance.breakdownjob.fields.title")",
+                    field: "Class",
+                    title: "@T("maintenance.vessel.fields.class")",
                     width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Title#</a>',
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Class#</a>',
                     },
                     {
-                    field: "JobReportedDate",
-                    title: "@T("maintenance.breakdownjob.fields.jobreported_date")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:JobReportedDate#</a>',
+                    field: "Flag",
+                    title: "@T("maintenance.vessel.fields.flag")",
+                    width: 150,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Flag#</a>',
                     },
                     {
-                    field: "ReportedBy",
-                    title: "@T("maintenance.breakdownjob.fields.reported_by")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:ReportedBy#</a>',
+                    field: "Auxiliary_Engine",
+                    title: "@T("maintenance.vessel.fields.auxiliary_engine")",
+                    width: 350,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Auxiliary_Engine#</a>',
                     },
                     {
-                    field: "Status",
-                    title: "@T("maintenance.breakdownjob.fields.status")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Status#</a>',
+                    field: "Main_Engine",
+                    title: "@T("maintenance.vessel.fields.main_engine")",
+                    width: 500,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Main_Engine#</a>',
                     },
+                    {
+                    field: "Hull_no",
+                    title: "@T("maintenance.vessel.fields.hull_no")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Hull_no#</a>',
+                    },
+                    {
+                    field: "Shipyard",
+                    title: "@T("maintenance.vessel.fields.shipyard")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:Shipyard#</a>',
+                    },
+                    {
+                    field: "IMO",
+                    title: "@T("Maintenance.Vessel.Fields.IMO")",
+                    width: 300,
+                    template: '<a class="k-link" href="Edit/#=Id#">#:IMO#</a>',
+                    },*@
+                    
                 ]
             });
         });
@@ -174,9 +195,7 @@
 
 
                // calling  via jquery
-               $.get("http://localhost:16592/Maintenance/BreakdownJob/DeleteSelected?selectedIds='" + chkArray + "'");
-
-
+                $.get("http://localhost:16592/Maintenance/Vessel/DeleteSelected?selectedIds='" + chkArray + "'");
                 window.location.reload();
                 return false;
             });
@@ -227,5 +246,3 @@
         });
     });
 </script>
-
-

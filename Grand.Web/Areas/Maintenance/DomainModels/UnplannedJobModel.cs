@@ -26,6 +26,8 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 
         [GrandResourceDisplayName("maintenance.unplannedjobs.fields.status")]
         public string Status { get; set; }
+        [GrandResourceDisplayName("maintenance.unplannedjobs.fields.status")]
+        public string Vessel { get; set; }
     }
     public class UnplannedJobDisplayModel : BaseGrandEntityModel
     {
@@ -47,5 +49,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 
         [GrandResourceDisplayName("maintenance.unplannedjobs.fields.status")]
         public string Status { get; set; }
+        [GrandResourceDisplayName("maintenance.unplannedjobs.fields.status")]
+        public string Vessel { get; set; }
     }
 }

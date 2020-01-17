@@ -39,6 +39,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 
         [GrandResourceDisplayName("Maintenance.Vessel.Fields.Auxiliary_Engine")]
         public string Auxiliary_Engine { get; set; }
+        public int ActiveStatus { get; set; }
 
         [GrandResourceDisplayName("Maintenance.Vessel.Fields.Image")]
         public IFormFile file { get; set; }

@@ -1,9 +1,14 @@
-﻿@{
-    ViewBag.Title = T("Maintenance.Title.Success").Text;
+﻿@model VesselForDisplay
+@*@Html.BeginForm("EditItem", "Vessel", FormMethod.Get, new { id = Model.VesselID , enctype = "multipart/form-data"})*@
+@*<input type="hidden" value="@Model.VesselID" name="VesselId" class="form-control" />*@
 
+@*@ViewBag.VesselName*@
+
+@{
+    ViewBag.Title = T("Maintenance.Title.Success").Text;
     //Layout = "~/Areas/Maintenance_Admin/Views/Shared/MaintenanceMasterLayout.cshtml";
 }
-   
+
 <!DOCTYPE html>
 
 <html>
@@ -13,11 +18,11 @@
 </head>
 
 <body>
-   
+
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>STATISTICS</h2>
+                <h2>@ViewBag.VesselName</h2>
             </div>
 
             <!-- Widgets -->
@@ -70,7 +75,7 @@
         </div>
     </section>
 
-    
+
 </body>
 </html>
 

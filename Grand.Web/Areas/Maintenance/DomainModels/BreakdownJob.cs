@@ -17,6 +17,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string JobReportedDate { get; set; }
         public string ReportedBy { get; set; }
         public string Status { get; set; }
+        public string Vessel { get; set; }
     }
     public class BreakdownJobDisplayModel : BaseGrandEntityModel
     {
@@ -27,5 +28,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string JobReportedDate { get; set; }
         public string ReportedBy { get; set; }
         public string Status { get; set; }
+        public string Vessel { get; set; }
     }
 }

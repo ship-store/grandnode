@@ -2,7 +2,6 @@
 using Grand.Core.Caching;
 using Grand.Core.Data;
 using Grand.Core.Domain.Vessel;
-
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
@@ -16,7 +15,7 @@ namespace Grand.Services.Vessel
     {
         private readonly IRepository<Grand.Core.Domain.Vessel.Vessel> _vesselRepository;
         private readonly ICacheManager _cacheManager;
-        private string key;
+       
 
         public VesselService(IRepository<Grand.Core.Domain.Vessel.Vessel> _vesselRepository,
             ICacheManager cacheManager)
@@ -32,15 +31,11 @@ namespace Grand.Services.Vessel
             return await PagedList< Grand.Core.Domain.Vessel.Vessel>.Create(query, pageIndex, pageSize);
         }
         
-         //TODO
-        // page size paramater need tobe setted
+         
+       
         async Task<IList<Core.Domain.Vessel.Vessel>> IVesselService.GetAllVesselAsList()
         {
-            var query = _vesselRepository.Table;
-
-
-           
-
+            var query = _vesselRepository.Table;  
             return await PagedList<Grand.Core.Domain.Vessel.Vessel>.Create(query ,0,15);
         }
 
@@ -88,21 +83,16 @@ namespace Grand.Services.Vessel
 
         }
 
-        //public Task DeleteVessel(Core.Domain.Vessel.Vessel vessel)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        
         public virtual async Task DeleteVessel(Core.Domain.Vessel.Vessel vessel)
         {
             if (vessel == null)
-                throw new ArgumentNullException("Vessel");
-
-
-            //deleted product
-            await _vesselRepository.DeleteAsync(vessel);
-
-            
-
+                throw new ArgumentNullException("Vessel");      
+            //Soft deleting Vessel
+            vessel.ActiveStatus = 0;
+            await _vesselRepository.UpdateAsync(vessel);
+           
+            //await _vesselRepository.DeleteAsync(vessel); hard delte 
         }
         public virtual async Task UpdateVessel(Core.Domain.Vessel.Vessel vessel)
         {

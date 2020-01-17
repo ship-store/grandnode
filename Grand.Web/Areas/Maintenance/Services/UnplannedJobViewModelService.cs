@@ -39,7 +39,8 @@ namespace Grand.Web.Areas.Maintenance.Services
                 unplannedJob.JobReportedDate = model1.JobReportedDate;
                 unplannedJob.ReportedBy = model1.ReportedBy;
                 unplannedJob.Status = model1.Status;
-    
+                unplannedJob.Vessel = model1.Vessel;
+
                 await _unplannedJobService.InsertUnplannedJob(unplannedJob);
                
             }
@@ -52,7 +53,8 @@ namespace Grand.Web.Areas.Maintenance.Services
                 unplannedJob.JobReportedDate = model1.JobReportedDate;
                 unplannedJob.ReportedBy = model1.ReportedBy;
                 unplannedJob.Status = model1.Status;
-                
+                unplannedJob.Vessel = model1.Vessel;
+
                 await _unplannedJobService.InsertUnplannedJob(unplannedJob);
 
             }

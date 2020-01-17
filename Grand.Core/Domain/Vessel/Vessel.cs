@@ -20,6 +20,8 @@ namespace Grand.Core.Domain.Vessel
         public string Shipyard { get; set; }
         public string Main_Engine { get; set; }
         public string Auxiliary_Engine { get; set; }
+        public int ActiveStatus { get; set; }
+
 
         [DataType(DataType.Upload)]
         [Display(Name = "Upload File")]

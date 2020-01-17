@@ -10,8 +10,10 @@ using Grand.Core.Domain.Orders;
 using Grand.Core.Domain.Shipping;
 using Grand.Core.Domain.Tax;
 using Grand.Core.Domain.Vendors;
+using Grand.Core.Domain.Vessel;
 using Grand.Core.Infrastructure.Mapper;
 using Grand.Web.Areas.Admin.Models.Settings;
+using Grand.Web.Areas.Maintenance.DomainModels;
 
 namespace Grand.Web.Areas.Admin.Infrastructure.Mapper
 {
@@ -348,6 +350,13 @@ namespace Grand.Web.Areas.Admin.Infrastructure.Mapper
             CreateMap<AddressSettings, CustomerUserSettingsModel.AddressSettingsModel>()
                 .ForMember(dest => dest.GenericAttributes, mo => mo.Ignore());
             CreateMap<CustomerUserSettingsModel.AddressSettingsModel, AddressSettings>();
+
+            
+            //Maintenance Area
+            //Vessel
+            CreateMap<Vessel, VesselModel>();
+            CreateMap<VesselModel, Vessel>();
+
 
         }
 

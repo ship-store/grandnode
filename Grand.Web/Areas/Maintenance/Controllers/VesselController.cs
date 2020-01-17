@@ -61,8 +61,25 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> List(DataSourceRequest command, VesselListModel model)
         {
             var vessels = await _vesselService.GetAllVessels(model.SearchName, command.Page - 1, command.PageSize, true);
+            var gridModel = new DataSourceResult {
+            Data = vessels.ToList()
 
+            };
+            return Json(gridModel);
+        }
 
+        public async Task<IActionResult> VesselList()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> VesselList(DataSourceRequest command, VesselListModel model, string id)
+        {
+            
+
+            //return View(display);
+            var vessels = await _vesselService.GetAllVessels(model.SearchName, command.Page - 1, command.PageSize, true);
             var gridModel = new DataSourceResult {
                 Data = vessels.ToList()
 
@@ -70,6 +87,22 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(gridModel);
         }
 
+        public async Task<IActionResult> VesselSession(DataSourceRequest command, VesselListModel model, string id)
+        {
+            var vessel = await _vesselService.GetVesselById(id);
+            VesselForDisplay display = new VesselForDisplay { VesselID = vessel.Id, Vessel_name = vessel.Vessel_name };
+            HttpContext.Session.SetString("VesselId", display.VesselID);
+            HttpContext.Session.SetString("VesselName", display.Vessel_name);
+
+            if (vessel == null)
+            {
+                return RedirectToAction("VesselList");
+            }
+   
+            ViewBag.VesselName = HttpContext.Session.GetString("VesselName").ToString();
+           
+            return View();
+        }
 
         [HttpGet]
         public async Task<IActionResult> TestImage()

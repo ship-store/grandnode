@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
     [Area("Maintenance")]
@@ -94,57 +96,51 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         public async Task<IActionResult> Edit(string id)
         {
-
+            
             List<Equipment> hopeList = new List<Equipment>();
             List<EquipmentModel> equipmentModels = new List<EquipmentModel>();
-
-            var vessel = await _vesselService.GetVesselById(id);
+            var VesselName = HttpContext.Session.GetString("VesselName").ToString();
             var equipments = await _equipmentService.GetAllEquipment("Equipment", 0, 500, true);
 
             foreach (Equipment item in equipments)
             {
 
-                if (item.Vessel.ToLower() == vessel.Vessel_name.ToLower())
+                if (item.Vessel.ToLower() == VesselName.ToLower())
                 {
                     hopeList.Add(item);
                 }
 
             }
 
-
-
             var x = hopeList;
-
-
-
+            
             foreach (Equipment item2 in hopeList)
             {
-                equipmentModels.Add(new EquipmentModel() {
+                
+                    equipmentModels.Add(new EquipmentModel() {
 
-                    Vessel = item2.Vessel,
-                    Department = item2.Department,
-                    Equipment_Status = item2.Equipment_Status,
-                    Sub1_number = item2.Sub1_number,
-                    Sub1_description = item2.Sub1_description,
-                    Sub2_number = item2.Sub2_number,
-                    Sub2_description = item2.Sub2_description,
-                    Sub3_number = item2.Sub3_number,
-                    Sub3_description = item2.Sub3_description,
-                    Sub4_number = item2.Sub4_number,
-                    Sub5_description = item2.Sub5_description,
-                    Safety_level = item2.Safety_level,
-                    Maker = item2.Maker,
-                    Model = item2.Model,
-                    Drawing_no = item2.Drawing_no,
-                    Remark = item2.Remark,
-                    Type = item2.Type
+                        Vessel = item2.Vessel,
+                        Department = item2.Department,
+                        Equipment_Status = item2.Equipment_Status,
+                        Sub1_number = item2.Sub1_number,
+                        Sub1_description = item2.Sub1_description,
+                        Sub2_number = item2.Sub2_number,
+                        Sub2_description = item2.Sub2_description,
+                        Sub3_number = item2.Sub3_number,
+                        Sub3_description = item2.Sub3_description,
+                        Sub4_number = item2.Sub4_number,
+                        Sub5_description = item2.Sub5_description,
+                        Safety_level = item2.Safety_level,
+                        Maker = item2.Maker,
+                        Model = item2.Model,
+                        Drawing_no = item2.Drawing_no,
+                        Remark = item2.Remark,
+                        Type = item2.Type
 
-                });
+                    });
+                
 
             }
-
-
-
 
             return View(equipmentModels);
         }
