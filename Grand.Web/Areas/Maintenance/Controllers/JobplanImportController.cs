@@ -16,6 +16,9 @@ using Grand.Core.Domain.Jobplan;
 using Grand.Web.Areas.Maintenance.DomainModels;
 using Grand.Web.Areas.Maintenance.Services;
 using Grand.Core.Domain.Sparepart;
+using Grand.Framework.Kendoui;
+using Grand.Core.Domain.Equipment;
+using Grand.Services.Spareparts;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -25,12 +28,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IJobplanImportManger _jobplanImportManger;
         private readonly IImportFileService _importFileService;
         private readonly IJobplanService _jobplanService;
-        public JobplanImportController(IJobplanImportManger _jobplanImportManger, IImportFileService _importFileService,
+        private readonly IEquipmentService _equipmentService;
+        private readonly ISparepartService _sparepartService;
+        public JobplanImportController(ISparepartService _sparepartService,IEquipmentService _equipmentService,IJobplanImportManger _jobplanImportManger, IImportFileService _importFileService,
             IJobplanService _jobplanService)
         {
             this._jobplanImportManger = _jobplanImportManger;
             this._importFileService = _importFileService;
             this._jobplanService = _jobplanService;
+            this._equipmentService = _equipmentService;
+            this._sparepartService = _sparepartService;
         }
         public IActionResult Index()
         {
@@ -80,13 +87,28 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
         public async Task<IActionResult> Map(string id)
         {
+            var Jobplanlist = await _jobplanService.GetAllJobplans("",0, 500, true);
+            List<Jobplan> jobplanlist = new List<Jobplan>();
+            int max = 9999;
+            foreach (Jobplan item in Jobplanlist)
+            {
+
+                if (item.JobOrder > max)
+                {
+                    max = item.JobOrder;
+                }
+            }
+
             await Task.FromResult(0);
             var importFile = await _importFileService.GetById(id);
             if (importFile.Status == "Pending")
             {
                 dynamic allItems = JsonConvert.DeserializeObject(importFile.Content);
+                int i = 0;
                 foreach (var item in allItems)
                 {
+                    max = max + 1;
+
                     Jobplan job = new Jobplan();
                     job.EquipmentCode = item["EquipmentCode"];
                     job.EquipmentName = item["EquipmentName"];
@@ -103,6 +125,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     job.NEXT_DUE_DATE = item["NEXT_DUE_DATE"];
                     job.Job_Type = item["Job_Type"];
                     job.Maintenance_Type = item["Maintenance_Type"];
+                    job.JobStatus = 0;//Setting JobStatus  to PlanedJObs
+                    job.JobOrder = max;
+
                     await _jobplanService.InsertJobplan(job);
                 }
             }
@@ -197,6 +222,59 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return fieldNames;
         }
 
+        public async Task<IActionResult> List1()
+        {
+            string VesselName = HttpContext.Session.GetString("VesselName").ToString();
+
+            var selectedEquipments = await _equipmentService.GetAllEquipment("", 0, 500, true);
+
+            var spareparts = await _sparepartService.GetAllSpareparts("", 0, 500, true);
+            List<Equipment> selectedEquipment = new List<Equipment>();
+            foreach (Equipment item in selectedEquipments)
+            {
+
+                if (item.Vessel.ToLower() == VesselName.ToLower())
+                {
+                    selectedEquipment.Add(item);
+                }
+
+            }
+
+
+            List<int> sub = new List<int>();
+            foreach (Equipment item in selectedEquipment.Where(x => x.Sub1_number != null))
+            {
+
+                sub.Add(Int32.Parse(item.Sub1_number));
+            }
+
+            int min = 999;
+            foreach (int item in sub)
+            {
+                if (item < min)
+                {
+                    min = item;
+                }
+
+            }
+            //HttpContext.Session.SetString("Test", "Silpa");
+            return RedirectToAction("SelectedEquipments", "EquipmentMaster", new { equipmentCode = min.ToString() });
+        }
+
+
+        public async Task<IActionResult> ReadData(DataSourceRequest command, JobplanListModel model)
+        {
+            var VesselName = HttpContext.Session.GetString("VesselName").ToString();
+            var Jobplanlist = await _jobplanService.GetAllJobplans(model.SearchName, command.Page - 1, command.PageSize, true);
+            List<Jobplan> jobplanlist = new List<Jobplan>();
+            foreach (Jobplan item in Jobplanlist.Where(x => x.Vessel == VesselName.ToLower()))
+            {
+                jobplanlist.Add(item);
+            }
+            var gridModel = new DataSourceResult { Data = jobplanlist.ToList().Where(x=>x.JobStatus==0)};
+            return Json(gridModel);
+        }
+
         public async Task<ActionResult> DownloadExcelResult(string id)
         {
             var importFile = await _importFileService.GetById(id);
@@ -211,6 +289,33 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public DataTable GetDataTableFromJsonString(string json)
         {
             return JsonConvert.DeserializeObject<DataTable>(json);
+        }
+
+
+        //
+
+       
+        public async Task<IActionResult> PostponeItems(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedJobplan = await _jobplanService.GetJobPlanById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedJobplan.JobStatus = 1;//changin job to postponed
+                    await _jobplanService.UpdateJobPlan(selectedJobplan);
+                }
+            }
+
+            return Json(new { Result = true });
         }
     }
 }

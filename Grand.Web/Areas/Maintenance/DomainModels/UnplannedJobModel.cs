@@ -13,7 +13,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string EquipmentName { get; set; }
 
         [GrandResourceDisplayName("maintenance.unplannedjobs.fields.job_order")]
-        public string JobOrder { get; set; }
+        public int JobOrder { get; set; }
 
         [GrandResourceDisplayName("maintenance.unplannedjobs.fields.title")]
         public string Title { get; set; }
@@ -28,6 +28,10 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string Status { get; set; }
         [GrandResourceDisplayName("maintenance.unplannedjobs.fields.status")]
         public string Vessel { get; set; }
+        public string DeleteStatus { get; set; }
+        public string JobCompletedDate { get; set; }
+        public string Remark { get; set; }
+
     }
     public class UnplannedJobDisplayModel : BaseGrandEntityModel
     {
@@ -36,7 +40,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string EquipmentName { get; set; }
 
         [GrandResourceDisplayName("maintenance.unplannedjobs.fields.job_order")]
-        public string JobOrder { get; set; }
+        public int JobOrder { get; set; }
 
         [GrandResourceDisplayName("maintenance.unplannedjobs.fields.title")]
         public string Title { get; set; }
@@ -51,5 +55,8 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string Status { get; set; }
         [GrandResourceDisplayName("maintenance.unplannedjobs.fields.status")]
         public string Vessel { get; set; }
+        public string DeleteStatus { get; set; }
+        public string JobCompletedDate { get; set; }
+        public string Remark { get; set; }
     }
 }

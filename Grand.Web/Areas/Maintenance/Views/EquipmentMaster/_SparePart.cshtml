@@ -1,0 +1,148 @@
+﻿<div class="x_title">
+    <div class="actions">
+        <div class="btn-group btn-group-devided util-btn-margin-bottom-5">
+            <button type="button" id="btnSelectRow" value="GetValue" class="btn green" data-toggle="modal" data-target="#myModal">View</button>
+            <a href="@Url.Action("AddSparepart")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+            <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+            @*<button type="button" name="delete-selected" id="delete-selected" class="btn red">
+            <i class="fa fa-trash-o"></i>
+            @T("Admin.Common.Delete.Selected")
+        </button>*@
+        </div>
+    </div>
+</div>
+
+<div id="example">
+    <antiforgery-token />
+    <div id="grid3"></div>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#grid3").kendoGrid({
+                dataSource: {
+
+                    transport: {
+
+                         read:
+                             {
+                                url: "@Html.Raw(Url.Action("ReadSpareParts", "EquipmentMaster","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                        },
+                        update:
+                            {
+                                url: "@Html.Raw(Url.Action("UpdateSpareParts","EquipmentMaster","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                            },
+                            create:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","EquipmentMaster","Maintenance"))",
+                                type: "POST",
+                                dataType: "json"
+                            }
+                    },
+                    batch: true,
+                    schema:
+                    {
+                               data: "Data",
+                               total: "Total",
+                               errors: "Errors",
+                        model:
+                        {
+                            id : "Id",
+                            fields:
+                            {
+                              Id: { validation: { required: true } },
+                              EquipmentCode: { type: "string" },
+                              EquipmentName: { type: "string" },
+                              SPAR_PARTS_DESCRIPTION: { type: "string" },
+                              PART_NUMBER: { type: "string" },
+                              DRAWING_NO: { type: "string" },
+                              SPECIFICATION: { type: "string" },
+                              POSITION_NUMBER: { type: "string" }
+                            }
+                        }
+                    },
+                    pageSize: 30
+                },
+                height: 480,
+                sortable: true,
+                reorderable: true,
+                groupable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: true,
+                pageable: true,
+                scrollable:
+                    {
+                       endless: true
+                    },
+                pageable:
+                    {
+                       numeric: false,
+                       previousNext: false
+                    },
+                selectable: true,
+                allowCopy: true,
+                columns: [
+                    {
+                    field: "EquipmentCode",
+                    title: "Equipment Code",
+                    width: 150
+                },
+                    {
+                    field: "EquipmentName",
+                    title: "Equipment Name",
+                    width: 150
+                }, {
+                    field: "SPAR_PARTS_DESCRIPTION",
+                    title: "SPAR PARTS DESCRIPTION",
+                    width: 150
+                },
+                     {
+                    field: "PART_NUMBER",
+                    title: "PART NUMBER",
+                    width: 150
+                },{
+                    field: "DRAWING_NO",
+                    title: "DRAWING_NO",
+                    width: 150
+                },{
+                    field: "SPECIFICATION",
+                    title: "SPECIFICATION",
+                    width: 150
+                },{
+                    field: "POSITION_NUMBER",
+                    title: "POSITION NUMBER",
+                    width: 150
+                },{
+                    command: ["edit", "destroy"],
+                    title: "&nbsp;",
+                    width: 300
+                  }],
+                    editable: "inline"
+
+            });
+        });
+         function customBoolEditor(container, options) {
+                        var guid = kendo.guid();
+                        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+                        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
+                    }
+
+                    function additionalData() {
+                        var data = {};
+                        addAntiForgeryToken(data);
+                        return data;
+        }
+
+
+    </script>
+
+
+</div>
+

@@ -12,5 +12,8 @@ namespace Grand.Services.Jobplan
         Task<IPagedList<Grand.Core.Domain.Jobplan.Jobplan>> GetAllJobpan(string name = "",
          int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
         Task<IPagedList<Core.Domain.Jobplan.Jobplan>> GetAllJobplan(string name, int pageIndex, int pageSize, bool showHidden);
+        Task<IPagedList<Grand.Core.Domain.Jobplan.Jobplan>> GetAllJobplans(string name = "",int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
+        Task<Core.Domain.Jobplan.Jobplan> GetJobPlanById(string Id);
+        Task UpdateJobPlan(Grand.Core.Domain.Jobplan.Jobplan jobplan);
     }
 }

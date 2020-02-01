@@ -1,0 +1,142 @@
+﻿
+@model EquipmentModel
+@{
+    var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+   // var  equipment;
+  }
+
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.default-v2.min.css" />
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
+
+<div class="row" id="SearchSection">
+    <div class="col-md-12">
+        <div class="x_panel light form-fit">
+            <div class="x_title">
+                <div class="caption">
+                    <i class="fa fa-cubes"></i>
+                    Running Hour
+                </div>
+                
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+   
+<div id="example">
+    <antiforgery-token />
+    <div id="grid"></div>
+    <script>
+        $(document).ready(function () {
+            $("#grid").kendoGrid({
+                dataSource: {
+
+                    transport: {
+
+                         read:
+                             {
+                                url: "@Html.Raw(Url.Action("ReadRunningHour", "RunningHour","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                        },
+                        update:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","RunningHour","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                            },
+                            create:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","BreakdownJob","Maintenance"))",
+                                type: "POST",
+                                dataType: "json"
+                            }
+                    },
+                    batch: true,
+                    schema:
+                    {
+                               data: "Data",
+                               total: "Total",
+                               errors: "Errors",
+                        model:
+                        {
+                            id : "Id",
+                            fields:
+                            {
+                              Id: { validation: { required: true }},
+                                Sub1_description: { type: "string", editable: false, },
+                                Sub2_description: { type: "string", editable: false, },
+                                Sub3_description: { type: "string",editable:false, },
+                              
+                              
+                            }
+                        }
+                    },
+                    pageSize: 30
+                },
+                height: 680,
+                sortable: true,
+                reorderable: true,
+                groupable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: true,
+                pageable: false,
+                selectable: true,
+                allowCopy: true,
+                columns: [{
+                    field: "Sub1_description",
+                    title: "Sub1 Description",
+                    width: 250,
+                    locked: true,
+                    lockable: false,
+                    editable:false,
+                },
+                    {
+                    field: "Sub2_description",
+                    title: "Sub2 Description",
+                        width: 250,
+                     editable:false,
+                    },
+                     {
+                    field: "Sub3_description",
+                    title: "Sub3 Description",
+                         width: 250,
+                    
+                    },
+                    {
+                        template: "<input data-bind='value:Reading' class='k-textbox'/>", title: "Reading", width: 250
+                    }, {
+                    command: ["edit"],
+                    title: "&nbsp;",
+                    width: 300
+                  }],
+                    editable: "inline"
+
+            });
+        });
+         function customBoolEditor(container, options) {
+                        var guid = kendo.guid();
+                        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+                        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
+                    }
+
+                    function additionalData() {
+                        var data = {};
+                        addAntiForgeryToken(data);
+                        return data;
+        }
+
+    </script>
+
+
+</div>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <Data>
+      <element>
+         <AssignedTo>VESSEL</AssignedTo>
+         <Department>DECK</Department>
+         <EquipmentCode>651</EquipmentCode>
+         <EquipmentName>MAIN GENERATORS</EquipmentName>
+         <Frequency>6</Frequency>
+         <FrequencyType>MONTH</FrequencyType>
+         <GenericAttributes />
+         <Id>5e253a11a0a88a2c54ddf33c</Id>
+         <JobDescription>1. CHECK ALL BOLTS &amp; NUTS FOR PROPER TIGHTENING                                                                                                                                                                                                                                                                                  2. CHECK BRAKE LININGS, AND RENEW IF REQUIRED                                                                                                                                                                                                                                                                                    3. INSPECT REMOTE CONTROL UNIT PIPE LINE FOR ANY DAMAGE( IF DENT DETECTED BY VISUAL INSPECTION IS GREATER THAN 10% OF THE PIPE DIAMETER REPLACE THE DENTED PIPE WITH A NEW ONE)                                                                                                                                                                                                                                                                                                                                                                         4. INSPECT SPEED CONTROL UNIT FOR ANY DAMAGE OF THE TOOTH SURFACE.                                                                                                                                                                                                                                  5.MEASURE THE STROKE OF HYDRAULIC BRAKE CYLINDER ROD WITH THE BRAKE TURNED ON AND OFF.                                                                                                                                                                                  6. CLEAN OIL FILTER                                                                                                                                                                                                                                                                                                                                                       7. CHECK FOR LOOSENING AND DEFORMATION OF THE GEAR COVER, SET BOLTS, AND CONFIRM THAT ALL BOLTS ARE FREE FROM SUCH DEFECTS AND ASSURE FAULT FREE OPERATION.                     REFER MAKER MAINTENANCE MANUAL                                  </JobDescription>
+         <JobStatus>0</JobStatus>
+         <JobTitle>6 MONTHLY ROUTINE</JobTitle>
+         <Job_Type>Inspection</Job_Type>
+         <LAST_DONE_DATE>1/3/2019 12:00:00 AM</LAST_DONE_DATE>
+         <Maintenance_Type>MANUFACTURER</Maintenance_Type>
+         <NEXT_DUE_DATE>1/9/2019 12:00:00 AM</NEXT_DUE_DATE>
+         <Priority>NORMAL</Priority>
+         <Rank>C/O</Rank>
+         <Vessel>oceania</Vessel>
+      </element>
+      <element>
+         <AssignedTo>VESSEL</AssignedTo>
+         <Department>ENGINE</Department>
+         <EquipmentCode>651.01</EquipmentCode>
+         <EquipmentName>AUXILIARY ENGINE NO. 1</EquipmentName>
+         <Frequency>12</Frequency>
+         <FrequencyType>MONTH</FrequencyType>
+         <GenericAttributes />
+         <Id>5e253a11a0a88a2c54ddf33d</Id>
+         <JobDescription>1. CHECK SAG OF ROLLER CHAIN 
+2. CHECK THE CLEARANCE FOR INSTALLATION STOPPER.(CONFIRM THAT THERE IS NO CLEARANCE BETWEEN THE BED AND THE STOPPER.IF A CLEARANCE IS DETECTED, ADJUST THE STOPPER)
+3. CHECK EXPANSION TANK FOR PEELING  PAINT FROM INNER TANK SURFACE.
+4. CHECK OIL FEEDING TANK FOR PEELING PAINT FROM INNER TANK SURFACE.
+5. CARRY OUT PERFORMANCE CHECK OF HYDRAULIC MOTOR.
+6. CHECK CONDITION OF HYDRAULIC OIL AND OIL INSIDE GEAR CASE, RENEW IF CONTAMINATED.
+
+REFER MAKER MAINTENANCE MANUAL</JobDescription>
+         <JobStatus>0</JobStatus>
+         <JobTitle>12 MONTHLY ROUTINE </JobTitle>
+         <Job_Type>Inspection</Job_Type>
+         <LAST_DONE_DATE>4/4/2019 12:00:00 AM</LAST_DONE_DATE>
+         <Maintenance_Type>MANUFACTURER</Maintenance_Type>
+         <NEXT_DUE_DATE>4/16/2019 12:00:00 AM</NEXT_DUE_DATE>
+         <Priority>NORMAL</Priority>
+         <Rank>2/E</Rank>
+         <Vessel>oceania</Vessel>
+      </element>
+      <element>
+         <AssignedTo>VESSEL</AssignedTo>
+         <Department>ENGINE</Department>
+         <EquipmentCode>651.01.01</EquipmentCode>
+         <EquipmentName>AE 1 CYLINDER HEAD UNIT</EquipmentName>
+         <Frequency>12</Frequency>
+         <FrequencyType>MONTH</FrequencyType>
+         <GenericAttributes />
+         <Id>5e253a11a0a88a2c54ddf33e</Id>
+         <JobDescription>1. SEND OIL SAMPLE TO OIL COMPANY FOR SHORE ANALYSIS</JobDescription>
+         <JobStatus>0</JobStatus>
+         <JobTitle>12 MONTHLY ROUTINE </JobTitle>
+         <Job_Type>Analysis</Job_Type>
+         <LAST_DONE_DATE>5/5/2019 12:00:00 AM</LAST_DONE_DATE>
+         <Maintenance_Type>MANUFACTURER</Maintenance_Type>
+         <NEXT_DUE_DATE>5/17/2019 12:00:00 AM</NEXT_DUE_DATE>
+         <Priority>NORMAL</Priority>
+         <Rank>2/E</Rank>
+         <Vessel>oceania</Vessel>
+      </element>
+      <element>
+         <AssignedTo>VESSEL</AssignedTo>
+         <Department>ENGINE</Department>
+         <EquipmentCode>651.01.01.01</EquipmentCode>
+         <EquipmentName>AE 1 CYLINDER HEAD UNIT NO.1</EquipmentName>
+         <Frequency>6</Frequency>
+         <FrequencyType>MONTH</FrequencyType>
+         <GenericAttributes />
+         <Id>5e253a11a0a88a2c54ddf33f</Id>
+         <JobDescription>CHECK HYDRAULIC PUMP OPERATION CONDITION AND EMISSION OF ABNORMAL SOUND (START THE HYDRAULIC PUMP AND CONFIRM THAT IT DOES NOT EMIT A WHIRRING / BUZZING / VIBRATING SOUND AND ITS WORKING PRESSURE IS NORMAL.)</JobDescription>
+         <JobStatus>0</JobStatus>
+         <JobTitle>6 MONTHLY ROUTINE</JobTitle>
+         <Job_Type>Inspection</Job_Type>
+         <LAST_DONE_DATE>1/6/2019 12:00:00 AM</LAST_DONE_DATE>
+         <Maintenance_Type>MANUFACTURER</Maintenance_Type>
+         <NEXT_DUE_DATE>1/12/2019 12:00:00 AM</NEXT_DUE_DATE>
+         <Priority>NORMAL</Priority>
+         <Rank>2/E</Rank>
+         <Vessel>oceania</Vessel>
+      </element>
+      <element>
+         <AssignedTo>VESSEL</AssignedTo>
+         <Department>ENGINE</Department>
+         <EquipmentCode>651.01.02</EquipmentCode>
+         <EquipmentName>AE 1 PISTON AND LINER</EquipmentName>
+         <Frequency>12</Frequency>
+         <FrequencyType>MONTH</FrequencyType>
+         <GenericAttributes />
+         <Id>5e253a11a0a88a2c54ddf340</Id>
+         <JobDescription>* CHECK HYDRAULIC PUMP EXISTENCE OF GREASE ON CHAIN COUPLING, AND DETERIORATION OF GREASE
+* CHECK HYDRAULIC PUMP  SHAFT MISALIGNMENT
+REFER MAKER MAINTENANCE MANUAL</JobDescription>
+         <JobStatus>0</JobStatus>
+         <JobTitle>12 MONTHLY ROUTINE </JobTitle>
+         <Job_Type>Inspection</Job_Type>
+         <LAST_DONE_DATE>15/1/2019</LAST_DONE_DATE>
+         <Maintenance_Type>MANUFACTURER</Maintenance_Type>
+         <NEXT_DUE_DATE>15/1/2020</NEXT_DUE_DATE>
+         <Priority>NORMAL</Priority>
+         <Rank>2/E</Rank>
+         <Vessel>oceania</Vessel>
+      </element>
+      <element>
+         <AssignedTo>VESSEL</AssignedTo>
+         <Department>ELECTRIC</Department>
+         <EquipmentCode>651.01.02.01</EquipmentCode>
+         <EquipmentName>AE 1 PISTON</EquipmentName>
+         <Frequency>30</Frequency>
+         <FrequencyType>MONTH</FrequencyType>
+         <GenericAttributes />
+         <Id>5e253a11a0a88a2c54ddf341</Id>
+         <JobDescription>1. OVERHAUL OF ELECTRIC MOTOR
+2. BEARINGS TO BE INSPECTED AND RENEWED.
+</JobDescription>
+         <JobStatus>0</JobStatus>
+         <JobTitle>30 MONTHLY ROUTINE</JobTitle>
+         <Job_Type>Overhaul</Job_Type>
+         <LAST_DONE_DATE>1/4/2019 12:00:00 AM</LAST_DONE_DATE>
+         <Maintenance_Type>MANUFACTURER</Maintenance_Type>
+         <NEXT_DUE_DATE>2/3/2019 12:00:00 AM</NEXT_DUE_DATE>
+         <Priority>NORMAL</Priority>
+         <Rank>ELECTRO TECH OFFICER</Rank>
+         <Vessel>oceania</Vessel>
+      </element>
+      <element>
+         <AssignedTo>VESSEL</AssignedTo>
+         <Department>DECK</Department>
+         <EquipmentCode>651.01.03</EquipmentCode>
+         <EquipmentName>AE 1 CONNECTING ROD</EquipmentName>
+         <Frequency>6</Frequency>
+         <FrequencyType>MONTH</FrequencyType>
+         <GenericAttributes />
+         <Id>5e253a11a0a88a2c54ddf343</Id>
+         <JobDescription>1. CHECK ALL BOLTS &amp; NUTS FOR PROPER TIGHTENING                                                                                                                                                                                                                                                                                  2. CHECK BRAKE LININGS, AND RENEW IF REQUIRED                                                                                                                                                                                                                                                                                    3. INSPECT REMOTE CONTROL UNIT PIPE LINE FOR ANY DAMAGE( IF DENT DETECTED BY VISUAL INSPECTION IS GREATER THAN 10% OF THE PIPE DIAMETER REPLACE THE DENTED PIPE WITH A NEW ONE)                                                                                                                                                                                                                                                                                                                                                                         4. INSPECT SPEED CONTROL UNIT FOR ANY DAMAGE OF THE TOOTH SURFACE.                                                                                                                                                                                                                                  5.MEASURE THE STROKE OF HYDRAULIC BRAKE CYLINDER ROD WITH THE BRAKE TURNED ON AND OFF.                                                                                                                                                                                  6. CLEAN OIL FILTER                                                                                                                                                                                                                                                                                                                                                       7. CHECK FOR LOOSENING AND DEFORMATION OF THE GEAR COVER, SET BOLTS, AND CONFIRM THAT ALL BOLTS ARE FREE FROM SUCH DEFECTS AND ASSURE FAULT FREE OPERATION.                     REFER MAKER MAINTENANCE MANUAL                                  </JobDescription>
+         <JobStatus>0</JobStatus>
+         <JobTitle>6 MONTHLY ROUTINE</JobTitle>
+         <Job_Type>Inspection</Job_Type>
+         <LAST_DONE_DATE>1/6/2019 12:00:00 AM</LAST_DONE_DATE>
+         <Maintenance_Type>MANUFACTURER</Maintenance_Type>
+         <NEXT_DUE_DATE>1/12/2019 12:00:00 AM</NEXT_DUE_DATE>
+         <Priority>NORMAL</Priority>
+         <Rank>C/O</Rank>
+         <Vessel>oceania</Vessel>
+      </element>
+      <element>
+         <AssignedTo>VESSEL</AssignedTo>
+         <Department>ENGINE</Department>
+         <EquipmentCode>651.01.03.01</EquipmentCode>
+         <EquipmentName>AE1 CONNECTING ROD UNIT NO.1</EquipmentName>
+         <Frequency>12</Frequency>
+         <FrequencyType>MONTH</FrequencyType>
+         <GenericAttributes />
+         <Id>5e253a11a0a88a2c54ddf344</Id>
+         <JobDescription>1. CHECK SAG OF ROLLER CHAIN 
+2. CHECK THE CLEARANCE FOR INSTALLATION STOPPER.(CONFIRM THAT THERE IS NO CLEARANCE BETWEEN THE BED AND THE STOPPER.IF A CLEARANCE IS DETECTED, ADJUST THE STOPPER)
+3. CHECK EXPANSION TANK FOR PEELING  PAINT FROM INNER TANK SURFACE.
+4. CHECK OIL FEEDING TANK FOR PEELING PAINT FROM INNER TANK SURFACE.
+5. CARRY OUT PERFORMANCE CHECK OF HYDRAULIC MOTOR.
+6. CHECK CONDITION OF HYDRAULIC OIL AND OIL INSIDE GEAR CASE, RENEW IF CONTAMINATED.
+
+REFER MAKER MAINTENANCE MANUAL</JobDescription>
+         <JobStatus>0</JobStatus>
+         <JobTitle>12 MONTHLY ROUTINE </JobTitle>
+         <Job_Type>Inspection</Job_Type>
+         <LAST_DONE_DATE>1/3/2019 12:00:00 AM</LAST_DONE_DATE>
+         <Maintenance_Type>MANUFACTURER</Maintenance_Type>
+         <NEXT_DUE_DATE>1/15/2019 12:00:00 AM</NEXT_DUE_DATE>
+         <Priority>NORMAL</Priority>
+         <Rank>2/E</Rank>
+         <Vessel>oceania</Vessel>
+      </element>
+      <element>
+         <AssignedTo>VESSEL</AssignedTo>
+         <Department>ENGINE</Department>
+         <EquipmentCode>651.01.04</EquipmentCode>
+         <EquipmentName>AE 1 CAMSHAFT AND CAMSHAFT DRIVE</EquipmentName>
+         <Frequency>12</Frequency>
+         <FrequencyType>MONTH</FrequencyType>
+         <GenericAttributes />
+         <Id>5e253a11a0a88a2c54ddf345</Id>
+         <JobDescription>1. SEND OIL SAMPLE TO OIL COMPANY FOR SHORE ANALYSIS</JobDescription>
+         <JobStatus>0</JobStatus>
+         <JobTitle>12 MONTHLY ROUTINE </JobTitle>
+         <Job_Type>Analysis</Job_Type>
+         <LAST_DONE_DATE>1/4/2019 12:00:00 AM</LAST_DONE_DATE>
+         <Maintenance_Type>MANUFACTURER</Maintenance_Type>
+         <NEXT_DUE_DATE>1/16/2019 12:00:00 AM</NEXT_DUE_DATE>
+         <Priority>NORMAL</Priority>
+         <Rank>2/E</Rank>
+         <Vessel>oceania</Vessel>
+      </element>
+   </Data>
+   <Errors null="true" />
+   <ExtraData null="true" />
+   <Total>0</Total>
+</root>

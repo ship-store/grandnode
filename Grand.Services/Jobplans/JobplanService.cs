@@ -30,5 +30,22 @@ namespace Grand.Services.Jobplan
 
             return await PagedList<Grand.Core.Domain.Jobplan.Jobplan>.Create(query, pageIndex, pageSize);
         }
+
+        async Task<IPagedList<Core.Domain.Jobplan.Jobplan>> IJobplanService.GetAllJobplans(string name, int pageIndex, int pageSize, bool showHidden)
+        {
+            var query = _jobplanRepository.Table;
+
+            return await PagedList<Grand.Core.Domain.Jobplan.Jobplan>.Create(query, pageIndex, pageSize);
+        }
+
+        public virtual Task<Core.Domain.Jobplan.Jobplan> GetJobPlanById(string jobplanId)
+        {
+            return _jobplanRepository.GetByIdAsync(jobplanId);
+        }
+
+        public virtual async Task UpdateJobPlan(Core.Domain.Jobplan.Jobplan jobplan)
+        {
+            await _jobplanRepository.UpdateAsync(jobplan);
+        }
     }
 }

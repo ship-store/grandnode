@@ -2,7 +2,7 @@
 using Grand.Framework.Kendoui;
 using Grand.Services.Vendors;
 using Grand.Services.Vessel;
-
+using System.Net.Http.Headers;
 using Grand.Web.Areas.Admin.Controllers;
 using Grand.Web.Areas.Admin.Models.Vendors;
 using Grand.Web.Areas.Maintenance.DomainModels;
@@ -87,6 +87,17 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(gridModel);
         }
 
+
+        public IActionResult CurrentStatus(string Id)
+        {
+            //if (Request.Headers["Referer"]!=null )
+            //{
+            //    ViewData["Reffer"] = Request.Headers["Referer"].ToString();
+            //}
+
+
+            return RedirectToAction("VesselList");
+        }
         public async Task<IActionResult> VesselSession(DataSourceRequest command, VesselListModel model, string id)
         {
             var vessel = await _vesselService.GetVesselById(id);
@@ -100,8 +111,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             }
    
             ViewBag.VesselName = HttpContext.Session.GetString("VesselName").ToString();
-           
-            return View();
+
+            return RedirectToAction("VesselList");
         }
 
         [HttpGet]

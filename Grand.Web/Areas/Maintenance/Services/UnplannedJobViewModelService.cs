@@ -40,6 +40,7 @@ namespace Grand.Web.Areas.Maintenance.Services
                 unplannedJob.ReportedBy = model1.ReportedBy;
                 unplannedJob.Status = model1.Status;
                 unplannedJob.Vessel = model1.Vessel;
+                unplannedJob.DeleteStatus = null;
 
                 await _unplannedJobService.InsertUnplannedJob(unplannedJob);
                
@@ -54,6 +55,7 @@ namespace Grand.Web.Areas.Maintenance.Services
                 unplannedJob.ReportedBy = model1.ReportedBy;
                 unplannedJob.Status = model1.Status;
                 unplannedJob.Vessel = model1.Vessel;
+                unplannedJob.DeleteStatus = null;
 
                 await _unplannedJobService.InsertUnplannedJob(unplannedJob);
 

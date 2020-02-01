@@ -1,81 +1,80 @@
-﻿@model VesselForDisplay
+﻿@*@model VesselForDisplay*@
 @*@Html.BeginForm("EditItem", "Vessel", FormMethod.Get, new { id = Model.VesselID , enctype = "multipart/form-data"})*@
 @*<input type="hidden" value="@Model.VesselID" name="VesselId" class="form-control" />*@
 
 @*@ViewBag.VesselName*@
 
-@{
-    ViewBag.Title = T("Maintenance.Title.Success").Text;
-    //Layout = "~/Areas/Maintenance_Admin/Views/Shared/MaintenanceMasterLayout.cshtml";
-}
-
+@*@if (!string.IsNullOrWhiteSpace(ViewData["Reffer"]))
+{
+    <a href="@ViewData["Reffer"]">Return to client detail</a>
+}*@
 <!DOCTYPE html>
 
-<html>
-<head>
-    <meta name=" viewport" content="width=device-width" />
-    <title>Success</title>
-</head>
+    <html>
+    <head>
+        <meta name=" viewport" content="width=device-width" />
+        <title>Success</title>
+    </head>
 
-<body>
+    <body>
 
-    <section class="content">
-        <div class="container-fluid">
-            <div class="block-header">
-                <h2>@ViewBag.VesselName</h2>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="block-header">
+                    <h2>@ViewBag.VesselName</h2>
+                </div>
+
+                 Widgets
+                <div class="row clearfix">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-pink hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons">playlist_add_check</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">TOTAL VESSELS</div>
+                                <div class="number count-to" data-from="0" data-to="000" data-speed="15" data-fresh-interval="20"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-cyan hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons">help</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">DUE FOR THE DAY</div>
+                                <div class="number count-to" data-from="0" data-to="000" data-speed="1000" data-fresh-interval="20"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-light-green hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons">forum</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">DUE FOR THE WEEK</div>
+                                <div class="number count-to" data-from="0" data-to="000" data-speed="1000" data-fresh-interval="20"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-orange hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons">person_add</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">DUE FOR THE MONTH</div>
+                                <div class="number count-to" data-from="0" data-to="000" data-speed="1000" data-fresh-interval="20"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <!-- Widgets -->
-            <div class="row clearfix">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-pink hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">playlist_add_check</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">TOTAL VESSELS</div>
-                            <div class="number count-to" data-from="0" data-to="000" data-speed="15" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-cyan hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">help</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">DUE FOR THE DAY</div>
-                            <div class="number count-to" data-from="0" data-to="000" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-light-green hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">forum</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">DUE FOR THE WEEK</div>
-                            <div class="number count-to" data-from="0" data-to="000" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-orange hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">person_add</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">DUE FOR THE MONTH</div>
-                            <div class="number count-to" data-from="0" data-to="000" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
 
-</body>
-</html>
+    </body>
+    </html>
 

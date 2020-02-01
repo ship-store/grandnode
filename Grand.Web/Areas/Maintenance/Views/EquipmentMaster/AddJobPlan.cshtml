@@ -1,0 +1,230 @@
+﻿@model ViewModel
+@{
+    ViewBag.Title = T("Maintenance.EquipmentMaster").Text;
+    var vessel = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+    //var equipment = @HttpContextAccessor.HttpContext.Session.GetString("Sub1_number");
+}
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+        <div class="header">
+            <h2>
+                Add Job Plan
+            </h2>
+            <br />
+
+            <ul class="header-dropdown m-r--5">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:void(0);">Action</a></li>
+                        <li><a href="javascript:void(0);">Another action</a></li>
+                        <li><a href="javascript:void(0);">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <br>
+
+        <div class="body">
+            <form action="AddJobPlanDetails" method="post" name="contact_form" id="first_form">
+
+                <input type="hidden" value="@vessel" name="Vessel" />
+                @*<input type="hidden" value="@equipment" name="Equipment" />*@
+
+                <div class="container-fluid" style="width: 80%;">
+                    <div class="table-responsive">
+
+                        <table class="table">
+                            <tr>
+                                <td><label for="EquipmentCode">Equipment Code</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            @*<input type="text" name="EquipmentCode" value="@Model.SelectedEquipment.Sub1_number@Model.SelectedEquipment.Sub2_number@Model.SelectedEquipment.Sub3_number" class="form-control time24" placeholder="" />*@
+
+                                            <input type="text" class="form-control valid" name="EquipmentCode" id="n1" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="EquipmentName">Equipment Name</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            @*<input type="text" name="EquipmentName" value="@Model.SelectedEquipment.Sub1_description@Model.SelectedEquipment.Sub2_description@Model.SelectedEquipment.Sub3_description" class="form-control time24" placeholder="" />*@
+
+                                            <input type="text" class="form-control valid" name="EquipmentName" id="n2" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="JobTitle">Job Title</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="JobTitle" id="n2" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @*<tr>
+                                <td><label for="Vessel">Vessel</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="Vessel" id="n3" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>*@
+                            <tr>
+                                <td><label for="JobDescription">Job Description</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="JobDescription" id="n4" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Job_Type">Job Type</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="Job_Type" id="n4" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Frequency">Frequency</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="Frequency" id="n4" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="FrequencyType">Frequency Type</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="FrequencyType" id="n4" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Maintenance_Type">Maintenance Type</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="Maintenance_Type" id="n4" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Department">Department</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="Department" id="n4" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Priority">Priority</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="Priority" id="n4" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Rank">Rank</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="Rank" id="n4" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="AssignedTo">Assigned To</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control valid" name="AssignedTo" id="n4" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="LAST_DONE_DATE">Last Done Date</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="date" class="form-control valid" name="LAST_DONE_DATE" id="n4" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="NEXT_DUE_DATE">Next Due Date</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="date" class="form-control valid" name="NEXT_DUE_DATE" id="n4" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                @Html.AntiForgeryToken()
+                                <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Submit" id="submit" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("form").on('submit', function (e) {
+            $(".valid").each(function () {
+
+                var input = $(this);
+                if (input.val() == "") {
+                    swal($(this).attr("name") + " Cannot be blank");
+                   e.preventDefault();
+                    return false;
+                }
+                else {
+                    swal({
+                        title: "Success!",
+                        text: "Submitting Form!",
+                        icon: "success",
+                        button: "Ok",
+                    });
+                }
+            });
+        });
+    });
+</script>

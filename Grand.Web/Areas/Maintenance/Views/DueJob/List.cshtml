@@ -1,0 +1,601 @@
+﻿@{
+    var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+    var SessionVar = @HttpContextAccessor.HttpContext.Session.GetString("email");
+
+    if (VesselName == null)
+    {
+        <script>
+
+        $(window).load(function(){
+            swal({
+
+                title: 'Vessel Not Selected!',
+                allowOutsideClick: false,
+                text: 'Please select a Vessel',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function () {
+                    window.location.href = '@Url.Action("VesselList","Vessel")';
+                })
+
+            });
+
+        </script>
+    }
+
+    if (SessionVar == null)
+    {
+        <script>
+
+            $(window).load(function ()
+            {
+            swal({
+
+                title: 'TimeOut!',
+                allowOutsideClick: false,
+                text: '"Time Out! , Please Login"',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function ()
+                {
+                    window.location.href = '@Url.Action("LoginPage","Register")';
+                })
+
+            });
+
+        </script>
+    }
+
+}
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.default-v2.min.css" />
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
+
+<div class="row" id="SearchSection">
+    <div class="col-md-12">
+        <div class="x_panel light form-fit">
+            <div class="x_title">
+                <div class="caption">
+                    <i class="fa fa-cubes"></i>
+
+                    Due Jobs
+
+                </div>
+                <div class="actions btn-group btn-group-devided">
+
+                    <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+
+                    <button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">Postpone Job</button>
+
+                    <button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>
+                </div>
+
+            </div>
+
+
+            <div class="x_content">
+                <div id="vessel-grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="example">
+    <antiforgery-token />
+    <div id="grid"></div>
+
+    <script>
+            $(document).ready(function () {
+            $("#grid").kendoGrid({
+                dataSource: {
+
+                    transport: {
+
+                         read:
+                             {
+                                url: "@Html.Raw(Url.Action("ReadData", "DueJob","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                        },
+                        @*update:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","UnplannedJobs","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                            },
+                            create:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","UnplannedJobs","Maintenance"))",
+                                type: "POST",
+                                dataType: "json"
+                            }*@
+                    },
+                    batch: true,
+                    schema:
+                    {
+                               data: "Data",
+                               total: "Total",
+                               errors: "Errors",
+                        model:
+                        {
+                            id : "Id",
+                            fields:
+                            {
+                                Id:
+                                {
+                                    validation: { required: true },
+                                    editable: false,
+                                },
+                                    NEXT_DUE_DATE: { type: "date" },
+                                    LAST_DONE_DATE: {type:"date"}
+                            }
+                        }
+                    },
+                    pageSize: 30
+                },
+                height: 490,
+                sortable: true,
+                reorderable: true,
+                groupable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: true,
+                 scrollable:
+                    {
+                       endless: true
+                    },
+                pageable:
+                    {
+                       numeric: false,
+                       previousNext: false
+                    },
+                selectable: true,
+                allowCopy: true,
+                columns: [
+                    {
+                            field: "EquipmentCode",
+                            title: "EquipmentCode",
+                            width: "120px"
+                        },
+                        {
+                            field: "EquipmentName",
+                            title: "Equipment Name",
+                            width: "170px"
+                        },
+                        {
+                            field: "JobTitle",
+                            title: "Job Title",
+                            width: "150px"
+                        },
+                        {
+                            field: "Frequency",
+                            title: "Frequency",
+                            width: "90px"
+
+                        },
+                        {
+                            field: "Department",
+                            title: "Department",
+                            width: "90px"
+                        },
+                        {
+                            field: "LAST_DONE_DATE",
+                            title: "Last Done",
+                             format: "{0:dd-MM-yyyy}",
+                            width: "150px"
+                        },
+                        {
+                            field: "NEXT_DUE_DATE",
+                            title: "Next Due",
+                            format: "{0:dd-MM-yyyy}",
+                            width: "150px",
+                        },],
+                    editable: "inline"
+
+            });
+        });
+
+         function customBoolEditor(container, options) {
+                        var guid = kendo.guid();
+                        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+                        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
+                    }
+
+                    function additionalData() {
+                        var data = {};
+                        addAntiForgeryToken(data);
+                        return data;
+        }
+    </script>
+</div>
+
+
+<!-- Modal for Postpone -->
+
+<script>
+
+    $("#btnSelectRow").click(function () {
+
+        var grid = $("#grid").data("kendoGrid");
+        var selectedItem = grid.dataItem(grid.select());
+        if (selectedItem == null) {
+
+            window.location.reload();
+            alert("Please Select a Job");
+        }
+        else {
+            var Bid = selectedItem.Id;
+            var equipmentname = selectedItem.EquipmentName;
+            var equipmentCode = selectedItem.EquipmentCode;
+            var jobTitle = selectedItem.JobTitle;
+            var frequency = selectedItem.Frequency;
+            var department = selectedItem.Department;
+            var lastDoneDate = selectedItem.LAST_DONE_DATE;
+            var nextDueDate = selectedItem.NEXT_DUE_DATE
+
+            document.getElementById("Bid").value = Bid;
+            document.getElementById("Ename").value = equipmentname;
+            document.getElementById("ECode").value = equipmentCode;
+            document.getElementById("jobTitle").value = jobTitle;
+            document.getElementById("frequency").value = frequency;
+            document.getElementById("department").value = department;
+            document.getElementById("lastDoneDate").value = lastDoneDate;
+            document.getElementById("nextDueDate").value = nextDueDate;
+
+        }
+
+    });
+</script>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:50%;padding:10px">
+
+        Modal content
+        <div class="modal-content" style="padding:40px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Postpone Job</h4>
+            </div>
+            <div class="modal-body">
+
+
+
+                <div class="body">
+                    <div class="demo-masked-input">
+                        <form action="PostponeJob" method="post">
+
+                            <div class="row clearfix">
+                                <div class="col-md-3" hidden>
+                                    <b>Id</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+
+                                            <input type="text" id="Bid" name="Bid" value="" class="form-control time24" placeholder="" readonly>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3" hidden>
+                                    <b>Equipment Code</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+
+                                            <input type="text" id="ECode" name="ECode" value="" class="form-control time24" placeholder="" readonly>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <b>Equipment Name</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+
+                                            <input type="text" id="Ename" name="Ename" value="" class="form-control time24" placeholder="" readonly>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <b>Job Title</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+                                            <input type="text" id="jobTitle" value="" class="form-control time24" placeholder="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <b>Frequency</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+                                            <input type="text" id="frequency" value="" class="form-control time24" placeholder="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <b>Department</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+                                            <input type="text" id="department" value="" class="form-control time24" placeholder="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="col-md-3">
+                                        <b>Reported By</b>
+                                        <div class="input-group">
+
+                                            <div class="form-line">
+                                                <input type="text" id="ReportedBy" class="form-control time24" placeholder="" readonly>
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+                                <div class="col-md-3">
+                                    <b>Last Done Date</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+                                            <input type="text" id="lastDoneDate" value="" class="form-control time24" placeholder="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <b>Next Due Date</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+                                            <input type="date" id="nextDueDate" name="dt" value="" class="form-control time24" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <b>Remark</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+                                            <textarea rows="5" cols="60" id="remark" name="remark" style="margin-left:20%"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <br /><br /><br />
+                                @*<div class="col-md-3">
+                                        <br />
+                                        <br />
+                                        <b>Remark</b>
+                                        <div class="input-group">
+
+                                            <div class="form-line">
+
+                                                <textarea rows="5" cols="100" id="remark" name="remark" align="center"></textarea>
+                                                <br />
+                                                <input type="text" id="Vessel" class="form-control time24" placeholder="" readonly>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <br /><br /><br /><br /><br /><br /><br /><br /><br />
+                                @Html.AntiForgeryToken()
+                                <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Postpone Job" id="submit" />
+                                @*<a id="submit" class="btn btn-primary m-t-15 waves-effect" href="Edit/#=Id#">Complete</a>*@
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal for Complete -->
+
+<script>
+
+    $("#btnSelectRow1").click(function () {
+
+        var grid = $("#grid").data("kendoGrid");
+        var selectedItem = grid.dataItem(grid.select());
+        if (selectedItem == null) {
+
+            window.location.reload();
+            alert("Please Select a Job");
+        }
+        else {
+            var Bid = selectedItem.Id;
+            var equipmentname = selectedItem.EquipmentName;
+            var equipmentCode = selectedItem.EquipmentCode;
+            var jobTitle = selectedItem.JobTitle;
+            var frequency = selectedItem.Frequency;
+            var department = selectedItem.Department;
+            var lastDoneDate = selectedItem.LAST_DONE_DATE;
+            var nextDueDate = selectedItem.NEXT_DUE_DATE
+
+            document.getElementById("Bid1").value = Bid;
+            document.getElementById("Ename1").value = equipmentname;
+            document.getElementById("ECode1").value = equipmentCode;
+            document.getElementById("jobTitle1").value = jobTitle;
+            document.getElementById("frequency1").value = frequency;
+            document.getElementById("department1").value = department;
+            document.getElementById("lastDoneDate1").value = lastDoneDate;
+            document.getElementById("nextDueDate1").value = nextDueDate;
+
+        }
+
+    });
+</script>
+
+<div id="myModal1" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:50%;padding:10px">
+
+        Modal content
+        <div class="modal-content" style="padding:40px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Complete Job</h4>
+            </div>
+            <div class="modal-body">
+
+
+
+                <div class="body">
+                    <div class="demo-masked-input">
+                        <form action="CompleteJob" method="post">
+
+                            <div class="row clearfix">
+                                <div class="col-md-3" hidden>
+                                    <b>Id</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+
+                                            <input type="text" id="Bid1" name="Bid1" value="" class="form-control time24" placeholder="" readonly>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3" hidden>
+                                    <b>Equipment Code</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+
+                                            <input type="text" id="ECode1" name="ECode1" value="" class="form-control time24" placeholder="" readonly>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <b>Equipment Name</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+
+                                            <input type="text" id="Ename1" name="Ename1" value="" class="form-control time24" placeholder="" readonly>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <b>Job Title</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+                                            <input type="text" id="jobTitle1" value="" class="form-control time24" placeholder="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <b>Frequency</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+                                            <input type="text" id="frequency1" value="" class="form-control time24" placeholder="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <b>Department</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+                                            <input type="text" id="department1" value="" class="form-control time24" placeholder="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="col-md-3">
+                                        <b>Reported By</b>
+                                        <div class="input-group">
+
+                                            <div class="form-line">
+                                                <input type="text" id="ReportedBy" class="form-control time24" placeholder="" readonly>
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+                                <div class="col-md-3">
+                                    <b>Last Done Date</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+                                            <input type="text" id="lastDoneDate1" value="" class="form-control time24" placeholder="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <b>Next Due Date</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+                                            <input type="date" id="nextDueDate" name="dt" value="" class="form-control time24" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <b>Remark</b>
+                                    <div class="input-group">
+
+                                        <div class="form-line">
+                                            <textarea rows="5" cols="60" id="remark" name="remark" style="margin-left:20%"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <br /><br /><br />
+                                @*<div class="col-md-3">
+                                        <br />
+                                        <br />
+                                        <b>Remark</b>
+                                        <div class="input-group">
+
+                                            <div class="form-line">
+
+                                                <textarea rows="5" cols="100" id="remark" name="remark" align="center"></textarea>
+                                                <br />
+                                                <input type="text" id="Vessel" class="form-control time24" placeholder="" readonly>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <br /><br /><br /><br /><br /><br /><br /><br /><br />
+                                @Html.AntiForgeryToken()
+                                <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Complete Job" id="submit" />
+                                @*<a id="submit" class="btn btn-primary m-t-15 waves-effect" href="Edit/#=Id#">Complete</a>*@
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

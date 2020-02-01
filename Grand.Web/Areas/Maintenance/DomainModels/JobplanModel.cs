@@ -23,6 +23,9 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string NEXT_DUE_DATE { get; set; }
         public string Job_Type { get; set; }
         public string Maintenance_Type { get; set; }
+
+        public int JobStatus { get; set; }
+        public int JobOrder { get; set; }
     }
     public class JobplanDisplayModel : BaseEntity
     {
@@ -41,5 +44,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string NEXT_DUE_DATE { get; set; }
         public string Job_Type { get; set; }
         public string Maintenance_Type { get; set; }
+        public int JobStatus { get; set; }
+        public int JobOrder { get; set; }
     }
 }
