@@ -106,6 +106,8 @@ namespace Grand.Data
         {
             return this._collection.Find(e => e.Id == id).FirstOrDefaultAsync();
         }
+
+
         /// <summary>
         /// Insert entity
         /// </summary>

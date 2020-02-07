@@ -43,6 +43,7 @@ namespace Grand.Web.Areas.Maintenance.Services
                 breakdownJob.ReportedBy = addNewBreakdownJob.ReportedBy;
                 breakdownJob.Status = addNewBreakdownJob.Status;
                 breakdownJob.Vessel = addNewBreakdownJob.Vessel;
+                breakdownJob.DeleteStatus = null;
 
                 await _breakdownJobService.InsertBreakdownJob(breakdownJob);
             }
@@ -57,6 +58,8 @@ namespace Grand.Web.Areas.Maintenance.Services
                 breakdownJob.ReportedBy = addNewBreakdownJob.ReportedBy;
                 breakdownJob.Status = addNewBreakdownJob.Status;
                 breakdownJob.Vessel = addNewBreakdownJob.Vessel;
+                breakdownJob.DeleteStatus = null;
+
 
                 await _breakdownJobService.InsertBreakdownJob(breakdownJob);
 

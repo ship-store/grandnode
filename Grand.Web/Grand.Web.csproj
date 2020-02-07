@@ -57,6 +57,8 @@
     <None Include="Areas\Maintenance\Views\EquipmentMaster\List.cshtml" />
   </ItemGroup>  
   <ItemGroup>
+    <Folder Include="wwwroot\Maintenance\NewFolder\" />
+    <Folder Include="wwwroot\Maintenance\scripts\NewFolder\" />
     <Folder Include="wwwroot\Maintenance\Vessel\" />
   </ItemGroup>  
  

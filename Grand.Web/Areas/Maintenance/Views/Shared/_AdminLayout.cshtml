@@ -165,7 +165,7 @@
                                     <ul class="nav navbar-nav">
                                         <li class="dropdown" role="presentation">
                                             <a href="@Url.Action("VesselList", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
-                                                <i class="fa fa-ship"></i>&nbsp;&nbsp;@vessel
+                                                <i class="fa fa-ship" style="color:#0f5f86;"></i>&nbsp;&nbsp;@vessel
                                             </a>
                                         </li>
                                     </ul>
@@ -217,17 +217,17 @@
                                     </a>
                                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list overflow-h" role="menu">
                                         <li>
-                                            <a href="http://docs.grandnode.com/" target="_blank">
+                                            <a href="#" target="_blank">
                                                 <i class="icon-book-open"></i>
                                                 @T("Admin.Header.Documentation")
                                             </a>
                                         </li>
-                                        <li>
+                                        @*<li>
                                             <a href="http://grandnode.com/boards" target="_blank">
                                                 <i class="icon-bubbles"></i>
                                                 @T("Admin.Header.Community")
                                             </a>
-                                        </li>
+                                        </li>*@
                                         @*<li>
                     <a href="javascript:;">
                         <i class="fa fa-dot-circle-o"></i>

@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Untitled</title>
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.mobile.all.min.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.1.114/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.1.114/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <script id="detail-template" type="text/x-kendo-template">
+        <div id="text-container">
+            #: text #
+        </div>
+        <textarea style="display: none;" id="text-editor" rows="10" cols="100" data-bind="value:text">
+          #: text #
+        </textarea>
+    </script>
+    <div id="grid"></div>
+    <script>
+        var data = [
+            {Sub1_description:"Sub1_description",Sub2_description:"Sub2_description",Sub3_description:"Sub3_description"}
+            { id: 1, from: "Jane Doe", to: "Someone else", cc: "Boss", text: "Message content" },
+            { id: 2, from: "John Doe", to: "Jane Doe", cc: "Manager", text: "Other message content" }
+        ];
+
+        $("#grid").kendoGrid({
+            columns: [
+                { field: "Sub1_description" },
+                { field: "Sub2_description" },
+                { field: "Sub3_description" },
+                { command: ["edit", "destroy"] }
+            ],
+            dataSource: {
+                  type: "json",
+                // Custom transport with local data for demo purposes.
+                transport: {
+                    read: function (options) {
+                         url: "@Html.Raw(Url.Action("ReadRunningHour", "RunningHour","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData,
+                                options.success(data);
+                      
+                    },
+
+                    update: function (options) {
+                        var updatedItem = options.data;
+
+                        // Save the updated item to the original datasource.
+                        data.splice(updatedItem.id - 1, 1, updatedItem);
+
+                        // On success.
+                        options.success();
+                    },
+                    create: function (options) {
+                        options.data.id = data.length;
+                        data.push(options.data);
+                        options.success()
+                    },
+                    destroy: function (options) {
+                        var indexToDelete;
+                        data.forEach(function (item, index) {
+                            if (item.id === options.data.id) {
+                                indexToDelete = index;
+                                return;
+                            }
+                        });
+
+                        data.splice(indexToDelete, 1);
+                        options.success();
+                    }
+                },
+                schema:
+                { data: "Data",
+                            total: "Total",
+                            errors: "Errors",
+                    model: {
+                        id: 'id',
+                        fields: {
+                            text: {
+                                defaultValue: ''
+                            }
+                        }
+                    }
+                }
+            },
+            edit: function (e) {
+                e.sender.expandRow(e.container);
+                var detailRow = e.container.next('.k-detail-row');
+                detailRow.find('#text-container').toggle();
+                detailRow.find('#text-editor').toggle();
+                var model = e.model;
+                kendo.bind(detailRow, model);
+                model.bind('change', function (e) {
+                    var tr = $('tr[data-uid=' + model.uid + ']');
+                })
+            },
+            save: function (e) {
+                var detailRow = e.container.next('.k-detail-row');
+                detailRow.find('#text-container').toggle();
+                detailRow.find('#text-editor').toggle();
+
+            },
+            cancel: function (e) {
+                var detailRow = e.container.next('.k-detail-row');
+                detailRow.find('#text-container').toggle();
+                detailRow.find('#text-editor').toggle();
+            },
+            detailTemplate: kendo.template($("#detail-template").html()),
+            toolbar: ['create'],
+            editable: 'inline',
+        });
+        
+            function additionalData()
+            {
+                var data = {};
+                addAntiForgeryToken(data);
+                return data;
+            }
+    </script>
+
+
+    @*<script>
+
+        $(document).ready(function () {
+   var employees = [
+            {
+                "EmployeeID": 2, "FirstName": "Andrew", "LastName": "Fuller", "Country": "USA", "Title": "Vice President, Sales", "HireDate": "1992-08-14 00:00:00", "BirthDate": "1952-02-19 00:00:00", "City": "Tacoma", "Address": "908 W. Capital Way", "expanded": "true",
+                children: [
+                { "EmployeeID": 8, "FirstName": "Laura", "LastName": "Callahan", "Country": "USA", "Title": "Inside Sales Coordinator", "HireDate": "1994-03-05 00:00:00", "BirthDate": "1958-01-09 00:00:00", "City": "Seattle", "Address": "4726 - 11th Ave. N.E." },
+                { "EmployeeID": 1, "FirstName": "Nancy", "LastName": "Davolio", "Country": "USA", "Title": "Sales Representative", "HireDate": "1992-05-01 00:00:00", "BirthDate": "1948-12-08 00:00:00", "City": "Seattle", "Address": "507 - 20th Ave. E.Apt. 2A" },
+                { "EmployeeID": 3, "FirstName": "Janet", "LastName": "Leverling", "Country": "USA", "Title": "Sales Representative", "HireDate": "1992-04-01 00:00:00", "BirthDate": "1963-08-30 00:00:00", "City": "Kirkland", "Address": "722 Moss Bay Blvd." },
+                { "EmployeeID": 4, "FirstName": "Margaret", "LastName": "Peacock", "Country": "USA", "Title": "Sales Representative", "HireDate": "1993-05-03 00:00:00", "BirthDate": "1937-09-19 00:00:00", "City": "Redmond", "Address": "4110 Old Redmond Rd." },
+                {
+                    "EmployeeID": 5, "FirstName": "Steven", "LastName": "Buchanan", "Country": "UK", "Title": "Sales Manager", "HireDate": "1993-10-17 00:00:00", "BirthDate": "1955-03-04 00:00:00", "City": "London", "Address": "14 Garrett Hill", "expanded": "true",
+                    children: [
+                           { "EmployeeID": 6, "FirstName": "Michael", "LastName": "Suyama", "Country": "UK", "Title": "Sales Representative", "HireDate": "1993-10-17 00:00:00", "BirthDate": "1963-07-02 00:00:00", "City": "London", "Address": "Coventry House Miner Rd." },
+                           { "EmployeeID": 7, "FirstName": "Robert", "LastName": "King", "Country": "UK", "Title": "Sales Representative", "HireDate": "1994-01-02 00:00:00", "BirthDate": "1960-05-29 00:00:00", "City": "London", "Address": "Edgeham Hollow Winchester Way" },
+                           { "EmployeeID": 9, "FirstName": "Anne", "LastName": "Dodsworth", "Country": "UK", "Title": "Sales Representative", "HireDate": "1994-11-15 00:00:00", "BirthDate": "1966-01-27 00:00:00", "City": "London", "Address": "7 Houndstooth Rd." }
+                    ]
+                }
+                ]
+            }
+        ];
+    // prepare the data
+    var source =
+    {
+        dataType: "json",
+        dataFields: [
+            { name: 'EmployeeID', type: 'number' },
+            { name: 'FirstName', type: 'string' },
+            { name: 'LastName', type: 'string' },
+            { name: 'Country', type: 'string' },
+            { name: 'City', type: 'string' },
+            { name: 'Address', type: 'string' },
+            { name: 'Title', type: 'string' },
+            { name: 'HireDate', type: 'date' },
+            { name: 'children', type: 'array' },
+            { name: 'expanded', type: 'bool' },
+            { name: 'BirthDate', type: 'date' }
+        ],
+        hierarchy:
+        {
+            root: 'children'
+        },
+        id: 'EmployeeID',
+        localData: employees
+    };
+    var dataAdapter = new $.jqx.dataAdapter(source);
+    // create Tree Grid
+    $("#treeGrid").jqxTreeGrid(
+    {
+        width: 850,
+        theme: "arctic",
+        source: dataAdapter,
+        sortable: true,
+        columns: [
+          { text: 'FirstName', dataField: 'FirstName', width: 200 },
+          { text: 'LastName', dataField: 'LastName', width: 120 },
+          { text: 'Title', dataField: 'Title', width: 160 },
+          { text: 'Birth Date', dataField: 'BirthDate', cellsFormat: 'd', width: 120 },
+          { text: 'Hire Date', dataField: 'HireDate', cellsFormat: 'd', width: 120 },
+          { text: 'Address', dataField: 'Address', width: 250 },
+          { text: 'City', dataField: 'City', width: 120 },
+          { text: 'Country', dataField: 'Country' }
+        ]
+    });
+});
+    </script>*@
+
+
+</body>
+</html>
+
+
+
+

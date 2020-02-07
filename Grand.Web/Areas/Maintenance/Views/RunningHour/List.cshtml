@@ -1,0 +1,194 @@
+﻿
+@model EquipmentModel
+@{
+    var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+    var SessionVar = @HttpContextAccessor.HttpContext.Session.GetString("email");
+
+    if (VesselName == null)
+    {
+        <script>
+
+        $(window).load(function(){
+            swal({
+
+                title: 'Vessel Not Selected!',
+                allowOutsideClick: false,
+                text: 'Please select a Vessel',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function () {
+                    window.location.href = '@Url.Action("VesselList","Vessel")';
+                })
+
+            });
+
+        </script>
+    }
+
+    if (SessionVar == null)
+    {
+        <script>
+
+            $(window).load(function ()
+            {
+            swal({
+
+                title: 'TimeOut!',
+                allowOutsideClick: false,
+                text: '"Time Out! , Please Login"',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function ()
+                {
+                    window.location.href = '@Url.Action("LoginPage","Register")';
+                })
+
+            });
+
+        </script>
+    }
+}
+
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.mobile.min.css" />
+
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
+
+<div class="row" id="SearchSection">
+    <div class="col-md-12">
+        <div class="x_panel light form-fit">
+            <div class="x_title">
+                <div class="caption">
+                    <i class="fa fa-cubes"></i>
+                    Running Hour
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div id="example">
+    <antiforgery-token />
+    <div id="grid"></div>
+    <script>
+        $(document).ready(function () {
+            $("#grid").kendoGrid({
+                dataSource: {
+
+                    transport: {
+
+                         read:
+                             {
+                                url: "@Html.Raw(Url.Action("ReadRunningHour", "RunningHour","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                        },
+                        update:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","RunningHour","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                            },
+                            create:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","BreakdownJob","Maintenance"))",
+                                type: "POST",
+                                dataType: "json"
+                            }
+                    },
+                    batch: true,
+                    schema:
+                    {
+                               data: "Data",
+                               total: "Total",
+                               errors: "Errors",
+                        model:
+                        {
+                            id : "Id",
+                            fields:
+                            {
+                              Id: { validation: { required: true }},
+                                Sub1_description: { type: "string", editable: false, },
+                                Sub2_description: { type: "string", editable: false, },
+                                Sub3_description: { type: "string",editable:false, },
+
+
+                            }
+                        }
+                    },
+                    pageSize: 60
+                },
+                height: 590,
+                sortable: true,
+                reorderable: true,
+                groupable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: true,
+                //pageable: true,
+                selectable: true,
+                allowCopy: true,
+                columns: [{
+                    field: "Sub1_description",
+                    title: "Sub1 Description",
+                    width: 250,
+                    locked: false,
+                    lockable: false,
+                    editable:false,
+                },
+                    {
+                    field: "Sub2_description",
+                    title: "Sub2 Description",
+                        width: 250,
+                     editable:false,
+                    },
+                     {
+                    field: "Sub3_description",
+                    title: "Sub3 Description",
+                         width: 250,
+
+
+                    },
+                    {
+                        template: "<input data-bind='value:InitialReading' class='k-textbox'/>", title: "Reading", width: 250
+                    }, {
+                    command: ["edit"],
+                    title: "&nbsp;",
+                    width: 300
+                  }],
+                    editable: "inline"
+
+            });
+        });
+         function customBoolEditor(container, options) {
+                        var guid = kendo.guid();
+                        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+                        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
+                    }
+
+                    function additionalData() {
+                        var data = {};
+                        addAntiForgeryToken(data);
+                        return data;
+        }
+
+    </script>
+
+
+</div>

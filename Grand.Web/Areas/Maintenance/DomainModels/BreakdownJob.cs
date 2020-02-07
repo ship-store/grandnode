@@ -12,22 +12,28 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
     public class BreakdownJobModel : BaseGrandEntityModel
     {
         public string EquipmentName { get; set; }
-        public string JobOrder { get; set; }
+        public int JobOrder { get; set; }
         public string Title { get; set; }
         public string JobReportedDate { get; set; }
         public string ReportedBy { get; set; }
         public string Status { get; set; }
         public string Vessel { get; set; }
+        public string DeleteStatus { get; set; }
+        public string JobCompletedDate { get; set; }
+        public string Remark { get; set; }
     }
     public class BreakdownJobDisplayModel : BaseGrandEntityModel
     {
         public string BreakdownJobID { get; set; }
         public string EquipmentName { get; set; }
-        public string JobOrder { get; set; }
+        public int JobOrder { get; set; }
         public string Title { get; set; }
         public string JobReportedDate { get; set; }
         public string ReportedBy { get; set; }
         public string Status { get; set; }
         public string Vessel { get; set; }
+        public string DeleteStatus { get; set; }
+        public string JobCompletedDate { get; set; }
+        public string Remark { get; set; }
     }
 }

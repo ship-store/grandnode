@@ -1,4 +1,5 @@
 ﻿using Grand.Core;
+using Grand.Core.Domain.Equipment;
 using Grand.Framework.Mvc.ModelBinding;
 using Grand.Framework.Mvc.Models;
 using System;
@@ -33,6 +34,9 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string Type { get; set; }
         [GrandResourceDisplayName("Maintenance.Vessel.List.SearchName")]
         public string SearchName { get; set; }
+        public int InitialReading { get; set; }
+
+
     }
 
 }

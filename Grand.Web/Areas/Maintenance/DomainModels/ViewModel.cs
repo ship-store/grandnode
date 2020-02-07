@@ -1,0 +1,25 @@
+﻿using Grand.Core.Domain.Equipment;
+using Grand.Core.Domain.Jobplan;
+using Grand.Core.Domain.Sparepart;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Grand.Web.Areas.Maintenance.DomainModels
+{
+    public class ViewModel
+    {
+        public Equipment SelectedEquipment { get; set; }
+        public IEnumerable<Equipment> AllEquipments { get; set; }
+
+        public IEnumerable <Jobplan> SelectedJobPlan { get; set; }
+        public Jobplan SelectedEquipmentView { get; set; }
+        public IEnumerable <Sparepart> SelectedSparepart { get; set; }
+        public string VName { get; set; }
+        public IEnumerable<JobplanListModel> SelectedJobPlanView { get; set; }
+
+       
+       
+    }
+}

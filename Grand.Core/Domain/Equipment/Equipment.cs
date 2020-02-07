@@ -29,5 +29,6 @@ namespace Grand.Core.Domain.Equipment
         public string Remark { get; set; }
         public string Vessel { get; set; }
         public string Type { get; set; }
+        public int InitialReading { get; set; }
     }
 }

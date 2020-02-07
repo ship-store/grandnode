@@ -18,7 +18,7 @@ namespace Grand.Services.Equipments
 
         public Task<Equipment> GetEquipmentById(string Id)
         {
-            throw new NotImplementedException();
+            return _equipmentRepository.GetByIdAsync(Id);
         }
 
         public virtual async Task InsertEquipment(Grand.Core.Domain.Equipment.Equipment equipment)
@@ -33,6 +33,9 @@ namespace Grand.Services.Equipments
 
             return await PagedList<Grand.Core.Domain.Equipment.Equipment>.Create(query, pageIndex, pageSize);
         }
-
+        public virtual async Task UpdateEquipment(Core.Domain.Equipment.Equipment equipment)
+        {
+            await _equipmentRepository.UpdateAsync(equipment);
+        }
     }
 }

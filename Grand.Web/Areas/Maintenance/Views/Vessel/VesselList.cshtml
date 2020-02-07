@@ -2,6 +2,34 @@
 @inject Grand.Core.Domain.Common.AdminAreaSettings adminAreaSettings
 @{
     ViewBag.Title = T("Maintenance.Vessel").Text;
+    var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+    var SessionVar = @HttpContextAccessor.HttpContext.Session.GetString("email");
+
+
+    if (SessionVar == null)
+    {
+        <script>
+
+            $(window).load(function ()
+            {
+            swal({
+
+                title: 'TimeOut!',
+                allowOutsideClick: false,
+                text: '"Time Out! , Please Login"',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function ()
+                {
+                    window.location.href = '@Url.Action("LoginPage","Register")';
+                })
+
+            });
+
+        </script>
+    }
 }
 <form asp-controller="Vessel" asp-action="VesselList" method="get">
     <antiforgery-token />
@@ -14,13 +42,13 @@
                         @T("Maintenance.Vessel")
                     </div>
                     @*<div class="actions btn-group btn-group-devided">
-                        <a href="@Url.Action("AddVessel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
-                        <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                        <button type="button" name="delete-selected" id="delete-selected" class="btn red">
-                            <i class="fa fa-trash-o"></i>
-                            @T("Admin.Common.Delete.Selected")
-                        </button>
-                    </div>*@
+                            <a href="@Url.Action("AddVessel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+                            <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+                            <button type="button" name="delete-selected" id="delete-selected" class="btn red">
+                                <i class="fa fa-trash-o"></i>
+                                @T("Admin.Common.Delete.Selected")
+                            </button>
+                        </div>*@
 
                 </div>
                 <div class="x_content form">
@@ -94,7 +122,7 @@
                     //},
                      {
                     field: "file",
-                    title: "@T("Maintenance.Vessel.Fields.Image")",
+                    title: "Image",
                     template: '<a class="k-link" href="VesselSession/#=Id#"><img src="#=file#" class="img-fluid" style="width:100px;height:60px"/></a>',
                     width: 92
                     },
@@ -151,7 +179,7 @@
                     width: 300,
                     template: '<a class="k-link" href="Edit/#=Id#">#:IMO#</a>',
                     },*@
-                    
+
                 ]
             });
         });

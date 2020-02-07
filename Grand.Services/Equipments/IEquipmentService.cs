@@ -13,6 +13,6 @@ namespace Grand.Services.Equipments
           int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
         Task InsertEquipment(Grand.Core.Domain.Equipment.Equipment equipment);
         Task<Grand.Core.Domain.Equipment.Equipment> GetEquipmentById(string Id);
-       
+        Task UpdateEquipment(Grand.Core.Domain.Equipment.Equipment equipment);
     }
 }

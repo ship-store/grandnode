@@ -5,10 +5,10 @@
 @inject IPermissionService permissionService
 @{
     //load sitemap
-    
+
     var siteMap = new XmlSiteMap();
     siteMap.LoadFrom("~/Areas/Maintenance/sitemap.config");
-    
+
 }
 
 @*<div class="col-md-3 left_col">
@@ -25,7 +25,7 @@
             <div style="width:70%; float:right;">
                 <span class="site_title">O3 Maintenance</span>
             </div>
-            
+
 
 
             </a>
@@ -34,16 +34,16 @@
         <div class="main_menu_side hidden-print main_menu" id="sidebar-menu">
             <div class="menu_section">
                 <ul class="nav side-menu page-sidebar-menu" style="position: absolute;display: block;width: 260px;">*@
-    <div class="col-md-3 left_col">
+<div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="~/Maintenance" class="site_title"><img   class="img-fluid-thumbnail" src="~/administration/build/images/O3 Log1.png" width="60px" height="45px" /> <span><b>Maintenance</b></span></a>
+            <a href="@Url.Action("Success", "Register", new { area = "Maintenance" })" class="site_title"><img class="img-fluid-thumbnail" src="~/administration/build/images/O3 Log1.png" width="60px" height="45px" /> <span><b>Maintenance</b></span></a>
         </div>
         <div class="clearfix"></div>
-        <div class="main_menu_side hidden-print main_menu" id="sidebar-menu">
+        <div class="main_menu_side hidden-print main_menu" id="sidebar-menu" style="max-height: 670px;overflow: auto; scroll ">
             <div class="menu_section">
                 <ul class="nav side-menu page-sidebar-menu">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       @{
+                    @{
                         //standard (default) items
                         var rootNode = siteMap.RootNode;
 
@@ -70,3 +70,9 @@
         </div>
     </div>
 </div>
+
+<style>
+    #sidebar-menu::-webkit-scrollbar {
+        width: 10px;
+    }
+</style>

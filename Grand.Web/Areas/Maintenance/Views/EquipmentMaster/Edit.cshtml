@@ -1,47 +1,112 @@
-﻿
-@model IEnumerable<EquipmentModel>
+﻿@model ViewModel
 @{
     ViewData["Title"] = "Edit";
     //Layout = "~/Areas/Maintenance_Admin/Views/Shared/MaintenanceMasterLayout.cshtml";
-    var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+        var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+        var SessionVar = @HttpContextAccessor.HttpContext.Session.GetString("email");
+
+        if (VesselName == null)
+        {
+            <script>
+
+        $(window).load(function(){
+            swal({
+
+                title: 'Vessel Not Selected!',
+                allowOutsideClick: false,
+                text: 'Please select a Vessel',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function () {
+                    window.location.href = '@Url.Action("VesselList","Vessel")';
+                })
+
+            });
+
+            </script>
+        }
+
+        if (SessionVar == null)
+        {
+            <script>
+
+            $(window).load(function ()
+            {
+            swal({
+
+                title: 'TimeOut!',
+                allowOutsideClick: false,
+                text: '"Time Out! , Please Login"',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function ()
+                {
+                    window.location.href = '@Url.Action("LoginPage","Register")';
+                })
+
+            });
+
+            </script>
+        }
+
 }
 
 @*@Html.BeginForm("Edit", "Vessel", FormMethod.Get, new { id = Model.VesselID })*@
+
+
+
+
 <div class="row">
     <div class="col-md-12">
         <div class="x_panel light form-fit">
             <div class="x_title">
                 <div class="caption">
-                    <button class="btn btn-success" name="save"><i class="fa fa-check"></i> @*@T("Admin.Common.Save")*@ General</button>
-                    <button class="btn btn-success" name="save"><i class="fa fa-check"></i> @*@T("Admin.Common.Save")*@ Job Plan</button>
-                    <button class="btn btn-success" name="save"><i class="fa fa-check"></i> @*@T("Admin.Common.Save")*@ Spare Part</button>
+
+                    <h5 style="color:#337ab7">
+                        <b>
+                            @VesselName.ToUpper() /
+                            @if (Model.SelectedEquipment != null)
+                            {
+                                @Model.SelectedEquipment.Sub1_number@Model.SelectedEquipment.Sub2_number@Model.SelectedEquipment.Sub3_number
+                            }-
+                            @if (Model.SelectedEquipment != null)
+                            {
+                                @Model.SelectedEquipment.Sub1_description@Model.SelectedEquipment.Sub2_description@Model.SelectedEquipment.Sub3_description
+                            }
+                        </b>
+                    </h5>
+
+
+
                     @*<i class="fa fa-cube"></i>
                         @T("Admin.Catalog.Products.EditProductDetails") - @Model.NameSabi
                         <small><i class="fa fa-arrow-circle-left"></i>@Html.ActionLink(T("Admin.Catalog.Products.BackToList").Text, "List")</small>*@
                 </div>
-                <div class="actions">
-                    <div class="btn-group btn-group-devided util-btn-margin-bottom-5">
-                        @*<button type="button" onclick="javascript:OpenWindow('@Url.RouteUrl("Product", new {SeName = Model.SeName})', 800, 600, true); return false;" class="btn purple">
-                                <i class="fa fa-eye"></i>
-                                @T("Admin.Common.Preview")
-                            </button>*@
-                        <button class="btn btn-success" type="submit" name="save"><i class="fa fa-check"></i> @T("Admin.Common.Save") </button>
-                        <button class="btn btn-success" type="submit" name="save-continue"><i class="fa fa-check-circle"></i> @T("Admin.Common.SaveContinue") </button>
-                        @*<button type="button" name="copyproduct" class="btn blue" id="copyproduct">
-                                <i class="fa fa-clone"></i>
-                                @T("Admin.Catalog.Products.Copy")
-                            </button>*@
-                        <span id="product-delete" class="btn red"><i class="fa fa-trash-o"></i> @T("Admin.Common.Delete")</span>
-                        @*<vc:admin-widget widget-zone="product_details_buttons" additional-data="Model" />*@
-                    </div>
-                </div>
+                @*<div class="actions">
+                        <div class="btn-group btn-group-devided util-btn-margin-bottom-5">
+
+
+                            <button class="btn btn-success" type="submit" name="save"><i class="fa fa-check"></i> @T("Admin.Common.Save") </button>
+                            <button class="btn btn-success" type="submit" name="save-continue"><i class="fa fa-check-circle"></i> @T("Admin.Common.SaveContinue") </button>
+
+                        </div>
+                    </div>*@
             </div>
-            <div class="x_content form">
-                <partial name="_CreateOrUpdate" model="Model" />
+
+            <div class="x_content form" style="float:left">
+                <partial name="_CreateOrUpdate" model="@Model" />
             </div>
+
+
+
         </div>
     </div>
 </div>
+@*<partial name="_General" />*@
 
 
 
