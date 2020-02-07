@@ -32,8 +32,7 @@ namespace Grand.Core.Domain.Jobplan
         public int DueRhs { get; set; }
 
 
-        public int JobStatus { get; set; }
-        public int JobOrder { get; set; }
+       
     }
 
 

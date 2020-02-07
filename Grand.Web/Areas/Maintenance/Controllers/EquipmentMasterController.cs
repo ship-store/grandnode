@@ -38,7 +38,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly ISparepartService _sparepartService;
         private readonly ISparepartViewModelService _sparepartViewModelService;
         private readonly IJobPlanViewModelService _jobPlanViewModelService;
-        public EquipmentMaster(IJobPlanViewModelService _jobPlanViewModelService,ISparepartViewModelService _sparepartViewModelService,IJobplanService _jobplanService,IVesselViewModelService _vesselViewModelService, IEquipmentService _equipmentService, IVesselService _vesselService, IHostingEnvironment env,
+        public EquipmentMaster(IJobPlanViewModelService _jobPlanViewModelService, ISparepartViewModelService _sparepartViewModelService, IJobplanService _jobplanService, IVesselViewModelService _vesselViewModelService, IEquipmentService _equipmentService, IVesselService _vesselService, IHostingEnvironment env,
             ISparepartService _sparepartService)
         {
 
@@ -86,11 +86,11 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         //    // return RedirectToAction("Edit", data);
         //    return RedirectToAction("Edit", "EquipmentMaster", new { equipmentName = equipmentName });
         //}
-     
+
 
         public async Task<IActionResult> SelectedEquipments(string equipmentCode)
         {
-             HttpContext.Session.SetString("eqpCode", equipmentCode);
+            HttpContext.Session.SetString("eqpCode", equipmentCode);
             var selectedEquipments = await _equipmentService.GetAllEquipment("", 0, 500, true);
             var spareparts = await _sparepartService.GetAllSpareparts("", 0, 500, true);
             var selectedEquipment = selectedEquipments.ToList().Where(x => x.Sub2_number == equipmentCode || x.Sub1_number == equipmentCode || x.Sub3_number == equipmentCode || x.Sub4_number == equipmentCode).First();
@@ -390,7 +390,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             }
         }
 
-       
+
         [HttpGet]
         public async Task<IActionResult> EditItem(VesselForDisplay vesselForDisplay, string id)
         {
@@ -540,7 +540,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         [HttpGet]
         public async Task<IActionResult> AddJobPlan()
         {
-              var VesselName = HttpContext.Session.GetString("VesselName").ToString();
+            var VesselName = HttpContext.Session.GetString("VesselName").ToString();
             List<Equipment> hopeList = new List<Equipment>();
             List<EquipmentModel> equipmentModels = new List<EquipmentModel>();
 
@@ -657,8 +657,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ReadJobPlan(DataSourceRequest command, JobplanListModel model)
         {
-            string selectedEquipmentCode=null;
-            DataSourceResult gridModel=null;
+            string selectedEquipmentCode = null;
+            DataSourceResult gridModel = null;
             List<JobPlanForDisplay> jp = new List<JobPlanForDisplay>();
 
             try
@@ -677,11 +677,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 //var jobplan = jobplans.ToList().Where(y => y.EquipmentName.ToLower() == selectedEquipment.Sub1_description.ToLower() || y.EquipmentName.ToLower() == selectedEquipment.Sub2_description.ToLower() || y.EquipmentName.ToLower() == selectedEquipment.Sub3_description.ToLower() || y.EquipmentName.ToLower() == selectedEquipment.Sub4_description.ToLower()).First();
                 var jobplan = jobplans.ToList().FindAll(y => y.EquipmentName == selectedEquipment.Sub1_description || y.EquipmentName == selectedEquipment.Sub2_description || y.EquipmentName == selectedEquipment.Sub3_description || y.EquipmentName == selectedEquipment.Sub4_description);
 
-                
+
                 foreach (var item in jobplan)
                 {
-                    jp.Add(new JobPlanForDisplay() 
-                    {
+                    jp.Add(new JobPlanForDisplay() {
                         EquipmentName = item.EquipmentName,
                         EquipmentCode = item.EquipmentCode,
                         Vessel = item.Vessel,
@@ -704,10 +703,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             }
             catch (Exception)
             {
-                gridModel = new DataSourceResult { Data=jp};
+                gridModel = new DataSourceResult { Data = jp };
                 return Json(gridModel);
             }
-            gridModel = new DataSourceResult { Data = jp.ToList().Where(x => x.JobStatus == 0)};
+            gridModel = new DataSourceResult { Data = jp.ToList().Where(x => x.JobStatus == 0) };
             return Json(gridModel);
         }
 
@@ -718,14 +717,14 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             string selectedEquipmentCode = null;
             DataSourceResult gridModel = null;
-            var sparePart = new List<Sparepart>{ };
+            var sparePart = new List<Sparepart> { };
             try
             {
-              selectedEquipmentCode = HttpContext.Session.GetString("SelectedEquipmentCode").ToString();
+                selectedEquipmentCode = HttpContext.Session.GetString("SelectedEquipmentCode").ToString();
                 // var VesselName = HttpContext.Session.GetString("VesselName").ToString();
 
                 var selectedEquipments = await _equipmentService.GetAllEquipment("", 0, 500, true);
-                var  spareparts = await _sparepartService.GetAllSpareparts("", 0, 500, true);
+                var spareparts = await _sparepartService.GetAllSpareparts("", 0, 500, true);
                 var jobplans = await _jobplanService.GetAllJobplan("", 0, 500, true);
                 var selectedEquipment = selectedEquipments.ToList().Where(src => src.Sub2_number == selectedEquipmentCode || src.Sub1_number == selectedEquipmentCode || src.Sub3_number == selectedEquipmentCode || src.Sub4_number == selectedEquipmentCode).First();
 
@@ -741,7 +740,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 return Json(gridModel);
 
 
-               
+
             }
 
             gridModel = new DataSourceResult { Data = sparePart.ToList() };
@@ -767,7 +766,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             }
 
             selectedJobPlan.NEXT_DUE_DATE = lastDone.AddDays(days).ToString("M/d/yyyy hh:mm:ss tt");
-          
+
             selectedJobPlan.LAST_DONE_DATE = lastDone.ToString("M/d/yyyy hh:mm:ss tt");
             await _jobplanService.UpdateJobPlan(selectedJobPlan);
 
@@ -797,11 +796,11 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult>EditJobplan(Jobplan model, int jobOrder, string lastdone)
+        public async Task<ActionResult> EditJobplan(Jobplan model, int jobOrder, string lastdone)
         {
             var joborder = jobOrder;
             var job = await _jobplanService.GetAllJobplan("", 0, 500, true);
-            var jobplan = job.ToList().FindAll(y => y.JobOrder== joborder);
+            var jobplan = job.ToList().FindAll(y => y.JobOrder == joborder);
 
             var doneDate = Convert.ToDateTime(lastdone);
             var lastDDate = doneDate.ToString("yyyy-MM-dd");
@@ -823,17 +822,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 item.LAST_DONE_DATE = lastdone;
                 var lastdonedate = Convert.ToDateTime(lastdone);
                 item.NEXT_DUE_DATE = lastdonedate.AddDays(days).ToString("yyyy-MM-dd");
-                
-            foreach (var item in jobplan)
-            {
-                if (item.FrequencyType.ToLower() == "month")
-                {
-                    days = Convert.ToInt32(item.Frequency) * 30;
-                }
-                else if (item.FrequencyType.ToLower() == "week")
-                {
-                    days = Convert.ToInt32(item.Frequency) * 7;
-                }
+
 
                 await _jobplanService.UpdateJobPlan(item);
             }

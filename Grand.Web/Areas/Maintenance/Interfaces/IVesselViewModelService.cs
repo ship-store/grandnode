@@ -14,7 +14,7 @@ namespace Grand.Web.Areas.Maintenance.Interfaces
         Task<IPagedList<Vessel>> GetAllVessels(string name = "",
              int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
         Task<IPagedList<Vessel>> GetAllVesselsAsList(string id);
-        Task PrepareVesselModel(VesselModel model);
+        Task PrepareVesselModel(VesselModel model1, object p, bool v);
         Task DeleteVessel(Vessel vessel);
         Task DeleteSelected(IList<string> selectedIds);
     }
