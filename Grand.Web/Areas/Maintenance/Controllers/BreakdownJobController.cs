@@ -34,6 +34,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
         // list
         public IActionResult Index() => RedirectToAction("List");
+
         public async Task<IActionResult> List()
         {
             return View();
@@ -85,11 +86,44 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         }
 
+                return RedirectToAction("Success", "Register");
+            }
+
+        }
+
+
+        //[HttpPost]
+        //public async Task<IActionResult> ReadData(DataSourceRequest command, BreakdownJobListModel model, string id)
+        //{
+        //    try
+        //    {
+        //        var VesselName = HttpContext.Session.GetString("VesselName").ToString();
+        //        var breakdownJobs = await _breakdownJobService.GetAllBreakdownJobs(model.SearchName, command.Page - 1, command.PageSize, true);
+        //        List<BreakdownJob> breakdownlist = new List<BreakdownJob>();
+        //        foreach (BreakdownJob item in breakdownJobs.Where(x => x.Vessel == VesselName))
+        //        {
+        //            breakdownlist.Add(item);
+        //        }
+        //        var gridModel = new DataSourceResult { Data = breakdownlist.ToList().Where(x => x.DeleteStatus != "1") };
+        //        return Json(gridModel);
+        //    }
+        //    catch (System.Exception)
+        //    {
+
+        //        return RedirectToAction("Success", "Register");
+        //    }
+
+        //}
+
 
         [HttpGet]
         public async Task<IActionResult> AddBreakdownJob()
         {
             var model = await Task.FromResult<object>(null);
+            var VesselName = HttpContext.Session.GetString("VesselName").ToString().ToLower();
+            var breakdownJobs = await _breakdownJobService.GetAllBreakdownJobs("", 0, 500, true);
+            List<BreakdownJob> breakdownlist = new List<BreakdownJob>();
+            int max = 9999;
 
             var VesselName = HttpContext.Session.GetString("VesselName").ToString().ToLower();
             var breakdownJobs = await _breakdownJobService.GetAllBreakdownJobs("", 0, 500, true);
@@ -116,9 +150,13 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return View(equipmentList);
         }
 
+            return View(equipmentList);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddBreakdownJobDetails(BreakdownJobModel addNewBreakdownJob)
+
         {
 
             var breakdownJobs = await _breakdownJobService.GetAllBreakdownJobs("", 0, 500, true);

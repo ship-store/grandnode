@@ -1,6 +1,6 @@
 ﻿@model ViewModel
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Equipment Master";
     //Layout = "~/Areas/Maintenance_Admin/Views/Shared/MaintenanceMasterLayout.cshtml";
         var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
         var SessionVar = @HttpContextAccessor.HttpContext.Session.GetString("email");
@@ -83,8 +83,8 @@
 
 
                     @*<i class="fa fa-cube"></i>
-                        @T("Admin.Catalog.Products.EditProductDetails") - @Model.NameSabi
-                        <small><i class="fa fa-arrow-circle-left"></i>@Html.ActionLink(T("Admin.Catalog.Products.BackToList").Text, "List")</small>*@
+        @T("Admin.Catalog.Products.EditProductDetails") - @Model.NameSabi
+        <small><i class="fa fa-arrow-circle-left"></i>@Html.ActionLink(T("Admin.Catalog.Products.BackToList").Text, "List")</small>*@
                 </div>
                 @*<div class="actions">
                         <div class="btn-group btn-group-devided util-btn-margin-bottom-5">

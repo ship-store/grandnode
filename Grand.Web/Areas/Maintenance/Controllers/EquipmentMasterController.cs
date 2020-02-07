@@ -824,6 +824,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 var lastdonedate = Convert.ToDateTime(lastdone);
                 item.NEXT_DUE_DATE = lastdonedate.AddDays(days).ToString("yyyy-MM-dd");
                 
+            foreach (var item in jobplan)
+            {
+                if (item.FrequencyType.ToLower() == "month")
+                {
+                    days = Convert.ToInt32(item.Frequency) * 30;
+                }
+                else if (item.FrequencyType.ToLower() == "week")
+                {
+                    days = Convert.ToInt32(item.Frequency) * 7;
+                }
 
                 await _jobplanService.UpdateJobPlan(item);
             }
