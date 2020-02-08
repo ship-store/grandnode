@@ -17,6 +17,7 @@ using Grand.Services.Equipments;
 using System;
 using Grand.Services.Report;
 using Grand.Core.Domain.BreakdownJobReport;
+using Grand.Services.BreakdownJob;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -226,20 +227,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return View(display);
         }
 
-        [HttpPost]
-        public async Task<JsonResult> EditItem(DataSourceRequest command, List<BreakdownJob> models)
-        {
-            foreach (var item in models)
-            {
-                var breakdownJob = await _breakdownJobService.GetBreakdownJobById(item.Id);
-                breakdownJob.EquipmentName = item.EquipmentName;
-                breakdownJob.JobOrder = item.JobOrder;
-                breakdownJob.Title = item.Title;
-                breakdownJob.JobReportedDate = item.JobReportedDate;
-                breakdownJob.ReportedBy = item.ReportedBy;
-                breakdownJob.Status = item.Status;
-            }
-        }
+      
 
         [HttpPost]
         public async Task<JsonResult> EditItem(DataSourceRequest command, List<BreakdownJob> models)
