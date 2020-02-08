@@ -1,9 +1,8 @@
 ﻿using Grand.Core.Domain.BreakdownJob;
+
 using Grand.Core.Domain.Vessel;
 using Grand.Framework.Kendoui;
-using Grand.Services.BreakdownJob;
-using Grand.Services.Vendors;
-using Grand.Services.Vessel;
+using Grand.Services.UnplannedJobs;
 using Grand.Web.Areas.Admin.Controllers;
 using Grand.Web.Areas.Admin.Models.Vendors;
 using Grand.Web.Areas.Maintenance.DomainModels;
@@ -33,7 +32,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         public BreakdownJobController(IEquipmentService _equipmentService, IBreakdownJobViewModelService _breakdownJobViewModelService, IBreakdownJobService _breakdownJobService, IReportViewModelService _reportViewModelService, IReportService _reportService)
         {
-
             this._breakdownJobViewModelService = _breakdownJobViewModelService;
             this._breakdownJobService = _breakdownJobService;
             this._equipmentService = _equipmentService;
@@ -43,15 +41,12 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
 
         }
-
         // list
         public IActionResult Index() => RedirectToAction("List");
 
         public async Task<IActionResult> List()
         {
-
             return View();
-
         }
         public async Task<IActionResult> List1()
         {
@@ -225,14 +220,26 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             var breakdownjob = await _breakdownJobService.GetBreakdownJobById(id);
             BreakdownJobDisplayModel display = new BreakdownJobDisplayModel { BreakdownJobID = breakdownjob.Id, EquipmentName = breakdownjob.EquipmentName, JobOrder = breakdownjob.JobOrder, Title = breakdownjob.Title, JobReportedDate = breakdownjob.JobReportedDate, ReportedBy = breakdownjob.ReportedBy, Status = breakdownjob.Status };
-
             if (breakdownjob == null)
 
                 return RedirectToAction("List");
-
             return View(display);
         }
 
+        [HttpPost]
+        public async Task<JsonResult> EditItem(DataSourceRequest command, List<BreakdownJob> models)
+        {
+            foreach (var item in models)
+            {
+                var breakdownJob = await _breakdownJobService.GetBreakdownJobById(item.Id);
+                breakdownJob.EquipmentName = item.EquipmentName;
+                breakdownJob.JobOrder = item.JobOrder;
+                breakdownJob.Title = item.Title;
+                breakdownJob.JobReportedDate = item.JobReportedDate;
+                breakdownJob.ReportedBy = item.ReportedBy;
+                breakdownJob.Status = item.Status;
+            }
+        }
 
         [HttpPost]
         public async Task<JsonResult> EditItem(DataSourceRequest command, List<BreakdownJob> models)
@@ -278,7 +285,5 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
             return Json(new { Result = true });
         }
-
-
     }
 }

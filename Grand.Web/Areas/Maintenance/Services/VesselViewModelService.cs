@@ -17,14 +17,14 @@ namespace Grand.Web.Areas.Maintenance.Services
         public VesselViewModelService(IVesselService _vesselService)
         {
             this._vesselService = _vesselService;
-            
+
         }
 
         public virtual async Task DeleteSelected(IList<string> selectedIds)
         {
             List<Vessel> vessels = new List<Vessel>();
-         
-           vessels.AddRange(await _vesselService.GetVesselByIds(selectedIds.ToArray()));
+
+            vessels.AddRange(await _vesselService.GetVesselByIds(selectedIds.ToArray()));
         }
 
 
@@ -65,11 +65,11 @@ namespace Grand.Web.Areas.Maintenance.Services
                 vessel.Auxiliary_Engine = addNewVessel.Auxiliary_Engine;
                 vessel.Main_Engine = addNewVessel.Main_Engine;
                 vessel.file = addNewVessel.file.FileName;
-               
-                await  _vesselService.InsertVessel(vessel);
+
+                await _vesselService.InsertVessel(vessel);
 
             }
-            catch (Exception )
+            catch (Exception)
             {
                 var vessel = new Vessel();
                 vessel.Vessel_name = addNewVessel.Vessel_name;
@@ -82,7 +82,7 @@ namespace Grand.Web.Areas.Maintenance.Services
                 vessel.Auxiliary_Engine = addNewVessel.Auxiliary_Engine;
                 vessel.Main_Engine = addNewVessel.Main_Engine;
                 vessel.file = addNewVessel.file.FileName;
-               
+
                 await _vesselService.InsertVessel(vessel);
 
             }

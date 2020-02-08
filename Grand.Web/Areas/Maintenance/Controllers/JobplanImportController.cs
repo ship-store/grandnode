@@ -113,7 +113,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     job.EquipmentCode = item["EquipmentCode"];
                     job.EquipmentName = item["EquipmentName"];
                     job.Vessel = item["Vessel"];
-                    job.JobTitle= item["JobTitle"];
+                    job.JobTitle = item["JobTitle"];
                     job.JobDescription = item["JobDescription"];
                     job.CalFrequency = item["Frequency"];
                     job.FrequencyType = item["FrequencyType"];
@@ -136,7 +136,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
             var properties = GetFieldNames(importFile.Content);
             var propertyMap = new Dictionary<string, string>();
-           
+
             var importFileMapModel = new ImportFileMapModel() {
                 ImportFile = importFile,
                 PropertyMap = propertyMap
@@ -283,6 +283,68 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 jobplanlist.Add(item);
             }
             var gridModel = new DataSourceResult { Data = jobplanlist.ToList().Where(x=>x.JobStatus==0)};
+            return Json(gridModel);
+        }
+
+        public async Task<IActionResult> List1()
+        {
+            try
+            {
+                string VesselName = HttpContext.Session.GetString("VesselName").ToString();
+
+                var selectedEquipments = await _equipmentService.GetAllEquipment("", 0, 500, true);
+
+                var spareparts = await _sparepartService.GetAllSpareparts("", 0, 500, true);
+                List<Equipment> selectedEquipment = new List<Equipment>();
+                foreach (Equipment item in selectedEquipments)
+                {
+
+                    if (item.Vessel.ToLower() == VesselName.ToLower())
+                    {
+                        selectedEquipment.Add(item);
+                    }
+
+                }
+
+
+                List<int> sub = new List<int>();
+                foreach (Equipment item in selectedEquipment.Where(x => x.Sub1_number != null))
+                {
+
+                    sub.Add(Int32.Parse(item.Sub1_number));
+                }
+
+                int min = 999;
+                foreach (int item in sub)
+                {
+                    if (item < min)
+                    {
+                        min = item;
+                    }
+
+                }
+                //HttpContext.Session.SetString("Test", "Silpa");
+                return RedirectToAction("SelectedEquipments", "EquipmentMaster", new { equipmentCode = min.ToString() });
+            }
+            catch (System.Exception)
+            {
+
+                return RedirectToAction("Success", "Register");
+            }
+
+        }
+
+
+        public async Task<IActionResult> ReadData(DataSourceRequest command, JobplanListModel model)
+        {
+            var VesselName = HttpContext.Session.GetString("VesselName").ToString();
+            var Jobplanlist = await _jobplanService.GetAllJobplans(model.SearchName, command.Page - 1, command.PageSize, true);
+            List<Jobplan> jobplanlist = new List<Jobplan>();
+            foreach (Jobplan item in Jobplanlist.Where(x => x.Vessel == VesselName.ToLower()))
+            {
+                jobplanlist.Add(item);
+            }
+            var gridModel = new DataSourceResult { Data = jobplanlist.ToList().Where(x => x.JobStatus == 0) };
             return Json(gridModel);
         }
 
