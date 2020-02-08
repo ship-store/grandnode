@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="actions btn-group btn-group-devided">
-                    <a href="@Url.Action("AddBreakdownJob")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+                    @*<a href="@Url.Action("AddBreakdownJob")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
 
                     <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
                     <button type="button" name="delete-selected" id="delete-selected" class="btn red">
@@ -79,7 +79,7 @@
                     </button>
                     <button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>
 
-                    <button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>
+                    <button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>*@
                 </div>
 
             </div>
@@ -175,15 +175,15 @@
                 selectable: true,
                 allowCopy: true,
                 columns: [
-                    {
-                            field: "Id",
-                            headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
-                            template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
-                        width: 50,
-                            locked: true,
-                        lockable: false,
+                    //{
+                    //        field: "Id",
+                    //        headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
+                    //        template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
+                    //    width: 50,
+                    //        locked: true,
+                    //    lockable: false,
 
-                        },
+                    //    },
                     {
                     field: "JobOrder",
                     title: "Job Order",
@@ -212,7 +212,7 @@
                     title: "Reported By",
                     width: 150
                 },{
-                    command: ["edit"],
+                    //command: ["edit"],
                     title: "&nbsp;",
                     width: 200
                   }],
@@ -325,7 +325,7 @@
 
     </script>
 
-    <script>
+    @*<script>
 
         $("#btnSelectRow1").click(function () {
             var grid = $("#grid").data("kendoGrid");
@@ -364,7 +364,7 @@
 
 
 </div>
-<!-- Modal -->
+ Modal 
 <div id="myModal" class="modal fade" role="dialog" style="top:auto">
     <div class="modal-dialog" style="width:auto;padding:10px">
 
@@ -493,7 +493,7 @@
 </div>
 
 
-@* -------------------------------------------COmplete Modal------------------------------------------------------------------- *@
+ -------------------------------------------COmplete Modal------------------------------------------------------------------- 
 
 <link rel="stylesheet" href="~/Maintenance/modal/style.css">
 
@@ -600,4 +600,4 @@
 
         </div>
     </div>
-</div>
+</div>*@

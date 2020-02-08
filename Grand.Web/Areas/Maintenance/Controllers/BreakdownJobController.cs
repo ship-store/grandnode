@@ -120,7 +120,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
                     var breakdownJobReports = await _reportService.GetAllBreakdownJobReports(model.SearchName, command.Page - 1, command.PageSize, true);
                     List<BreakdownJobReport> breakdownreports = new List<BreakdownJobReport>();
-                    foreach (BreakdownJobReport item in breakdownJobReports)
+                    foreach (BreakdownJobReport item in breakdownJobReports.Where(x => x.Vessel == VesselName))
                     {
                         breakdownreports.Add(item);
                     }

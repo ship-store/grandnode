@@ -144,14 +144,80 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> CompleteJob(Jobplan model, string dt, string Bid1, string remark,string vessel)
+        //{
+        //    var id = Bid1;
+        //    var job = await _jobplanService.GetAllJobplan("", 0, 500, true);
+        //    var jobplan = job.ToList().FindAll(y => y.Id == id);
+
+
+        //    var postponeJob = await _jobplanService.GetJobPlanById(Bid1);
+        //    var dueDate = Convert.ToDateTime(dt);
+        //    var lastdone = dueDate.ToString("yyyy-MM-dd");
+
+        //    var selectedJobPlan = jobplan;
+        //    int days = 0;
+
+        //    foreach (var item in jobplan)
+        //    {
+        //        if (item.FrequencyType.ToLower() == "month")
+        //        {
+        //            days = Convert.ToInt32(item.CalFrequency) * 30;
+        //        }
+        //        else if (item.FrequencyType.ToLower() == "week")
+        //        {
+        //            days = Convert.ToInt32(item.CalFrequency) * 7;
+        //        }
+
+        //        item.LAST_DONE_DATE = lastdone;
+        //        var lastdonedate = Convert.ToDateTime(lastdone);
+        //        item.NEXT_DUE_DATE = lastdonedate.AddDays(days).ToString("yyyy-MM-dd");
+        //        item.JobStatus = 0;
+        //        item.JobPlanStatus = "pending";
+        //        item.Status= "Completed";
+
+
+                
+        //        DueJobReportModel output = new DueJobReportModel() {
+        //            EquipmentCode = item.EquipmentCode,
+        //            EquipmentName = item.EquipmentName,
+
+        //            JobTitle = item.JobTitle,
+        //            JobDescription = item.JobDescription,
+        //            CalFrequency = item.CalFrequency,
+        //            FrequencyType = item.FrequencyType,
+        //            Vessel = item.Vessel,
+
+        //            Department = item.Department,
+        //            AssignedTo = item.AssignedTo,
+        //            NEXT_DUE_DATE = item.NEXT_DUE_DATE,
+        //            LAST_DONE_DATE = item.LAST_DONE_DATE,
+        //            Job_Type = item.Job_Type,
+        //            Maintenance_Type = item.Maintenance_Type,
+        //            JobCompletedDate = item.JobCompletedDate,
+        //            JobStatus = item.JobStatus,
+        //            JobOrder = item.JobOrder,
+        //            Reading = item.Reading,
+        //            Remark = remark,
+                   
+        //        };
+
+        //        await _jobplanService.UpdateJobPlan(item);
+        //        await _reportViewModelService.PrepareDueJobReportModel(output, "Vishnu", true);
+        //    }
+
+        //    return RedirectToAction("List");
+
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CompleteJob(Jobplan model, string dt, string Bid1, string remark,string vessel)
+        public async Task<IActionResult> CompleteJob(Jobplan model, string dt, string Bid1)
         {
             var id = Bid1;
             var job = await _jobplanService.GetAllJobplan("", 0, 500, true);
             var jobplan = job.ToList().FindAll(y => y.Id == id);
-
 
             var postponeJob = await _jobplanService.GetJobPlanById(Bid1);
             var dueDate = Convert.ToDateTime(dt);
@@ -176,36 +242,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 item.NEXT_DUE_DATE = lastdonedate.AddDays(days).ToString("yyyy-MM-dd");
                 item.JobStatus = 0;
                 item.JobPlanStatus = "pending";
-                item.Status= "Completed";
-
-
-                
-                DueJobReportModel output = new DueJobReportModel() {
-                    EquipmentCode = item.EquipmentCode,
-                    EquipmentName = item.EquipmentName,
-
-                    JobTitle = item.JobTitle,
-                    JobDescription = item.JobDescription,
-                    CalFrequency = item.CalFrequency,
-                    FrequencyType = item.FrequencyType,
-                    Vessel = item.Vessel,
-
-                    Department = item.Department,
-                    AssignedTo = item.AssignedTo,
-                    NEXT_DUE_DATE = item.NEXT_DUE_DATE,
-                    LAST_DONE_DATE = item.LAST_DONE_DATE,
-                    Job_Type = item.Job_Type,
-                    Maintenance_Type = item.Maintenance_Type,
-                    JobCompletedDate = item.JobCompletedDate,
-                    JobStatus = item.JobStatus,
-                    JobOrder = item.JobOrder,
-                    Reading = item.Reading,
-                    Remark = remark,
-                   
-                };
+                item.Status = "Completed";
 
                 await _jobplanService.UpdateJobPlan(item);
-                await _reportViewModelService.PrepareDueJobReportModel(output, "Vishnu", true);
             }
 
             return RedirectToAction("List");

@@ -403,6 +403,41 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
             return RedirectToAction("List");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditJobplanCalendar(Jobplan model, int jobOrder2, string lastdone)
+        {
+            var joborder = jobOrder2;
+            var job = await _jobplanService.GetAllJobplan("", 0, 500, true);
+            var jobplan = job.ToList().FindAll(y => y.JobOrder == joborder);
+
+            var doneDate = Convert.ToDateTime(lastdone);
+            var lastDDate = doneDate.ToString("yyyy-MM-dd");
+
+            var selectedJobPlan = jobplan;
+            int days = 0;
+
+            foreach (var item in jobplan)
+            {
+                if (item.FrequencyType.ToLower() == "month")
+                {
+                    days = Convert.ToInt32(item.CalFrequency) * 30;
+                }
+                else if (item.FrequencyType.ToLower() == "week")
+                {
+                    days = Convert.ToInt32(item.CalFrequency) * 7;
+                }
+
+                item.LAST_DONE_DATE = lastdone;
+                var lastdonedate = Convert.ToDateTime(lastdone);
+                item.NEXT_DUE_DATE = lastdonedate.AddDays(days).ToString("yyyy-MM-dd");
+
+
+                await _jobplanService.UpdateJobPlan(item);
+            }
+
+            return RedirectToAction("List");
+        }
 
     }
 }
