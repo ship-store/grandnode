@@ -1,0 +1,236 @@
+﻿@model ViewModel
+
+
+
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.mobile.min.css" />
+
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
+
+<section>
+
+    <div>
+        <div id="example" style="float:left;width:25%; background-color:#fff; margin-left:2px;">
+
+            <div class="demo-section k-content" style="height: 700px;background-color: #ffff;padding-left:1em; padding-top:1em; padding-right:1em;">
+                <div class="container">
+                    <div style="float: left; width: 15%">
+                        <button class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                    <div style="float:left;width:80%;position:relative;left:-7px;">
+                        <input class="form-control" id="searchbar" onkeyup="search_sidebar()" type="text"
+                               name="search" placeholder="Search ..">
+                    </div>
+                    <br /><br />
+
+                </div>
+
+                <ul id="treeview" style="height:621px; overflow:auto; font-size:small;">
+
+                    @foreach (var item in Model.AllEquipments.Where(f => f.Sub1_number != null && f.Sub1_description != null))
+                    {
+
+                        <li class="data">
+
+                            <span>
+                                <a onclick="jsFunction(this); return false;" style="color: #7273a3">@item.Sub1_number-@item.Sub1_description</a>
+                            </span>
+
+                            <ul>
+                                @foreach (var item2 in Model.AllEquipments.Where(f => f.Sub2_number != null && f.Sub2_description != null && f.Type == item.Type))
+                                {
+                                    <li class="data">
+
+                                        <a class="id1" href="#" onclick="jsFunction(this); return false;"
+                                           style="color:#7273a3">@item2.Sub2_number-@item2.Sub2_description</a>
+
+
+                                        <ul>
+
+                                            @foreach (var item3 in Model.AllEquipments.Where(f => f.Sub3_number != null && f.Sub3_description != null && f.Type == item2.Type))
+                                            {
+                                                <li class="data">
+                                                    <a onclick="jsFunction(this); return false;" style="color:#7273a3">@item3.Sub3_number-@item3.Sub3_description</a>
+                                                    <ul>
+                                                    </ul>
+
+                                                </li>
+                                            }
+                                        </ul>
+                                    </li>
+
+                                }
+
+                            </ul>
+                        </li>
+
+
+                    }
+                </ul>
+
+
+            </div>
+
+        </div>
+
+
+        <script>
+            $(function () {
+                $("li").each(function () {
+                    if ($(this).attr("href") == window.location.pathname) {
+                        $(this).addClass("active");
+                    }
+                });
+            });
+
+            $(function () {
+                $(".makeEditable").click(function () {
+                    $('input:text').removeAttr("readonly");
+                });
+            });
+        </script>
+
+        <div class="row" style="float:right;width:76%">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+
+                    <div class="body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                            <li role="presentation"><a href="#general" data-toggle="tab">GENERAL</a></li>
+                            <li role="presentation" class="active"><a href="#jobplan" data-toggle="tab">JOB PLAN</a></li>
+                            <li role="presentation"><a href="#spareparts" data-toggle="tab">SPARE PARTS</a></li>
+
+                        </ul>
+
+                        <!-- Tab panes -->
+                        @* --------------------------------------------------------------------General Contents----------------------------------------- *@
+
+
+
+                        <div>
+                            <partial name="TabView" model="Model" />
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<script>
+    $(document).ready(function () {
+        $("#treeview").kendoTreeView();
+    });
+    $(function () {
+        $(".makeEditable").click(function () {
+            $('input:text').removeAttr("disabled");
+        });
+    });
+</script>
+
+<style>
+    #treeview .k-sprite {
+        background-image: url("../content/web/treeview/coloricons-sprite.png");
+    }
+
+    .rootfolder {
+        background-position: 0 0;
+    }
+
+    .folder {
+        background-position: 0 -16px;
+    }
+
+    .pdf {
+        background-position: 0 -32px;
+    }
+
+    .html {
+        background-position: 0 -48px;
+    }
+
+    .image {
+        background-position: 0 -64px;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+<script>
+    function search_sidebar() {
+        let input = document.getElementById('searchbar').value
+        input = input.toLowerCase();
+        let x = document.getElementsByClassName('data');
+
+        for (i = 0; i < x.length; i++) {
+            if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                x[i].style.display = "none";
+            }
+            else {
+                x[i].style.display = "list-item";
+            }
+        }
+    }
+</script>
+
+
+<style>
+    #searchbar {
+        margin-left: 1%;
+        border-radius: 3px;
+    }
+</style>
+
+
+<script>
+    var x = "";
+    $(function () {
+        $("#p1").hide();
+    });
+    function jsFunction(link) {
+
+        window.selectedEquipmentCode = link.text.split("-")[0].trim();
+        $("#grid").data("kendoGrid").dataSource.read();
+        $("#grid3").data("kendoGrid").dataSource.read();
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetEquipmentDetails")" + "?equipmentCode=" + window.selectedEquipmentCode,
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (datas) {
+                var data = JSON.parse(datas);
+                //alert("VesselName= " + data.Vessel);
+                //alert("2nd"+posts.Vessel);
+                $("#id17").val(data.Sub1_number);
+                $("#id18").val(data.Sub2_number);
+                $("#id1").val(data.Sub1_description);
+                $("#id2").val(data.Sub2_description);
+                $("#id3").val(data.Sub3_number);
+               // $("#id4").val(Sub5_description);
+                $("#id5").val(data.Safety_level);
+                $("#id6").val(data.Maker);
+                $("#id7").val(data.Model);
+                $("#id8").val(data.Drawing_no);
+                $("#id9").val(data.Department);
+                $("#id10").val(data.Department);
+                $("#id11").val(data.Location);
+                $("#id12").val(data.Equipment_Status);
+                $("#id13").val(data.Type);
+                $("#id14").val(data.Vessel);
+              //  $("#id15").val(data.Type);
+
+
+            }
+        });
+
+    }
+</script>

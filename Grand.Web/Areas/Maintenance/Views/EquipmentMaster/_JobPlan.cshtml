@@ -1,0 +1,383 @@
+﻿
+<div class="x_title">
+
+    <div class="actions">
+        <div class="btn-group btn-group-devided util-btn-margin-bottom-5">
+            <button type="button" id="btnSelectRow" value="GetValue" class="btn green" data-toggle="modal" data-target="#myModal">View</button>
+            <a href="@Url.Action("AddJobPlan")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+            <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+            @*<button type="button" name="delete-selected" id="delete-selected" class="btn red">
+                    <i class="fa fa-trash-o"></i>
+                    @T("Admin.Common.Delete.Selected")
+                </button>*@
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+</script>
+<div id="example">
+    <antiforgery-token />
+    <div id="grid"></div>
+
+    <script>
+
+            $(document).ready(function () {
+                $("#grid").kendoGrid({
+                    dataSource:
+                    {
+                        transport:
+                        {
+                            read:
+                            {
+                                url: "@Html.Raw(Url.Action("ReadJobPlan","EquipmentMaster","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                            },
+                            update:
+                            {
+                                url: "@Html.Raw(Url.Action("UpdateJobPlan", "EquipmentMaster","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                            },
+                            parameterMap: function(data, type) {
+                                if (type === 'create' || type === 'update') {
+                                // this changes the date to 'dd/MM/YYYY' format
+                                    data.LAST_DONE_DATE = kendo.toString(data.LAST_DONE_DATE, 'dd/MMM/yyyy hh:mm:ss tt');
+
+                                }
+                                return data;
+                            }
+                        },
+
+                        pageSize: 60,
+                        schema:
+                        {
+
+                            data: "Data",
+                            total: "Total",
+                            errors: "Errors",
+                            model:
+                            {
+                                id : "Id",
+                                fields:
+                                {
+                                    Id: { required: true },
+                                    JobOrder: { required: true, type: "int" },
+                                    LAST_DONE_DATE: { editable: true,type: "date", format: "{0: dd/MM/yyyy}" },
+                                    NEXT_DUE_DATE: {type:"date"}
+                                }
+                            }
+                        }
+                    },
+                   // batch:true,
+                    sortable: true,
+                reorderable: true,
+                groupable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: true,
+                 scrollable:
+                    {
+                       endless: true
+                    },
+                pageable:
+                    {
+                       numeric: false,
+                       previousNext: false
+                    },
+                selectable: true,
+                allowCopy: true,
+                    height: 480,
+
+                    columns: [
+
+                        {
+                            field: "EquipmentName",
+                            title: "Equipment Name",
+                            width: "250px"
+                        },
+                         {
+                            field: "EquipmentCode",
+                            title: "Equipment Code",
+                            width: "140px"
+                        },
+                         {
+                            field: "Frequency",
+                            title: "Frequency",
+                            width: "120px"
+                        },
+                          {
+                            field: "FrequencyType",
+                            title: "Frequency Type",
+                            width: "140px"
+                        },
+                         {
+                            field: "Department",
+                            title: "Department",
+                            width: "120px"
+                        },
+                        {
+                            field: "JobTitle",
+                            title: "JobTitle",
+                            width: "170px"
+                        },
+                        {
+                            field: "Maintenance_Type",
+                            title: "Maintenance Type",
+                            width: "170px"
+                        },
+                        {
+                            field: "LAST_DONE_DATE",
+                            title: "Last Done Date",
+                           format: "{0:dd-MM-yyyy}",
+                            width: "150px"
+                        },
+
+                        {
+                            field: "NEXT_DUE_DATE",
+                            title: "Next Due Date",
+                           format: "{0:dd-MM-yyyy}",
+                            width: "150px"
+                        },
+
+                        //{
+                        //    command: ["edit"],
+                        //    title: "&nbsp;",
+                        //    width: "100px"
+                        //}
+                    ],
+                    editable: "inline",
+
+                });
+
+            });
+
+
+            function additionalData()
+            {
+                var data = {};
+                addAntiForgeryToken(data);
+                return data;
+            }
+    </script>
+</div>
+<script>
+    $("#btnSelectRow").click(function () {
+
+        var grid = $("#grid").data("kendoGrid");
+        var selectedItem = grid.dataItem(grid.select());
+
+        $("#lblJobOrder").text(selectedItem.JobOrder);
+        $("#lblEquipmentName").text(selectedItem.EquipmentName);
+        $("#lblEquipmentcode").text(selectedItem.EquipmentCode);
+        $("#lblDepartment").text(selectedItem.Department);
+        $("#lblJobtitle").text(selectedItem.JobTitle);
+        $("#lblFrequency").text(selectedItem.Frequency);
+        $("#lblLastDoneDate").text(selectedItem.LAST_DONE_DATE);
+        $("#lblNextDueDate").text(selectedItem.NEXT_DUE_DATE);
+
+        var ename = selectedItem.EquipmentName;
+        var ecode = selectedItem.EquipmentCode;
+        var jobOrder = selectedItem.JobOrder;
+        var department = selectedItem.Department;
+        var jobTitle = selectedItem.JobTitle;
+        var frequency = selectedItem.Frequency;
+        //var lastDoneDate = selectedItem.LAST_DONE_DATE;
+        var nextDueDate = selectedItem.NEXT_DUE_DATE;
+        var FrequencyType = selectedItem.FrequencyType;
+
+
+        document.getElementById("Ename").value = ename;
+        document.getElementById("ECode").value = ecode;
+        document.getElementById("JobOrder").value = jobOrder;
+        document.getElementById("Department").value = department;
+        document.getElementById("JobTitle").value = jobTitle;
+        document.getElementById("Frequency").value = frequency;
+        //document.getElementById("LastDoneDate").value = lastDoneDate;
+        document.getElementById("NextDueDate").value = nextDueDate;
+        document.getElementById("FrequencyType").value = FrequencyType;
+
+
+
+    })
+</script>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog" style="top:auto">
+    <div class="modal-dialog" style="width:auto;padding:10px">
+
+
+        <div class="modal-content" style="padding:40px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">View Job Plan</h4>
+            </div>
+            <div class="modal-body">
+
+
+
+                <div class="body">
+                    <div class="demo-masked-input">
+
+                        <form action="EditJobplan" method="post">
+                            <div class="row clearfix">
+
+                                <div class="col-md-3">
+                                    <b>Job Order</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="JobOrder" name="JobOrder" readonly value="JobOrder" class="form-control time24" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <b>Equipment Name</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+
+                                            <input type="text" id="Ename" readonly value="" class="form-control time24" placeholder="">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <b>Equipment Code</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="ECode" readonly value="" class="form-control money-euro" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-3">
+                                    <b>Job Title</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="JobTitle" readonly value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <b>Department</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="Department" readonly value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <b>Frequency</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="Frequency" readonly value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <b>Frequency Type</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="FrequencyType" readonly value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-3">
+                                    <b>Last Done Date</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="date" id="lastdone" name="lastdone" value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <b>Due Date</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="NextDueDate" readonly value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-3">
+                                    <b>Remarks</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="Remark" readonly value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                @Html.AntiForgeryToken()
+
+                                <button style="font-size: 40px;position: relative;left: 90%;color:#f50224"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+                                <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Update" id="submit" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+

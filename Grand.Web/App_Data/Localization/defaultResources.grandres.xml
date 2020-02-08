@@ -12400,7 +12400,7 @@
     <Value>Logout?</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Header.Profile">
-    <Value>My profile</Value>
+    <!--<Value>My profile</Value>-->
   </LocaleResource>
   <LocaleResource Name="Admin.Header.PublicStore">
     <Value>Public store</Value>

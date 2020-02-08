@@ -1,0 +1,603 @@
+﻿@{
+    var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+    var SessionVar = @HttpContextAccessor.HttpContext.Session.GetString("email");
+
+    if (VesselName == null)
+    {
+        <script>
+
+        $(window).load(function(){
+            swal({
+
+                title: 'Vessel Not Selected!',
+                allowOutsideClick: false,
+                text: 'Please select a Vessel',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function () {
+                    window.location.href = '@Url.Action("VesselList","Vessel")';
+                })
+
+            });
+
+        </script>
+    }
+
+    if (SessionVar == null)
+    {
+        <script>
+
+            $(window).load(function ()
+            {
+            swal({
+
+                title: 'TimeOut!',
+                allowOutsideClick: false,
+                text: '"Time Out! , Please Login"',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function ()
+                {
+                    window.location.href = '@Url.Action("LoginPage","Register")';
+                })
+
+            });
+
+        </script>
+    }
+
+}
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.mobile.min.css" />
+
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
+
+
+<div class="row" id="SearchSection">
+    <div class="col-md-12">
+        <div class="x_panel light form-fit">
+            <div class="x_title">
+                <div class="caption">
+                    <i class="fa fa-cubes"></i>
+
+                    Breakdown Jobs
+                </div>
+
+                <div class="actions btn-group btn-group-devided">
+                    <a href="@Url.Action("AddBreakdownJob")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+
+                    <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+                    <button type="button" name="delete-selected" id="delete-selected" class="btn red">
+                        <i class="fa fa-trash-o"></i>
+                        @T("Admin.Common.Delete.Selected")
+                    </button>
+                    <button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>
+
+                    <button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>
+                </div>
+
+            </div>
+
+
+            <div class="x_content">
+                <div id="vessel-grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div id="example">
+    <antiforgery-token />
+    <div id="grid"></div>
+    <script>
+
+        $(document).ready(function () {
+            $("#grid").kendoGrid({
+                dataSource: {
+
+                    transport: {
+
+                         read:
+                             {
+                                url: "@Html.Raw(Url.Action("ReadData1", "BreakdownJob","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                        },
+                        update:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","BreakdownJob","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                            },
+                            create:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","BreakdownJob","Maintenance"))",
+                                type: "POST",
+                                dataType: "json"
+                            }
+                    },
+                    batch: true,
+                    schema:
+                    {
+                               data: "Data",
+                               total: "Total",
+                               errors: "Errors",
+                        model:
+                        {
+                            id : "Id",
+                            fields:
+                            {
+                                Id:
+                                {
+                                    validation: { required: true },
+                                    editable: false,
+                                },
+                              EquipmentName: { type: "string" },
+                              JobOrder: { type: "string" },
+                              Title: { type: "string" },
+                              JobReportedDate: { type: "string" },
+                              ReportedBy: { type: "string" },
+                              Status: { type: "string" }
+                            }
+                        }
+                    },
+                    pageSize: 30
+                },
+                height: 590,
+                sortable: true,
+                reorderable: true,
+                groupable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: true,
+                 scrollable:
+                    {
+                       endless: true
+                    },
+                //pageable:
+                //    {
+                //       numeric: false,
+                //       previousNext: false
+                //    },
+                selectable: true,
+                allowCopy: true,
+                columns: [
+                    {
+                            field: "Id",
+                            headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
+                            template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
+                        width: 50,
+                            locked: true,
+                        lockable: false,
+
+                        },
+                    {
+                    field: "JobOrder",
+                    title: "Job Order",
+                    width: 150,
+
+                },
+                    {
+                    field: "EquipmentName",
+                    title: "Equipment Name",
+                    width: 190
+                }, {
+                    field: "Title",
+                    title: "Title",
+                    width: 150
+                },{
+                    field: "JobReportedDate",
+                    title: "Job Reported Date",
+                    width: 190
+                },{
+                    field: "Status",
+                    title: "Status",
+                     width: 150,
+
+                },{
+                    field: "ReportedBy",
+                    title: "Reported By",
+                    width: 150
+                },{
+                    command: ["edit"],
+                    title: "&nbsp;",
+                    width: 200
+                  }],
+                    editable: "inline"
+
+            });
+        });
+
+         function customBoolEditor(container, options) {
+                        var guid = kendo.guid();
+                        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+                        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
+                    }
+
+                    function additionalData() {
+                        var data = {};
+                        addAntiForgeryToken(data);
+                        return data;
+        }
+
+        var selectedIds = [];
+        //delete selected
+        $('#delete-selected').click(function (e)
+        {
+            e.preventDefault();
+            var postData = {selectedIds: selectedIds};
+            addAntiForgeryToken(postData);
+
+            // Look for all checkboxes that have a specific class and was checked
+            var chkArray = [];
+            $(".chk:checked").each(function ()
+            {
+                chkArray.push($(this).val());
+            });
+
+            // calling  via jquery
+            $.get("http://localhost:16592/Maintenance/BreakdownJob/DeleteSelected?selectedIds='" + chkArray + "'");
+            window.location.reload();
+            return false;
+        });
+
+        $('#mastercheckbox').click(function ()
+        {
+            $('.checkboxGroups').prop('checked', $(this).is(':checked')).change();
+
+            //wire up checkboxes.
+                $('#vessel-grid').on('change', 'input[type=checkbox][id!=mastercheckbox]', function (e)
+                {
+                    var $check = $(this);
+                    if ($check.is(":checked") == true)
+                    {
+                        var checked = jQuery.inArray($check.val(), selectedIds);
+                        if (checked == -1)
+                        {
+                            //add id to selectedIds.
+                            selectedIds.push($check.val());
+                        }
+                    }
+                    else
+                    {
+                        var checked = jQuery.inArray($check.val(), selectedIds);
+                        if (checked > -1)
+                        {
+                            //remove id from selectedIds.
+                            selectedIds = $.grep(selectedIds, function (item, index)
+                            {
+                                return item != $check.val();
+                            });
+                        }
+                    }
+                    updateMasterCheckbox();
+                });
+        });
+
+         $("#btnSelectRow").click(function(){
+
+    var grid = $("#grid").data("kendoGrid");
+             var selectedItem = grid.dataItem(grid.select());
+             if (selectedItem == null) {
+
+                 window.location.reload();
+                 alert("Please Select a Job");
+             }
+             $("#lblJobOrder").text(selectedItem.JobOrder);
+             $("#lblEquipmentName").text(selectedItem.EquipmentName);
+             $("#lblEquipmentcode").text(selectedItem.EquipmentCode);
+             $("#lblTitle").text(selectedItem.Title);
+             $("#lblJobReportedDate").text(selectedItem.JobReportedDate);
+             $("#lblReportedBy").text(selectedItem.ReportedBy);
+             $("#lblStatus").text(selectedItem.Status);
+
+             var ename = selectedItem.EquipmentName;
+
+             var jobOrder = selectedItem.JobOrder;
+             var title = selectedItem.Title;
+             var jobReportedDate = selectedItem.JobReportedDate;
+             var reportedBy = selectedItem.ReportedBy;
+             var Status = selectedItem.Status;
+
+             document.getElementById("Ename").value = ename;
+
+             document.getElementById("JobOrder").value = jobOrder;
+             document.getElementById("Title").value = title;
+             document.getElementById("JobReportedDate").value = jobReportedDate;
+             document.getElementById("ReportedBy").value = reportedBy;
+             document.getElementById("Status").value = Status;
+
+
+         })
+
+    </script>
+
+    <script>
+
+        $("#btnSelectRow1").click(function () {
+            var grid = $("#grid").data("kendoGrid");
+            var selectedItem = grid.dataItem(grid.select());
+            if (selectedItem == null) {
+
+                window.location.reload();
+                alert("Please Select a Job");
+
+            }
+
+            else {
+
+                var Bid = selectedItem.Id;
+                var equpmentname = selectedItem.EquipmentName;
+                var ecode1 = selectedItem.EquipmentCode;
+                var JobOrder = selectedItem.JobOrder;
+                var Title = selectedItem.Title;
+                var JobReportedDate = selectedItem.JobReportedDate;
+                var ReportedBy = selectedItem.ReportedBy;
+                var Vessel = selectedItem.Vessel;
+
+                document.getElementById("Ename1").value = equpmentname;
+                document.getElementById("JobOrder1").value = JobOrder;
+                document.getElementById("Title1").value = Title;
+                document.getElementById("JobReportedDate1").value = JobReportedDate;
+                document.getElementById("ReportedBy1").value = ReportedBy;
+                document.getElementById("Vessel1").value = Vessel;
+                document.getElementById("Bid").value = Bid;
+                document.getElementById("ecode1").value = ecode1;
+            }
+
+        })
+    </script>
+
+
+
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog" style="top:auto">
+    <div class="modal-dialog" style="width:auto;padding:10px">
+
+
+        <div class="modal-content" style="padding:40px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">View Breakdown Job</h4>
+            </div>
+            <div class="modal-body">
+
+
+
+                <div class="body">
+                    <div class="demo-masked-input">
+
+
+                        <div class="row clearfix">
+
+                            <div class="col-md-3">
+                                <b>Job Order</b>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">turned_in_not</i>
+                                    </span>
+                                    <div class="form-line">
+                                        <input type="text" id="JobOrder" readonly value="" class="form-control time24" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <b>Equipment Name</b>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">turned_in_not</i>
+                                    </span>
+                                    <div class="form-line">
+
+                                        <input type="text" id="Ename" readonly value="" class="form-control time24" placeholder="">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <b>Title</b>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">turned_in_not</i>
+                                    </span>
+                                    <div class="form-line">
+                                        <input type="text" id="Title" readonly value="" class="form-control key" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <b>Job Reported Date</b>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">turned_in_not</i>
+                                    </span>
+                                    <div class="form-line">
+                                        <input type="text" id="JobReportedDate" readonly value="" class="form-control key" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-3">
+                                <b>Reported By</b>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">turned_in_not</i>
+                                    </span>
+                                    <div class="form-line">
+                                        <input type="text" id="ReportedBy" readonly value="" class="form-control key" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-3">
+                                <b>Status</b>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">turned_in_not</i>
+                                    </span>
+                                    <div class="form-line">
+                                        <input type="text" id="Status" readonly value="" class="form-control key" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <b>Remarks</b>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">turned_in_not</i>
+                                    </span>
+                                    <div class="form-line">
+                                        <input type="text" readonly value="" class="form-control key" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <button style="font-size: 40px;position: relative;left: 90%;color:#f50224"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* -------------------------------------------COmplete Modal------------------------------------------------------------------- *@
+
+<link rel="stylesheet" href="~/Maintenance/modal/style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+
+
+<div class="modal fade  come-from-modal right" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="width:400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Complete Job</h4>
+
+
+            </div>
+            <form action="EditItem2" method="post">
+                <div class="modal-body" style="left:5%">
+                    <div class="row clearfix">
+                        <br />
+                        <div class="col-md-12">
+                            <b>Job Order</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+                                    <input type="text" id="Bid" name="Bid" readonly hidden>
+                                    <input type="text" id="JobOrder1" name="JobOrder1" readonly value="" class="form-control time24" hidden>
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="col-md-12">
+                            <b>Equipment Name</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+                                    <input type="text" id="Ename1" name="Ename" readonly value="" class="form-control time24" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+
+
+                        <div class="col-md-12">
+                            <b>Title</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+                                    <input type="text" id="Title1" readonly value="" class="form-control time24" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="col-md-12">
+                            <b>Job Reported Date</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+                                    <input type="text" id="JobReportedDate1" readonly value="" class="form-control time24" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="col-md-12">
+                            <b>Reported By</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+                                    <input type="text" id="ReportedBy1" readonly value="" class="form-control time24" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="col-md-12">
+                            <b>Vessel</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+                                    <input type="text" id="Vessel1" readonly value="" class="form-control time24" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="col-md-12">
+                            <b>Remark</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+
+                                    <textarea rows="5" cols="100" id="remark" name="remark" class="form-control time24"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    @Html.AntiForgeryToken()
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                        <input type="submit" class="btn btn-primary" value="Complete" id="submit" />
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

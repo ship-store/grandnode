@@ -1,15 +1,16 @@
-﻿@{ 
+﻿@{
     ViewBag.Title = T("Maintenance.Title.AddUnplannedJobs").Text;
     var vessel = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+    var JobOrder = ViewBag.joborder;
 }
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
         <div class="header">
             <h2>
-                Breakdown Job
+                Unplanned Job
             </h2>
-            <ul class="header-dropdown m-r--5">
+            @*<ul class="header-dropdown m-r--5">
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="material-icons">more_vert</i>
@@ -20,7 +21,7 @@
                         <li><a href="javascript:void(0);">Something else here</a></li>
                     </ul>
                 </li>
-            </ul>
+            </ul>*@
         </div>
         <br>
 
@@ -35,7 +36,16 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control valid" name="EquipmentName" id="n1" />
+                                            <select id="ddlFruits" name="EquipmentName" class="form-line form-group form-control valid">
+                                                <option value="">Please select Equipment</option>
+                                                @foreach (var item in Model)
+                                                {
+
+                                                    <option value="@item.Sub1_description@item.Sub2_description@item.Sub3_description@item.Sub4_description@item.Sub5_description">@item.Sub1_description@item.Sub2_description@item.Sub3_description@item.Sub4_description@item.Sub5_description</option>
+
+
+                                                }
+                                            </select>
                                         </div>
                                     </div>
                                 </td>
@@ -45,7 +55,7 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control valid" name="JobOrder" id="n2" />
+                                            <input type="text" class="form-control valid" readonly value="@JobOrder" name="JobOrder" id="n2" />
                                         </div>
                                     </div>
                                 </td>
@@ -108,16 +118,16 @@
     $(document).ready(function () {
         $("form").on('submit', function (e) {
             $(".valid").each(function () {
-              
+
                 var input = $(this);
                 if (input.val() == "") {
                     swal($(this).attr("name") + " Cannot be blank");
-                      e.preventDefault();
+                    e.preventDefault();
                     return false;
                 }
-                
-                }
+
+            }
             });
-        });
+    });
     });
 </script>

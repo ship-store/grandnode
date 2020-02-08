@@ -13,7 +13,8 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string Vessel { get; set; }
         public string JobTitle { get; set; }
         public string JobDescription { get; set; }
-        public string Frequency { get; set; }
+        public string CalFrequency { get; set; }
+        public string RunFrequency { get; set; }
         public string FrequencyType { get; set; }
         public string Department { get; set; }
         public string Priority { get; set; }
@@ -23,6 +24,17 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string NEXT_DUE_DATE { get; set; }
         public string Job_Type { get; set; }
         public string Maintenance_Type { get; set; }
+        public int JobStatus { get; set; }
+        public int JobOrder { get; set; }
+        public int InitialReading { get; set; }
+        public int PreviousReading { get; set; }
+        public int LastReading { get; set; }
+        public int PlanHorizon { get; set; }
+        public string JobCompletedDate { get; set; }
+        public string Reading { get; set; }
+        public string Remark { get; set; }
+        public string Status { get; set; }
+        public int DueRhs { get; set; }
     }
     public class JobplanDisplayModel : BaseEntity
     {
@@ -31,7 +43,8 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string Vessel { get; set; }
         public string JobTitle { get; set; }
         public string JobDescription { get; set; }
-        public string Frequency { get; set; }
+        public string CalFrequency { get; set; }
+        public string RunFrequency { get; set; }
         public string FrequencyType { get; set; }
         public string Department { get; set; }
         public string Priority { get; set; }
@@ -41,5 +54,16 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string NEXT_DUE_DATE { get; set; }
         public string Job_Type { get; set; }
         public string Maintenance_Type { get; set; }
+        public int JobStatus { get; set; }
+        public int JobOrder { get; set; }
+        public string JobCompletedDate { get; set; }
+        public int InitialReading { get; set; }
+        public int PreviousReading { get; set; }
+        public int LastReading { get; set; }
+        public int PlanHorizon { get; set; }
+        public string Reading { get; set; }
+        public string Remark { get; set; }
+        public string Status { get; set; }
+        public int DueRhs { get; set; }
     }
 }

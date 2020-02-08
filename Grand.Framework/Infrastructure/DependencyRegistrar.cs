@@ -46,6 +46,7 @@ using Grand.Services.Payments;
 using Grand.Services.Polls;
 using Grand.Services.PushNotifications;
 using Grand.Services.register;
+using Grand.Services.Report;
 using Grand.Services.Security;
 using Grand.Services.Seo;
 using Grand.Services.Shipping;
@@ -163,6 +164,7 @@ namespace Grand.Framework.Infrastructure
             builder.RegisterType<VesselService>().As<IVesselService>().InstancePerLifetimeScope();
             builder.RegisterType<RegisterService>().As<IRegisterService>().InstancePerLifetimeScope();
             builder.RegisterType<BreakdownJobService>().As<IBreakdownJobService>().InstancePerLifetimeScope();
+            builder.RegisterType<ReportService>().As<IReportService>().InstancePerLifetimeScope();
             builder.RegisterType<UnplannedJobService>().As<IUnplannedJobService>().InstancePerLifetimeScope();
             builder.RegisterType<MakerService>().As<IMakerService>().InstancePerLifetimeScope();
             builder.RegisterType<MakerService1>().As<IMakerService1>().InstancePerLifetimeScope();

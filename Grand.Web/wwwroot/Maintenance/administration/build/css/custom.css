@@ -2911,8 +2911,8 @@ a.btn-success, a.btn-primary, a.btn-warning, a.btn-danger {
 }
 
 .btn-success {
-    background: #337ab7;
-    border: 1px solid #169F85
+    background: #0e5679;
+    border: 1px solid #dbdbdb
 }
 
 .btn-dark {
@@ -5189,11 +5189,11 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     border-color: #2499a3;
 }
 
-.btn.green:not(.btn-outline):active:hover, .btn.green:not(.btn-outline):active:focus, .btn.green:not(.btn-outline):active.focus, .btn.green:not(.btn-outline).active:hover, .btn.green:not(.btn-outline).active:focus, .btn.green:not(.btn-outline).active.focus, .open>.btn.green:not(.btn-outline).dropdown-toggle:hover, .open>.btn.green:not(.btn-outline).dropdown-toggle:focus, .open>.btn.green:not(.btn-outline).dropdown-toggle.focus {
-    color: #FFFFFF;
-    background-color: #1f858e;
-    border-color: #18666d;
-}
+    .btn.green:not(.btn-outline):active:hover, .btn.green:not(.btn-outline):active:focus, .btn.green:not(.btn-outline):active.focus, .btn.green:not(.btn-outline).active:hover, .btn.green:not(.btn-outline).active:focus, .btn.green:not(.btn-outline).active.focus, .open > .btn.green:not(.btn-outline).dropdown-toggle:hover, .open > .btn.green:not(.btn-outline).dropdown-toggle:focus, .open > .btn.green:not(.btn-outline).dropdown-toggle.focus {
+        color: #FFFFFF;
+        background-color: #0f5f86;
+        border-color: #18666d;
+    }
 
 .btn.green:not(.btn-outline):active, .btn.green:not(.btn-outline).active, .open>.btn.green:not(.btn-outline).dropdown-toggle {
     background-image: none;

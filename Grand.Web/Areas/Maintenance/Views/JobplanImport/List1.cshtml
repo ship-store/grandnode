@@ -1,0 +1,418 @@
+﻿
+@model ViewModel
+@inject Grand.Core.Domain.Common.AdminAreaSettings adminAreaSettings
+@{
+    ViewBag.Title = T("Maintenance.Sparepart").Text;
+    var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+    var SessionVar = @HttpContextAccessor.HttpContext.Session.GetString("email");
+
+    if (VesselName == null)
+    {
+        <script>
+
+        $(window).load(function(){
+            swal({
+
+                title: 'Vessel Not Selected!',
+                allowOutsideClick: false,
+                text: 'Please select a Vessel',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function () {
+                    window.location.href = '@Url.Action("VesselList","Vessel")';
+                })
+
+            });
+
+        </script>
+    }
+
+    if (SessionVar == null)
+    {
+        <script>
+
+            $(window).load(function ()
+            {
+            swal({
+
+                title: 'TimeOut!',
+                allowOutsideClick: false,
+                text: '"Time Out! , Please Login"',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function ()
+                {
+                    window.location.href = '@Url.Action("LoginPage","Register")';
+                })
+
+            });
+
+        </script>
+    }
+}
+
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.default-v2.min.css" />
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
+
+<div class="row" id="SearchSection">
+    <div class="col-md-12">
+        <div class="x_panel light form-fit">
+            <div class="x_title">
+                <div class="caption">
+                    <i class="fa fa-cubes"></i>
+
+                    @T("Maintenance.UnplannedJobs")
+                </div>
+                <div class="actions btn-group btn-group-devided">
+                    <a href="@Url.Action("AddUnplannedJobs")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+                    <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+                    <button type="button" name="delete-selected" id="delete-selected" class="btn red">
+                        <i class="fa fa-trash-o"></i>
+                        @T("Admin.Common.Delete.Selected")
+                    </button>
+                    <button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>
+                </div>
+
+            </div>
+            <div class="x_content form">
+                <div class="form-horizontal">
+                    <div class="form-body col-md-6 advanced-filter">
+                        <div class="form-group">
+
+
+
+                            <div class="col-xs-9 col-md-8 col-sm-8">
+                                <input id="SearchInput" type="text" placeholder="Search.." class="form-control">
+                            </div>
+                            <div id="ExtendFilter">
+                                <button class="btn btn-success filter-submit" id="search-vessel">
+                                    <i class="fa fa-search"></i> @T("Admin.Common.Search")
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-body col-md-6 advanced-filter">
+                        <div class="form-group">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="x_content">
+                <div id="vessel-grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<antiforgery-token />
+<div id="example">
+    <div id="grid"></div>
+    <script>
+        $(document).ready(function () {
+            $("#grid").kendoGrid({
+                dataSource: {
+                    type: "odata",
+                    transport: {
+
+                         read:
+                                                {
+                                                    url: "@Html.Raw(Url.Action("ReadData", "JobplanImport","Maintenance"))",
+                                                    type: "POST",
+                                                    dataType: "json",
+                                                    data: additionalData
+                                                }
+                    },
+                    schema: {
+                                                data: "Data",
+                                                total: "Total",
+                                                errors: "Errors",
+                        model: {
+                            fields: {
+                                            EquipmentCode: { type: "number" },
+                                            EquipmentName: { type: "string" },
+                                            JobTitle: { type: "string" },
+                                            Frequency: { type: "number" },
+                                            Department: { type: "string" },
+                                            LAST_DONE_DATE: { type: "string" },
+                                            NEXT_DUE_DATE: { type: "string" }
+                            }
+                        }
+                    },
+                    pageSize: 20
+                },
+                height: 680,
+                sortable: true,
+                reorderable: true,
+                groupable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: true,
+                pageable: true,
+                selectable: true,
+                allowCopy: true,
+                columns: [{
+                    field: "EquipmentCode",
+                    title: "Equipment Code",
+                    locked: true,
+                    lockable: false,
+                    width: 150
+                }, {
+                    field: "EquipmentName",
+                    title: "Equipment Name",
+                    width: 150
+                }, {
+                    field: "JobTitle",
+                    title: "Job Title",
+                    width: 150
+                },{
+                    field: "Frequency",
+                    title: "Frequency",
+                    width: 150
+                },{
+                    field: "Department",
+                    title: "Department",
+                    width: 150
+                },{
+                    field: "LAST_DONE_DATE",
+                    title: "Last Done Date",
+                        width: 150,
+
+
+                },{
+                    field: "NEXT_DUE_DATE",
+                    title: "Next Due Date",
+                        width: 150,
+
+                },{
+                    command: ["edit","Postpone"],
+                    title: "&nbsp;",
+                    width: 300
+                  }],
+                    editable: "inline"
+
+            });
+        });
+         function customBoolEditor(container, options) {
+                        var guid = kendo.guid();
+                        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+                        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
+                    }
+
+                    function additionalData() {
+                        var data = {};
+                        addAntiForgeryToken(data);
+                        return data;
+        }
+
+         $("#btnSelectRow").click(function(){
+
+    var grid = $("#grid").data("kendoGrid");
+        var selectedItem = grid.dataItem(grid.select());
+
+             $("#lblEquipmentName").text(selectedItem.EquipmentName);
+             $("#lblEquipmentcode").text(selectedItem.EquipmentCode);
+             $("#lblDepartment").text(selectedItem.Department);
+             $("#lblJobtitle").text(selectedItem.JobTitle);
+             $("#lblFrequency").text(selectedItem.Frequency);
+             $("#lblLastDoneDate").text(selectedItem.LAST_DONE_DATE);
+
+             var ename = selectedItem.EquipmentName;
+             var ecode = selectedItem.EquipmentCode;
+
+             document.getElementById("Ename").value = ename;
+             document.getElementById("ECode").value = ecode;
+
+  })
+    </script>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog" style="top:auto">
+        <div class="modal-dialog" style="width:auto;padding:10px">
+
+
+            <div class="modal-content" style="padding:40px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">View Job Plan</h4>
+                </div>
+                <div class="modal-body">
+
+
+
+                    <div class="body">
+                        <div class="demo-masked-input">
+
+
+                            <div class="row clearfix">
+
+                                <div class="col-md-3">
+                                    <b>Job Order</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" class="form-control time24" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <b>Equipment Name</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+
+                                            <input type="text" id="Ename" value="" class="form-control time24" placeholder="">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <b>Equipment Code</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="ECode" class="form-control money-euro" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-3">
+                                    <b>Job Title</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <b>Maintenance Type</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-3">
+                                    <b>Job Type</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-3">
+                                    <b>Frequency</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <b>Frequency Type</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-3">
+                                    <b>Last Done</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <b>Due Date</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-3">
+                                    <b>Remarks</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" readonly value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <button style="font-size: 40px;position: relative;left: 90%;color:#f50224"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+

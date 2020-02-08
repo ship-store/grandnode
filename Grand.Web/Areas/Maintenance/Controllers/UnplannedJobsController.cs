@@ -12,6 +12,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Grand.Core.Domain.Equipment;
+using Grand.Services.Equipments;
+using System;
+using Grand.Services.Report;
+using Grand.Core.Domain.Report;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -19,12 +24,18 @@ namespace Grand.Web.Areas.Maintenance.Controllers
     public class UnplannedJobsController : BaseAdminController
     {
         private readonly IUnplannedJobService _unplannedJobService;
+        private readonly IReportService _reportService;
+        private readonly IEquipmentService _equipmentService;
 
         private readonly IUnplannedJobViewModelService _unplannedJobViewModelService;
-        public UnplannedJobsController(IUnplannedJobViewModelService _unplannedJobViewModelService, IUnplannedJobService _unplannedJobService)
+        private readonly IReportViewModelService _reportViewModelService;
+        public UnplannedJobsController(IEquipmentService _equipmentService, IUnplannedJobViewModelService _unplannedJobViewModelService, IUnplannedJobService _unplannedJobService, IReportService _reportService, IReportViewModelService _reportViewModelService)
         {
             this._unplannedJobViewModelService = _unplannedJobViewModelService;
             this._unplannedJobService = _unplannedJobService;
+            this._equipmentService = _equipmentService;
+            this._reportService = _reportService;
+            this._reportViewModelService = _reportViewModelService;
         }
         // list
         public IActionResult Index() => RedirectToAction("List");
@@ -32,43 +43,156 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             return View();
         }
-
-        [HttpPost]
-        public async Task<IActionResult> List(DataSourceRequest command, UnplannedJobListModel model)
+        public async Task<IActionResult> List1()
         {
-            var VesselName = HttpContext.Session.GetString("VesselName").ToString();
-            if (VesselName != null)
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> EditItem2(string Bid, string remark)
+        {
+            DateTime today = DateTime.Today;
+            var id = Bid;
+            var vessel = await _unplannedJobService.GetUnplannedJobById(id);
+
+            vessel.JobCompletedDate = today.ToString("yyyy-MM-dd");
+            vessel.Status = "Completed";
+            vessel.Remark = remark;
+
+            await _unplannedJobService.UpdateUnplannedJob(vessel);
+            //ReportModel emp = vessel.Cast<ReportModel>();
+            ReportModel output = new ReportModel() {
+                EquipmentName = vessel.EquipmentName,
+                JobOrder = vessel.JobOrder,
+                Category = vessel.Category,
+                Title = vessel.Title,
+                JobReportedDate = vessel.JobReportedDate,
+                ReportedBy = vessel.ReportedBy,
+                Status = vessel.Status,
+                Vessel = vessel.Vessel,
+                DeleteStatus = vessel.DeleteStatus,
+                JobCompletedDate = vessel.JobCompletedDate,
+                Remark = remark
+
+            };
+
+            await _reportViewModelService.PrepareReportModel(output, "Vishnu", true);
+            return RedirectToAction("List");
+        }
+
+        public async Task<IActionResult> ReadData(DataSourceRequest command, UnplannedJobListModel model)
+        {
+            try
+            {
+                var VesselName = HttpContext.Session.GetString("VesselName").ToString();
+                if (VesselName != null)
+                {
+
+                    var unplannedJobs = await _unplannedJobService.GetAllUnplannedJobs(model.SearchName, command.Page - 1, command.PageSize, true);
+                    List<UnplannedJob> unplannedlist = new List<UnplannedJob>();
+                    foreach (UnplannedJob item in unplannedJobs.Where(x => x.Vessel == VesselName))
+                    {
+                        unplannedlist.Add(item);
+                    }
+                    var gridModel = new DataSourceResult { Data = unplannedlist.ToList().Where(x => x.DeleteStatus != "1") };
+                    return Json(gridModel);
+
+                }
+                else
+                {
+                    return RedirectToAction("Success", "Register");
+                }
+            }
+            catch (System.Exception)
             {
 
-                var unplannedJobs = await _unplannedJobService.GetAllUnplannedJobs(model.SearchName, command.Page - 1, command.PageSize, true);
-                List<UnplannedJob> unplannedlist = new List<UnplannedJob>();
-                foreach (UnplannedJob item in unplannedJobs.Where(x => x.Vessel == VesselName))
-                {
-                    unplannedlist.Add(item);
-                }
-                var gridModel = new DataSourceResult { Data = unplannedlist };
-                return Json(gridModel);
-                
-            }
-            else
-            {
                 return RedirectToAction("Success", "Register");
             }
-            
+
+
         }
+
+        public async Task<IActionResult> ReadData1(DataSourceRequest command, UnplannedJobReportListModel model)
+        {
+            try
+            {
+                var VesselName = HttpContext.Session.GetString("VesselName").ToString();
+                if (VesselName != null)
+                {
+
+                    var unplannedJobReports = await _reportService.GetAllUnplannedJobReports(model.SearchName, command.Page - 1, command.PageSize, true);
+                    List<Report> unplannedreports = new List<Report>();
+                    foreach (Report item in unplannedJobReports.Where(x => x.Vessel == VesselName))
+                    {
+                        unplannedreports.Add(item);
+                    }
+                    var gridModel = new DataSourceResult { Data = unplannedreports.ToList() };
+                    return Json(gridModel);
+
+                }
+                else
+                {
+                    return RedirectToAction("Success", "Register");
+                }
+            }
+            catch (System.Exception)
+            {
+
+                return RedirectToAction("Success", "Register");
+            }
+
+
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> AddUnplannedJobs()
         {
             var model = await Task.FromResult<object>(null);
 
-            return View();
+            var VesselName = HttpContext.Session.GetString("VesselName").ToString().ToLower();
+            var unplannedJobs = await _unplannedJobService.GetAllUnplannedJobs("", 0, 500, true);
+            List<UnplannedJob> unplannedlist = new List<UnplannedJob>();
+            int max = 9999;
+            foreach (UnplannedJob item in unplannedJobs)
+            {
+
+                if (item.JobOrder > max)
+                {
+                    max = item.JobOrder;
+                }
+            }
+            int order = max + 1;
+            ViewBag.joborder = VesselName + order;
+            var equipments = await _equipmentService.GetAllEquipment("", 0, 500, true);
+            List<Equipment> equipmentList = new List<Equipment>();
+            foreach (Equipment item in equipments.Where(x => x.Vessel == VesselName))
+            {
+                equipmentList.Add(item);
+            }
+            ViewBag.MyList = equipmentList;
+
+            return View(equipmentList);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddUnplannedJobDetails(UnplannedJobModel addNewUnplannedJob)
         {
+
+            var unplannedJobs = await _unplannedJobService.GetAllUnplannedJobs("", 0, 500, true);
+            List<UnplannedJob> unplannedlist = new List<UnplannedJob>();
+            int max = 9999;
+            string VesselName = HttpContext.Session.GetString("VesselName").ToString();
+            foreach (UnplannedJob item in unplannedJobs)
+            {
+
+
+                if (item.JobOrder > max)
+                {
+                    max = item.JobOrder;
+                }
+            }
+            addNewUnplannedJob.JobOrder = max + 1;
             await _unplannedJobViewModelService.PrepareUnplannedJobModel(addNewUnplannedJob, "Vishnu", true);
             return RedirectToAction("List", "UnplannedJobs");
         }
@@ -80,35 +204,64 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 return RedirectToAction("List");
             return View(display);
         }
-        [HttpGet]
-        public async Task<IActionResult> EditItem(UnplannedJobDisplayModel unplannedjobForDisplay, string id)
-        {
-            id = unplannedjobForDisplay.UnplannedJobID;
-            var unplannedJob = await _unplannedJobService.GetUnplannedJobById(id);
-            unplannedJob.EquipmentName = unplannedjobForDisplay.EquipmentName;
-            unplannedJob.JobOrder = unplannedjobForDisplay.JobOrder;
-            unplannedJob.Title = unplannedjobForDisplay.Title;
-            unplannedJob.JobReportedDate = unplannedjobForDisplay.JobReportedDate;
-            unplannedJob.ReportedBy = unplannedjobForDisplay.ReportedBy;
-            unplannedJob.Status = unplannedjobForDisplay.Status;
 
-            await _unplannedJobService.UpdateUnplannedJob(unplannedJob);
-            return RedirectToAction("List");
+        [HttpPost]
+        public async Task<JsonResult> EditItem(DataSourceRequest command, List<UnplannedJob> models)
+        {
+            foreach (var item in models)
+            {
+                var unplannedJob = await _unplannedJobService.GetUnplannedJobById(item.Id);
+                unplannedJob.EquipmentName = item.EquipmentName;
+                unplannedJob.JobOrder = item.JobOrder;
+                unplannedJob.Title = item.Title;
+                unplannedJob.JobReportedDate = item.JobReportedDate;
+                unplannedJob.ReportedBy = item.ReportedBy;
+                unplannedJob.Status = item.Status;
+
+                await _unplannedJobService.UpdateUnplannedJob(unplannedJob);
+            }
+            return Json(models);
         }
+
+        //[HttpGet]
+        //public async Task<IActionResult> DeleteSelected(string selectedIds)
+        //{
+        //    string[] strlist = selectedIds.Split(",");
+        //    var SelectedList = strlist.ToList();
+        //    if (selectedIds != null)
+        //    {
+        //        for (int i = 0; i < strlist.Length; i++)
+        //        {
+        //            var breakdownjob = await _unplannedJobService.GetUnplannedJobById(strlist[i].Trim(new char[] { (char)39 }));
+        //            await _unplannedJobViewModelService.DeleteUnplannedJob(breakdownjob);
+        //        }
+        //    }
+        //    return Json(new { Result = true });
+        //}
+
         [HttpGet]
         public async Task<IActionResult> DeleteSelected(string selectedIds)
         {
+            await Task.FromResult(0);
+
             string[] strlist = selectedIds.Split(",");
+
             var SelectedList = strlist.ToList();
             if (selectedIds != null)
             {
                 for (int i = 0; i < strlist.Length; i++)
                 {
-                   var breakdownjob = await _unplannedJobService.GetUnplannedJobById(strlist[i].Trim(new char[] { (char)39 }));
-                   await _unplannedJobViewModelService.DeleteUnplannedJob(breakdownjob);
+
+
+                    var selectedunplanedJob = await _unplannedJobService.GetUnplannedJobById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedunplanedJob.DeleteStatus = "1";//changin job to postponed
+                    await _unplannedJobService.UpdateUnplannedJob(selectedunplanedJob);
                 }
             }
+
             return Json(new { Result = true });
         }
+
     }
 }

@@ -835,7 +835,7 @@
     <Value>Login and Checkout</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Header.Profile">
-    <Value>My profile</Value>
+    <!--<Value>My profile</Value>-->
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Products.Calendar.Clearold">
     <Value>Clear old, unused records</Value>

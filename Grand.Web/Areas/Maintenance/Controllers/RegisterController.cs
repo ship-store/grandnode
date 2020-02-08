@@ -35,44 +35,57 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var model = await Task.FromResult<object>(null);
             return View();
         }
+
         [HttpGet]
         public IActionResult Success()
         {
+            //Session value gettings
+            try
+            {
+                ViewBag.EmailAddress = HttpContext.Session.GetString("email").ToString();
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("LoginPage", "Register");
+            }
 
-            //Session value getting
-
-            ViewBag.EmailAddress = HttpContext.Session.GetString("email").ToString();
             return View();
         }
+
         [HttpGet]
         public async Task<IActionResult> AddRegisterlDetails(RegisterModel addNewRegister)
         {
             await _registerViewModelService.PrepareRegisterModel(addNewRegister, "Register", true);
             return RedirectToAction("LoginPage", "Register");
         }
+
         [HttpGet]
         public virtual async Task<IActionResult> LoginPage()
         {
             await Task.FromResult(0);
             return View();
         }
+
         [HttpGet]
         public virtual async Task<IActionResult> Login(RegisterModel model)
         {
-
-
-            Register register = new Register() { Email=model.Email,Password=model.Password,Firstname=model.Firstname};
-            var RegList= await _registerService.PrepareLogin(register);
-            if (RegList.ToList().Find(x => x.Email == model.Email && x.Password == model.Password) != null)
+            try
             {
+                Register register = new Register() { Email = model.Email, Password = model.Password, Firstname = model.Firstname };
+                var RegList = await _registerService.PrepareLogin(register);
+                if (RegList.ToList().Find(x => x.Email == model.Email && x.Password == model.Password) != null)
+                {
+                    //Sesion
+                    HttpContext.Session.SetString("email", model.Email);
+                    return RedirectToAction("Success");
+                }
 
-                //Sesion
-                HttpContext.Session.SetString("email", model.Email);
-                return RedirectToAction("Success");
+                return RedirectToAction("LoginPage", "Register");
             }
-        
-
-            return RedirectToAction("LoginPage", "Register");
+            catch (System.Exception)
+            {
+                return RedirectToAction("LoginPage", "Register");
+            }            
         }
 
         [HttpGet]

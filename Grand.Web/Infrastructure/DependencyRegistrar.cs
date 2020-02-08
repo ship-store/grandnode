@@ -104,6 +104,11 @@ namespace Grand.Web.Infrastructure
 
             //Equipment view model service
             builder.RegisterType<EquipmentViewModelService>().As<IEquipmentViewModelService>().InstancePerLifetimeScope();
+           // sparepart view model service
+            builder.RegisterType<SparepartViewModelService>().As<ISparepartViewModelService>().InstancePerLifetimeScope();
+            // jobplan view model service
+            builder.RegisterType<JobPlanViewModelService>().As<IJobPlanViewModelService>().InstancePerLifetimeScope();
+            builder.RegisterType<ReportViewModelService>().As<IReportViewModelService>().InstancePerLifetimeScope();
 
         }
 
