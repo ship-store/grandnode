@@ -113,20 +113,36 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             var jobplans = await _jobplanService.GetAllJobplan("", 0, 500, true);
             int max = 9999;
+            int prReading = 0;
             string VesselName = HttpContext.Session.GetString("VesselName").ToString();
+
             foreach (Jobplan item in jobplans)
             {
-
-
                 if (item.JobOrder > max)
                 {
                     max = item.JobOrder;
                 }
+
+                if (item.EquipmentName == addNewJobPlan.EquipmentName && item.JobOrder == max)
+                {
+                    prReading = item.PreviousReading;
+                }
             }
+
+            //foreach (Jobplan item2 in jobplans.Where(x => x.EquipmentName == addNewJobPlan.EquipmentName && x.JobOrder == max))
+            //{
+            //    prReading = item2.PreviousReading;
+            //}
+
+            addNewJobPlan.PreviousReading = prReading;
+            var dueRhsFreq = Convert.ToInt32(addNewJobPlan.RunFrequency);
+            int dueRhs = prReading + dueRhsFreq;
+
             addNewJobPlan.JobOrder = max + 1;
             var dt = Convert.ToDateTime(addNewJobPlan.LAST_DONE_DATE).ToString("yyyy-MM-dd");
             addNewJobPlan.LAST_DONE_DATE = dt;
             addNewJobPlan.Vessel = VesselName;
+
             await _jobPlanViewModelService.PrepareJobplanModel(addNewJobPlan, "Jobplan", true);
             return RedirectToAction("List", "Equipments");
         }
@@ -154,6 +170,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 {
                     if (item.Vessel.ToLower() == VesselName.ToLower())
                     {
+                        var hrsfrq = Convert.ToInt32(item.RunFrequency);
                         jp.Add(new JobPlanForDisplay() {
                             EquipmentName = item.EquipmentName,
                             EquipmentCode = item.EquipmentCode,
@@ -175,7 +192,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                             NEXT_DUE_DATE = Convert.ToDateTime(item.NEXT_DUE_DATE),
                             PreviousReading = item.PreviousReading,
                             LastReading = item.LastReading,
-                        });
+                            DueRhs = item.PreviousReading + hrsfrq,
+                        }) ;
                     }
                 }
             }
@@ -380,7 +398,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
             var selectedJobPlan = jobplan;
             int days = 0;
-
+           
             foreach (var item in jobplan)
             {
                 if (item.FrequencyType.ToLower() == "month")
@@ -396,6 +414,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 var lastdonedate = Convert.ToDateTime(lastdone);
                 item.NEXT_DUE_DATE = lastdonedate.AddDays(days).ToString("yyyy-MM-dd");
                 item.LastReading = currentrhs;
+                var prReading = item.PreviousReading + currentrhs;
+                item.PreviousReading = prReading;
 
 
                 await _jobplanService.UpdateJobPlan(item);
@@ -403,6 +423,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
             return RedirectToAction("List");
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditJobplanCalendar(Jobplan model, int jobOrder2, string lastdone)
