@@ -87,7 +87,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 if (VesselName != null)
                 {
 
-                    var unplannedJobs = await _unplannedJobService.GetAllUnplannedJobs(model.SearchName, command.Page - 1, command.PageSize, true);
+                    var unplannedJobs = await _unplannedJobService.GetAllUnplannedJobs(model.SearchName, command.Page, command.PageSize, true);
                     List<UnplannedJob> unplannedlist = new List<UnplannedJob>();
                     foreach (UnplannedJob item in unplannedJobs.Where(x => x.Vessel == VesselName))
                     {
@@ -119,7 +119,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 if (VesselName != null)
                 {
 
-                    var unplannedJobReports = await _reportService.GetAllUnplannedJobReports(model.SearchName, command.Page - 1, command.PageSize, true);
+                    var unplannedJobReports = await _reportService.GetAllUnplannedJobReports(model.SearchName, command.Page, command.PageSize, true);
                     List<Report> unplannedreports = new List<Report>();
                     foreach (Report item in unplannedJobReports.Where(x => x.Vessel == VesselName))
                     {

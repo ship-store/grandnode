@@ -20,6 +20,7 @@ namespace Grand.Web.Areas.Api.Controllers.OData
         }
 
         [HttpGet]
+        [EnableQuery]
         public async Task<IActionResult> Get(string key)
         {
             if (!await _permissionService.Authorize(PermissionSystemName.Products))

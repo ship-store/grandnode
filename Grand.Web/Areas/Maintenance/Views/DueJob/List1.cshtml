@@ -1,4 +1,5 @@
-﻿@{
+﻿@inject AdminAreaSettings adminAreaSettings
+@{
     var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
     var SessionVar = @HttpContextAccessor.HttpContext.Session.GetString("email");
 
@@ -65,7 +66,7 @@
                 <div class="caption">
                     <i class="fa fa-cubes"></i>
 
-                    Due Jobs
+                    Due Job Reports
 
                 </div>
                 <div class="actions btn-group btn-group-devided">
@@ -74,7 +75,7 @@
 
                     @*<button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">Postpone Job</button>
 
-                    <button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>*@
+                        <button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>*@
                 </div>
 
             </div>
@@ -92,12 +93,13 @@
     <div id="grid"></div>
 
     <script>
-            $(document).ready(function () {
+        $(document).ready(function ()
+        {
             $("#grid").kendoGrid({
-                dataSource: {
-
-                    transport: {
-
+                dataSource:
+                {
+                    transport:
+                    {
                          read:
                              {
                                 url: "@Html.Raw(Url.Action("ReadData1", "DueJob","Maintenance"))",
@@ -105,42 +107,25 @@
                                 dataType: "json",
                                 data: additionalData
                         },
-                        @*update:
-                            {
-                                url: "@Html.Raw(Url.Action("EditItem","UnplannedJobs","Maintenance"))",
-                                type: "POST",
-                                dataType: "json",
-                                data: additionalData
-                            },
-                            create:
-                            {
-                                url: "@Html.Raw(Url.Action("EditItem","UnplannedJobs","Maintenance"))",
-                                type: "POST",
-                                dataType: "json"
-                            }*@
                     },
                     batch: true,
                     schema:
                     {
-                               data: "Data",
-                               total: "Total",
-                               errors: "Errors",
+                        data: "Data",
+                        total: "Total",
+                        errors: "Errors",
                         model:
                         {
                             id : "Id",
                             fields:
                             {
-                                Id:
-                                {
-                                    validation: { required: true },
-                                    editable: false,
-                                },
-                                    NEXT_DUE_DATE: { type: "date" },
-                                    LAST_DONE_DATE: {type:"date"}
+                                Id:{validation: { required: true },editable: false,},
+                                NEXT_DUE_DATE: { type: "date"},
+                                LAST_DONE_DATE: {type:"date"}
                             }
                         }
                     },
-                    pageSize: 30
+                    pageSize: @(adminAreaSettings.DefaultGridPageSize),
                 },
                 height: 580,
                 sortable: true,
@@ -149,25 +134,25 @@
                 resizable: true,
                 filterable: true,
                 columnMenu: true,
-                 scrollable:
+                scrollable:
                     {
                        endless: true
                     },
                 pageable:
                     {
-                       numeric: false,
-                       previousNext: false
+                       pageSizes: [@(adminAreaSettings.GridPageSizes)],
+                        refresh: true,
                     },
                 selectable: true,
                 allowCopy: true,
                 columns: [
-                    {
+                        {
                             field: "JobOrder",
                             title: "Job Order",
                             width: "120px"
                         },
 
-                    {
+                        {
                             field: "EquipmentCode",
                             title: "EquipmentCode",
                             width: "120px"
@@ -175,12 +160,12 @@
                         {
                             field: "EquipmentName",
                             title: "Equipment Name",
-                            width: "200px"
+                            width: "280px"
                         },
                         {
                             field: "JobTitle",
                             title: "Job Title",
-                            width: "150px"
+                            width: "200px"
                         },
                         {
                             field: "CalFrequency",
@@ -204,8 +189,14 @@
                             title: "Next Due",
                             format: "{0:dd-MM-yyyy}",
                             width: "150px",
-                    },
-                {
+                        },
+                        {
+                            field: "JobCompletedDate",
+                            title: "Completed Date",
+                            //format: "{0:dd-MM-yyyy}",
+                            width: 150
+                        },
+                        {
                             field: "Status",
                             title: "Status",
                             width: "150px"
@@ -231,4 +222,3 @@
 
 
 <!-- Modal for Postpone -->
-

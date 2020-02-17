@@ -5,6 +5,14 @@
     //page title
     ViewBag.Title = T("Admin.Catalog.Products.Manage").Text;
 }
+
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.mobile.min.css" />
+
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
+
 <form asp-controller="Product" asp-action="List" method="post">
     <antiforgery-token />
     <div class="row">
@@ -128,7 +136,7 @@
                                 <div class="col-xs-8 col-md-8 col-sm-8">
                                     <label class="mt-checkbox mt-checkbox-outline control control-checkbox">
                                         <admin-input asp-for="SearchIncludeSubCategories" />
-                                         <div class="control__indicator"></div>
+                                        <div class="control__indicator"></div>
                                     </label>
                                 </div>
                             </div>
@@ -170,7 +178,7 @@
                 $('.filter-text-open').toggle();
                 $('.filter-text-close').toggle();
             });
-            
+
             $("#products-grid").kendoGrid({
                 dataSource: {
                     transport: {

@@ -66,7 +66,7 @@
                 <div class="caption">
                     <i class="fa fa-cubes"></i>
 
-                    Breakdown Jobs
+                    Breakdown Job Reports
                 </div>
 
                 <div class="actions btn-group btn-group-devided">
@@ -199,23 +199,39 @@
                     title: "Title",
                     width: 150
                 },{
+                    field: "ReportedBy",
+                    title: "Reported By",
+                    width: 150
+                    },
+                    {
                     field: "JobReportedDate",
-                    title: "Job Reported Date",
-                    width: 190
-                },{
+                    title: "Reported Date",
+                    format: "{0:dd-MM-yyyy}",
+                    width: 140
+                },
+                    {
+                    field: "JobCompletedDate",
+                    title: "Completed Date",
+                    format: "{0:dd-MM-yyyy}",
+                    width: 150
+                    },
+                    {
+                    field: "",
+                    title: "Remark",
+                    width: 150
+                    },
+                    {
                     field: "Status",
                     title: "Status",
                      width: 150,
 
-                },{
-                    field: "ReportedBy",
-                    title: "Reported By",
-                    width: 150
-                },{
-                    //command: ["edit"],
-                    title: "&nbsp;",
-                    width: 200
-                  }],
+                }
+                  //  {
+                  //  command: ["edit"],
+                  //  title: "&nbsp;",
+                  //  width: 200
+                  //}],
+                    ],
                     editable: "inline"
 
             });

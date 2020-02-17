@@ -89,7 +89,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 var VesselName = HttpContext.Session.GetString("VesselName").ToString();
                 if (VesselName != null)
                 {
-                    var breakdownJobs = await _breakdownJobService.GetAllBreakdownJobs(model.SearchName, command.Page - 1, command.PageSize, true);
+                    var breakdownJobs = await _breakdownJobService.GetAllBreakdownJobs(model.SearchName, command.Page, command.PageSize, true);
                     List<BreakdownJob> breakdownlist = new List<BreakdownJob>();
                     foreach (BreakdownJob item in breakdownJobs.Where(x => x.Vessel == VesselName))
                     {
@@ -118,7 +118,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 if (VesselName != null)
                 {
 
-                    var breakdownJobReports = await _reportService.GetAllBreakdownJobReports(model.SearchName, command.Page - 1, command.PageSize, true);
+                    var breakdownJobReports = await _reportService.GetAllBreakdownJobReports(model.SearchName, command.Page, command.PageSize, true);
                     List<BreakdownJobReport> breakdownreports = new List<BreakdownJobReport>();
                     foreach (BreakdownJobReport item in breakdownJobReports.Where(x => x.Vessel == VesselName))
                     {

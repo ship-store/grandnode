@@ -46,8 +46,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 var VesselName = HttpContext.Session.GetString("VesselName").ToString();
                 if (VesselName != null)
                 {
-
-                    var equipments = await _equipmentService.GetAllEquipment(model.SearchName, command.Page - 1, command.PageSize, true);
+                    var equipments = await _equipmentService.GetAllEquipment(model.SearchName, command.Page, command.PageSize, true);
                     List<Equipment> equipmentlist = new List<Equipment>();
                     foreach (Equipment item in equipments.Where(x => x.Vessel.ToLower() == VesselName.ToLower()))
                     {
@@ -55,7 +54,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     }
                     var gridModel = new DataSourceResult { Data = equipmentlist };
                     return Json(gridModel);
-
                 }
                 else
                 {
@@ -64,11 +62,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             }
             catch (System.Exception)
             {
-
                 return RedirectToAction("Success", "Register");
             }
-            
-
         }
 
         [HttpPost]
@@ -76,7 +71,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             foreach (var item in models)
             {
-
                 var vessel = await _equipmentService.GetEquipmentById(item.Id);
                 var Jobplanlist = await _jobplanService.GetAllJobplans("", 0, 500, true);
                 foreach (var item1 in Jobplanlist.Where(x => x.EquipmentCode == item.Sub1_number || x.EquipmentCode == item.Sub2_number || x.EquipmentCode == item.Sub3_number || x.EquipmentCode == item.Sub4_number || x.EquipmentCode == item.Sub5_number))
@@ -85,7 +79,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     await _jobplanService.UpdateJobPlan(item1);
 
                 }
-
                 vessel.Sub1_description = item.Sub1_description;
                 vessel.Sub1_number = item.Sub1_number;
                 vessel.Sub2_description = item.Sub2_description;

@@ -1,4 +1,5 @@
-﻿@{
+﻿@inject AdminAreaSettings adminAreaSettings
+@{
     var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
     var SessionVar = @HttpContextAccessor.HttpContext.Session.GetString("email");
 
@@ -140,9 +141,10 @@
                             }
                         }
                     },
-                    pageSize: 30
+                    pageSize: @(adminAreaSettings.DefaultGridPageSize),
                 },
-                height: 580,
+                //height: 580,
+               
                 sortable: true,
                 reorderable: true,
                 groupable: true,
@@ -153,11 +155,10 @@
                     {
                        endless: true
                     },
-                pageable:
-                    {
-                       numeric: false,
-                       previousNext: false
-                    },
+                 pageable: {
+                    refresh: true,
+                    pageSizes: [@(adminAreaSettings.GridPageSizes)]
+                },
                 selectable: true,
                 allowCopy: true,
                 columns: [
@@ -165,54 +166,54 @@
                     {
                             field: "EquipmentCode",
                             title: "EquipmentCode",
-                            width: "120px"
+                            width: "160px"
                         },
                         {
                             field: "EquipmentName",
                             title: "Equipment Name",
-                            width: "200px"
+                            width: "260px"
                         },
                         {
                             field: "JobTitle",
                             title: "Job Title",
-                            width: "150px"
+                            width: "200px"
                         },
                         {
                             field: "CalFrequency",
                             title: "Calendar Frequency",
-                            width: "90px"
+                            width: "190px"
 
                     }
                     , {
                             field: "FrequencyType",
                             title: "Frequency Type",
-                            width: "90px"
+                            width: "160px"
 
                         },
                         {
                             field: "RunFrequency",
                             title: "Rhs Frequency",
-                            width: "90px"
+                            width: "160px"
 
                         },
-                        
+
                         {
                             field: "PreviousReading",
                             title: "Previous Reading",
-                            width: "120px"
+                            width: "180px"
                     },
-                         
+
                         {
                             field: "LastReading",
                             title: "Last Reading",
-                            width: "120px"
+                            width: "160px"
                     },
                    {
                             field: "DueRhs",
                             title: "Due Rhs",
                             width: "120px"
                     },
-                         
+
                         {
                             field: "Department",
                             title: "Department",
@@ -233,7 +234,7 @@
                 {
                             field: " AssignedTo",
                             title: " Assigned To",
-                            width: "90px"
+                            width: "180px"
 
                         },],
                     editable: "inline"
@@ -274,8 +275,8 @@
             var equipmentname = selectedItem.EquipmentName;
             var equipmentCode = selectedItem.EquipmentCode;
             var JobOrder = selectedItem.JobOrder;
-            
-             var remark = selectedItem.Remark;
+
+            var remark = selectedItem.Remark;
             var jobTitle = selectedItem.JobTitle;
             var frequency = selectedItem.Frequency;
             var department = selectedItem.Department;
@@ -293,8 +294,8 @@
             document.getElementById("nextDueDate").value = nextDueDate;
             document.getElementById("JobOrder").value = JobOrder;
             document.getElementById("vessel").value = vessel;
-            
-             document.getElementById("remark").value = remark;
+
+            document.getElementById("remark").value = remark;
 
         }
 
@@ -321,7 +322,7 @@
             var department = selectedItem.Department;
             var lastDoneDate = selectedItem.LAST_DONE_DATE;
             var nextDueDate = selectedItem.NEXT_DUE_DATE;
-             var vessel = selectedItem.Vessel;
+            var vessel = selectedItem.Vessel;
 
             document.getElementById("Bid1").value = Bid;
             document.getElementById("Ename1").value = equipmentname;
@@ -332,7 +333,7 @@
             document.getElementById("lastDoneDate1").value = lastDoneDate;
             document.getElementById("nextDueDate1").value = nextDueDate;
             document.getElementById("Job").value = Job;
-             document.getElementById("vessel").value = vessel;
+            document.getElementById("vessel").value = vessel;
 
         }
 

@@ -89,7 +89,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             try
             {
                 var VesselName = HttpContext.Session.GetString("VesselName").ToString();
-                var Jobplanlist = await _jobplanService.GetAllJobplans(model.SearchName, command.Page - 1, 500, true);
+                var Jobplanlist = await _jobplanService.GetAllJobplans(model.SearchName, command.Page, command.PageSize);
                 List<Jobplan> jobplanlist = new List<Jobplan>();
 
                 foreach (Jobplan item in Jobplanlist.Where(x => x.Vessel.ToLower() == VesselName.ToLower() && x.NEXT_DUE_DATE != null).OrderBy(x => x.NEXT_DUE_DATE).ToList())
@@ -114,8 +114,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     {
                         jobplanlist.Add(item);
                     }
-
-
                 }
                 var p = jobplanlist.OrderBy(x => x.NEXT_DUE_DATE).ToList();
                 var gridModel = new DataSourceResult { Data = jobplanlist.ToList().Where(x => x.JobStatus == 0) };
@@ -126,9 +124,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
                 return RedirectToAction("Success", "Register");
             }
-
         }
-        //
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PostponeJob(Jobplan model, string dt, string Bid)
@@ -264,7 +261,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 if (VesselName != null)
                 {
 
-                    var dueJobReports = await _reportService.GetAllDueJobReports(model.SearchName, command.Page - 1, command.PageSize, true);
+                    var dueJobReports = await _reportService.GetAllDueJobReports(model.SearchName, command.Page, command.PageSize, true);
                     List<DueJobReport> duereports = new List<DueJobReport>();
                     foreach (DueJobReport item in dueJobReports)
                     {

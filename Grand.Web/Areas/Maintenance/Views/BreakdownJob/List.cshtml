@@ -51,17 +51,12 @@
     }
 
 }
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.mobile.min.css" />
 
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.default-v2.min.css" />
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
-
-<link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.2.504/styles/kendo.common.min.css" />
-
-
-
-
-<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js" integrity="sha256-0vBSIAi/8FxkNOSKyPEfdGQzFDak1dlqFKBYqBp1yC4=" crossorigin="anonymous"></script>
 
 
 <div class="row" id="SearchSection">
@@ -71,13 +66,15 @@
                 <div class="caption">
                     <i class="fa fa-cubes"></i>
 
-                    @T("Maintenance.Breakdownjob")
+                    Breakdown Jobs
                 </div>
+
                 <div class="actions btn-group btn-group-devided">
                     <a href="@Url.Action("AddBreakdownJob")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+
                     <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
                     <button type="button" name="delete-selected" id="delete-selected" class="btn red">
-                        <i class="fa fa-plus"></i>
+                        <i class="fa fa-trash-o"></i>
                         @T("Admin.Common.Delete.Selected")
                     </button>
                     <button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>
@@ -106,66 +103,60 @@
     <script>
 
         $(document).ready(function () {
-                $("#grid").kendoGrid({
-                    dataSource:
-                    {
-                        serverPaging: true,
-                        serverSorting: true,
-                        serverFiltering: true,
-                        allowUnsort: true,
-                        transport:
-                        {
-                            read:
-                            {
+            $("#grid").kendoGrid({
+                dataSource: {
+
+                    transport: {
+
+                         read:
+                             {
                                 url: "@Html.Raw(Url.Action("ReadBreakdownData", "BreakdownJob","Maintenance"))",
                                 type: "POST",
                                 dataType: "json",
                                 data: additionalData
-                            },
-                            update:
+                        },
+                        update:
                             {
-                                url: "@Html.Raw(Url.Action("EditItem", "BreakdownJob","Maintenance"))",
+                                url: "@Html.Raw(Url.Action("EditItem","BreakdownJob","Maintenance"))",
                                 type: "POST",
                                 dataType: "json",
                                 data: additionalData
                             },
                             create:
                             {
-                                url: "@Html.Raw(Url.Action("AddBreakdownJobDetails", "BreakdownJob","Maintenance"))",
+                                url: "@Html.Raw(Url.Action("EditItem","BreakdownJob","Maintenance"))",
                                 type: "POST",
                                 dataType: "json"
                             }
-
-                        },
-                        batch: true,
-                        pageSize: 50,
-                        schema:
+                    },
+                    batch: true,
+                    schema:
+                    {
+                               data: "Data",
+                               total: "Total",
+                               errors: "Errors",
+                        model:
                         {
-                            data: "Data",
-                            total: "Total",
-                            errors: "Errors",
-                            model:
+                            id : "Id",
+                            fields:
                             {
-                                id : "Id",
-                                fields:
+                                Id:
                                 {
-                                    Id:
-                                    {
-                                        validation: { required: true },
-                                        editable: false,
-                                    },
-                                    EquipmentName: { validation: { required: true } },
-                                    JobOrder: {type: "string", validation: { required: true } },
-                                    Title: { validation: { required: true } },
-                                    JobReportedDate: { validation: { required: true } },
-                                    ReportedBy: { validation: { required: true } },
-                                    Status: { validation: { required: true } },
-                                    Vessel: { validation: { required: true } },
-                                }
+                                    validation: { required: true },
+                                    editable: false,
+                                },
+                              EquipmentName: { type: "string" },
+                              JobOrder: { type: "string" },
+                              Title: { type: "string" },
+                              JobReportedDate: { type: "string" },
+                              ReportedBy: { type: "string" },
+                              Status: { type: "string" }
                             }
                         }
                     },
-                    height: 600,
+                    pageSize: 30
+                },
+                height: 590,
                 sortable: true,
                 reorderable: true,
                 groupable: true,
@@ -176,88 +167,71 @@
                     {
                        endless: true
                     },
-                pageable:
-                    {
-                       numeric: false,
-                       previousNext: false
-                    },
+                //pageable:
+                //    {
+                //       numeric: false,
+                //       previousNext: false
+                //    },
                 selectable: true,
                 allowCopy: true,
-
-                    columns:
-                        [
-                        {
+                columns: [
+                    {
                             field: "Id",
                             headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
                             template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
-                            width: 50
-                        },
-
-
-                        {
-                            field: "EquipmentName",
-                            title: "Equipment Name",
-                            width: "120px",
+                        width: 50,
+                            locked: true,
+                        lockable: false,
 
                         },
-                        {
-                            field: "JobOrder",
-                            title: "Job Order",
-                            width: "90px"
-                        },
-                        {
-                            field: "Title",
-                            title: "Title",
-                            width: "90px"
-                        },
-                        {
-                            field: "JobReportedDate",
-                            title: "Job Reported Date",
-                            width: "120px",
-                            editor: function (container, options)
-                            {
-                                var dateString = kendo.toString(options.model.JobReportedDate, "dd-MM-yyyy");
-                                var $input = $("<input value=" + dateString + " />").appendTo(container);
-                                $input.datepicker().toString();
-                            },
-                            //format: "{0:MM-dd-yyyy}"
-                        },
-                        {
-                            field: "ReportedBy",
-                            title: "Reported By",
-                            width: "120px"
-                        },
-                        {
-                            field: "Status",
-                            title: "Status",
-                            width: "80px"
-                        },
+                    {
+                    field: "JobOrder",
+                    title: "Job Order",
+                    width: 150,
 
-                        {
-                            command: [{ name: "edit" }],
-                            title: "&nbsp;",
-                            width: "120px"
-                        },
+                },
+                    {
+                    field: "EquipmentName",
+                    title: "Equipment Name",
+                    width: 190
+                }, {
+                    field: "Title",
+                    title: "Title",
+                    width: 150
+                },{
+                    field: "JobReportedDate",
+                    title: "Job Reported Date",
+                    width: 190
+                },{
+                    field: "Status",
+                    title: "Status",
+                     width: 150,
 
-                    ],
+                },{
+                    field: "ReportedBy",
+                    title: "Reported By",
+                    width: 150
+                },{
+                    command: ["edit"],
+                    title: "&nbsp;",
+                    width: 200
+                  }],
                     editable: "inline"
-                });
+
             });
+        });
 
-            function customBoolEditor(container, options)
-            {
-                var guid = kendo.guid();
-                $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-                $('<label class="k-checkbox-label" for="' + guid + '"></label>').appendTo(container);
-            }
+         function customBoolEditor(container, options) {
+                        var guid = kendo.guid();
+                        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+                        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
+                    }
 
-            function additionalData()
-            {
-                var data = {};
-                addAntiForgeryToken(data);
-                return data;
-            }
-
+                    function additionalData() {
+                        var data = {};
+                        addAntiForgeryToken(data);
+                        return data;
+        }
 
         var selectedIds = [];
         //delete selected
@@ -313,8 +287,7 @@
                 });
         });
 
-
-          $("#btnSelectRow").click(function(){
+         $("#btnSelectRow").click(function(){
 
     var grid = $("#grid").data("kendoGrid");
              var selectedItem = grid.dataItem(grid.select());
@@ -332,7 +305,7 @@
              $("#lblStatus").text(selectedItem.Status);
 
              var ename = selectedItem.EquipmentName;
-             var ecode = selectedItem.EquipmentCode;
+
              var jobOrder = selectedItem.JobOrder;
              var title = selectedItem.Title;
              var jobReportedDate = selectedItem.JobReportedDate;
@@ -340,7 +313,7 @@
              var Status = selectedItem.Status;
 
              document.getElementById("Ename").value = ename;
-             document.getElementById("ECode").value = ecode;
+
              document.getElementById("JobOrder").value = jobOrder;
              document.getElementById("Title").value = title;
              document.getElementById("JobReportedDate").value = jobReportedDate;
@@ -368,6 +341,7 @@
 
                 var Bid = selectedItem.Id;
                 var equpmentname = selectedItem.EquipmentName;
+                var ecode1 = selectedItem.EquipmentCode;
                 var JobOrder = selectedItem.JobOrder;
                 var Title = selectedItem.Title;
                 var JobReportedDate = selectedItem.JobReportedDate;
@@ -375,16 +349,20 @@
                 var Vessel = selectedItem.Vessel;
 
                 document.getElementById("Ename1").value = equpmentname;
-                document.getElementById("ECode1").value = JobOrder;
+                document.getElementById("JobOrder1").value = JobOrder;
                 document.getElementById("Title1").value = Title;
                 document.getElementById("JobReportedDate1").value = JobReportedDate;
                 document.getElementById("ReportedBy1").value = ReportedBy;
                 document.getElementById("Vessel1").value = Vessel;
                 document.getElementById("Bid").value = Bid;
+                document.getElementById("ecode1").value = ecode1;
             }
 
         })
     </script>
+
+
+
 </div>
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog" style="top:auto">
@@ -394,7 +372,7 @@
         <div class="modal-content" style="padding:40px">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">View Job Plan</h4>
+                <h4 class="modal-title">View Breakdown Job</h4>
             </div>
             <div class="modal-body">
 
@@ -431,22 +409,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="col-md-3">
-                                <b>Equipment Code</b>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="material-icons">turned_in_not</i>
-                                    </span>
-                                    <div class="form-line">
-                                        <input type="text" id="ECode" readonly value="" class="form-control money-euro" placeholder="">
-                                    </div>
-                                </div>
-                            </div>
-
-
-
 
                             <div class="col-md-3">
                                 <b>Title</b>
@@ -530,126 +492,112 @@
     </div>
 </div>
 
-<div id="myModal1" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="width:50%;padding:10px">
 
-        Modal content
-        <form action="EditItem2" method="post">
-            <div class="modal-content" style="padding:40px">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Complete Job</h4>
-                </div>
-                <div class="modal-body">
+@* -------------------------------------------COmplete Modal------------------------------------------------------------------- *@
+
+<link rel="stylesheet" href="~/Maintenance/modal/style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
 
 
-                    <div class="body">
-                        <div class="demo-masked-input">
+<div class="modal fade  come-from-modal right" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="width:400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Complete Job</h4>
 
-
-                            <div class="row clearfix">
-
-                                <div class="col-md-3" hidden>
-                                    <b>Equipment Name</b>
-                                    <div class="input-group">
-
-                                        <div class="form-line">
-
-                                            <input type="text" id="Bid" name="Bid" value="" class="form-control time24" placeholder="" readonly>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <b>Equipment Name</b>
-                                    <div class="input-group">
-
-                                        <div class="form-line">
-
-
-                                            <input type="text" id="Ename1" name="Ename" value="" class="form-control time24" placeholder="" readonly>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="col-md-3">
-                                    <b>Equipment Code</b>
-                                    <div class="input-group">
-
-                                        <div class="form-line">
-                                            <input type="text" id="ECode1" class="form-control time24" placeholder="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <b>Title</b>
-                                    <div class="input-group">
-
-                                        <div class="form-line">
-                                            <input type="text" id="Title1" class="form-control time24" placeholder="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <b>Job Reported Date</b>
-                                    <div class="input-group">
-
-                                        <div class="form-line">
-                                            <input type="text" id="JobReportedDate1" class="form-control time24" placeholder="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <b>Reported By</b>
-                                    <div class="input-group">
-
-                                        <div class="form-line">
-                                            <input type="text" id="ReportedBy1" class="form-control time24" placeholder="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <b>Vessel</b>
-                                    <div class="input-group">
-
-                                        <div class="form-line">
-                                            <input type="text" id="Vessel1" class="form-control time24" placeholder="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br /><br /><br />
-                                <div class="col-md-3">
-
-                                    <b>Remark</b>
-                                    <div class="input-group">
-
-                                        <div class="form-line">
-                                            <textarea rows="5" cols="100" id="remark" name="remark"></textarea>
-                                            @*<input type="text" id="Vessel" class="form-control time24" placeholder="" readonly>*@
-                                        </div>
-                                    </div>
-                                </div>
-                                <br /><br /><br /><br /><br />
-                                @Html.AntiForgeryToken()
-
-                                @*<a id="submit" class="btn btn-primary m-t-15 waves-effect" href="Edit/#=Id#">Complete</a>*@
-                            </div>
-
-                        </div>
-                    </div>
-                    <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Complete" id="submit" />
-
-                </div>
 
             </div>
-        </form>
+            <form action="EditItem2" method="post">
+                <div class="modal-body" style="left:5%">
+                    <div class="row clearfix">
+                        <br />
+                        <div class="col-md-12">
+                            <b>Job Order</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+                                    <input type="text" id="Bid" name="Bid" readonly hidden>
+                                    <input type="text" id="JobOrder1" name="JobOrder1" readonly value="" class="form-control time24" hidden>
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="col-md-12">
+                            <b>Equipment Name</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+                                    <input type="text" id="Ename1" name="Ename" readonly value="" class="form-control time24" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+
+
+                        <div class="col-md-12">
+                            <b>Title</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+                                    <input type="text" id="Title1" readonly value="" class="form-control time24" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="col-md-12">
+                            <b>Job Reported Date</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+                                    <input type="text" id="JobReportedDate1" readonly value="" class="form-control time24" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="col-md-12">
+                            <b>Reported By</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+                                    <input type="text" id="ReportedBy1" readonly value="" class="form-control time24" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="col-md-12">
+                            <b>Vessel</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+                                    <input type="text" id="Vessel1" readonly value="" class="form-control time24" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="col-md-12">
+                            <b>Remark</b>
+                            <div class="input-group" style="width:90%">
+
+                                <div class="form-line">
+
+                                    <textarea rows="5" cols="100" id="remark" name="remark" class="form-control time24"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    @Html.AntiForgeryToken()
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                        <input type="submit" class="btn btn-primary" value="Complete" id="submit" />
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
     </div>
 </div>

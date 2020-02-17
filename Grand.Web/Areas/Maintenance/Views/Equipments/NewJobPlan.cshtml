@@ -44,6 +44,10 @@
                     $(".c3").hide();
                     $(".c5").hide();
                     $(".c6").show();
+                     $(".c7").show();
+                    $(".c8").show();
+                    $(".c9").show();
+                    $(".c10").show();
                 });
                 $("#rEnable").click(function ()
                 {
@@ -60,20 +64,25 @@
                 });
             });
         </script>
+<style>
 
+
+</style>
         <div class="body" style="max-height: 650px;overflow: auto;">
             <div class="x_title">
-
                 <div class="actions">
                     <div class="btn-group btn-group-devided util-btn-margin-bottom-5">
-                        <input name="group1" type="radio" checked="checked" id="cEnable" class="radio-col-black" onclick="EnableDisableTextBox()" />
+
+                       <input name="group1" type="radio" checked="checked" id="cEnable" class="radio-col-black" onclick="EnableDisableTextBox()" />
                         <label for="chkYes">Calender Based</label>
 
                         <input name="group1" type="radio" id="rEnable" class="radio-col-black" onclick="EnableDisableTextBox()" />
                         <label for="chkNo">Running Hour Based</label>
-                    </div>
+
+                     </div>
                 </div>
             </div>
+
             <form action="AddJobPlanDetails" method="post" name="contact_form" id="first_form">
 
                 @*<input type="hidden" value="@vessel" name="Vessel" />*@
@@ -165,14 +174,22 @@
 
 
 
-                            <tr class="c1">
+                            <tr class="c1" style="height:61px;">
                                 <td><label for="CalFrequency">Frequency</label></td>
                                 <td>
                                     <select class="form-control show-tick" name="CalFrequency" id="n6">
                                         <option value=""></option>
                                         <option>1</option>
+                                        <option>2</option>
                                         <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
                                         <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
                                         <option>12</option>
                                     </select>
                                 </td>

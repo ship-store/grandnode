@@ -34,7 +34,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             try
             {
                 var VesselName = HttpContext.Session.GetString("VesselName").ToString();
-                var Jobplanlist = await _jobplanService.GetAllJobplans(model.SearchName, command.Page - 1, 100, true);
+                var Jobplanlist = await _jobplanService.GetAllJobplans(model.SearchName, command.Page, command.PageSize, true);
                 List<Jobplan> jobplanlist = new List<Jobplan>();
                 foreach (Jobplan item in Jobplanlist.Where(x => x.Vessel == VesselName.ToLower()))
                 {

@@ -57,22 +57,36 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         public async Task<IActionResult> List(string equipmentCode)
         {
-            //Load tree first
-            var VesselName = HttpContext.Session.GetString("VesselName").ToString();
-            List<Equipment> equipmentList = new List<Equipment>();
-            List<EquipmentModel> equipmentModels = new List<EquipmentModel>();
-            var equipments = await _equipmentService.GetAllEquipment("Equipment", 0, 500, true);
-            List<Equipment> selectedEquipment = new List<Equipment>();
-            foreach (Equipment item in equipments)
+            try
             {
-                if (item.Vessel.ToLower() == VesselName.ToLower())
+                //Load tree first
+                var VesselName = HttpContext.Session.GetString("VesselName").ToString();
+                if (VesselName != null)
                 {
-                    selectedEquipment.Add(item);
+                    List<Equipment> equipmentList = new List<Equipment>();
+                    List<EquipmentModel> equipmentModels = new List<EquipmentModel>();
+                    var equipments = await _equipmentService.GetAllEquipment("Equipment", 0, 500, true);
+                    List<Equipment> selectedEquipment = new List<Equipment>();
+                    foreach (Equipment item in equipments)
+                    {
+                        if (item.Vessel.ToLower() == VesselName.ToLower())
+                        {
+                            selectedEquipment.Add(item);
+                        }
+                    }
+                    ViewModel vm = new ViewModel();
+                    vm.AllEquipments = selectedEquipment;
+                    return View(vm);
+                }
+                else
+                {
+                    return RedirectToAction("Success", "Register");
                 }
             }
-            ViewModel vm = new ViewModel();
-            vm.AllEquipments = selectedEquipment;
-           return View(vm);
+            catch (System.Exception)
+            {
+                return RedirectToAction("Success", "Register");
+            }          
         }
 
         [HttpGet]
@@ -196,14 +210,17 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                         }) ;
                     }
                 }
-            }
-            catch (Exception)
-            {
-                gridModel = new DataSourceResult { Data = jp };
+
+                gridModel = new DataSourceResult { Data = jp.ToList() };
                 return Json(gridModel);
             }
-            gridModel = new DataSourceResult { Data = jp.ToList() };
-            return Json(gridModel);
+            catch (System.Exception)
+            {
+                //gridModel = new DataSourceResult { Data = jp };
+                //return Json(gridModel);
+                return RedirectToAction("Success", "Register");
+            }
+            
         }
 
         [HttpPost]
@@ -214,6 +231,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var sparePart = new List<Sparepart> { };
             try
             {
+                var VesselName = HttpContext.Session.GetString("VesselName").ToString();
                 var selectedEquipments = await _equipmentService.GetAllEquipment("", 0, 500, true);
                 var spareparts = await _sparepartService.GetAllSpareparts("", 0, 500, true);
                 var jobplans = await _jobplanService.GetAllJobplan("", 0, 500, true);
@@ -221,16 +239,25 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                  sparePart = spareparts.ToList().FindAll(y => y.EquipmentCode == selectedEquipment.Sub1_number || y.EquipmentCode == selectedEquipment.Sub2_number || y.EquipmentCode == selectedEquipment.Sub3_number || y.EquipmentCode == selectedEquipment.Sub4_number);
                 //var jobplan = jobplans.ToList().Where(y => y.EquipmentName.ToLower() == selectedEquipment.Sub1_description.ToLower() || y.EquipmentName.ToLower() == selectedEquipment.Sub2_description.ToLower() || y.EquipmentName.ToLower() == selectedEquipment.Sub3_description.ToLower() || y.EquipmentName.ToLower() == selectedEquipment.Sub4_description.ToLower()).First();
                 var jobplan = jobplans.ToList().FindAll(y => y.EquipmentCode == selectedEquipment.Sub1_number || y.EquipmentCode == selectedEquipment.Sub2_number || y.EquipmentCode == selectedEquipment.Sub3_number || y.EquipmentCode == selectedEquipment.Sub4_number);
-            }
-            catch (Exception ex)
-            {
 
-                gridModel = new DataSourceResult { Data = sparePart };
+                foreach (var item in sparePart)
+                {
+                    if (item.Vessel.ToLower() == VesselName.ToLower())
+                    {
+                        gridModel = new DataSourceResult { Data = sparePart.ToList() };
+                        
+                    }
+                    
+                }
                 return Json(gridModel);
-            }
 
-            gridModel = new DataSourceResult { Data = sparePart.ToList() };
-            return Json(gridModel);
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Success", "Register");
+                //gridModel = new DataSourceResult { Data = sparePart };
+                //return Json(gridModel);
+            }           
         }
 
         [HttpGet]
@@ -282,8 +309,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 HttpContext.Session.SetString("eqname", SelectedEquipment.Sub5_description);
             }
 
-            var jsnList = Newtonsoft.Json.JsonConvert.SerializeObject(vm.SelectedEquipment);
-          
+            var jsnList = Newtonsoft.Json.JsonConvert.SerializeObject(vm.SelectedEquipment);          
             return Json(jsnList);
         }
 

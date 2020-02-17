@@ -1,4 +1,6 @@
-﻿<div class="x_title">
+﻿@inject AdminAreaSettings adminAreaSettings
+
+<div class="x_title">
 
     <div class="actions">
         <div class="btn-group btn-group-devided util-btn-margin-bottom-5">
@@ -58,7 +60,7 @@
                             }
                         },
 
-                        pageSize: 60,
+                        pageSize: @(adminAreaSettings.DefaultGridPageSize),
                         schema:
                         {
 
@@ -91,14 +93,16 @@
                     },
 
                 selectable: true,
-                allowCopy: true,
-                    height: 540,
+                    allowCopy: true,
+                pageSizes: [@(adminAreaSettings.GridPageSizes)],
+                    height: 545,
 
                     columns: [
                         {
-                            field: "JobOrder",
-                            title: "JobOrder",
-                            width: "120px"
+                        field: "JobOrder",
+                        title: "JobOrder",
+                        width: "120px",
+                        lockable: true,
 
                         },
 

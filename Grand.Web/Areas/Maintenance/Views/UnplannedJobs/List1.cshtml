@@ -71,7 +71,7 @@
                 <div class="caption">
                     <i class="fa fa-cubes"></i>
 
-                    Unplanned Jobs
+                    Unplanned Job Reports
                 </div>
                 <div class="actions btn-group btn-group-devided">
                     @*<a href="@Url.Action("AddUnplannedJobs")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
@@ -207,23 +207,31 @@
                     title: "Title",
                     width: 150
                 },{
+                    field: "ReportedBy",
+                    title: "Reported By",
+                    width: 150
+                    },
+                    {
                     field: "JobReportedDate",
-                    title: "Job Reported Date",
-                    width: 190
-                },{
+                    title: "Reported Date",
+                    width: 140
+                },
+                    {
+                    field: "JobCompletedDate",
+                    title: "Completed Date",
+                    width: 150
+                    },
+                    {
+                    field: "",
+                    title: "Remark",
+                    width: 150
+                    },
+                    {
                     field: "Status",
                     title: "Status",
                      width: 150,
 
-                },{
-                    field: "ReportedBy",
-                    title: "Reported By",
-                    width: 150
-                },{
-                  
-                    title: "&nbsp;",
-                    width: 200
-                  }],
+                }],
                     editable: "inline"
 
             });
