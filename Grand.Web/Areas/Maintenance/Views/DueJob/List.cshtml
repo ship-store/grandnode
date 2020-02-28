@@ -143,7 +143,7 @@
                     },
                     pageSize: @(adminAreaSettings.DefaultGridPageSize),
                 },
-                //height: 580,
+                height: 580,
                
                 sortable: true,
                 reorderable: true,
@@ -155,10 +155,10 @@
                     {
                        endless: true
                     },
-                 pageable: {
+                 @*pageable: {
                     refresh: true,
                     pageSizes: [@(adminAreaSettings.GridPageSizes)]
-                },
+                },*@
                 selectable: true,
                 allowCopy: true,
                 columns: [
@@ -166,6 +166,11 @@
                     {
                             field: "EquipmentCode",
                             title: "EquipmentCode",
+                            width: "160px"
+                    },
+                    {
+                            field: "JobOrder",
+                            title: "Job Order",
                             width: "160px"
                         },
                         {
@@ -278,7 +283,8 @@
 
             var remark = selectedItem.Remark;
             var jobTitle = selectedItem.JobTitle;
-            var frequency = selectedItem.Frequency;
+            var CalFrequency = selectedItem.CalFrequency;
+            var RunFrequency = selectedItem.RunFrequency;
             var department = selectedItem.Department;
             var lastDoneDate = selectedItem.LAST_DONE_DATE;
             var nextDueDate = selectedItem.NEXT_DUE_DATE;
@@ -288,13 +294,13 @@
             document.getElementById("Ename").value = equipmentname;
             document.getElementById("ECode").value = equipmentCode;
             document.getElementById("jobTitle").value = jobTitle;
-            document.getElementById("frequency").value = frequency;
-            document.getElementById("department").value = department;
+            document.getElementById("CalFrequency").value = CalFrequency;
+            document.getElementById("RunFrequency").value = RunFrequency;
+            document.getElementById("department2").value = department;
             document.getElementById("lastDoneDate").value = lastDoneDate;
             document.getElementById("nextDueDate").value = nextDueDate;
             document.getElementById("JobOrder").value = JobOrder;
             document.getElementById("vessel").value = vessel;
-
             document.getElementById("remark").value = remark;
 
         }
@@ -315,8 +321,8 @@
             var Bid = selectedItem.Id;
             var equipmentname = selectedItem.EquipmentName;
             var equipmentCode = selectedItem.EquipmentCode;
-            var Job = selectedItem.JobOrder;
-
+           // var Job = selectedItem.JobOrder;
+           //  var JobOrder = selectedItem.JobOrder;
             var jobTitle = selectedItem.JobTitle;
             var frequency = selectedItem.Frequency;
             var department = selectedItem.Department;
@@ -332,8 +338,10 @@
             document.getElementById("department1").value = department;
             document.getElementById("lastDoneDate1").value = lastDoneDate;
             document.getElementById("nextDueDate1").value = nextDueDate;
-            document.getElementById("Job").value = Job;
+         //   document.getElementById("Job").value = Job;
             document.getElementById("vessel").value = vessel;
+          //  document.getElementById("JobOrder1").value = JobOrder;
+
 
         }
 
@@ -367,7 +375,7 @@
 
                                 <div class="form-line">
                                     <input type="text" id="Bid" name="Bid" readonly hidden>
-                                    <input type="text" id="JobOrder" name="JobOrder" readonly class="form-control time24" hidden>
+                                    <input type="text" id="JobOrder" readonly class="form-control time24" hidden>
                                 </div>
                             </div>
                         </div>
@@ -410,34 +418,13 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="frequency" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" id="CalFrequency"  readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
                         <br /><br />
 
-                        <div class="col-md-12">
-                            <b>Department</b>
-                            <div class="input-group" style="width:90%">
-
-                                <div class="form-line">
-                                    <input type="text" id="department" readonly value="" class="form-control time24" placeholder="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <br /><br />
-                        <div class="col-md-12">
-                            <b>Last Done Date </b>
-                            <div class="input-group" style="width:90%">
-
-                                <div class="form-line">
-                                    <input type="text" id="lastDoneDate" readonly value="" class="form-control time24" placeholder="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <br /><br />
+                       
                         <div class="col-md-12">
                             <b>Postpone To</b>
                             <div class="input-group" style="width:90%">
@@ -503,7 +490,7 @@
 
                                 <div class="form-line">
                                     <input type="text" id="Bid1" name="Bid1" readonly hidden>
-                                    <input type="text" id="Job" name="Job" readonly class="form-control time24" hidden>
+                                    <input type="text" id="JobOrder1" name="JobOrder1" readonly class="form-control time24" hidden>
                                 </div>
                             </div>
                         </div>

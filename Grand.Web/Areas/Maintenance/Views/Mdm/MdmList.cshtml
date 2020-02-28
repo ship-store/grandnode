@@ -1,0 +1,50 @@
+﻿
+
+<div class="row" id="SearchSection">
+    <div class="col-md-12">
+        <div class="x_panel light form-fit">
+            <div class="x_title">
+                <div class="caption">
+                    <i class="fa fa-cubes"></i>
+
+                    Master Data Management
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<admin-tabstrip name="mdm" SetTabPos="true">
+    <items>
+        <tabstrip-item text="Add Maker" tab-index="0">
+            <content>
+                <div>
+                    <partial name="AddMaker" />
+                </div>
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Maker Model" tab-index="1">
+            <content>
+                <div>
+                    <partial name="List" model="Model" />
+                </div>
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Add Reported By" tab-index="2">
+            <content>
+                <div>
+                    <partial name="AddReportedBy" model="Model" />
+                </div>
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Add Status" tab-index="3">
+            <content>
+                <div>
+                    <partial name="List" model="Model" />
+                </div>
+            </content>
+        </tabstrip-item>
+    </items>
+</admin-tabstrip>
+
+
