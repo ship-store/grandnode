@@ -119,7 +119,29 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return View();
         }
 
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GeneralEdit(Equipment vmodel, string id, string code, string remark, string safety, string maker, string model, string eqtype, string drawno, string dept, string location, string eqstatus, string type)
+        {
+            var selectedEquipments = await _equipmentService.GetAllEquipment("", 0, 500, true);
+
+            var selectedEquipment = selectedEquipments.ToList().Where(src => src.Sub1_number == code || src.Sub2_number == code || src.Sub3_number == code || src.Sub4_number == code).First();
+
+            selectedEquipment.Remark = remark;
+            selectedEquipment.Safety_level = safety;
+            selectedEquipment.Maker = maker;
+            selectedEquipment.Model = model;
+            selectedEquipment.Equipment_type = type;
+            selectedEquipment.Equipment_Status = eqstatus;
+            selectedEquipment.Drawing_no = drawno;
+            selectedEquipment.Department = dept;
+            selectedEquipment.Location = location;
+            selectedEquipment.Type = type;
+
+            await _equipmentService.UpdateEquipment(selectedEquipment);
+            return RedirectToAction("List");
+
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
