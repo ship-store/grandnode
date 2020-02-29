@@ -1,0 +1,140 @@
+﻿
+
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.mobile.min.css" />
+
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
+
+
+<div class="row" id="SearchSection">
+    <div class="col-md-12">
+        @*<div class="x_panel light form-fit">*@
+            <div class="x_title">
+                <div class="caption">
+                    <i class="fa fa-cubes"></i>
+                    Makers
+                </div>
+                <div class="actions btn-group btn-group-devided">
+                    @*<a href="@Url.Action("AddVessel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs">Job Postpone @T("Admin.Common.AddNew") </span></a>*@
+                    <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+                    <a href="@Url.Action("AddMaker")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+
+                    @*<button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>*@
+                    @*<button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>*@
+                </div>
+
+            </div>
+
+            <div class="x_content">
+                <div id="vessel-grid"></div>
+            </div>
+        @*</div>*@
+    </div>
+</div>
+
+<div id="example">
+    <antiforgery-token />
+    <div id="MakerGrid""></div>
+    <script>
+        $(document).ready(function () {
+            $("#MakerGrid").kendoGrid({
+                dataSource: {
+
+                    transport: {
+
+                         read:
+                             {
+                                url: "@Html.Raw(Url.Action("ReadMakerDetails", "Mdm","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                        },
+                        @*update:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","PostponeJob","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                            },
+                            create:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","PostponeJob","Maintenance"))",
+                                type: "POST",
+                                dataType: "json"
+                            }*@
+                    },
+                    batch: true,
+                    schema:
+                    {
+                               data: "Data",
+                               total: "Total",
+                               errors: "Errors",
+                        model:
+                        {
+                            id : "Id",
+                            fields:
+                            {
+                                Id:
+                                {
+                                    validation: { required: true },
+                                    editable: false,
+                                },
+                                    
+                            }
+                        }
+                    },
+                    pageSize: 30
+                },
+                height: 470,
+                sortable: true,
+                reorderable: true,
+                groupable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: true,
+                pageable: false,
+                selectable: true,
+                allowCopy: true,
+                columns: [
+                    {
+                            field: "Name",
+                            title: "Name",
+                            width: "100px"
+                        },
+
+                        {
+                            field: "Code",
+                            title: "Code",
+                            width: "100px"
+                        },
+                        {
+                            field: "Country",
+                            title: "Country",
+                            width: "100px"
+                        }
+                        ],
+                    editable: "inline"
+
+            });
+        });
+         function customBoolEditor(container, options) {
+                        var guid = kendo.guid();
+                        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+                        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
+                    }
+
+                    function additionalData() {
+                        var data = {};
+                        addAntiForgeryToken(data);
+                        return data;
+        }
+    </script>
+</div>
+
+
+
+
+
+

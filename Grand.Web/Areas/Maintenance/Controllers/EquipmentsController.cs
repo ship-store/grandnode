@@ -266,7 +266,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 {
                     if (item.Vessel.ToLower() == VesselName.ToLower())
                     {
-                        gridModel = new DataSourceResult { Data = sparePart.ToList() };
+                        gridModel = new DataSourceResult { Data = sparePart.ToList().Where(x=> x.EquipmentCode == selectedEquipment.Sub1_number) };
                         
                     }
                     
