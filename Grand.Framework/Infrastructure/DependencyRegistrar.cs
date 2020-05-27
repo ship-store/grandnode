@@ -168,6 +168,7 @@ namespace Grand.Framework.Infrastructure
             builder.RegisterType<ReportService>().As<IReportService>().InstancePerLifetimeScope();
             builder.RegisterType<UnplannedJobService>().As<IUnplannedJobService>().InstancePerLifetimeScope();
             builder.RegisterType<MakerService>().As<IMakerService>().InstancePerLifetimeScope();
+           
             builder.RegisterType<MakerService1>().As<IMakerService1>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentTypeService>().As<IEquipmentTypeService>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentService>().As<IEquipmentService>().InstancePerLifetimeScope();

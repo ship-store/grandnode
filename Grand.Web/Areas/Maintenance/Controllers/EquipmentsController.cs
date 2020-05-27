@@ -250,6 +250,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> ReadSpareParts(DataSourceRequest command, string selectedEquipmentCode)
         {
             DataSourceResult gridModel = null;
+              List<SparepartForDisplay> sp = new List<SparepartForDisplay>();
+          
+
             var sparePart = new List<Sparepart> { };
             try
             {
@@ -266,12 +269,23 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 {
                     if (item.Vessel.ToLower() == VesselName.ToLower())
                     {
-                        gridModel = new DataSourceResult { Data = sparePart.ToList().Where(x=> x.EquipmentCode == selectedEquipment.Sub1_number) };
-                        
+                        //gridModel = new DataSourceResult { Data = sparePart.ToList().Where(x=> x.EquipmentCode == selectedEquipment.Sub1_number) };
+                        sp.Add(new SparepartForDisplay() {
+                            EquipmentName = item.EquipmentName,
+                            EquipmentCode = item.EquipmentCode,
+                            SPAR_PARTS_DESCRIPTION = item.SPAR_PARTS_DESCRIPTION,
+                            PART_NUMBER=item.PART_NUMBER,
+                            DRAWING_NO=item.DRAWING_NO,
+                            SPECIFICATION=item.SPECIFICATION,
+                            POSITION_NUMBER=item.POSITION_NUMBER
+                        });
+                       
                     }
                     
                 }
+                gridModel = new DataSourceResult { Data = sp.ToList() };
                 return Json(gridModel);
+
 
             }
             catch (System.Exception)

@@ -17,9 +17,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
     [Area("Maintenance")]
     public class MdmController : BaseAdminController
     {
-        private readonly IMakerService _makerService;
+       
         private readonly IEquipmentTypeService _equipmentTypeService;
         private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
+        private readonly IMakerService _makerService;
 
         private readonly IMakerService1 _makerService1;
         private readonly IMakerViewModelService _makerViewModelService;
@@ -32,7 +33,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._makerService1 = _makerService1;
             this._equipmentTypeService = _equipmentTypeService;
             this._equipmentTypeViewModelService = _equipmentTypeViewModelService;
-        }
+             }
 
         // list
         public IActionResult Index() => RedirectToAction("List");
@@ -85,6 +86,13 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _makerViewModelService.PrepareMakerModel(addNewMaker, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AddReportedByDetails(ReportedByModel addNewReportedBy)
+        //{
+        //    await _reportedByViewModelService.PrepareReportedByModel(addNewReportedBy, "", true);
+        //    return RedirectToAction("MdmList", "Mdm");
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddEquipmentTypeDetails(EquipmentTypeModel addNewEquipmentType)
