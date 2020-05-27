@@ -89,6 +89,8 @@ namespace Grand.Web.Infrastructure
 
             //Maker Service
             builder.RegisterType<MakerViewModelService>().As<IMakerViewModelService>().InstancePerLifetimeScope();
+            builder.RegisterType<EquipmentTypeViewModelService>().As<IEquipmentTypeViewModelService>().InstancePerLifetimeScope();
+
             builder.RegisterType<MakerViewModelService1>().As<IMakerViewModelService1>().InstancePerLifetimeScope();
             //Equipment Service
             builder.RegisterType<ImportFileService>().As<IImportFileService>().InstancePerLifetimeScope();

@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Grand.Web.Areas.Maintenance.Views.Maker
 {
-    //public class AddMakerModel : PageModel
-    //{
-    //    public void OnGet()
-    //    {
-    //    }
-    //}
+    public class AddMakerModel : PageModel
+    {
+        public void OnGet()
+        {
+        }
+    }
 }
