@@ -27,6 +27,7 @@ using Grand.Services.Customers;
 using Grand.Services.Directory;
 using Grand.Services.Discounts;
 using Grand.Services.Equipments;
+using Grand.Services.EquipmentType;
 using Grand.Services.ExportImport;
 using Grand.Services.Forums;
 using Grand.Services.Helpers;
@@ -167,7 +168,9 @@ namespace Grand.Framework.Infrastructure
             builder.RegisterType<ReportService>().As<IReportService>().InstancePerLifetimeScope();
             builder.RegisterType<UnplannedJobService>().As<IUnplannedJobService>().InstancePerLifetimeScope();
             builder.RegisterType<MakerService>().As<IMakerService>().InstancePerLifetimeScope();
+           
             builder.RegisterType<MakerService1>().As<IMakerService1>().InstancePerLifetimeScope();
+            builder.RegisterType<EquipmentTypeService>().As<IEquipmentTypeService>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentService>().As<IEquipmentService>().InstancePerLifetimeScope();
             builder.RegisterType<JobplanService>().As<IJobplanService>().InstancePerLifetimeScope();
             builder.RegisterType<SparepartService>().As<ISparepartService>().InstancePerLifetimeScope();

@@ -1,7 +1,6 @@
 ﻿using Grand.Core.Domain.MakerEntity;
 using Grand.Framework.Kendoui;
-
-
+using Grand.Services.EquipmentType;
 using Grand.Services.Maker;
 
 using Grand.Web.Areas.Admin.Controllers;
@@ -18,17 +17,23 @@ namespace Grand.Web.Areas.Maintenance.Controllers
     [Area("Maintenance")]
     public class MdmController : BaseAdminController
     {
+       
+        private readonly IEquipmentTypeService _equipmentTypeService;
+        private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
         private readonly IMakerService _makerService;
+
         private readonly IMakerService1 _makerService1;
         private readonly IMakerViewModelService _makerViewModelService;
         private readonly IMakerViewModelService1 _makerViewModelService1;
-        public MdmController(IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
+        public MdmController(IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
         {
             this._makerViewModelService = _makerViewModelService;
             this._makerService = _makerService;
             this._makerViewModelService1 = _makerViewModelService1;
             this._makerService1 = _makerService1;
-        }
+            this._equipmentTypeService = _equipmentTypeService;
+            this._equipmentTypeViewModelService = _equipmentTypeViewModelService;
+             }
 
         // list
         public IActionResult Index() => RedirectToAction("List");
@@ -79,6 +84,20 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> AddMakerDetails(MakerModel addNewMaker)
         {
             await _makerViewModelService.PrepareMakerModel(addNewMaker, "", true);
+            return RedirectToAction("MdmList", "Mdm");
+        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AddReportedByDetails(ReportedByModel addNewReportedBy)
+        //{
+        //    await _reportedByViewModelService.PrepareReportedByModel(addNewReportedBy, "", true);
+        //    return RedirectToAction("MdmList", "Mdm");
+        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddEquipmentTypeDetails(EquipmentTypeModel addNewEquipmentType)
+        {
+            await _equipmentTypeViewModelService.PrepareEquipmentTypeModel(addNewEquipmentType, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
 
