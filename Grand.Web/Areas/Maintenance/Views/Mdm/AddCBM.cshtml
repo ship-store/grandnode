@@ -1,0 +1,73 @@
+﻿
+    <script>
+     function goBack()
+     {
+       window.history.back();
+     }
+    </script>
+@*test*@
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+
+
+            <div class="header">
+
+                <h2>
+                    <a onclick="goBack()" class="fa fa-arrow-circle-left"></a>
+                    Maker
+                </h2>
+
+            </div>
+            <br>
+            <div class="body">
+                <form action="AddMakerDetails" method="post">
+
+                    <div class="container-fluid" style="width: 80%;">
+                        <div class="table-responsive">
+
+                            <table class="table">
+
+                                <tr>
+                                    <td><label for="EquipmentName">Name</label></td>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="Name"/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><label for="Code">Code</label></td>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="Code" />
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="Country">Country</label></td>
+                                    <td>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="Country" />
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    @Html.AntiForgeryToken()
+                                    <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Add" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
