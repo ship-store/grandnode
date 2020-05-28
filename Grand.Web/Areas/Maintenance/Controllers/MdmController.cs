@@ -30,7 +30,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IMakerService1 _makerService1;
         private readonly IMakerViewModelService _makerViewModelService;
         private readonly IMakerViewModelService1 _makerViewModelService1;
-        public MdmController(IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
+        public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
         {
             this._makerViewModelService = _makerViewModelService;
             this._makerService = _makerService;
@@ -40,7 +40,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._equipmentTypeViewModelService = _equipmentTypeViewModelService;
             this._jobTypeService = _jobTypeService;
             this._jobTypeViewModelService = _jobTypeViewModelService;
-
+            this._reportedByService = _reportedByService;
+            this._reportedByViewModelService = _reportedByViewModelService;
              }
 
         // list
@@ -131,6 +132,14 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return RedirectToAction("MdmList", "Mdm");
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddReportedByDetails(ReportedByModel addNewReportedBy)
+        {
+            await _reportedByViewModelService.PrepareReportedByModel(addNewReportedBy, "", true);
+            return RedirectToAction("MdmList", "Mdm");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> ReadEquipmentTypeDetails(DataSourceRequest command, EquipmentTypeModel model)
         {
             var equipmentTypelist = await _equipmentTypeService.GetAllEquipmentTypes("", command.Page, command.PageSize);
@@ -163,13 +172,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _makerViewModelService1.PrepareMakerModel(addNewMaker1, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddReportedByDetails(ReportedByModel addNewReportedBy)
-        {
-            await _reportedByViewModelService.PrepareReportedByModel(addNewReportedBy, "", true);
-            return RedirectToAction("MdmList", "Mdm");
-        }
+
         [HttpPost]
         public async Task<IActionResult> ReadMakerDetails(DataSourceRequest command, MakerModel model)
         {
