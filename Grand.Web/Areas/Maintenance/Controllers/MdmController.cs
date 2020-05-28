@@ -3,7 +3,7 @@ using Grand.Framework.Kendoui;
 using Grand.Services.EquipmentType;
 using Grand.Services.JobType;
 using Grand.Services.Maker;
-
+using Grand.Services.ReportedBy;
 using Grand.Web.Areas.Admin.Controllers;
 
 using Grand.Web.Areas.Maintenance.DomainModels;
@@ -20,6 +20,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
     {
         private readonly IJobTypeService _jobTypeService;
         private readonly IJobTypeViewModelService _jobTypeViewModelService;
+        private readonly IReportedByService _reportedByService;
+        private readonly IReportedByViewModelService1 _reportedByViewModelService;
 
         private readonly IEquipmentTypeService _equipmentTypeService;
         private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
@@ -70,6 +72,12 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return View();
         }
         [HttpGet]
+        public async Task<IActionResult> AddReportedBy()
+        {
+            var model = await Task.FromResult<object>(null);
+            return View();
+        }
+        [HttpGet]
         public async Task<IActionResult> AddEquipmentType()
         {
             var model = await Task.FromResult<object>(null);
@@ -113,13 +121,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _jobTypeViewModelService.PrepareJobTypeModel(addNewJobType, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> AddReportedByDetails(ReportedByModel addNewReportedBy)
-        //{
-        //    await _reportedByViewModelService.PrepareReportedByModel(addNewReportedBy, "", true);
-        //    return RedirectToAction("MdmList", "Mdm");
-        //}
+       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddEquipmentTypeDetails(EquipmentTypeModel addNewEquipmentType)
@@ -133,6 +136,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var equipmentTypelist = await _equipmentTypeService.GetAllEquipmentTypes("", command.Page, command.PageSize);
             //List<MakerModel> makerlist = new List<MakerModel>();
             var gridModel = new DataSourceResult { Data = equipmentTypelist.ToList() };
+            return Json(gridModel);
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> ReadReportedByDetails(DataSourceRequest command, ReportedByModel model)
+        {
+            var reportedBylist = await _reportedByService.GetAllReportedBy("", command.Page, command.PageSize);
+            //List<MakerModel> makerlist = new List<MakerModel>();
+            var gridModel = new DataSourceResult { Data = reportedBylist.ToList() };
             return Json(gridModel);
 
         }
@@ -151,7 +163,13 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _makerViewModelService1.PrepareMakerModel(addNewMaker1, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddReportedByDetails(ReportedByModel addNewReportedBy)
+        {
+            await _reportedByViewModelService.PrepareReportedByModel(addNewReportedBy, "", true);
+            return RedirectToAction("MdmList", "Mdm");
+        }
         [HttpPost]
         public async Task<IActionResult> ReadMakerDetails(DataSourceRequest command, MakerModel model)
         {
