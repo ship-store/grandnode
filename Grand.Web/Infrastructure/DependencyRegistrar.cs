@@ -86,6 +86,8 @@ namespace Grand.Web.Infrastructure
 
             //unplanned Service
             builder.RegisterType<UnplannedJobViewModelService>().As<IUnplannedJobViewModelService>().InstancePerLifetimeScope();
+            //Job type
+            builder.RegisterType<JobTypeViewModelService>().As<IJobTypeViewModelService>().InstancePerLifetimeScope();
 
             //Maker Service
             builder.RegisterType<MakerViewModelService>().As<IMakerViewModelService>().InstancePerLifetimeScope();
