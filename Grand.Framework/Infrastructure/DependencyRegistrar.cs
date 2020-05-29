@@ -49,6 +49,7 @@ using Grand.Services.Polls;
 using Grand.Services.PushNotifications;
 using Grand.Services.register;
 using Grand.Services.Report;
+using Grand.Services.ReportedBy;
 using Grand.Services.Security;
 using Grand.Services.Seo;
 using Grand.Services.Shipping;
@@ -170,7 +171,8 @@ namespace Grand.Framework.Infrastructure
             builder.RegisterType<ReportService>().As<IReportService>().InstancePerLifetimeScope();
             builder.RegisterType<UnplannedJobService>().As<IUnplannedJobService>().InstancePerLifetimeScope();
             builder.RegisterType<MakerService>().As<IMakerService>().InstancePerLifetimeScope();
-           
+            builder.RegisterType<ReportedByService>().As<IReportedByService>().InstancePerLifetimeScope();
+
             builder.RegisterType<MakerService1>().As<IMakerService1>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentTypeService>().As<IEquipmentTypeService>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentService>().As<IEquipmentService>().InstancePerLifetimeScope();

@@ -88,6 +88,8 @@ namespace Grand.Web.Infrastructure
             builder.RegisterType<UnplannedJobViewModelService>().As<IUnplannedJobViewModelService>().InstancePerLifetimeScope();
             //Job type
             builder.RegisterType<JobTypeViewModelService>().As<IJobTypeViewModelService>().InstancePerLifetimeScope();
+            //reported by
+            builder.RegisterType<ReportedByViewModelService1>().As<IReportedByViewModelService1>().InstancePerLifetimeScope();
 
             //CBM
             builder.RegisterType<CbmViewModelService>().As<ICbmViewModelService>().InstancePerLifetimeScope();
