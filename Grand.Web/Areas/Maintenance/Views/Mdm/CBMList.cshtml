@@ -11,26 +11,27 @@
 <div class="row" id="SearchSection">
     <div class="col-md-12">
         @*<div class="x_panel light form-fit">*@
-            <div class="x_title">
-                <div class="caption">
-                    <i class="fa fa-cubes"></i>
-                    CBM List
-                </div>
-                <div class="actions btn-group btn-group-devided">
-                    @*<a href="@Url.Action("AddVessel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs">Job Postpone @T("Admin.Common.AddNew") </span></a>*@
-                    <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                    <a href="@Url.Action("AddCBM")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"> </span></a>
-                    <a href="@Url.Action("AddCBM")" class="btn btn-success"><i class="fa fa-pencil-square-o"></i><span class="hidden-xs"> </span></a>
-                    <a href="@Url.Action("AddCBM")" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> </span></a>
-                    @*<button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>*@
-                    @*<button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>*@
-                </div>
+        <div class="x_title">
+            <div class="caption">
+                <i class="fa fa-cubes"></i>
+                CBM List
+            </div>
+            <div class="actions btn-group btn-group-devided">
+                @*<a href="@Url.Action("AddVessel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs">Job Postpone @T("Admin.Common.AddNew") </span></a>*@
+                <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+                <a href="@Url.Action("AddCBM")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"> </span></a>
+                <a href="#" class="btn btn-success"><i class="fa fa-pencil-square-o"></i><span class="hidden-xs"> </span></a>
+                <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> </span></a>
 
+                @*<button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>*@
+                @*<button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>*@
             </div>
 
-            <div class="x_content">
-                <div id="vessel-grid"></div>
-            </div>
+        </div>
+
+        <div class="x_content">
+            <div id="vessel-grid"></div>
+        </div>
         @*</div>*@
     </div>
 </div>
@@ -47,7 +48,7 @@
 
                          read:
                              {
-                                url: "@Html.Raw(Url.Action("ReadMakerDetails", "Mdm","Maintenance"))",
+                                url: "@Html.Raw(Url.Action("ReadCBMDetails", "Mdm","Maintenance"))",
                                 type: "POST",
                                 dataType: "json",
                                 data: additionalData
@@ -82,7 +83,7 @@
                                     validation: { required: true },
                                     editable: false,
                                 },
-                                    
+
                             }
                         }
                     },
@@ -100,21 +101,12 @@
                 allowCopy: true,
                 columns: [
                     {
-                            field: "Name",
+                        field: "Cbm_Name",
                             title: "Name",
                             width: "100px"
                         },
 
-                        {
-                            field: "Code",
-                            title: "Code",
-                            width: "100px"
-                        },
-                        {
-                            field: "Country",
-                            title: "Country",
-                            width: "100px"
-                        }
+
                         ],
                     editable: "inline"
 

@@ -3,7 +3,7 @@ using Grand.Framework.Kendoui;
 using Grand.Services.EquipmentType;
 using Grand.Services.JobType;
 using Grand.Services.Maker;
-
+using Grand.Services.Cbm;
 using Grand.Web.Areas.Admin.Controllers;
 
 using Grand.Web.Areas.Maintenance.DomainModels;
@@ -20,7 +20,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
     {
         private readonly IJobTypeService _jobTypeService;
         private readonly IJobTypeViewModelService _jobTypeViewModelService;
-
+        private readonly ICbmService _cbmService;
+        private readonly ICbmViewModelService _cbmViewModelService;
         private readonly IEquipmentTypeService _equipmentTypeService;
         private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
         private readonly IMakerService _makerService;
@@ -28,7 +29,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IMakerService1 _makerService1;
         private readonly IMakerViewModelService _makerViewModelService;
         private readonly IMakerViewModelService1 _makerViewModelService1;
-        public MdmController(IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
+        public MdmController(IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1,ICbmService _cbmService,ICbmViewModelService _cbmViewModelService)
         {
             this._makerViewModelService = _makerViewModelService;
             this._makerService = _makerService;
@@ -38,8 +39,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._equipmentTypeViewModelService = _equipmentTypeViewModelService;
             this._jobTypeService = _jobTypeService;
             this._jobTypeViewModelService = _jobTypeViewModelService;
+            this._cbmService = _cbmService;
+            this._cbmViewModelService = _cbmViewModelService;
 
-             }
+        }
 
         // list
         public IActionResult Index() => RedirectToAction("List");
@@ -62,7 +65,14 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var makers = await _makerService.GetAllMakers("", 0, 500, true);
             return View(makers);      
         }
-      
+
+        [HttpGet]
+        public async Task<IActionResult> AddCBM()
+        {
+            var model = await Task.FromResult<object>(null);
+            return View();
+        }
+
         [HttpGet]
         public async Task<IActionResult> AddMaker()
         {
@@ -108,6 +118,14 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddCBMDetails(CBMModel addNewCBM)
+        {
+            await _cbmViewModelService.PrepareCbmModel(addNewCBM, "", true);
+            return RedirectToAction("MdmList", "Mdm");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddJobTypeDetails(JobTypeModel addNewJobType)
         {
             await _jobTypeViewModelService.PrepareJobTypeModel(addNewJobType, "", true);
@@ -136,6 +154,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(gridModel);
 
         }
+
         [HttpPost]
         public async Task<IActionResult> ReadJobTypeDetails(DataSourceRequest command, JobTypeModel model)
         {
@@ -145,6 +164,17 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(gridModel);
 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ReadCBMDetails(DataSourceRequest command, CBMModel model)
+        {
+            var cbmlist = await _cbmService.GetAllCbm("", command.Page, command.PageSize);
+            //List<MakerModel> makerlist = new List<MakerModel>();
+            var gridModel = new DataSourceResult { Data = cbmlist.ToList() };
+            return Json(gridModel);
+
+        }
+
         [HttpGet]
         public async Task<IActionResult> AddModelDetails(MakerModel1 addNewMaker1)
         {
