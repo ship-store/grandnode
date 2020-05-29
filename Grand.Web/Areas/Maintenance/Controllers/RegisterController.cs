@@ -73,7 +73,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             {
                 Register register = new Register() { Email = model.Email, Password = model.Password, Firstname = model.Firstname };
                 var RegList = await _registerService.PrepareLogin(register);
-                if (RegList.ToList().Find(x => x.Email == model.Email && x.Password == model.Password) != null)
+                if (RegList.ToList().Find(x => x.Email.ToLower() == model.Email.ToLower() && x.Password ==model.Password) != null)
                 {
                     //Sesion
                     HttpContext.Session.SetString("email", model.Email);
