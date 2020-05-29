@@ -99,7 +99,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult> AddJobStatatus()
+        public async Task<IActionResult> AddJobStatus()
         {
             var model = await Task.FromResult<object>(null);
             return View();
