@@ -90,6 +90,8 @@ namespace Grand.Web.Infrastructure
             builder.RegisterType<JobTypeViewModelService>().As<IJobTypeViewModelService>().InstancePerLifetimeScope();
             //reported by
             builder.RegisterType<ReportedByViewModelService1>().As<IReportedByViewModelService1>().InstancePerLifetimeScope();
+            //job status
+            builder.RegisterType<JobStatusViewModelService>().As<IJobStatusViewModelService>().InstancePerLifetimeScope();
 
             //Maker Service
             builder.RegisterType<MakerViewModelService>().As<IMakerViewModelService>().InstancePerLifetimeScope();
