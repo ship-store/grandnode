@@ -59,21 +59,22 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public IActionResult Index() => RedirectToAction("List");
 
         [HttpGet]
-        public async  Task<IActionResult> AddEquipment(string equipment_Code)
+        public async  Task<IActionResult> AddEquipment(string equipment_Code, string sub_number)
         {
 
             var EquipmentTypeList=await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
+            ViewBag.subNumber = sub_number;
             ViewBag.equipment_Code = equipment_Code;
-             ViewBag.VesselName = HttpContext.Session.GetString("VesselName").ToString();
+            ViewBag.VesselName = HttpContext.Session.GetString("VesselName").ToString();
             return View(EquipmentTypeList.ToList());
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddEquipments(string equipmentCode)
+        public async Task<IActionResult> AddEquipments(string equipmentCode,string sub_number)
         {
 
             await Task.FromResult(0);
-          return Json(Url.Action("AddEquipment", "Equipment", new { equipment_Code = equipmentCode }));
+          return Json(Url.Action("AddEquipment", "Equipment", new { equipment_Code = equipmentCode , subNumber= sub_number }));
         }
 
         [HttpPost]
