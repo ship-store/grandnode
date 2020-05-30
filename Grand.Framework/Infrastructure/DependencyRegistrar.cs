@@ -35,6 +35,7 @@ using Grand.Services.Infrastructure;
 using Grand.Services.Installation;
 using Grand.Services.JobMaster;
 using Grand.Services.Jobplan;
+using Grand.Services.JobStatus;
 using Grand.Services.JobType;
 using Grand.Services.Knowledgebase;
 using Grand.Services.Localization;
@@ -172,6 +173,7 @@ namespace Grand.Framework.Infrastructure
             builder.RegisterType<UnplannedJobService>().As<IUnplannedJobService>().InstancePerLifetimeScope();
             builder.RegisterType<MakerService>().As<IMakerService>().InstancePerLifetimeScope();
             builder.RegisterType<ReportedByService>().As<IReportedByService>().InstancePerLifetimeScope();
+            builder.RegisterType<JobStatusService>().As<IJobStatusService>().InstancePerLifetimeScope();
 
             builder.RegisterType<MakerService1>().As<IMakerService1>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentTypeService>().As<IEquipmentTypeService>().InstancePerLifetimeScope();
