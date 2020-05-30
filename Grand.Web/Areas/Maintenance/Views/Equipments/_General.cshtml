@@ -1,18 +1,24 @@
 ﻿
 
-
-
-
-
-
-
-
-
-    <div class="body" id="_general">
+<div class="body" id="_general">
         <div class="demo-masked-input">
-            <div class="row clearfix">
-                <div class="col-md-10" style="float:left">
-                    <button class="btn btn-success makeEditable col-md-offset-10 c" type="submit" name="Edit" style="width:90px;position:relative;right:-25px"><i class="fa fa-pencil"></i><span class="hidden-xs"> Edit  </span></button>
+            <div class="row clearfix border-secondary">
+
+                <div class="col-md-3" style="float:left">
+                    <a  href="#" onclick="AddEquipment(this); return false;"
+                       
+                       class="btn btn-success"                         
+                        style="width:auto;position:relative;right:-25px">
+                        <i class="fa fa-pencil"></i>
+                        <span class="hidden-xs">AddEquipment</span>
+                    </a>
+                </div>
+                <div class="col-md-4" style="float:left">
+                    <button class="btn btn-success makeEditable col-md-offset-10 c"
+                            type="submit" name="Edit" style="width:90px;position:relative;right:-25px">
+                        <i class="fa fa-pencil"></i>
+                        <span class="hidden-xs"> Edit</span>
+                    </button>
 
                 </div>
                 <form action="GeneralEdit" method="post">
@@ -20,6 +26,7 @@
 
                         <input type="submit" value="Save" class="btn btn-success " style="width:90px" />
                     </div>
+
 
                     <div class="col-md-4">
                         <b>Equipment Code</b>
@@ -222,6 +229,31 @@
             });
             $(".silpa").click(function () {
                 $('input:text').attr("readonly", "readonly");
-                //});
-            });
+            });//this
+
+
+       
+
+
+        });
+
+
+        function AddEquipment(data) {
+            
+
+      var url = location.origin + '/Maintenance/Equipments/AddEquipment?equipment_Code=' + window.selectedEquipmentCode;
+            window.location.href = url;
+           
+            @*$.ajax({
+                type: "GET",
+                url: "@Url.Action("AddEquipments")" + "?equipmentCode=" + window.selectedEquipmentCode,
+               crossDomain: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (datas) {
+                    var data = JSON.parse(datas);
+                     window.location.href = datas;
+                }
+            });*@
+        }
     </script>

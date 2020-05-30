@@ -29,7 +29,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
     public class EquipmentsController : BaseAdminController
     {
 
-
+        private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
         private readonly IVesselService _vesselService;
         private readonly IHostingEnvironment env;
         private readonly IVesselViewModelService _vesselViewModelService;
@@ -39,7 +39,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly ISparepartViewModelService _sparepartViewModelService;
         private readonly IJobPlanViewModelService _jobPlanViewModelService;
         public EquipmentsController(IJobPlanViewModelService _jobPlanViewModelService, ISparepartViewModelService _sparepartViewModelService, IJobplanService _jobplanService, IVesselViewModelService _vesselViewModelService, IEquipmentService _equipmentService, IVesselService _vesselService, IHostingEnvironment env,
-            ISparepartService _sparepartService)
+            ISparepartService _sparepartService,
+            IEquipmentTypeViewModelService _equipmentTypeViewModelService
+            )
         {
 
             this._vesselViewModelService = _vesselViewModelService;
@@ -50,10 +52,38 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._sparepartViewModelService = _sparepartViewModelService;
             this._sparepartService = _sparepartService;
             this._jobPlanViewModelService = _jobPlanViewModelService;
+            this._equipmentTypeViewModelService = _equipmentTypeViewModelService;
         }
 
 
         public IActionResult Index() => RedirectToAction("List");
+
+        [HttpGet]
+        public async  Task<IActionResult> AddEquipment(string equipment_Code)
+        {
+
+            var EquipmentTypeList=await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
+            ViewBag.equipment_Code = equipment_Code;
+             ViewBag.VesselName = HttpContext.Session.GetString("VesselName").ToString();
+            return View(EquipmentTypeList.ToList());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddEquipments(string equipmentCode)
+        {
+
+            await Task.FromResult(0);
+          return Json(Url.Action("AddEquipment", "Equipment", new { equipment_Code = equipmentCode }));
+        }
+
+        [HttpPost]
+        public IActionResult AddEquipment(Equipment newEquipment)
+        {
+
+            _equipmentService.InsertEquipment(newEquipment);
+            return View();
+        }
+
 
         public async Task<IActionResult> List(string equipmentCode)
         {
@@ -121,11 +151,19 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> GeneralEdit(Equipment vmodel, string id, string code, string remark, string safety, string maker, string model, string eqtype, string drawno, string dept, string location, string eqstatus, string type)
+        public async Task<IActionResult> GeneralEdit(Equipment vmodel, string id, string code,
+            string remark, string safety, 
+            string maker, string model,
+            string eqtype, string drawno, 
+            string dept, string location, 
+            string eqstatus, string type)
         {
             var selectedEquipments = await _equipmentService.GetAllEquipment("", 0, 500, true);
 
-            var selectedEquipment = selectedEquipments.ToList().Where(src => src.Sub1_number == code || src.Sub2_number == code || src.Sub3_number == code || src.Sub4_number == code).First();
+            var selectedEquipment = selectedEquipments.ToList()
+                .Where(src => src.Sub1_number == code || 
+                src.Sub2_number == code || src.Sub3_number == code || 
+                src.Sub4_number == code).First();
 
             selectedEquipment.Remark = remark;
             selectedEquipment.Safety_level = safety;

@@ -249,6 +249,8 @@
     function jsFunction(link) {
 
         window.selectedEquipmentCode = link.text.split("-")[0].trim();
+        //window.selctedEquipmentName = link.text.split("_")[1].trim();
+        alert("Your Equipment Code" + window.selectedEquipmentCode );
         $("#grid").data("kendoGrid").dataSource.read();
         $("#grid3").data("kendoGrid").dataSource.read();
         $.ajax({
@@ -261,9 +263,11 @@
                 var data = JSON.parse(datas);
                 //alert("VesselName= " + data.Vessel);
                 //alert("2nd"+posts.Vessel);
-                $("#id17").val(data.Sub1_number);
+              //  $("#id17").val(data.Sub1_number);
+                $("#id17").val(window.selectedEquipmentCode);
                 $("#id18").val(data.Sub2_number);
                 $("#id1").val(data.Sub1_description);
+                //$("#id1").val(window.selctedEquipmentName);
                 $("#id2").val(data.Sub2_description);
                 $("#id3").val(data.Sub3_number);
                // $("#id4").val(Sub5_description);
