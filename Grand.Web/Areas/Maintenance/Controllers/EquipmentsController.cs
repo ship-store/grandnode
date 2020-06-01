@@ -81,8 +81,39 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public IActionResult AddEquipment(Equipment newEquipment)
         {
 
+            //
+
+            if (newEquipment.Sub1_number.Length == 3)//if(sub_number==631)
+            {
+
+                newEquipment.Sub1_number = newEquipment.Sub1_number;
+                newEquipment.Sub1_description = newEquipment.Sub1_description;
+
+            }
+            else if (newEquipment.Sub1_number.Length == 6)//if(sub_number==631.01)
+            {
+                newEquipment.Sub2_number = newEquipment.Sub1_number;
+                newEquipment.Sub2_description = newEquipment.Sub1_description;
+
+            }
+            else if (newEquipment.Sub1_number.Length == 8)//if(sub_number==631.01.01)
+            {
+                newEquipment.Sub3_number = newEquipment.Sub1_number;
+                newEquipment.Sub3_description = newEquipment.Sub1_description;
+            }
+            else if (newEquipment.Sub1_number.Length == 10)//if(sub_number==631.01.01.01)
+            {
+                newEquipment.Sub4_number = newEquipment.Sub1_number;
+                newEquipment.Sub4_description = newEquipment.Sub1_description;
+            }
+            else if (newEquipment.Sub1_number.Length == 12)//if(sub_number==631.01.01.01)
+            {
+                newEquipment.Sub5_number = newEquipment.Sub1_number;
+                newEquipment.Sub5_description = newEquipment.Sub1_description;
+            }
+
             _equipmentService.InsertEquipment(newEquipment);
-            return View();
+            return RedirectToAction("Index");
         }
 
 
