@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Grand.Core.Domain.MakerEntity.Maker>
+﻿
 
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
@@ -14,12 +14,12 @@
         <div class="x_title">
             <div class="caption">
                 <i class="fa fa-cubes"></i>
-                Maker Model
+                CBM List
             </div>
             <div class="actions btn-group btn-group-devided">
                 @*<a href="@Url.Action("AddVessel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs">Job Postpone @T("Admin.Common.AddNew") </span></a>*@
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                <a href="@Url.Action("AddMakerModel")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"></span></a>
+                <a href="@Url.Action("AddCBM")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"> </span></a>
                 <a href="#" class="btn btn-success"><i class="fa fa-pencil-square-o"></i><span class="hidden-xs"> </span></a>
                 <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> </span></a>
 
@@ -38,17 +38,17 @@
 
 <div id="example">
     <antiforgery-token />
-    <div id="MakerModelGrid"></div>
+    <div id="CBMGrid"></div>
     <script>
         $(document).ready(function () {
-            $("#MakerModelGrid").kendoGrid({
+            $("#CBMGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
 
                          read:
                              {
-                                url: "@Html.Raw(Url.Action("ReadMakerModelDetails", "Mdm","Maintenance"))",
+                                url: "@Html.Raw(Url.Action("ReadCBMDetails", "Mdm","Maintenance"))",
                                 type: "POST",
                                 dataType: "json",
                                 data: additionalData
@@ -101,21 +101,12 @@
                 allowCopy: true,
                 columns: [
                     {
-                            field: "Maker",
-                            title: "Maker",
+                        field: "Cbm_Name",
+                            title: "Name",
                             width: "100px"
                         },
 
-                        {
-                            field: "Model",
-                            title: "Model",
-                            width: "100px"
-                        },
-                        {
-                            field: "Remark",
-                            title: "Remark",
-                            width: "100px"
-                        }
+
                         ],
                     editable: "inline"
 

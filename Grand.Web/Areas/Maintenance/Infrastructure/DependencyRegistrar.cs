@@ -52,6 +52,7 @@ namespace Grand.Web.Areas.Maintenance.Infrastructure
 
             builder.RegisterType<VesselViewModelService>().As<IVesselViewModelService>().InstancePerLifetimeScope();
             builder.RegisterType<RegisterViewModelService>().As<IRegisterViewModelService>().InstancePerLifetimeScope();
+
         }
         public int Order {
             get { return 3; }

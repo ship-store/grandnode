@@ -51,17 +51,12 @@
     }
 
 }
-
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.mobile.min.css" />
 
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
-
-
-@*<link rel="stylesheet" href="~/Maintenance/scripts/model/modalcss.css">*@
-
 
 
 <div class="row" id="SearchSection">
@@ -71,10 +66,12 @@
                 <div class="caption">
                     <i class="fa fa-cubes"></i>
 
-                    Unplanned Jobs
+                    Breakdown Jobs
                 </div>
+
                 <div class="actions btn-group btn-group-devided">
                     <a href="@Url.Action("AddUnplannedJobs")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+
                     <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
                     <button type="button" name="delete-selected" id="delete-selected" class="btn red">
                         <i class="fa fa-trash-o"></i>
@@ -104,11 +101,6 @@
     <antiforgery-token />
     <div id="grid"></div>
     <script>
-
-        var Status = [
-        { StatusId: 1, name: "Pending" },
-        { StatusId: 2, name: "In Progress" }
-        ];
 
         $(document).ready(function () {
             $("#grid").kendoGrid({
@@ -257,7 +249,7 @@
             });
 
             // calling  via jquery
-            $.get("http://localhost:16592/Maintenance/UnplannedJobs/DeleteSelected?selectedIds='" + chkArray + "'");
+            $.get("http://localhost:16592/Maintenance/BreakdownJob/DeleteSelected?selectedIds='" + chkArray + "'");
             window.location.reload();
             return false;
         });
@@ -313,7 +305,7 @@
              $("#lblStatus").text(selectedItem.Status);
 
              var ename = selectedItem.EquipmentName;
-             var ecode = selectedItem.EquipmentCode;
+
              var jobOrder = selectedItem.JobOrder;
              var title = selectedItem.Title;
              var jobReportedDate = selectedItem.JobReportedDate;
@@ -321,7 +313,7 @@
              var Status = selectedItem.Status;
 
              document.getElementById("Ename").value = ename;
-             document.getElementById("ECode").value = ecode;
+
              document.getElementById("JobOrder").value = jobOrder;
              document.getElementById("Title").value = title;
              document.getElementById("JobReportedDate").value = jobReportedDate;
@@ -368,6 +360,9 @@
 
         })
     </script>
+
+
+
 </div>
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog" style="top:auto">
@@ -377,7 +372,7 @@
         <div class="modal-content" style="padding:40px">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">View Job Plan</h4>
+                <h4 class="modal-title">View Breakdown Job</h4>
             </div>
             <div class="modal-body">
 
@@ -414,22 +409,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="col-md-3">
-                                <b>Equipment Code</b>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="material-icons">turned_in_not</i>
-                                    </span>
-                                    <div class="form-line">
-                                        <input type="text" id="ECode" readonly value="" class="form-control money-euro" placeholder="">
-                                    </div>
-                                </div>
-                            </div>
-
-
-
 
                             <div class="col-md-3">
                                 <b>Title</b>
@@ -514,10 +493,6 @@
 </div>
 
 
-
-
-
-
 @* -------------------------------------------COmplete Modal------------------------------------------------------------------- *@
 
 <link rel="stylesheet" href="~/Maintenance/modal/style.css">
@@ -528,13 +503,13 @@
 
 <div class="modal fade  come-from-modal right" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width:400px">
-        <form action="EditItem2" method="post">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Complete Job</h4>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Complete Job</h4>
 
 
-                </div>
+            </div>
+            <form action="EditItem2" method="post">
                 <div class="modal-body" style="left:5%">
                     <div class="row clearfix">
                         <br />
@@ -559,16 +534,8 @@
                             </div>
                         </div>
                         <br /><br />
-                        <div class="col-md-12">
-                            <b>Equipment Code</b>
-                            <div class="input-group" style="width:90%">
 
-                                <div class="form-line">
-                                    <input type="text" id="ecode1" readonly value="" class="form-control time24" placeholder="">
-                                </div>
-                            </div>
-                        </div>
-                        <br /><br />
+
                         <div class="col-md-12">
                             <b>Title</b>
                             <div class="input-group" style="width:90%">
@@ -629,8 +596,8 @@
 
                     </div>
                 </div>
+            </form>
 
-            </div>
-        </form>
+        </div>
     </div>
 </div>

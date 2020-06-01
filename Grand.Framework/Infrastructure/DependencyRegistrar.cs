@@ -62,6 +62,7 @@ using Grand.Services.Topics;
 using Grand.Services.UnplannedJobs;
 using Grand.Services.Vendors;
 using Grand.Services.Vessel;
+using Grand.Services.Cbm;
 
 using Microsoft.AspNetCore.StaticFiles;
 using MongoDB.Driver;
@@ -178,7 +179,7 @@ namespace Grand.Framework.Infrastructure
             builder.RegisterType<EquipmentTypeService>().As<IEquipmentTypeService>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentService>().As<IEquipmentService>().InstancePerLifetimeScope();
             builder.RegisterType<JobTypeService>().As<IJobTypeService>().InstancePerLifetimeScope();
-
+            builder.RegisterType<CbmService>().As<ICbmService>().InstancePerLifetimeScope();
             builder.RegisterType<JobplanService>().As<IJobplanService>().InstancePerLifetimeScope();
             builder.RegisterType<SparepartService>().As<ISparepartService>().InstancePerLifetimeScope();
             builder.RegisterType<JobMasterService>().As<IJobMasterService>().InstancePerLifetimeScope();

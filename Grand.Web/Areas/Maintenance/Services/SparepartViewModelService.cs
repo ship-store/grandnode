@@ -26,7 +26,8 @@ namespace Grand.Web.Areas.Maintenance.Services
             {
                 var sparepart = new Sparepart();
 
-               
+                sparepart.EquipmentCode= addNewSparepart.EquipmentCode;
+
                 sparepart.EquipmentName = addNewSparepart.EquipmentName;
                 sparepart.SPAR_PARTS_DESCRIPTION = addNewSparepart.SPAR_PARTS_DESCRIPTION;
                 sparepart.PART_NUMBER = addNewSparepart.PART_NUMBER;
@@ -41,7 +42,8 @@ namespace Grand.Web.Areas.Maintenance.Services
             {
 
                 var sparepart = new Sparepart();
-             
+                sparepart.EquipmentCode = addNewSparepart.EquipmentCode;
+
                 sparepart.EquipmentName = addNewSparepart.EquipmentName;
                 sparepart.SPAR_PARTS_DESCRIPTION = addNewSparepart.SPAR_PARTS_DESCRIPTION;
                 sparepart.PART_NUMBER = addNewSparepart.PART_NUMBER;
