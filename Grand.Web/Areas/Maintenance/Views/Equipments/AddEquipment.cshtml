@@ -1,0 +1,189 @@
+﻿@model List<Grand.Core.Domain.EquipmentTypeEntity.EquipmentType>
+@{ 
+    var subNumber= @ViewBag.subNumber;
+   
+
+
+
+}
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+        <div class="header">
+            <h2>
+                Add New Equipment
+            </h2>
+
+            <ul class="header-dropdown m-r--5">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:void(0);">Action</a></li>
+                        <li><a href="javascript:void(0);">Another action</a></li>
+                        <li><a href="javascript:void(0);">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <div class="body">
+            <form action="AddEquipment" method="post" enctype="multipart/form-data">
+
+                <div class="container-fluid" style="width: 80%;">
+                    <div class="table-responsive">
+
+                        <table class="table">
+
+                            <tr>
+                                <td><label for="EquipmentName">Equipment Name</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="Vessel_name" required />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td><label for="EquipmentCode">Equipment Code</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="Vessel_name"
+                                                   value="@ViewBag.equipment_Code" required />
+                                            
+                                            <input type="hidden"  value="@ViewBag.subNumber"/>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="EquipmentType">Equipment Type</label></td>
+                                <td>
+                                    <select class="form-control show-tick chosen" id="chose" name="Equipment_Type" required>
+
+                                        <option value=""></option>
+                                        @foreach (var item in Model)
+                                        {
+                                            <option>@item.Equipment_type</option>
+                                        }
+
+                                        @*<option>Bulk</option>
+                                            <option>Tanker</option>
+                                            <option>LNG</option>
+                                            <option>Container</option>
+                                            <option>LPG</option>*@
+                                    </select>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><label for="Safety_level">Safety level</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="Safety_level" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><label for="Maker">Maker</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="Flag" required />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><label for="DrawingNo ">Drawing No </label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="Drawing_no " required />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Department">Department</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="Department" required />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><label for="Location">Location</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="Location" required />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Equipment_Status">Equipment Status</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="Equipment_Status" required />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Vessel">Vessel</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="Vessel"  value="@ViewBag.VesselName"required />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="Remark">Remark</label></td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="Remark" />
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                @Html.AntiForgeryToken()
+                                <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Add Equipment" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

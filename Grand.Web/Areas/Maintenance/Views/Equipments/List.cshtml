@@ -3,7 +3,6 @@
     @{
         var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
         var SessionVar = @HttpContextAccessor.HttpContext.Session.GetString("email");
-
         if (VesselName == null)
         {
             <script>
@@ -82,20 +81,23 @@
 
                         @foreach (var item in Model.AllEquipments.Where(f => f.Sub1_number != null && f.Sub1_description != null))
                         {
-
+                          
                             <li class="data">
 
                                 <span>
-                                    <a onclick="jsFunction(this); return false;" style="color: #7273a3">@item.Sub1_number-@item.Sub1_description</a>
+                                    <a onclick="jsFunction(this); return false;" style="color: #7273a3"
+                                       alt="Sub1_number-Sub1_description">@item.Sub1_number-@item.Sub1_description</a>
                                 </span>
 
                                 <ul>
                                     @foreach (var item2 in Model.AllEquipments.Where(f => f.Sub2_number != null && f.Sub2_description != null && f.Type == item.Type))
                                     {
+                                     
                                         <li class="data">
 
                                             <a class="id1" href="#" onclick="jsFunction(this); return false;"
-                                               style="color:#7273a3">@item2.Sub2_number-@item2.Sub2_description</a>
+                                               style="color:#7273a3" 
+                                               alt="Sub2_number-Sub2_description">@item2.Sub2_number-@item2.Sub2_description</a>
 
 
                                             <ul>
@@ -103,7 +105,8 @@
                                                 @foreach (var item3 in Model.AllEquipments.Where(f => f.Sub3_number != null && f.Sub3_description != null && f.Type == item2.Type))
                                                 {
                                                     <li class="data">
-                                                        <a onclick="jsFunction(this); return false;" style="color:#7273a3">@item3.Sub3_number-@item3.Sub3_description</a>
+                                                        <a onclick="jsFunction(this); return false;" style="color:#7273a3"
+                                                            alt="Sub3_number-Sub3_description">@item3.Sub3_number-@item3.Sub3_description</a>
                                                         <ul>
                                                         </ul>
 
@@ -246,9 +249,12 @@
     $(function () {
         $("#p1").hide();
     });
-    function jsFunction(link) {
-
-        window.selectedEquipmentCode = link.text.split("-")[0].trim();
+        function jsFunction(link) {          
+            window.selectedEquipmentCode = link.text.split("-")[0].trim();
+              window.sub_number = link.getAttribute("alt").split("-")[0].trim();
+               alert("Your Equipment Code" + window.sub_number);
+                $("#SubNumber").val(sub_number);
+        
         $("#grid").data("kendoGrid").dataSource.read();
         $("#grid3").data("kendoGrid").dataSource.read();
         $.ajax({
@@ -261,9 +267,11 @@
                 var data = JSON.parse(datas);
                 //alert("VesselName= " + data.Vessel);
                 //alert("2nd"+posts.Vessel);
-                $("#id17").val(data.Sub1_number);
+              //  $("#id17").val(data.Sub1_number);
+                $("#id17").val(window.selectedEquipmentCode);
                 $("#id18").val(data.Sub2_number);
                 $("#id1").val(data.Sub1_description);
+                //$("#id1").val(window.selctedEquipmentName);
                 $("#id2").val(data.Sub2_description);
                 $("#id3").val(data.Sub3_number);
                // $("#id4").val(Sub5_description);
@@ -283,5 +291,8 @@
             }
         });
 
-    }
+        }
+
+
+
     </script>
