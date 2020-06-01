@@ -286,7 +286,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ReadSpareParts(DataSourceRequest command, string selectedEquipmentCode)
+        public async Task<IActionResult> ReadSpareParts(DataSourceRequest command, string selectedEquipmentCode, SparepartListModel model)
         {
             DataSourceResult gridModel = null;
               List<SparepartForDisplay> sp = new List<SparepartForDisplay>();
@@ -451,7 +451,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             //string Sub3_description = HttpContext.Session.GetString("Sub3_description").ToString();
             await _sparepartViewModelService.PrepareSparepartModel(sparepart, "Sparepart", true);
 
-            return RedirectToAction("Edit", "EquipmentMaster");
+            return RedirectToAction("List", "Equipments");
         }
         public async Task<IActionResult> EditItem2(ViewModel vmodel, string id)
         {
