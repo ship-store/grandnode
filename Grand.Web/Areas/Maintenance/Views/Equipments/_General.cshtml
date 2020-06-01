@@ -37,6 +37,7 @@
                             <div class="form-line">
                                 @*@Html.TextBoxFor(m => m.Sub2_number, new { disabledd = "disabled", id = "id1" })<br />*@
                                 <input type="text" value="" name="code" class="form-control money-euro" placeholder="" id="id17" disabled>
+                                <input type="hidden" id="SubNumber" />
                             </div>
                         </div>
                     </div>
@@ -239,9 +240,9 @@
 
 
         function AddEquipment(data) {
-            
-
-      var url = location.origin + '/Maintenance/Equipments/AddEquipment?equipment_Code=' + window.selectedEquipmentCode;
+          //  var url = location.origin + '/Maintenance/Equipments/AddEquipment?equipment_Code=' + window.selectedEquipmentCode;
+            var url = location.origin + '/Maintenance/Equipments/AddEquipment?equipment_Code='
+                + window.selectedEquipmentCode + "&sub_number=" + window.sub_number;
             window.location.href = url;
            
             @*$.ajax({
