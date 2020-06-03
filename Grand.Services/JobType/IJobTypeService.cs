@@ -10,12 +10,12 @@ namespace Grand.Services.JobType
 {
     public interface IJobTypeService
     {
-         Task<IPagedList<Grand.Core.Domain.JobTypeEntity.JobType>> GetAllJobTypes(string name = "", 
+         Task<IPagedList<Grand.Core.Domain.JobType.JobType>> GetAllJobTypes(string name = "", 
             int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
 
-         Task<IList<Grand.Core.Domain.JobTypeEntity.JobType>> GetAllJobTypeAsList();
-           Task PrepareJobTypeModel(Grand.Core.Domain.JobTypeEntity.JobType model1, object p, bool v);
+         Task<IList<Grand.Core.Domain.JobType.JobType>> GetAllJobTypeAsList();
+           Task PrepareJobTypeModel(Grand.Core.Domain.JobType.JobType model1, object p, bool v);
        
-        Task InsertJobType(Core.Domain.JobTypeEntity.JobType jobType);
+        Task InsertJobType(Core.Domain.JobType.JobType jobType);
     }
 }

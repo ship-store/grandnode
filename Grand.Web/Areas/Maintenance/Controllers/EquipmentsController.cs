@@ -30,6 +30,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
     {
 
         private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
+        private readonly IJobTypeViewModelService _jobTypeViewModelService;
         private readonly IVesselService _vesselService;
         private readonly IHostingEnvironment env;
         private readonly IVesselViewModelService _vesselViewModelService;
@@ -40,7 +41,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IJobPlanViewModelService _jobPlanViewModelService;
         public EquipmentsController(IJobPlanViewModelService _jobPlanViewModelService, ISparepartViewModelService _sparepartViewModelService, IJobplanService _jobplanService, IVesselViewModelService _vesselViewModelService, IEquipmentService _equipmentService, IVesselService _vesselService, IHostingEnvironment env,
             ISparepartService _sparepartService,
-            IEquipmentTypeViewModelService _equipmentTypeViewModelService
+            IEquipmentTypeViewModelService _equipmentTypeViewModelService, IJobTypeViewModelService _jobTypeViewModelService
             )
         {
 
@@ -53,6 +54,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._sparepartService = _sparepartService;
             this._jobPlanViewModelService = _jobPlanViewModelService;
             this._equipmentTypeViewModelService = _equipmentTypeViewModelService;
+            this._jobTypeViewModelService = _jobTypeViewModelService;
         }
 
 
@@ -388,7 +390,20 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(jsnList);
         }
 
-       
+        [HttpGet]
+        public async Task<IActionResult> GetJobTypeDetails()
+        {
+
+            var jobTypes = await _jobTypeViewModelService.GetAllJobTypes("", 0, 500, true);
+         
+            ViewModel vm = new ViewModel();
+            vm.JobTypeList = jobTypes.ToList();
+            
+            var jsnList = Newtonsoft.Json.JsonConvert.SerializeObject(vm.JobTypeList);
+            return Json(jsnList);
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditJobplan(Jobplan model, int jobOrder2, string lastdone)

@@ -11,38 +11,38 @@ namespace Grand.Services.JobType
 {
     public class JobTypeService : IJobTypeService
     {
-        private readonly IRepository<Grand.Core.Domain.JobTypeEntity.JobType> _jobTypeRepository;
+        private readonly IRepository<Grand.Core.Domain.JobType.JobType> _jobTypeRepository;
         
-        public JobTypeService(IRepository<Grand.Core.Domain.JobTypeEntity.JobType> _jobTypeRepository)
+        public JobTypeService(IRepository<Grand.Core.Domain.JobType.JobType> _jobTypeRepository)
         {
             this._jobTypeRepository = _jobTypeRepository;
         }
        
-        async Task<IPagedList<Core.Domain.JobTypeEntity.JobType>> IJobTypeService.GetAllJobTypes(string name, int pageIndex, int pageSize, bool showHidden)
+        async Task<IPagedList<Core.Domain.JobType.JobType>> IJobTypeService.GetAllJobTypes(string name, int pageIndex, int pageSize, bool showHidden)
         {
             var query = _jobTypeRepository.Table;
          
-            return await PagedList< Grand.Core.Domain.JobTypeEntity.JobType>.Create(query, pageIndex, pageSize);
+            return await PagedList< Grand.Core.Domain.JobType.JobType>.Create(query, pageIndex, pageSize);
         }
         
          //TODO
         // page size paramater need tobe setted
-        async Task<IList<Core.Domain.JobTypeEntity.JobType>> IJobTypeService.GetAllJobTypeAsList()
+        async Task<IList<Core.Domain.JobType.JobType>> IJobTypeService.GetAllJobTypeAsList()
         {
             var query = _jobTypeRepository.Table;
 
 
            
 
-            return await PagedList<Grand.Core.Domain.JobTypeEntity.JobType>.Create(query ,0,15);
+            return await PagedList<Grand.Core.Domain.JobType.JobType>.Create(query ,0,15);
         }
 
-        Task IJobTypeService.PrepareJobTypeModel(Core.Domain.JobTypeEntity.JobType model1, object p, bool v)
+        Task IJobTypeService.PrepareJobTypeModel(Core.Domain.JobType.JobType model1, object p, bool v)
         {
             throw new NotImplementedException();
         }
 
-        public virtual async Task InsertJobType(Core.Domain.JobTypeEntity.JobType jobType)
+        public virtual async Task InsertJobType(Core.Domain.JobType.JobType jobType)
         {
 
 
