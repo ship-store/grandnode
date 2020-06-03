@@ -61,30 +61,91 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public IActionResult Index() => RedirectToAction("List");
 
         [HttpGet]
-        public async  Task<IActionResult> AddEquipment(string equipment_Code, string sub_number)
+        public async  Task<IActionResult> AddEquipment(string equipment_Code, string sub_number,string EquipmentId)
         {
 
             var EquipmentTypeList=await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
             ViewBag.subNumber = sub_number;
             ViewBag.equipment_Code = equipment_Code;
+            ViewBag.EquipmentId = EquipmentId;
             ViewBag.VesselName = HttpContext.Session.GetString("VesselName").ToString();
             return View(EquipmentTypeList.ToList());
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddEquipments(string equipmentCode,string sub_number)
+        public async Task<IActionResult> AddEquipments(string equipmentCode,string sub_number, string EquipmentId)
         {
 
             await Task.FromResult(0);
-          return Json(Url.Action("AddEquipment", "Equipment", new { equipment_Code = equipmentCode , subNumber= sub_number }));
+            return Json(Url.Action("AddEquipment", "Equipment", new
+            {
+                equipment_Code = equipmentCode,
+                subNumber = sub_number,
+                
+            })); 
         }
 
         [HttpPost]
-        public IActionResult AddEquipment(Equipment newEquipment)
+        public async Task<IActionResult> AddEquipment(Equipment newEquipment)
         {
+            var EquipmentCode = newEquipment.Sub1_number;
+           
 
-            _equipmentService.InsertEquipment(newEquipment);
-            return View();
+           //
+
+            if (EquipmentCode.Length == 3)//if(sub_number==631)
+            {
+             
+                newEquipment.Sub1_number = EquipmentCode;
+                newEquipment.Sub1_description = newEquipment.Sub1_description;
+                await _equipmentService.InsertEquipment(newEquipment);
+                return RedirectToAction("Index");
+
+            }
+            var equipments = await _equipmentService.GetAllEquipment("Equipment", 0, 500, true);
+            var selectedEquipment = equipments.ToList().Where(src => src.Id == newEquipment.Id).First();
+            if (EquipmentCode.Length == 6)//if(sub_number==631.01)
+            {
+
+
+                //newEquipment.Sub1_number = EquipmentCode.Split(".")[0];
+
+
+                selectedEquipment.Sub2_number = EquipmentCode;
+                selectedEquipment.Sub2_description = newEquipment.Sub1_description;
+
+
+            }
+            else if (newEquipment.Sub1_number.Length == 9)//if(sub_number==631.01.01)
+            {
+                //newEquipment.Sub1_number = EquipmentCode.Split(".")[0];
+                //newEquipment.Sub2_number = EquipmentCode.Split(".")[1];
+
+                selectedEquipment.Sub3_number = EquipmentCode;
+                selectedEquipment.Sub3_description = newEquipment.Sub1_description;
+            }
+            else if (newEquipment.Sub1_number.Length == 10)//if(sub_number==631.01.01.01)
+            {
+                //newEquipment.Sub1_number = EquipmentCode.Split(".")[0];
+                //newEquipment.Sub2_number = EquipmentCode.Split(".")[1];
+                //newEquipment.Sub3_number = EquipmentCode.Split(".")[2];
+
+                selectedEquipment.Sub4_number = newEquipment.Sub1_number;
+                selectedEquipment.Sub4_description = newEquipment.Sub1_description;
+            }
+            else if (newEquipment.Sub1_number.Length == 12)//if(sub_number==631.01.01.01)
+            {
+                //newEquipment.Sub1_number = EquipmentCode .Split(".")[0];
+                //newEquipment.Sub2_number = EquipmentCode.Split(".")[1];
+                //newEquipment.Sub3_number = EquipmentCode.Split(".")[2];
+
+                selectedEquipment.Sub5_number = EquipmentCode;
+                selectedEquipment.Sub5_description = newEquipment.Sub1_description;
+            }
+
+            await _equipmentService.UpdateEquipment(selectedEquipment);
+
+            return RedirectToAction("Index");
         }
 
 
@@ -288,7 +349,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ReadSpareParts(DataSourceRequest command, string selectedEquipmentCode)
+        public async Task<IActionResult> ReadSpareParts(DataSourceRequest command, string selectedEquipmentCode, SparepartListModel model)
         {
             DataSourceResult gridModel = null;
               List<SparepartForDisplay> sp = new List<SparepartForDisplay>();
@@ -466,7 +527,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             //string Sub3_description = HttpContext.Session.GetString("Sub3_description").ToString();
             await _sparepartViewModelService.PrepareSparepartModel(sparepart, "Sparepart", true);
 
-            return RedirectToAction("Edit", "EquipmentMaster");
+            return RedirectToAction("List", "Equipments");
         }
         public async Task<IActionResult> EditItem2(ViewModel vmodel, string id)
         {

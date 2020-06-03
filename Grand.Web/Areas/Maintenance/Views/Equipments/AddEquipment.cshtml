@@ -2,7 +2,9 @@
 @{ 
     var subNumber= @ViewBag.subNumber;
    
-
+    
+            
+         
 
 
 }
@@ -41,8 +43,8 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="Vessel_name" required />
-
+                                            <input type="text" class="form-control" name="Sub1_description" required />
+                                            <input type="hidden" value="@ViewBag.EquipmentId"  name="Id"/>
                                         </div>
                                     </div>
                                 </td>
@@ -54,7 +56,7 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="Vessel_name"
+                                            <input type="text" class="form-control" name="Sub1_number"
                                                    value="@ViewBag.equipment_Code" required />
                                             
                                             <input type="hidden"  value="@ViewBag.subNumber"/>
