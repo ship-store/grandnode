@@ -2,6 +2,7 @@
     ViewBag.Title = T("Maintenance.BreakdownJobs").Text;
     var vessel = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
     var joborder = ViewBag.joborder;
+    var reportedby = ViewBag.MyList1;
 }
 <script>
     function goBack() {
@@ -86,6 +87,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            
                             <tr>
                                 <td><label for="ReportedBy">Reported By</label></td>
                                 <td>
