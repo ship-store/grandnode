@@ -6,6 +6,7 @@ using Grand.Services.JobType;
 using Grand.Services.Maker;
 using Grand.Services.ReportedBy;
 using Grand.Services.Cbm;
+using Grand.Services.CbmMapping;
 using Grand.Web.Areas.Admin.Controllers;
 
 using Grand.Web.Areas.Maintenance.DomainModels;
@@ -30,6 +31,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         private readonly ICbmService _cbmService;
         private readonly ICbmViewModelService _cbmViewModelService;
+
+        private readonly ICbmMappingService _cbmMappingService;
+        private readonly ICbmMappingViewModelService _cbmMappingViewModelService;
+
         private readonly IEquipmentTypeService _equipmentTypeService;
         private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
         private readonly IMakerService _makerService;
@@ -39,8 +44,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IMakerViewModelService1 _makerViewModelService1;
         //public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobStatusViewModelService _jobStatusViewModelService, IJobTypeViewModelService _jobTypeViewModelService, IJobStatusService _jobStatusService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
         //public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
-        public MdmController(IJobStatusViewModelService _jobStatusViewModelService, IJobStatusService _jobStatusService, IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1,ICbmService _cbmService,ICbmViewModelService _cbmViewModelService)
+        public MdmController(ICbmMappingViewModelService cbmMappingViewModelService, ICbmMappingService cbmMappingService,IJobStatusViewModelService _jobStatusViewModelService, IJobStatusService _jobStatusService, IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1,ICbmService _cbmService,ICbmViewModelService _cbmViewModelService)
         {
+            this._cbmMappingViewModelService = cbmMappingViewModelService;
+            this._cbmMappingService = cbmMappingService;
             this._makerViewModelService = _makerViewModelService;
             this._makerService = _makerService;
             this._makerViewModelService1 = _makerViewModelService1;
@@ -95,6 +102,25 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var model = await Task.FromResult<object>(null);
             return View();
         }
+
+
+       
+        public async Task<IActionResult> NewCBMMapping()
+        {
+            ViewModel vm = new ViewModel();
+
+            var equipmentType = await _equipmentTypeService.GetAllEquipmentTypes("", 0, 500, true);
+            var equipmentTypeList = equipmentType.ToList();
+
+            var cbm = await _cbmService.GetAllCbm("", 0, 500, true);
+            var cbmList = cbm.ToList();
+
+            vm.equipmentTypeList = equipmentTypeList;
+            vm.cbmList = cbmList;
+
+            return View(vm);
+        }
+
         [HttpGet]
         public async Task<IActionResult> AddReportedBy()
         {
@@ -151,6 +177,13 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return RedirectToAction("MdmList", "Mdm");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AddCBMMapping(CBMMappingModel cbmMappingModel)
+        {
+            await _cbmMappingViewModelService.PrepareCbmMappingModel(cbmMappingModel, "", true);
+            return RedirectToAction("MdmList", "Mdm");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddJobTypeDetails(JobTypeModel addNewJobType)
@@ -182,6 +215,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> ReadCBMMappingDetails(DataSourceRequest command, ReportedByModel model)
+        {
+            var cbmMappinglist = await _cbmMappingService.GetAllCbmMapping("", command.Page, command.PageSize);
+            //List<MakerModel> makerlist = new List<MakerModel>();
+            var gridModel = new DataSourceResult { Data = cbmMappinglist.ToList() };
+            return Json(gridModel);
+
+        }
+
+        [HttpPost]
         public async Task<IActionResult> ReadEquipmentTypeDetails(DataSourceRequest command, EquipmentTypeModel model)
         {
             var equipmentTypelist = await _equipmentTypeService.GetAllEquipmentTypes("", command.Page, command.PageSize);
@@ -200,6 +243,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(gridModel);
 
         }
+
         [HttpPost]
         public async Task<IActionResult> ReadJobTypeDetails(DataSourceRequest command, JobTypeModel model)
         {

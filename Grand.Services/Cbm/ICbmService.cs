@@ -14,8 +14,9 @@ namespace Grand.Services.Cbm
             int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
 
          Task<IList<Grand.Core.Domain.CbmEntity.CBM>> GetAllCbmAsList();
-           Task PrepareCbmModel(Grand.Core.Domain.CbmEntity.CBM model1, object p, bool v);
-       
-         Task InsertCbm(Core.Domain.CbmEntity.CBM cbm);
+         Task PrepareCbmModel(Grand.Core.Domain.CbmEntity.CBM model1, object p, bool v);
+
+        Task InsertCbm(Core.Domain.CbmEntity.CBM cbm);
+
     }
 }
