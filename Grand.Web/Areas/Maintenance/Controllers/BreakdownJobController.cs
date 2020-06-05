@@ -18,6 +18,9 @@ using System;
 using Grand.Services.Report;
 using Grand.Core.Domain.BreakdownJobReport;
 using Grand.Services.BreakdownJob;
+using Grand.Core.Domain.ReportedByEntity;
+using Grand.Services.ReportedBy;
+using System.Dynamic;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -28,17 +31,18 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IEquipmentService _equipmentService;
         private readonly IReportViewModelService _reportViewModelService;
         private readonly IReportService _reportService;
+        private readonly IReportedByService _reportedByService;
 
         private readonly IBreakdownJobViewModelService _breakdownJobViewModelService;
 
-        public BreakdownJobController(IEquipmentService _equipmentService, IBreakdownJobViewModelService _breakdownJobViewModelService, IBreakdownJobService _breakdownJobService, IReportViewModelService _reportViewModelService, IReportService _reportService)
+        public BreakdownJobController(IReportedByService _reportedByService,IEquipmentService _equipmentService, IBreakdownJobViewModelService _breakdownJobViewModelService, IBreakdownJobService _breakdownJobService, IReportViewModelService _reportViewModelService, IReportService _reportService)
         {
             this._breakdownJobViewModelService = _breakdownJobViewModelService;
             this._breakdownJobService = _breakdownJobService;
             this._equipmentService = _equipmentService;
             this._reportViewModelService = _reportViewModelService;
             this._reportService = _reportService;
-
+            this._reportedByService = _reportedByService;
 
 
         }
@@ -192,8 +196,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 equipmentList.Add(item);
             }
             ViewBag.MyList = equipmentList;
-
             return View(equipmentList);
+            
         }
 
         [HttpPost]
