@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Grand.Core.Domain.JobTypeEntity
+namespace Grand.Core.Domain.JobType
 {
     public partial class JobType: BaseEntity
     {

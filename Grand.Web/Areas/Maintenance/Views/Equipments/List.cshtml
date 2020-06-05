@@ -86,7 +86,7 @@
 
                                 <span>
                                     <a onclick="jsFunction(this); return false;" style="color: #7273a3"
-                                       alt="Sub1_number-Sub1_description">@item.Sub1_number-@item.Sub1_description</a>
+                                       alt="Sub1_number-Sub1_description-@item.Id">@item.Sub1_number-@item.Sub1_description</a>
                                 </span>
 
                                 <ul>
@@ -97,7 +97,7 @@
 
                                             <a class="id1" href="#" onclick="jsFunction(this); return false;"
                                                style="color:#7273a3" 
-                                               alt="Sub2_number-Sub2_description">@item2.Sub2_number-@item2.Sub2_description</a>
+                                               alt="Sub2_number-Sub2_description-@item2.Id">@item2.Sub2_number-@item2.Sub2_description</a>
 
 
                                             <ul>
@@ -106,7 +106,7 @@
                                                 {
                                                     <li class="data">
                                                         <a onclick="jsFunction(this); return false;" style="color:#7273a3"
-                                                            alt="Sub3_number-Sub3_description">@item3.Sub3_number-@item3.Sub3_description</a>
+                                                            alt="Sub3_number-Sub3_description-@item3.Id">@item3.Sub3_number-@item3.Sub3_description</a>
                                                         <ul>
                                                         </ul>
 
@@ -249,9 +249,12 @@
     $(function () {
         $("#p1").hide();
     });
-        function jsFunction(link) {          
+        function jsFunction(link) {
+          
             window.selectedEquipmentCode = link.text.split("-")[0].trim();
-              window.sub_number = link.getAttribute("alt").split("-")[0].trim();
+            window.sub_number = link.getAttribute("alt").split("-")[0].trim();
+            window.EquipmentId= link.getAttribute("alt").split("-")[2].trim();
+              alert("ID=" + link.getAttribute("alt").split("-")[2].trim());
                alert("Your Equipment Code" + window.sub_number);
                 $("#SubNumber").val(sub_number);
         

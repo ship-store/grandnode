@@ -36,7 +36,7 @@
                             </span>
                             <div class="form-line">
                                 @*@Html.TextBoxFor(m => m.Sub2_number, new { disabledd = "disabled", id = "id1" })<br />*@
-                                <input type="text" value="" name="code" class="form-control money-euro" placeholder="" id="id17" disabled>
+                                <input type="text" value="" name="code" class="form-control money-euro" placeholder="" id="id17" readonly="readonly">
                                 <input type="hidden" id="SubNumber" />
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                             </span>
                             <div class="form-line">
 
-                                <input type="text" value="" class="form-control money-euro" placeholder="" id="id1" disabled>
+                                <input type="text" value="" class="form-control money-euro" placeholder="" id="id1" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" name="safety" value="" class="form-control money-euro" placeholder="" id="id5" disabled>
+                                <input type="text" name="safety" value="" class="form-control money-euro" placeholder="" id="id5" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" value="" name="maker" class="form-control money-euro" placeholder="" id="id6" disabled>
+                                <input type="text" value="" name="maker" class="form-control money-euro" placeholder="" id="id6" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" value="" name="model" class="form-control money-euro" placeholder="" id="id7" disabled>
+                                <input type="text" value="" name="model" class="form-control money-euro" placeholder="" id="id7" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" name="eqtype" value="" class="form-control money-euro" placeholder="" id="id8" disabled>
+                                <input type="text" name="eqtype" value="" class="form-control money-euro" placeholder="" id="id8" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" value="" name="drawno" class="form-control money-euro" placeholder="" id="id9" disabled>
+                                <input type="text" value="" name="drawno" class="form-control money-euro" placeholder="" id="id9" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" value="" name="dept" class="form-control money-euro" placeholder="" id="id10" disabled>
+                                <input type="text" value="" name="dept" class="form-control money-euro" placeholder="" id="id10" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" value="" name="location" class="form-control money-euro" placeholder="" id="id11" disabled>
+                                <input type="text" value="" name="location" class="form-control money-euro" placeholder="" id="id11" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" value="" name="eqstatus" class="form-control money-euro" placeholder="" id="id12" disabled>
+                                <input type="text" value="" name="eqstatus" class="form-control money-euro" placeholder="" id="id12" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" value="" name="remark" class="form-control money-euro" placeholder="" id="id13" disabled>
+                                <input type="text" value="" name="remark" class="form-control money-euro" placeholder="" id="id13" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" value="" class="form-control money-euro" placeholder="" id="id14" disabled>
+                                <input type="text" value="" class="form-control money-euro" placeholder="" id="id14" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -185,7 +185,18 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" value="" name="type" class="form-control money-euro" placeholder="" id="id15" disabled>
+                                <input type="text" value="" name="type" class="form-control money-euro" placeholder="" id="id15" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <b>Universal Job Code</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" value="" name="type" class="form-control money-euro" placeholder=""  readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -215,7 +226,10 @@
     <script type="text/javascript">
         $(function () {
             $(".makeEditable").click(function () {
+                alert("hi");
                 $('input:text').removeAttr("readonly");
+                
+                
                 //$("#id5").prop("readonly", false);
                 //$(".name2").prop("readonly", false);
                 //$(".name3").prop("readonly", false);
@@ -227,13 +241,23 @@
                 //$(".name9").prop("readonly", false);
                 //$(".name10").prop("readonly", false);
                 //  $(".name11").prop("readonly", false);
+                 $.ajax({
+            type: "GET",
+            url: "Equipments/GetJobTypeDetails" ,
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+                     success: function (datas) {
+                         var data = JSON.parse(datas);
+                         alert(data);
+                     }
             });
             $(".silpa").click(function () {
                 $('input:text').attr("readonly", "readonly");
             });//this
 
 
-       
+
 
 
         });
@@ -242,9 +266,9 @@
         function AddEquipment(data) {
           //  var url = location.origin + '/Maintenance/Equipments/AddEquipment?equipment_Code=' + window.selectedEquipmentCode;
             var url = location.origin + '/Maintenance/Equipments/AddEquipment?equipment_Code='
-                + window.selectedEquipmentCode + "&sub_number=" + window.sub_number;
+                + window.selectedEquipmentCode + "&sub_number=" + window.sub_number + "&EquipmentId=" +  window.EquipmentId;
             window.location.href = url;
-           
+
             @*$.ajax({
                 type: "GET",
                 url: "@Url.Action("AddEquipments")" + "?equipmentCode=" + window.selectedEquipmentCode,

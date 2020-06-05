@@ -1,7 +1,7 @@
 ﻿using Grand.Core;
 using Grand.Core.Domain.EquipmentTypeEntity;
 using Grand.Core.Domain.JobStatusEntity;
-using Grand.Core.Domain.JobTypeEntity;
+using Grand.Core.Domain.JobType;
 using Grand.Core.Domain.MakerEntity;
 using Grand.Web.Areas.Admin.Interfaces;
 using Grand.Web.Areas.Maintenance.DomainModels;

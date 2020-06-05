@@ -4,6 +4,8 @@ using Grand.Core.Domain.Sparepart;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Grand.Core.Domain.JobType;
+
 using System.Threading.Tasks;
 
 namespace Grand.Web.Areas.Maintenance.DomainModels
@@ -18,8 +20,12 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public IEnumerable <Sparepart> SelectedSparepart { get; set; }
         public string VName { get; set; }
         public IEnumerable<JobplanListModel> SelectedJobPlanView { get; set; }
+        public IEnumerable<JobType> JobTypeList { get; set; }
 
-       
-       
+        //public Grand.Core.Domain.EquipmentTypeEntity.EquipmentType equipmentTypeList { get; set; }
+        public IEnumerable<Grand.Core.Domain.EquipmentTypeEntity.EquipmentType> equipmentTypeList { get; set; }
+
+        //public Grand.Core.Domain.CbmEntity.CBM cbmList { get; set; }
+        public IEnumerable<Grand.Core.Domain.CbmEntity.CBM> cbmList { get; set; }
     }
 }
