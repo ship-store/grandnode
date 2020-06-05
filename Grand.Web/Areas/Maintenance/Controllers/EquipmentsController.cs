@@ -87,61 +87,45 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> AddEquipment(Equipment newEquipment)
         {
             var EquipmentCode = newEquipment.Sub1_number;
-           
-
-           //
+            var EquipmentName = newEquipment.Sub1_description;
+            
+            newEquipment.Sub1_description =null;newEquipment.Sub1_number =null;         
+            newEquipment.Id = Guid.NewGuid().ToString();
 
             if (EquipmentCode.Length == 3)//if(sub_number==631)
             {
-             
+                newEquipment.Type = EquipmentCode;
                 newEquipment.Sub1_number = EquipmentCode;
-                newEquipment.Sub1_description = newEquipment.Sub1_description;
+                newEquipment.Sub1_description = EquipmentName;
                 await _equipmentService.InsertEquipment(newEquipment);
                 return RedirectToAction("Index");
-
             }
-            var equipments = await _equipmentService.GetAllEquipment("Equipment", 0, 500, true);
-            var selectedEquipment = equipments.ToList().Where(src => src.Id == newEquipment.Id).First();
-            if (EquipmentCode.Length == 6)//if(sub_number==631.01)
+            else if (EquipmentCode.Length == 6)//if(sub_number==631.01)
             {
-
-
-                //newEquipment.Sub1_number = EquipmentCode.Split(".")[0];
-
-
-                selectedEquipment.Sub2_number = EquipmentCode;
-                selectedEquipment.Sub2_description = newEquipment.Sub1_description;
-
-
+                newEquipment.Type = EquipmentCode.Split(".")[0];
+                newEquipment.Sub2_number = EquipmentCode;
+                newEquipment.Sub2_description = EquipmentName;
             }
-            else if (newEquipment.Sub1_number.Length == 9)//if(sub_number==631.01.01)
+            else if (EquipmentCode.Length == 9)//if(sub_number==631.01.01)
             {
-                //newEquipment.Sub1_number = EquipmentCode.Split(".")[0];
-                //newEquipment.Sub2_number = EquipmentCode.Split(".")[1];
-
-                selectedEquipment.Sub3_number = EquipmentCode;
-                selectedEquipment.Sub3_description = newEquipment.Sub1_description;
+               newEquipment.Type = EquipmentCode.Split(".")[0];
+               newEquipment.Sub3_number = EquipmentCode;
+               newEquipment.Sub3_description = EquipmentName;
             }
-            else if (newEquipment.Sub1_number.Length == 10)//if(sub_number==631.01.01.01)
+            else if (EquipmentCode.Length == 10)//if(sub_number==631.01.01.01)
             {
-                //newEquipment.Sub1_number = EquipmentCode.Split(".")[0];
-                //newEquipment.Sub2_number = EquipmentCode.Split(".")[1];
-                //newEquipment.Sub3_number = EquipmentCode.Split(".")[2];
-
-                selectedEquipment.Sub4_number = newEquipment.Sub1_number;
-                selectedEquipment.Sub4_description = newEquipment.Sub1_description;
+                newEquipment.Type = EquipmentCode.Split(".")[0];
+                newEquipment.Sub4_number = newEquipment.Sub1_number;
+                newEquipment.Sub4_description = newEquipment.Sub1_description;
             }
-            else if (newEquipment.Sub1_number.Length == 12)//if(sub_number==631.01.01.01)
+            else if (EquipmentCode.Length == 12)//if(sub_number==631.01.01.01)
             {
-                //newEquipment.Sub1_number = EquipmentCode .Split(".")[0];
-                //newEquipment.Sub2_number = EquipmentCode.Split(".")[1];
-                //newEquipment.Sub3_number = EquipmentCode.Split(".")[2];
-
-                selectedEquipment.Sub5_number = EquipmentCode;
-                selectedEquipment.Sub5_description = newEquipment.Sub1_description;
+                newEquipment.Type = EquipmentCode.Split(".")[0];
+                newEquipment.Sub5_number = EquipmentCode;
+                newEquipment.Sub5_description = EquipmentName;
             }
 
-            await _equipmentService.UpdateEquipment(selectedEquipment);
+            await _equipmentService.InsertEquipment(newEquipment);
 
             return RedirectToAction("Index");
         }
