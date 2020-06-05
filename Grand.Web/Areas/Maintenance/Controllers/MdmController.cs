@@ -215,6 +215,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> ReadCBMMappingDetails(DataSourceRequest command, ReportedByModel model)
+        {
+            var cbmMappinglist = await _cbmMappingService.GetAllCbmMapping("", command.Page, command.PageSize);
+            //List<MakerModel> makerlist = new List<MakerModel>();
+            var gridModel = new DataSourceResult { Data = cbmMappinglist.ToList() };
+            return Json(gridModel);
+
+        }
+
+        [HttpPost]
         public async Task<IActionResult> ReadEquipmentTypeDetails(DataSourceRequest command, EquipmentTypeModel model)
         {
             var equipmentTypelist = await _equipmentTypeService.GetAllEquipmentTypes("", command.Page, command.PageSize);
@@ -233,6 +243,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(gridModel);
 
         }
+
         [HttpPost]
         public async Task<IActionResult> ReadJobTypeDetails(DataSourceRequest command, JobTypeModel model)
         {

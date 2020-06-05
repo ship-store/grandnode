@@ -38,17 +38,17 @@
 
 <div id="example">
     <antiforgery-token />
-    <div id="CBMGrid"></div>
+    <div id="CBMMappingGrid"></div>
     <script>
         $(document).ready(function () {
-            $("#CBMGrid").kendoGrid({
+            $("#CBMMappingGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
 
                          read:
                              {
-                                url: "@Html.Raw(Url.Action("ReadCBMDetails", "Mdm","Maintenance"))",
+                                url: "@Html.Raw(Url.Action("ReadCBMMappingDetails", "Mdm","Maintenance"))",
                                 type: "POST",
                                 dataType: "json",
                                 data: additionalData
@@ -100,11 +100,18 @@
                 selectable: true,
                 allowCopy: true,
                 columns: [
+
                     {
-                        field: "Cbm_Name",
-                            title: "Name",
-                            width: "100px"
-                        },
+                        field: "equipmentComponent",
+                        title: "Equipment Component",
+                        width: "100px"
+                    },
+                    {
+                      field: "Cbm_Name",
+                      title: "CBM",
+                      width: "100px"
+                    },
+                    
 
 
                         ],
