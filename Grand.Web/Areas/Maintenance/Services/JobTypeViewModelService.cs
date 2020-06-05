@@ -1,6 +1,6 @@
 ﻿using Grand.Core;
 using Grand.Core.Domain.EquipmentTypeEntity;
-using Grand.Core.Domain.JobTypeEntity;
+using Grand.Core.Domain.JobType;
 using Grand.Core.Domain.MakerEntity;
 using Grand.Services.EquipmentType;
 using Grand.Services.JobType;
