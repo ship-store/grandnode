@@ -12,12 +12,14 @@ namespace Grand.Services.Cbm
     public class CbmService : ICbmService
     {
         private readonly IRepository<Grand.Core.Domain.CbmEntity.CBM> _CbmRepository;
-        
+
         public CbmService(IRepository<Grand.Core.Domain.CbmEntity.CBM> _CBMRepository)
         {
             this._CbmRepository = _CBMRepository;
         }
-       
+
+
+
         async Task<IPagedList<Core.Domain.CbmEntity.CBM>> ICbmService.GetAllCbm(string name, int pageIndex, int pageSize, bool showHidden)
         {
             var query = _CbmRepository.Table;

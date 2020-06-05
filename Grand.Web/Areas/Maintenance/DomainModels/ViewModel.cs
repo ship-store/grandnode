@@ -19,7 +19,10 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string VName { get; set; }
         public IEnumerable<JobplanListModel> SelectedJobPlanView { get; set; }
 
-       
-       
+        //public Grand.Core.Domain.EquipmentTypeEntity.EquipmentType equipmentTypeList { get; set; }
+        public IEnumerable<Grand.Core.Domain.EquipmentTypeEntity.EquipmentType> equipmentTypeList { get; set; }
+
+        //public Grand.Core.Domain.CbmEntity.CBM cbmList { get; set; }
+        public IEnumerable<Grand.Core.Domain.CbmEntity.CBM> cbmList { get; set; }
     }
 }
