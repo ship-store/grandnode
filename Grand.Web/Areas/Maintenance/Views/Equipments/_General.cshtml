@@ -3,14 +3,15 @@
 <div class="body" id="_general">
         <div class="demo-masked-input">
             <div class="row clearfix border-secondary">
-
-                <div class="col-md-3" style="float:right">
-                    <a href="#" onclick="AddEquipment(this); return false;"
+                <button onclick="AddEquipment('hai')">Click here</button>
+                <div class="col-md-3" style="float:left">
+                    <a onclick="AddEquipment(this); return false;"
                        class="btn btn-success"
-                       style="width:auto;position:relative;right:-20px">
+                       >
                         <i class="fa fa-plus"></i>
-                        @*<span class="hidden-xs">AddEquipment</span>*@
+                        <span class="hidden-xs">AddEquipment</span>
                     </a>
+               
                 </div>
                 <div class="col-md-4" style="float:left">
                     <button class="btn btn-success makeEditable col-md-offset-10 c"
@@ -230,8 +231,8 @@
             $(".makeEditable").click(function () {
                 alert("hi");
                 $('input:text').removeAttr("readonly");
-                
-                
+
+
                 //$("#id5").prop("readonly", false);
                 //$(".name2").prop("readonly", false);
                 //$(".name3").prop("readonly", false);
@@ -243,24 +244,26 @@
                 //$(".name9").prop("readonly", false);
                 //$(".name10").prop("readonly", false);
                 //  $(".name11").prop("readonly", false);
-                 $.ajax({
-            type: "GET",
-            url: "Equipments/GetJobTypeDetails" ,
-            data: "{}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-                     success: function (datas) {
-                         var data = JSON.parse(datas);
-                         alert(data);
-                     }
+                $.ajax({
+                    type: "GET",
+                    url: "Equipments/GetJobTypeDetails",
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (datas) {
+                        var data = JSON.parse(datas);
+                        alert(data);
+                    }
+                });
+                $(".silpa").click(function () {
+                    $('input:text').attr("readonly", "readonly");
+                });//this
+
+
+
+
+
             });
-            $(".silpa").click(function () {
-                $('input:text').attr("readonly", "readonly");
-            });//this
-
-
-
-
 
         });
 
@@ -271,16 +274,8 @@
                 + window.selectedEquipmentCode + "&sub_number=" + window.sub_number + "&EquipmentId=" +  window.EquipmentId;
             window.location.href = url;
 
-            @*$.ajax({
-                type: "GET",
-                url: "@Url.Action("AddEquipments")" + "?equipmentCode=" + window.selectedEquipmentCode,
-               crossDomain: true,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (datas) {
-                    var data = JSON.parse(datas);
-                     window.location.href = datas;
-                }
-            });*@
-        }
+            }
+
+            
+       
     </script>
