@@ -7,6 +7,7 @@ using System.Linq;
 using Grand.Core.Domain.JobType;
 
 using System.Threading.Tasks;
+using Grand.Core.Domain.CbmEntity;
 
 namespace Grand.Web.Areas.Maintenance.DomainModels
 {
@@ -23,9 +24,11 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public IEnumerable<JobType> JobTypeList { get; set; }
 
         //public Grand.Core.Domain.EquipmentTypeEntity.EquipmentType equipmentTypeList { get; set; }
-        public IEnumerable<Grand.Core.Domain.EquipmentTypeEntity.EquipmentType> equipmentTypeList { get; set; }
+        public List<Grand.Core.Domain.EquipmentTypeEntity.EquipmentType> equipmentTypeList { get; set; }
 
         //public Grand.Core.Domain.CbmEntity.CBM cbmList { get; set; }
         public IEnumerable<Grand.Core.Domain.CbmEntity.CBM> cbmList { get; set; }
+        public List<string> EquipmentTypeList { get; set; }
+
     }
 }

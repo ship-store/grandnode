@@ -22,13 +22,14 @@ using Microsoft.AspNetCore.Http;
 using System.Dynamic;
 using Grand.Services.Spareparts;
 using Grand.Core.Domain.Sparepart;
+using Grand.Core.Domain.CbmEntity;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
     [Area("Maintenance")]
     public class EquipmentsController : BaseAdminController
     {
-
+        private readonly ICbmMappingViewModelService _cbmMappingViewModelService;
         private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
         private readonly IJobTypeViewModelService _jobTypeViewModelService;
         private readonly IVesselService _vesselService;
@@ -39,9 +40,14 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly ISparepartService _sparepartService;
         private readonly ISparepartViewModelService _sparepartViewModelService;
         private readonly IJobPlanViewModelService _jobPlanViewModelService;
-        public EquipmentsController(IJobPlanViewModelService _jobPlanViewModelService, ISparepartViewModelService _sparepartViewModelService, IJobplanService _jobplanService, IVesselViewModelService _vesselViewModelService, IEquipmentService _equipmentService, IVesselService _vesselService, IHostingEnvironment env,
+        public EquipmentsController(IJobPlanViewModelService _jobPlanViewModelService, 
+            ISparepartViewModelService _sparepartViewModelService, IJobplanService _jobplanService, 
+            IVesselViewModelService _vesselViewModelService, 
+            IEquipmentService _equipmentService, IVesselService _vesselService,
+            IHostingEnvironment env,
             ISparepartService _sparepartService,
-            IEquipmentTypeViewModelService _equipmentTypeViewModelService, IJobTypeViewModelService _jobTypeViewModelService
+            IEquipmentTypeViewModelService _equipmentTypeViewModelService, IJobTypeViewModelService _jobTypeViewModelService,
+            ICbmMappingViewModelService _cbmMappingViewModelService
             )
         {
 
@@ -55,6 +61,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._jobPlanViewModelService = _jobPlanViewModelService;
             this._equipmentTypeViewModelService = _equipmentTypeViewModelService;
             this._jobTypeViewModelService = _jobTypeViewModelService;
+            this._cbmMappingViewModelService = _cbmMappingViewModelService;
         }
 
 
@@ -64,12 +71,19 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async  Task<IActionResult> AddEquipment(string equipment_Code, string sub_number,string EquipmentId)
         {
 
-            var EquipmentTypeList=await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
+            //  var EquipmentTypeList=await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
+            var equiomentList = await _cbmMappingViewModelService.GetAllCbmMappingAsList("");
+            List<string> equipmentTypetList = new List<string>();
+            foreach (var item in equiomentList)
+            {
+
+                equipmentTypetList.Add(item.equipmentComponent);
+            }
             ViewBag.subNumber = sub_number;
             ViewBag.equipment_Code = equipment_Code;
             ViewBag.EquipmentId = EquipmentId;
             ViewBag.VesselName = HttpContext.Session.GetString("VesselName").ToString();
-            return View(EquipmentTypeList.ToList());
+            return View(equipmentTypetList.ToList());
         }
 
         [HttpGet]
@@ -154,14 +168,23 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     }
                     ViewModel vm = new ViewModel();
                     vm.AllEquipments = selectedEquipment;
+                    var equiomentList= await _cbmMappingViewModelService.GetAllCbmMappingAsList("");
+                    List<string> equipmentTypetList = new List<string>();
+                    foreach (var item in equiomentList)
+                    {
+
+                        equipmentTypetList.Add(item.equipmentComponent);
+                    }
+                    vm.EquipmentTypeList = equipmentTypetList;
                     return View(vm);
+
                 }
                 else
                 {
                     return RedirectToAction("Success", "Register");
                 }
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                 return RedirectToAction("Success", "Register");
             }          
