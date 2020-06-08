@@ -5,10 +5,9 @@
             <div class="row clearfix border-secondary">
 
                 <div class="col-md-3" style="float:left">
-                    <a  href="#" onclick="AddEquipment(this); return false;"
-                       
-                       class="btn btn-success"                         
-                        style="width:auto;position:relative;right:-25px">
+                    <a href="#" onclick="AddEquipment(this); return false;"
+                       class="btn btn-success"
+                       style="width:auto;position:relative;right:-25px">
                         <i class="fa fa-pencil"></i>
                         <span class="hidden-xs">AddEquipment</span>
                     </a>
@@ -21,6 +20,7 @@
                     </button>
 
                 </div>
+               
                 <form action="GeneralEdit" method="post">
                     <div class="col-md-2" style="float:right">
 
@@ -189,17 +189,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <b>Universal Job Code</b>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="material-icons">turned_in_not</i>
-                            </span>
-                            <div class="form-line">
-                                <input type="text" value="" name="type" class="form-control money-euro" placeholder=""  readonly="readonly">
-                            </div>
-                        </div>
-                    </div>
+                    
                     @Html.AntiForgeryToken()
                 </form>
             </div>
@@ -252,15 +242,17 @@
                          alert(data);
                      }
             });
-            $(".silpa").click(function () {
-                $('input:text').attr("readonly", "readonly");
-            });//this
+            //$(".silpa").click(function () {
+            //    $('input:text').attr("readonly", "readonly");
+            //});//this
 
 
 
 
 
-        });
+            });
+           
+
 
 
         function AddEquipment(data) {

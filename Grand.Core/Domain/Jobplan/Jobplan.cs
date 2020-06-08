@@ -34,6 +34,8 @@ namespace Grand.Core.Domain.Jobplan
         public string Remark { get; set; }
         public string Status { get; set; }
         public int DueRhs { get; set; }
+        public string UniversalJobCode { get; set; }
+
     }
 
 
@@ -65,5 +67,7 @@ namespace Grand.Core.Domain.Jobplan
         public string Remark { get; set; }
         public string Status { get; set; }
         public int DueRhs { get; set; }
+        public string UniversalJobCode { get; set; }
+
     }
 }
