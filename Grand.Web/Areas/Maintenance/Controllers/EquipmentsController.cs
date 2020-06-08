@@ -251,6 +251,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             }
             else if (code.Length == 9)
             {
+                //
                 selectedEquipment.Sub3_description = EquipmentName;
                 selectedEquipment.Sub3_number = code;
             }
