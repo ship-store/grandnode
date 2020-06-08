@@ -256,6 +256,7 @@
            // window.EquipmentCode = autogenerateNextEquipmentCode(lastNode);
            //alert("NextEquipmentCode"+   window.EquipmentCode)
             window.selectedEquipmentCode = link.text.split("-")[0].trim();
+            window.selectedEquipmentName = link.text.split("-")[1].trim();
 
            
               window.sub_number = link.getAttribute("alt").split("-")[0].trim();
@@ -280,7 +281,7 @@
 
                 $("#id17").val(window.selectedEquipmentCode);
                 $("#id18").val(data.Sub2_number);
-                $("#id1").val(data.Sub1_description);
+                $("#id1").val(window.selectedEquipmentName);
                 //$("#id1").val(window.selctedEquipmentName);
                 $("#id2").val(data.Sub2_description);
                 $("#id3").val(data.Sub3_number);
