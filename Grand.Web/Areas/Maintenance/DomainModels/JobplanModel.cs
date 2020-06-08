@@ -35,6 +35,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string Remark { get; set; }
         public string Status { get; set; }
         public int DueRhs { get; set; }
+        public string UniversalJobCode { get; set; }
     }
     public class JobplanDisplayModel : BaseEntity
     {
@@ -65,5 +66,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string Remark { get; set; }
         public string Status { get; set; }
         public int DueRhs { get; set; }
+        public string UniversalJobCode { get; set; }
     }
 }
