@@ -15,6 +15,7 @@ namespace Grand.Web.Areas.Maintenance.Interfaces
         Task<IPagedList<EquipmentType>> GetAllEquipmentTypes(string name = "",
              int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
         Task<IPagedList<EquipmentType>> GetAllEquipmentTypeAsList(string id);
+        
         Task PrepareEquipmentTypeModel(EquipmentTypeModel model1, object p, bool v);
     }
 }

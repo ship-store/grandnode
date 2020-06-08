@@ -96,6 +96,9 @@ namespace Grand.Web.Infrastructure
             //CBM
             builder.RegisterType<CbmViewModelService>().As<ICbmViewModelService>().InstancePerLifetimeScope();
 
+            //CBM Mapping
+            builder.RegisterType<CbmMappingViewModelService>().As<ICbmMappingViewModelService>().InstancePerLifetimeScope();
+
             //Maker Service
             builder.RegisterType<MakerViewModelService>().As<IMakerViewModelService>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentTypeViewModelService>().As<IEquipmentTypeViewModelService>().InstancePerLifetimeScope();
