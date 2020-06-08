@@ -1,4 +1,4 @@
-﻿@model List<Grand.Core.Domain.EquipmentTypeEntity.EquipmentType>
+﻿@model List<string>
 @{ 
     var subNumber= @ViewBag.subNumber;
    
@@ -73,7 +73,7 @@
                                         <option value=""></option>
                                         @foreach (var item in Model)
                                         {
-                                            <option>@item.Equipment_type</option>
+                                            <option>@item</option>
                                         }
 
                                         @*<option>Bulk</option>

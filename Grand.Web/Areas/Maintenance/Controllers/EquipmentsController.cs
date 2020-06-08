@@ -22,13 +22,14 @@ using Microsoft.AspNetCore.Http;
 using System.Dynamic;
 using Grand.Services.Spareparts;
 using Grand.Core.Domain.Sparepart;
+using Grand.Core.Domain.CbmEntity;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
     [Area("Maintenance")]
     public class EquipmentsController : BaseAdminController
     {
-
+        private readonly ICbmMappingViewModelService _cbmMappingViewModelService;
         private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
         private readonly IJobTypeViewModelService _jobTypeViewModelService;
         private readonly IVesselService _vesselService;
@@ -39,9 +40,14 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly ISparepartService _sparepartService;
         private readonly ISparepartViewModelService _sparepartViewModelService;
         private readonly IJobPlanViewModelService _jobPlanViewModelService;
-        public EquipmentsController(IJobPlanViewModelService _jobPlanViewModelService, ISparepartViewModelService _sparepartViewModelService, IJobplanService _jobplanService, IVesselViewModelService _vesselViewModelService, IEquipmentService _equipmentService, IVesselService _vesselService, IHostingEnvironment env,
+        public EquipmentsController(IJobPlanViewModelService _jobPlanViewModelService, 
+            ISparepartViewModelService _sparepartViewModelService, IJobplanService _jobplanService, 
+            IVesselViewModelService _vesselViewModelService, 
+            IEquipmentService _equipmentService, IVesselService _vesselService,
+            IHostingEnvironment env,
             ISparepartService _sparepartService,
-            IEquipmentTypeViewModelService _equipmentTypeViewModelService, IJobTypeViewModelService _jobTypeViewModelService
+            IEquipmentTypeViewModelService _equipmentTypeViewModelService, IJobTypeViewModelService _jobTypeViewModelService,
+            ICbmMappingViewModelService _cbmMappingViewModelService
             )
         {
 
@@ -55,6 +61,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._jobPlanViewModelService = _jobPlanViewModelService;
             this._equipmentTypeViewModelService = _equipmentTypeViewModelService;
             this._jobTypeViewModelService = _jobTypeViewModelService;
+            this._cbmMappingViewModelService = _cbmMappingViewModelService;
         }
 
 
@@ -64,12 +71,19 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async  Task<IActionResult> AddEquipment(string equipment_Code, string sub_number,string EquipmentId)
         {
 
-            var EquipmentTypeList=await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
+            //  var EquipmentTypeList=await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
+            var equiomentList = await _cbmMappingViewModelService.GetAllCbmMappingAsList("");
+            List<string> equipmentTypetList = new List<string>();
+            foreach (var item in equiomentList)
+            {
+
+                equipmentTypetList.Add(item.equipmentComponent);
+            }
             ViewBag.subNumber = sub_number;
             ViewBag.equipment_Code = equipment_Code;
             ViewBag.EquipmentId = EquipmentId;
             ViewBag.VesselName = HttpContext.Session.GetString("VesselName").ToString();
-            return View(EquipmentTypeList.ToList());
+            return View(equipmentTypetList.ToList());
         }
 
         [HttpGet]
@@ -89,61 +103,45 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> AddEquipment(Equipment newEquipment)
         {
             var EquipmentCode = newEquipment.Sub1_number;
-           
-
-           //
+            var EquipmentName = newEquipment.Sub1_description;
+            
+            newEquipment.Sub1_description =null;newEquipment.Sub1_number =null;         
+            newEquipment.Id = Guid.NewGuid().ToString();
 
             if (EquipmentCode.Length == 3)//if(sub_number==631)
             {
-             
+                newEquipment.Type = EquipmentCode;
                 newEquipment.Sub1_number = EquipmentCode;
-                newEquipment.Sub1_description = newEquipment.Sub1_description;
+                newEquipment.Sub1_description = EquipmentName;
                 await _equipmentService.InsertEquipment(newEquipment);
                 return RedirectToAction("Index");
-
             }
-            var equipments = await _equipmentService.GetAllEquipment("Equipment", 0, 500, true);
-            var selectedEquipment = equipments.ToList().Where(src => src.Id == newEquipment.Id).First();
-            if (EquipmentCode.Length == 6)//if(sub_number==631.01)
+            else if (EquipmentCode.Length == 6)//if(sub_number==631.01)
             {
-
-
-                //newEquipment.Sub1_number = EquipmentCode.Split(".")[0];
-
-
-                selectedEquipment.Sub2_number = EquipmentCode;
-                selectedEquipment.Sub2_description = newEquipment.Sub1_description;
-
-
+                newEquipment.Type = EquipmentCode.Split(".")[0];
+                newEquipment.Sub2_number = EquipmentCode;
+                newEquipment.Sub2_description = EquipmentName;
             }
-            else if (newEquipment.Sub1_number.Length == 9)//if(sub_number==631.01.01)
+            else if (EquipmentCode.Length == 9)//if(sub_number==631.01.01)
             {
-                //newEquipment.Sub1_number = EquipmentCode.Split(".")[0];
-                //newEquipment.Sub2_number = EquipmentCode.Split(".")[1];
-
-                selectedEquipment.Sub3_number = EquipmentCode;
-                selectedEquipment.Sub3_description = newEquipment.Sub1_description;
+               newEquipment.Type = EquipmentCode.Split(".")[0];
+               newEquipment.Sub3_number = EquipmentCode;
+               newEquipment.Sub3_description = EquipmentName;
             }
-            else if (newEquipment.Sub1_number.Length == 10)//if(sub_number==631.01.01.01)
+            else if (EquipmentCode.Length == 10)//if(sub_number==631.01.01.01)
             {
-                //newEquipment.Sub1_number = EquipmentCode.Split(".")[0];
-                //newEquipment.Sub2_number = EquipmentCode.Split(".")[1];
-                //newEquipment.Sub3_number = EquipmentCode.Split(".")[2];
-
-                selectedEquipment.Sub4_number = newEquipment.Sub1_number;
-                selectedEquipment.Sub4_description = newEquipment.Sub1_description;
+                newEquipment.Type = EquipmentCode.Split(".")[0];
+                newEquipment.Sub4_number = newEquipment.Sub1_number;
+                newEquipment.Sub4_description = newEquipment.Sub1_description;
             }
-            else if (newEquipment.Sub1_number.Length == 12)//if(sub_number==631.01.01.01)
+            else if (EquipmentCode.Length == 12)//if(sub_number==631.01.01.01)
             {
-                //newEquipment.Sub1_number = EquipmentCode .Split(".")[0];
-                //newEquipment.Sub2_number = EquipmentCode.Split(".")[1];
-                //newEquipment.Sub3_number = EquipmentCode.Split(".")[2];
-
-                selectedEquipment.Sub5_number = EquipmentCode;
-                selectedEquipment.Sub5_description = newEquipment.Sub1_description;
+                newEquipment.Type = EquipmentCode.Split(".")[0];
+                newEquipment.Sub5_number = EquipmentCode;
+                newEquipment.Sub5_description = EquipmentName;
             }
 
-            await _equipmentService.UpdateEquipment(selectedEquipment);
+            await _equipmentService.InsertEquipment(newEquipment);
 
             return RedirectToAction("Index");
         }
@@ -170,14 +168,23 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     }
                     ViewModel vm = new ViewModel();
                     vm.AllEquipments = selectedEquipment;
+                    var equiomentList= await _cbmMappingViewModelService.GetAllCbmMappingAsList("");
+                    List<string> equipmentTypetList = new List<string>();
+                    foreach (var item in equiomentList)
+                    {
+
+                        equipmentTypetList.Add(item.equipmentComponent);
+                    }
+                    vm.EquipmentTypeList = equipmentTypetList;
                     return View(vm);
+
                 }
                 else
                 {
                     return RedirectToAction("Success", "Register");
                 }
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                 return RedirectToAction("Success", "Register");
             }          
@@ -215,13 +222,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> GeneralEdit(Equipment vmodel, string id, string code,
+        public async Task<IActionResult> GeneralEdit(Equipment vmodel, string id, string code, string
+            EquipmentName,
             string remark, string safety, 
             string maker, string model,
             string eqtype, string drawno, 
             string dept, string location, 
             string eqstatus, string type)
         {
+
             var selectedEquipments = await _equipmentService.GetAllEquipment("", 0, 500, true);
 
             var selectedEquipment = selectedEquipments.ToList()
@@ -229,16 +238,46 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 src.Sub2_number == code || src.Sub3_number == code || 
                 src.Sub4_number == code).First();
 
+            if (code.Length == 3)
+            {
+                selectedEquipment.Sub1_description = EquipmentName;
+                selectedEquipment.Sub1_number = code;
+              
+            }
+            else if (code.Length==6)
+            {
+                selectedEquipment.Sub2_description = EquipmentName;
+                selectedEquipment.Sub2_number = code;
+            }
+            else if (code.Length == 9)
+            {
+                // //
+                selectedEquipment.Sub3_description = EquipmentName;
+                selectedEquipment.Sub3_number = code;
+            }
+            else if (code.Length == 10)
+            {
+                selectedEquipment.Sub4_description = EquipmentName;
+                selectedEquipment.Sub4_number = code;
+            }
+            else if (code.Length == 12)
+            {
+                selectedEquipment.Sub5_description = EquipmentName;
+                selectedEquipment.Sub5_number = code;
+            }
+
+
+
             selectedEquipment.Remark = remark;
             selectedEquipment.Safety_level = safety;
             selectedEquipment.Maker = maker;
             selectedEquipment.Model = model;
-            selectedEquipment.Equipment_type = type;
+            selectedEquipment.Equipment_type = eqtype;
             selectedEquipment.Equipment_Status = eqstatus;
             selectedEquipment.Drawing_no = drawno;
             selectedEquipment.Department = dept;
             selectedEquipment.Location = location;
-            selectedEquipment.Type = type;
+            selectedEquipment.Type = code.Split('.')[0];
 
             await _equipmentService.UpdateEquipment(selectedEquipment);
             return RedirectToAction("List");

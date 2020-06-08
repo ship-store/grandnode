@@ -13,25 +13,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grand.Services.CbmMapping;
+using Grand.Core.Data;
 
 namespace Grand.Web.Areas.Maintenance.Services
 {
     public partial class CbmMappingViewModelService : ICbmMappingViewModelService
     {
         private readonly ICbmMappingService _cbmMappingService;
-        public CbmMappingViewModelService(ICbmMappingService _CbmMappingService)
+        private readonly IRepository<CBMMapping> _cbmMappingRepository;
+        public CbmMappingViewModelService(ICbmMappingService _CbmMappingService,
+            IRepository<CBMMapping> _cbmMappingRepository)
         {
             this._cbmMappingService = _CbmMappingService;
-            
-        }
-        Task<IPagedList<Grand.Core.Domain.CbmEntity.CBMMapping>> ICbmMappingViewModelService.GetAllCbmMapping(string name, int pageIndex, int pageSize, bool showHidden)
-        {
-            throw new NotImplementedException();
+            this._cbmMappingRepository = _cbmMappingRepository;
         }
 
-        Task<IPagedList<Grand.Core.Domain.CbmEntity.CBMMapping>> ICbmMappingViewModelService.GetAllCbmMappingAsList(string id)
+        public async Task<IPagedList<CBMMapping>> GetAll()
         {
-            throw new NotImplementedException();
+            var query = _cbmMappingRepository.Table;
+
+            return await PagedList<CBMMapping>.Create(query, 0, 500);
+        }
+
+        async Task<IPagedList<CBMMapping>> ICbmMappingViewModelService.GetAllCbmMapping(string name, int pageIndex, int pageSize, bool showHidden)
+        {
+            var query = _cbmMappingRepository.Table;
+
+            return await PagedList<CBMMapping>.Create(query, pageIndex, pageSize);
+           
+        }
+
+       
+
+
+        async Task<IPagedList<Grand.Core.Domain.CbmEntity.CBMMapping>> ICbmMappingViewModelService.GetAllCbmMappingAsList(string id)
+        {
+            var query = _cbmMappingRepository.Table;
+
+            return await PagedList<CBMMapping>.Create(query, 0,500);
         }
 
         async Task ICbmMappingViewModelService.PrepareCbmMappingModel(CBMMappingModel addNewCbmMapping, object p, bool v)
