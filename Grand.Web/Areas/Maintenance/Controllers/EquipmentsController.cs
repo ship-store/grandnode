@@ -222,13 +222,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> GeneralEdit(Equipment vmodel, string id, string code,
+        public async Task<IActionResult> GeneralEdit(Equipment vmodel, string id, string code, string
+            EquipmentName,
             string remark, string safety, 
             string maker, string model,
             string eqtype, string drawno, 
             string dept, string location, 
             string eqstatus, string type)
         {
+
             var selectedEquipments = await _equipmentService.GetAllEquipment("", 0, 500, true);
 
             var selectedEquipment = selectedEquipments.ToList()
@@ -236,16 +238,46 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 src.Sub2_number == code || src.Sub3_number == code || 
                 src.Sub4_number == code).First();
 
+            if (code.Length == 3)
+            {
+                selectedEquipment.Sub1_description = EquipmentName;
+                selectedEquipment.Sub1_number = code;
+              
+            }
+            else if (code.Length==6)
+            {
+                selectedEquipment.Sub2_description = EquipmentName;
+                selectedEquipment.Sub2_number = code;
+            }
+            else if (code.Length == 9)
+            {
+                // //
+                selectedEquipment.Sub3_description = EquipmentName;
+                selectedEquipment.Sub3_number = code;
+            }
+            else if (code.Length == 10)
+            {
+                selectedEquipment.Sub4_description = EquipmentName;
+                selectedEquipment.Sub4_number = code;
+            }
+            else if (code.Length == 12)
+            {
+                selectedEquipment.Sub5_description = EquipmentName;
+                selectedEquipment.Sub5_number = code;
+            }
+
+
+
             selectedEquipment.Remark = remark;
             selectedEquipment.Safety_level = safety;
             selectedEquipment.Maker = maker;
             selectedEquipment.Model = model;
-            selectedEquipment.Equipment_type = type;
+            selectedEquipment.Equipment_type = eqtype;
             selectedEquipment.Equipment_Status = eqstatus;
             selectedEquipment.Drawing_no = drawno;
             selectedEquipment.Department = dept;
             selectedEquipment.Location = location;
-            selectedEquipment.Type = type;
+            selectedEquipment.Type = code.Split('.')[0];
 
             await _equipmentService.UpdateEquipment(selectedEquipment);
             return RedirectToAction("List");
