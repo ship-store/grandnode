@@ -107,13 +107,14 @@
                         </span>
                         <!--<div class="form-line">
         <input type="text" name="eqtype" value="" class="form-control money-euro" placeholder="" id="id8" readonly="readonly">
-    </div>-->
+    </div>-->                  <input type="text" id="eqptype_">
                         <select name="eqtype" class="form-control money-euro" id="eqptype">
+                            <option id="dvalue"></option>
                             @foreach (var item in Model.EquipmentTypeList)
                             {
 
 
-                                <option class=""form-control money-euro" > @item</option>
+                                <option class="form-control money-euro" > @item</option>
 
                             }
                         </select>
