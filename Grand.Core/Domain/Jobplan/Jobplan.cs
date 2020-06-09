@@ -68,6 +68,9 @@ namespace Grand.Core.Domain.Jobplan
         public string Status { get; set; }
         public int DueRhs { get; set; }
         public string UniversalJobCode { get; set; }
+        
+        public string Cbm { get; set; }
+        public List<string> CbmParameterList{ get; set; } = new List<string>();
 
     }
 }

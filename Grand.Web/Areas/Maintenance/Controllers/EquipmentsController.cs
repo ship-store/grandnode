@@ -23,12 +23,15 @@ using System.Dynamic;
 using Grand.Services.Spareparts;
 using Grand.Core.Domain.Sparepart;
 using Grand.Core.Domain.CbmEntity;
+using Grand.Services.CbmMapping;
+using System.Text;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
     [Area("Maintenance")]
     public class EquipmentsController : BaseAdminController
     {
+        private readonly ICbmMappingService _cbmMappingService;
         private readonly ICbmMappingViewModelService _cbmMappingViewModelService;
         private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
         private readonly IJobTypeViewModelService _jobTypeViewModelService;
@@ -47,7 +50,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             IHostingEnvironment env,
             ISparepartService _sparepartService,
             IEquipmentTypeViewModelService _equipmentTypeViewModelService, IJobTypeViewModelService _jobTypeViewModelService,
-            ICbmMappingViewModelService _cbmMappingViewModelService
+            ICbmMappingViewModelService _cbmMappingViewModelService,
+            ICbmMappingService _cbmMappingService
             )
         {
 
@@ -62,6 +66,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._equipmentTypeViewModelService = _equipmentTypeViewModelService;
             this._jobTypeViewModelService = _jobTypeViewModelService;
             this._cbmMappingViewModelService = _cbmMappingViewModelService;
+            this._cbmMappingService = _cbmMappingService;
         }
 
 
@@ -326,10 +331,24 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ReadJobPlan(DataSourceRequest command, JobplanListModel model, string selectedEquipmentCode)
+        public async Task<IActionResult> ReadJobPlan(DataSourceRequest command, JobplanListModel model, string selectedEquipmentCode,
+            string SelectedEquipmentType)
         {
+            //Cbm_Name equipmentComponent
             DataSourceResult gridModel = null;
             List<JobPlanForDisplay> jp = new List<JobPlanForDisplay>();
+            StringBuilder cbmParameters = new StringBuilder();
+            var cbmMappinglist = await _cbmMappingService.GetAllCbmMapping("", command.Page, command.PageSize);
+           
+            var cbmParameterList= cbmMappinglist.Where(x=>x.equipmentComponent.ToLower()==SelectedEquipmentType.ToLower()).FirstOrDefault();
+            List<string> dummyList = new List<string>() { "Vishnu1","Vipin1"};
+            //foreach (var item in cbmParameterList)
+            //{
+            //    cbmParameters.Append(item.Cbm_Name);
+            //    cbmParameters.Append(",");
+            //}
+
+
             try
             {
                 var VesselName = HttpContext.Session.GetString("VesselName").ToString();
@@ -370,7 +389,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                             PreviousReading = item.PreviousReading,
                             LastReading = item.LastReading,
                             DueRhs = item.PreviousReading + hrsfrq,
-                        }) ;
+                            Cbm = cbmParameterList.Cbm_Name,
+                            CbmParameterList =dummyList
+
+                        });; 
                     }
                 }
 

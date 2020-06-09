@@ -4,10 +4,10 @@
 
     <div class="actions">
         <div class="btn-group btn-group-devided util-btn-margin-bottom-5">
-            <button type="button" id="btnSelectRow" value="GetValue" class="btn green" data-toggle="modal" data-target="#myModal">View</button>
+            <button type="button" id="btnSelectRow" value="GetValue" class="btn green" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" aria-hidden="true"></i></button>
 
 
-            <a href="@Url.Action("NewJobPlan")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+            <a href="@Url.Action("NewJobPlan")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @*@T("Admin.Common.AddNew")*@ </span></a>
 
 
             <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
@@ -30,8 +30,12 @@
 
     <script>
         var eqp=sessionStorage.getItem("EquipmentCode")
-             $(document).ready(function () {
-                $("#grid").kendoGrid({
+        $(document).ready(function () {
+            $("#btn1").click(function () {
+                     alert("hai");
+                    // alert("n="+ );
+                    window.SelectedEquipmentType=$("#eqptype").val();
+                 $("#grid").kendoGrid({
                     dataSource:
                     {
                         transport:
@@ -172,6 +176,11 @@
                             title: "Due Hrs",
                             width: "150px"
                         },
+                        {
+                             field: "Cbm",
+                            title: "Cbm",
+                            width: "150px"
+                        }
 
                         //{
                         //    command: ["edit"],
@@ -181,14 +190,19 @@
                     ],
                     editable: "inline",
 
-                });
+                 });
 
+                          });
+                
             });
 
 
             function gridadditionalData()
             {
-                var data = { selectedEquipmentCode : window["selectedEquipmentCode"] };
+                var data = {
+                    selectedEquipmentCode: window["selectedEquipmentCode"],
+                    SelectedEquipmentType:window.SelectedEquipmentType
+                };
                 //data.selectedEquipmentCode = window["selectedEquipmentCode"];
                 addAntiForgeryToken(data);
                 return data;

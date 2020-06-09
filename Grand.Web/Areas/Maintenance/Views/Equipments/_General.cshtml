@@ -5,11 +5,11 @@
         <div class="row clearfix border-secondary">
 
             <div class="col-md-3" style="float:right">
-                <a onclick="AddEquipment(this); return false;"
+                <button onclick="AddEquipment('')"
                    class="btn btn-success">
                     <i class="fa fa-plus"></i>
                     <span class="hidden-xs">Add</span>
-                </a>
+                </button>
 
             </div>
             <div class="col-md-4" style="float:left">
@@ -27,7 +27,7 @@
 
                     <input type="submit" value="Save"
                            class="btn btn-success"
-                           style="width:auto;position:relative;left:50px;height:30px" />
+                           style="width:auto;position:relative;left:30px;height:30px" />
 
                 </div>
 
@@ -108,7 +108,7 @@
                         <!--<div class="form-line">
         <input type="text" name="eqtype" value="" class="form-control money-euro" placeholder="" id="id8" readonly="readonly">
     </div>-->
-                        <select name="eqtype" class="form-control money-euro">
+                        <select name="eqtype" class="form-control money-euro" id="eqptype">
                             @foreach (var item in Model.EquipmentTypeList)
                             {
 
@@ -278,6 +278,11 @@
     });
 
 
+
+
+</script>*@
+<script>
+    
     function AddEquipment(data) {
         //  var url = location.origin + '/Maintenance/Equipments/AddEquipment?equipment_Code=' + window.selectedEquipmentCode;
         var url = location.origin + '/Maintenance/Equipments/AddEquipment?equipment_Code='
@@ -285,6 +290,4 @@
         window.location.href = url;
     }
 
-
-
-</script>*@
+</script>
