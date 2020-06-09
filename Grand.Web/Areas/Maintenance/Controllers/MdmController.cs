@@ -178,7 +178,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddCBMMapping(CBMMappingModel cbmMappingModel)
+        public async Task<IActionResult> AddCBMMapping(CBMMappingModel cbmMappingModel, string selcetedCBM)
         {
             await _cbmMappingViewModelService.PrepareCbmMappingModel(cbmMappingModel, "", true);
             return RedirectToAction("MdmList", "Mdm");

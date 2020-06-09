@@ -1,5 +1,6 @@
 ﻿@model ViewModel
 @*@model IEnumerable<ViewModel>*@
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>*@
 <script>
     function goBack() {
         window.history.back();
@@ -49,7 +50,7 @@
                                         @foreach (var item in Model.equipmentTypeList)
                                         {
 
-                                            <option value=@item.Equipment_type name=@item.Equipment_type>@item.Equipment_type</option>
+                                            <option value=@item.Equipment_type id="@item.Id" name=@item.Equipment_type>@item.Equipment_type</option>
 
 
                                         }
@@ -88,7 +89,7 @@
                                         <li class="list-group-item clearfix">
                                             @item2.Cbm_Name
                                             <div class="pull-right">
-                                                <input type="checkbox" id="basic_checkbox_2" class="filled-in" name="Cbm_Name" value="@item2.Cbm_Name" />
+                                                <input type="checkbox" id="@item2.Id" class="filled-in" name="Cbm_Name1" value="@item2.Cbm_Name" />
 
                                             </div>
                                         </li>
@@ -98,40 +99,40 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" id="Cbm_Name" name="Cbm_Name" value="s" />
+                    @*<script>
+                        var text = [];
+                        $.each($("input[name='Cbm_Name']:checked"), function () {
+                            text.push($(this).val());
+                        });
+                        window.selectedId = text;
+                        
+                        //$("input[name='Cbm_Name[]']:checked").each(function () {
+                        //    text.push($(this).val());
+                        //    window.selectedId = text;
+                        //});
+                    </script>*@
                     <!-- #END# Circle -->
                 </div>
-                <input type="submit" class="btn btn-success" value="Submit" />
+                <input type="submit" onclick='printChecked()' id="getValues" class="btn btn-success" value="Submit" />
                 @*<a href="@Url.Action("AddMaker")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"> Submit </span></a>*@
                 <a href="@Url.Action("AddCBM")" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> Cancel </span></a>
 
-                @*<form action="AddCBMDetails" method="post">
-
-            <div class="container-fluid" style="width: 80%;">
-                <div class="table-responsive">
-
-                    <table class="table">
-
-                        <tr>
-                            <td><label for="CBM">CBM</label></td>
-                            <td>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="CBM_Name"/>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            @Html.AntiForgeryToken()
-                            <td><input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Add" /></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </form>*@
             </div>
         </div>
     </div>
 </form>
+
+<script type="text/javascript">
+    function printChecked() {
+        var items = document.getElementsByName('Cbm_Name1');
+        var selectedItems = "";
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].type == 'checkbox' && items[i].checked == true)
+                selectedItems += items[i].value + " ,";
+        }
+        //var selectedItemsPass = selectedItems.split(',');
+        alert(selectedItems);
+        document.getElementById("Cbm_Name").value = selectedItems;
+    }
+</script>
