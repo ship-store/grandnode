@@ -21,6 +21,8 @@ using Grand.Services.BreakdownJob;
 using Grand.Core.Domain.ReportedByEntity;
 using Grand.Services.ReportedBy;
 using System.Dynamic;
+using Grand.Services.JobStatus;
+using Grand.Core.Domain.JobStatusEntity;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -32,10 +34,11 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IReportViewModelService _reportViewModelService;
         private readonly IReportService _reportService;
         private readonly IReportedByService _reportedByService;
+        private readonly IJobStatusService _jobStatusService;
 
         private readonly IBreakdownJobViewModelService _breakdownJobViewModelService;
 
-        public BreakdownJobController(IReportedByService _reportedByService,IEquipmentService _equipmentService, IBreakdownJobViewModelService _breakdownJobViewModelService, IBreakdownJobService _breakdownJobService, IReportViewModelService _reportViewModelService, IReportService _reportService)
+        public BreakdownJobController(IReportedByService _reportedByService,IEquipmentService _equipmentService, IBreakdownJobViewModelService _breakdownJobViewModelService, IBreakdownJobService _breakdownJobService, IReportViewModelService _reportViewModelService, IReportService _reportService, IJobStatusService _jobStatusService)
         {
             this._breakdownJobViewModelService = _breakdownJobViewModelService;
             this._breakdownJobService = _breakdownJobService;
@@ -43,6 +46,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._reportViewModelService = _reportViewModelService;
             this._reportService = _reportService;
             this._reportedByService = _reportedByService;
+            this._jobStatusService = _jobStatusService;
 
 
         }
@@ -174,6 +178,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         [HttpGet]
         public async Task<IActionResult> AddBreakdownJob()
         {
+           
+            var reporters = await _reportedByService.GetAllReportedBy("", 0, 500, true);
+            List<ReportedBy> reporterList = reporters.ToList();
+            ViewBag.ReporterList = reporterList;
+
+            var statuses = await _jobStatusService.GetAllJobStatus("", 0, 500, true);
+            List<JobStatus> statusList = statuses.ToList();
+            ViewBag.StatusList = statusList;
+
             var model = await Task.FromResult<object>(null);
             var VesselName = HttpContext.Session.GetString("VesselName").ToString().ToLower();
             var breakdownJobs = await _breakdownJobService.GetAllBreakdownJobs("", 0, 500, true);
