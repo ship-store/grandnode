@@ -5,19 +5,19 @@
         <div class="row clearfix border-secondary">
 
             <div class="col-md-3" style="float:right">
-                <button onclick="AddEquipment('')"
-                   class="btn btn-success">
+                <a href="#" onclick="AddEquipment(this); return false;"
+                   class="btn btn-success"
+                   style="width:auto;position:relative;right:-150px">
                     <i class="fa fa-plus"></i>
-                    <span class="hidden-xs">Add</span>
-                </button>
-
+                    @*<span class="hidden-xs">AddEquipment</span>*@
+                </a>
             </div>
             <div class="col-md-4" style="float:left">
                 <button class="btn btn-success makeEditable col-md-offset-10 c"
-                        type="submit" name="Edit" style="width:auto;position:relative;right:-100px">
+                        type="submit" name="Edit" style="width:auto;position:relative;right:-480px">
                     <i class="fa fa-pencil"></i>
 
-                    <span class="hidden-xs"> Edit</span>
+                    @*<span class="hidden-xs"> Edit</span>*@
                 </button>
 
             </div>
@@ -25,11 +25,10 @@
             <form action="GeneralEdit" method="post">
                 <div class="col-md-2" style="float:right">
 
-                    <input type="submit" value="Save"
-                           class="btn btn-success"
-                           style="width:auto;position:relative;left:50px;height:30px" />
+                    <input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="width:auto;position:relative;right:-250px;height:30px" />
 
                 </div>
+
 
 
                 <div class="col-md-4">
@@ -106,18 +105,18 @@
                             <i class="material-icons">turned_in_not</i>
                         </span>
                         <!--<div class="form-line">
-        <input type="text" name="eqtype" value="" class="form-control money-euro" placeholder="" id="id8" readonly="readonly">
-    </div>-->
+                    <input type="text" name="eqtype" value="" class="form-control money-euro" placeholder="" id="id8" readonly="readonly">
+                </div>-->
                         <select name="eqtype" class="form-control money-euro">
                             @foreach (var item in Model.EquipmentTypeList)
                             {
 
 
-                                <option class=""form-control money-euro" > @item</option>
+                                <option class="" form-control money-euro"> @item</option>
 
                             }
                         </select>
-                        </div>
+                    </div>
                 </div>
 
 

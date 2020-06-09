@@ -70,14 +70,14 @@
                 </div>
 
                 <div class="actions btn-group btn-group-devided">
-                    <a href="@Url.Action("AddUnplannedJobs")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+                    <a href="@Url.Action("AddUnplannedJobs")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> </span></a>
 
                     <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
                     <button type="button" name="delete-selected" id="delete-selected" class="btn red">
                         <i class="fa fa-trash-o"></i>
-                        @T("Admin.Common.Delete.Selected")
+                      
                     </button>
-                    <button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>
+                    <button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" aria-hidden="true"></i></button>
 
                     <button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>
                 </div>
