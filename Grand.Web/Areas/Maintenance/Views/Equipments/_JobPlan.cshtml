@@ -4,10 +4,10 @@
 
     <div class="actions">
         <div class="btn-group btn-group-devided util-btn-margin-bottom-5">
-            <button type="button" id="btnSelectRow" value="GetValue" class="btn green" data-toggle="modal" data-target="#myModal">View</button>
+            <button type="button" id="btnSelectRow" value="GetValue" class="btn green" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" aria-hidden="true"></i></button>
 
 
-            <a href="@Url.Action("NewJobPlan")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @T("Admin.Common.AddNew") </span></a>
+            <a href="@Url.Action("NewJobPlan")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @*@T("Admin.Common.AddNew")*@ </span></a>
 
 
             <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
