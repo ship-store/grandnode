@@ -14,7 +14,8 @@
             </div>
             <div class="col-md-4" style="float:left">
                 <button class="btn btn-success makeEditable col-md-offset-10 c"
-                        type="submit" name="Edit" style="width:auto;position:relative;right:-100px">
+                        type="submit" name="Edit" style="width:auto;position:relative;right:-200px" 
+                        onclick="MakedropDownEditable()">
                     <i class="fa fa-pencil"></i>
 
                     <span class="hidden-xs"> Edit</span>
@@ -105,18 +106,21 @@
                         <span class="input-group-addon">
                             <i class="material-icons">turned_in_not</i>
                         </span>
-                        <!--<div class="form-line">
-        <input type="text" name="eqtype" value="" class="form-control money-euro" placeholder="" id="id8" readonly="readonly">
-    </div>-->
-                        <select name="eqtype" class="form-control money-euro" id="eqptype">
+                        <div class="form-line">
+        @*<input type="text" name="eqtype" value="" class="form-control money-euro" placeholder="" id="id8" readonly="readonly">*@
+                  @*<input type="text" id="eqptype_">*@
+                          <select name="eqtype" class="form-control money-euro" id="eqptype" disabled>
+                            <option id="dvalue"></option>
                             @foreach (var item in Model.EquipmentTypeList)
                             {
 
 
-                                <option class=""form-control money-euro" > @item</option>
+                                <option class="form-control money-euro" > @item</option>
 
                             }
                         </select>
+                            </div>  
+
                         </div>
                 </div>
 
@@ -288,6 +292,9 @@
         var url = location.origin + '/Maintenance/Equipments/AddEquipment?equipment_Code='
             + window.selectedEquipmentCode + "&sub_number=" + window.sub_number + "&EquipmentId=" + window.EquipmentId;
         window.location.href = url;
+    }
+    function MakedropDownEditable() {
+       $("#eqptype").removeAttr('disabled');
     }
 
 </script>
