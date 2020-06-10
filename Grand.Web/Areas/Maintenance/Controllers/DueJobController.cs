@@ -81,6 +81,47 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ReadDueJobs()
+        {
+            var VesselName = HttpContext.Session.GetString("VesselName").ToString();
+            var Jobplanlist = await _jobplanService.GetAllJobplans("", 0, 500);
+            List<Jobplan> jobplanlist = new List<Jobplan>();
+
+            foreach (Jobplan item in Jobplanlist.Where(x => x.Vessel.ToLower() == VesselName.ToLower() && x.NEXT_DUE_DATE != null).OrderBy(x => x.NEXT_DUE_DATE).ToList())
+            {
+                var date = Convert.ToDateTime(item.NEXT_DUE_DATE);
+
+
+
+                var UperLimit = date.AddDays(10);
+                var temp = DateTime.Now.AddDays(10);
+                var dueRhs = (item.DueRhs / 100) * 10;
+                var duerhs1 = item.DueRhs - dueRhs;
+                var cureentrhs = item.LastReading;
+
+
+                if (temp >= date)
+                {
+                    jobplanlist.Add(item);
+                }
+
+                if (cureentrhs <= duerhs1)
+                {
+                    jobplanlist.Add(item);
+                }
+            }
+            var p = jobplanlist.OrderBy(x => x.NEXT_DUE_DATE).ToList();
+
+
+            //for Dashbord values
+            var Data = jobplanlist.ToList().Where(x => x.JobStatus == 0);
+            var TotalDueJobs = Data.Count();
+
+
+
+            return Json("");
+        }
 
 
         [HttpPost]
@@ -117,7 +158,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 }
                 var p = jobplanlist.OrderBy(x => x.NEXT_DUE_DATE).ToList();
                 var gridModel = new DataSourceResult { Data = jobplanlist.ToList().Where(x => x.JobStatus == 0) };
+
+
+                //for Dashbord values
+                var Data = jobplanlist.ToList().Where(x => x.JobStatus == 0);
+                var TotalDueJobs=Data.Count();
+
+
                 return Json(gridModel);
+
+
             }
             catch (System.Exception)
             {

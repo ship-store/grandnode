@@ -127,6 +127,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     job.Maintenance_Type = item["Maintenance_Type"];
                     job.JobStatus = 0;//Setting JobStatus  to PlanedJObs
                     job.JobOrder = max;
+                    job.UniversalJobCode = item["JobCode"];
                     //job.RunFrequency = 0;
                     
 

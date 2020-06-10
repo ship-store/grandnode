@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Session;
 using System.Web;
 using Microsoft.AspNetCore.Http;
+using Grand.Services.Jobplan;
+using Grand.Core.Domain.Jobplan;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -19,15 +21,17 @@ namespace Grand.Web.Areas.Maintenance.Controllers
     public class RegisterController : BaseAdminController
     {
         private readonly IRegisterViewModelService _registerViewModelService;
-       
+        private readonly IJobplanService _jobplanService;
         private readonly IRegisterService _registerService;
         public RegisterController(
             IRegisterViewModelService registerViewModelService,
-            IRegisterService registerService
+            IRegisterService registerService,
+            IJobplanService _jobplanService
             )
         {
             this._registerViewModelService = registerViewModelService;
             this._registerService = registerService;
+            this._jobplanService = _jobplanService;
         }
         [HttpGet]
         public async Task<IActionResult> AddRegister()
@@ -37,12 +41,14 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
 
         [HttpGet]
-        public IActionResult Success()
+        public async  Task<IActionResult >Success()
         {
             //Session value gettings
             try
             {
                 ViewBag.EmailAddress = HttpContext.Session.GetString("email").ToString();
+
+
             }
             catch (System.Exception)
             {
