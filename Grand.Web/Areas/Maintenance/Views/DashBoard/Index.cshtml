@@ -25,7 +25,19 @@
             })
                 .then(function () {
                     var url1 = location.origin + "Maintenance/DueJob/ReadDueJob";
-                  
+                    $.ajax({
+                            type: "GET",
+    	                        url:"http://localhost:16599/Maintenance/DueJob/ReadDueJob",
+    	                        success: function(data){ 
+                                    // $('#data').text(data);
+                                    alert("Haiu");
+
+    	                        },
+    	                        error: function(){
+    		                        alert("There was an error.");
+    	                        }
+                            });
+
 
                     window.location.href = '@Url.Action("VesselList","Vessel")';
                 })
@@ -86,7 +98,7 @@
                         </div>
                         <div class="content">
                             <div class="text">TOTAL VESSELS</div>
-                            <div class="text">450</div>
+                            <div class="text">@ViewBag.TotalVessel</div>
                             <div class="number count-to" data-from="0" data-to="000" data-speed="15" data-fresh-interval="20"></div>
                         </div>
                     </div>
@@ -98,7 +110,7 @@
                         </div>
                         <div class="content">
                             <div class="text">DUE FOR THE DAY</div>
-                            <div class="text">2</div>
+                            <div class="text">@ViewBag.DueToday </div>
                             <div class="number count-to" data-from="0" data-to="000" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
@@ -110,7 +122,7 @@
                         </div>
                         <div class="content">
                             <div class="text">DUE FOR THE WEEK</div>
-                            <div class="text">5</div>
+                            <div class="text">@ViewBag.DueOfWeek</div>
                             <div class="number count-to" data-from="0" data-to="000" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
@@ -122,7 +134,7 @@
                         </div>
                         <div class="content">
                             <div class="text">DUE FOR THE MONTH</div>
-                            <div class="text">8</div>
+                            <div class="text">@ViewBag.DueofMonth</div>
                             <div class="number count-to" data-from="0" data-to="000" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>

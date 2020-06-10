@@ -58,6 +58,12 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> DashBoard()
+        {
+            return View();
+        }
         [HttpGet]
         public async Task<IActionResult> AddRegisterlDetails(RegisterModel addNewRegister)
         {

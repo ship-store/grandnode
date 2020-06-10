@@ -25,7 +25,19 @@
             })
                 .then(function () {
                     var url1 = location.origin + "Maintenance/DueJob/ReadDueJob";
-                  
+                    $.ajax({
+                            type: "GET",
+    	                        url:"http://localhost:16599/Maintenance/DueJob/ReadDueJob",
+    	                        success: function(data){ 
+                                    // $('#data').text(data);
+                                    alert("Haiu");
+
+    	                        },
+    	                        error: function(){
+    		                        alert("There was an error.");
+    	                        }
+                            });
+
 
                     window.location.href = '@Url.Action("VesselList","Vessel")';
                 })
