@@ -17,6 +17,10 @@ using Grand.Services.Equipments;
 using System;
 using Grand.Services.Report;
 using Grand.Core.Domain.Report;
+using Grand.Services.ReportedBy;
+using Grand.Services.JobStatus;
+using Grand.Core.Domain.ReportedByEntity;
+using Grand.Core.Domain.JobStatusEntity;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -26,16 +30,19 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IUnplannedJobService _unplannedJobService;
         private readonly IReportService _reportService;
         private readonly IEquipmentService _equipmentService;
-
+        private readonly IReportedByService _reportedByService;
+        private readonly IJobStatusService _jobStatusService;
         private readonly IUnplannedJobViewModelService _unplannedJobViewModelService;
         private readonly IReportViewModelService _reportViewModelService;
-        public UnplannedJobsController(IEquipmentService _equipmentService, IUnplannedJobViewModelService _unplannedJobViewModelService, IUnplannedJobService _unplannedJobService, IReportService _reportService, IReportViewModelService _reportViewModelService)
+        public UnplannedJobsController(IEquipmentService _equipmentService, IUnplannedJobViewModelService _unplannedJobViewModelService, IUnplannedJobService _unplannedJobService, IReportService _reportService, IReportViewModelService _reportViewModelService, IReportedByService _reportedByService, IJobStatusService _jobStatusService)
         {
             this._unplannedJobViewModelService = _unplannedJobViewModelService;
             this._unplannedJobService = _unplannedJobService;
             this._equipmentService = _equipmentService;
             this._reportService = _reportService;
             this._reportViewModelService = _reportViewModelService;
+            this._reportedByService = _reportedByService;
+            this._jobStatusService = _jobStatusService;
         }
         // list
         public IActionResult Index() => RedirectToAction("List");
@@ -147,6 +154,14 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         [HttpGet]
         public async Task<IActionResult> AddUnplannedJobs()
         {
+            var reporters = await _reportedByService.GetAllReportedBy("", 0, 500, true);
+            List<ReportedBy> reporterList = reporters.ToList();
+            ViewBag.ReporterList = reporterList;
+
+            var statuses = await _jobStatusService.GetAllJobStatus("", 0, 500, true);
+            List<JobStatus> statusList = statuses.ToList();
+            ViewBag.StatusList = statusList;
+
             var model = await Task.FromResult<object>(null);
 
             var VesselName = HttpContext.Session.GetString("VesselName").ToString().ToLower();

@@ -2,6 +2,8 @@
     ViewBag.Title = T("Maintenance.Title.AddUnplannedJobs").Text;
     var vessel = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
     var JobOrder = ViewBag.joborder;
+    var reporterList = ViewBag.ReporterList;
+    var statusList = ViewBag.StatusList;
 }
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -83,23 +85,30 @@
                             <tr>
                                 <td><label for="ReportedBy">Reported By</label></td>
                                 <td>
-                                    <select class="form-control show-tick valid" name="ReportedBy" id="n5">
-                                        <option value=""></option>
-                                        <option>Chief Engineer</option>
-                                        <option>Second Engineer</option>
-                                        <option>Third Engineer</option>
-                                        <option>Fourth Engineer</option>
+                                    <select class="form-control show-tick" name="ReportedBy">
+                                        @foreach (var reporter in reporterList)
+                                        {
+
+                                            <option value=@reporter.Reported_By name=@reporter.Reported_By>@reporter.Reported_By</option>
+
+
+                                        }
+
                                     </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td><label for="Status">Status</label></td>
                                 <td>
-                                    <select class="form-control show-tick valid" name="Status" id="n6">
-                                        <option value=""></option>
-                                        <option>Completed</option>
-                                        <option>In progress</option>
-                                        <option>Pending</option>
+                                    <select class="form-control show-tick" name="Status">
+                                        @foreach (var status in statusList)
+                                        {
+
+                                            <option value=@status.Status name=@status.Status>@status.Status</option>
+
+
+                                        }
+
                                     </select>
                                 </td>
                             </tr>
