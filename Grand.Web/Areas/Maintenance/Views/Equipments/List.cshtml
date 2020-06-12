@@ -85,7 +85,7 @@
                             <li class="data">
 
                                 <span>
-                                    <a onclick="jsFunction(this,''); return false;" style="color: #7273a3"
+                                    <a onclick="jsFunction(this); return false;" style="color: #7273a3"
                                        alt="Sub1_number-Sub1_description-@item.Id">@item.Sub1_number-@item.Sub1_description</a>
                                 </span>
 
@@ -96,7 +96,7 @@
                                        // var  lastNode2 = Model.AllEquipments.Where(f => f.Sub2_number != null && f.Sub2_description != null && f.Type == item.Type).Last().Sub2_number;
                                         <li class="data">
 
-                                            <a class="id1" href="#" onclick="jsFunsction(this,''); return false;"
+                                            <a class="id1" href="#" onclick="jsFunsction(this); return false;"
                                                style="color:#7273a3" 
                                                alt="Sub2_number-Sub2_description-@item2.Id">@item2.Sub2_number-@item2.Sub2_description</a>
 
@@ -107,7 +107,7 @@
                                                 {
                                                    // var lastNode3 = Model.AllEquipments.Where(f => f.Sub3_number != null && f.Sub3_description != null && f.Type == item2.Type).Last().Sub3_number;
                                                     <li class="data">
-                                                        <a onclick="jsFunction(this,''); return false;" style="color:#7273a3"
+                                                        <a onclick="jsFunction(this); return false;" style="color:#7273a3"
                                                             alt="Sub3_number-Sub3_description-@item3.Id">@item3.Sub3_number-@item3.Sub3_description</a>
                                                         <ul>
                                                         </ul>
@@ -251,7 +251,7 @@
     $(function () {
         $("#p1").hide();
     });
-        function jsFunction(link, lastNode) {
+        function jsFunction(link) {
 
            // window.EquipmentCode = autogenerateNextEquipmentCode(lastNode);
            //alert("NextEquipmentCode"+   window.EquipmentCode)
@@ -265,8 +265,8 @@
               // alert("Your Equipment Code" + window.sub_number);
                 $("#SubNumber").val(sub_number);
         
-       // $("#grid").data("kendoGrid").dataSource.read();
-      //  $("#grid3").data("kendoGrid").dataSource.read();
+     //  $("#grid").data("kendoGrid").dataSource.read();
+      //$("#grid3").data("kendoGrid").dataSource.read();
         $.ajax({
             type: "GET",
             url: "@Url.Action("GetEquipmentDetails")" + "?equipmentCode=" + window.selectedEquipmentCode,
