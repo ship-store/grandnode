@@ -40,7 +40,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 {
                     jobplanlist.Add(item);
                 }
-                var gridModel = new DataSourceResult { Data = jobplanlist.ToList().Where(x => x.JobStatus == 2) };
+                var gridModel = new DataSourceResult { Data = jobplanlist.ToList().Where(x => x.JobStatus == 2) }; 
                 return Json(gridModel);
             }
             catch (System.Exception)
