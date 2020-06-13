@@ -30,5 +30,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public IEnumerable<Grand.Core.Domain.CbmEntity.CBM> cbmList { get; set; }
         public List<string> EquipmentTypeList { get; set; }
 
+        public List<Core.Domain.Jobplan.Jobplan> JobplansList { get; set; }
+
     }
 }

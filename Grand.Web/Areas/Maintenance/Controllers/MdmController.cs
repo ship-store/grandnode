@@ -8,7 +8,7 @@ using Grand.Services.ReportedBy;
 using Grand.Services.Cbm;
 using Grand.Services.CbmMapping;
 using Grand.Web.Areas.Admin.Controllers;
-
+using Grand.Services.Jobplan;
 using Grand.Web.Areas.Maintenance.DomainModels;
 
 using Grand.Web.Areas.Maintenance.Interfaces;
@@ -42,9 +42,11 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IMakerService1 _makerService1;
         private readonly IMakerViewModelService _makerViewModelService;
         private readonly IMakerViewModelService1 _makerViewModelService1;
+
+        private readonly IJobplanService _jobplanService;
         //public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobStatusViewModelService _jobStatusViewModelService, IJobTypeViewModelService _jobTypeViewModelService, IJobStatusService _jobStatusService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
         //public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
-        public MdmController(ICbmMappingViewModelService cbmMappingViewModelService, ICbmMappingService cbmMappingService,IJobStatusViewModelService _jobStatusViewModelService, IJobStatusService _jobStatusService, IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1,ICbmService _cbmService,ICbmViewModelService _cbmViewModelService)
+        public MdmController(IJobplanService _jobplanService, ICbmMappingViewModelService cbmMappingViewModelService, ICbmMappingService cbmMappingService,IJobStatusViewModelService _jobStatusViewModelService, IJobStatusService _jobStatusService, IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1,ICbmService _cbmService,ICbmViewModelService _cbmViewModelService)
         {
             this._cbmMappingViewModelService = cbmMappingViewModelService;
             this._cbmMappingService = cbmMappingService;
@@ -58,7 +60,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._jobTypeViewModelService = _jobTypeViewModelService;
             this._jobStatusService = _jobStatusService;
             this._jobStatusViewModelService = _jobStatusViewModelService;
-
+            this._jobplanService = _jobplanService;
             this._reportedByService = _reportedByService;
             this._reportedByViewModelService = _reportedByViewModelService;
              
@@ -115,8 +117,12 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var cbm = await _cbmService.GetAllCbm("", 0, 500, true);
             var cbmList = cbm.ToList();
 
+            var jobplans = await _jobplanService.GetAllJobplan("", 0, 500, true);
+            var jobplansList = jobplans.ToList();
+
             vm.equipmentTypeList = equipmentTypeList;
             vm.cbmList = cbmList;
+            vm.JobplansList = jobplansList;
 
             return View(vm);
         }

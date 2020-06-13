@@ -335,12 +335,17 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             string SelectedEquipmentType)
         {
             //Cbm_Name equipmentComponent
+            string cbmParameterList="";
             DataSourceResult gridModel = null;
             List<JobPlanForDisplay> jp = new List<JobPlanForDisplay>();
             StringBuilder cbmParameters = new StringBuilder();
             var cbmMappinglist = await _cbmMappingService.GetAllCbmMapping("", command.Page, command.PageSize);
+
+            if (!String.IsNullOrEmpty(SelectedEquipmentType))
+            {
+                cbmParameterList = cbmMappinglist.Where(x => x.equipmentComponent.ToLower() == SelectedEquipmentType.ToLower()).FirstOrDefault().Cbm_Name;
+            }
            
-            var cbmParameterList= cbmMappinglist.Where(x=>x.equipmentComponent.ToLower()==SelectedEquipmentType.ToLower()).FirstOrDefault();
             List<string> dummyList = new List<string>() { "Vishnu1","Vipin1"};
             //foreach (var item in cbmParameterList)
             //{
@@ -389,9 +394,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                             PreviousReading = item.PreviousReading,
                             LastReading = item.LastReading,
                             DueRhs = item.PreviousReading + hrsfrq,
-                            UniversalJobCode=item.UniversalJobCode,
-
-                            Cbm = cbmParameterList.Cbm_Name,
+                           
+                            Cbm = cbmParameterList,
                             CbmParameterList =dummyList
 
                         });; 
