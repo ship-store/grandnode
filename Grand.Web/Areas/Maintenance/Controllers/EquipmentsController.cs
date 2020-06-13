@@ -389,6 +389,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                             PreviousReading = item.PreviousReading,
                             LastReading = item.LastReading,
                             DueRhs = item.PreviousReading + hrsfrq,
+                            UniversalJobCode=item.UniversalJobCode,
+
                             Cbm = cbmParameterList.Cbm_Name,
                             CbmParameterList =dummyList
 

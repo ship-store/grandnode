@@ -43,6 +43,7 @@ namespace Grand.Web.Areas.Maintenance.Services
                 jobPlan.Vessel = addNewJobPlan.Vessel;
                 jobPlan.PlanHorizon = addNewJobPlan.PlanHorizon;
                 jobPlan.PreviousReading = addNewJobPlan.PreviousReading;
+                jobPlan.UniversalJobCode = addNewJobPlan.UniversalJobCode;
 
                 await _jobPlanService.InsertJobplan(jobPlan);
             }
@@ -71,6 +72,7 @@ namespace Grand.Web.Areas.Maintenance.Services
                 jobPlan.Vessel = addNewJobPlan.Vessel;
                 jobPlan.PlanHorizon = addNewJobPlan.PlanHorizon;
                 jobPlan.PreviousReading = addNewJobPlan.PreviousReading;
+                jobPlan.UniversalJobCode = addNewJobPlan.UniversalJobCode;
 
                 await _jobPlanService.InsertJobplan(jobPlan);
 
