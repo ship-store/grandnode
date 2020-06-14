@@ -31,10 +31,22 @@
     <script>
         var eqp=sessionStorage.getItem("EquipmentCode")
         $(document).ready(function () {
+             // alert("hai");
+            loadJobPlan();
             $("#btn1").click(function () {
                    //  alert("hai");
                     // alert("n="+ );
-                    window.SelectedEquipmentType=$("#eqptype").val();
+                loadJobPlan();
+                  //alert("hai");
+              });
+                
+        });
+
+
+
+        function loadJobPlan() {
+           // alert("Jobplan is loading");
+               window.SelectedEquipmentType=$("#eqptype").val();
                  $("#grid").kendoGrid({
                     dataSource:
                     {
@@ -197,10 +209,7 @@
                     editable: "inline",
 
                  });
-
-              });
-                
-           });
+        }
 
 
             function gridadditionalData()
