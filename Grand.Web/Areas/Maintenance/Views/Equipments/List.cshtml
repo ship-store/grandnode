@@ -157,7 +157,7 @@
                             <ul class="nav nav-tabs tab-nav-right" role="tablist">
                                 <li role="presentation" class="active"><a href="#general" data-toggle="tab" id="generalTab">GENERAL</a></li>
                                 <li role="presentation" ><a href="#jobplan" data-toggle="tab" id="btn1">JOB PLAN</a></li>
-                                <li role="presentation"><a href="#spareparts" data-toggle="tab">SPARE PARTS</a></li>
+                                <li role="presentation"><a href="#spareparts" data-toggle="tab" id="btn2">SPARE PARTS</a></li>
 
                             </ul>
 
@@ -250,11 +250,12 @@
     
 
         function equipmentSelected(link) {
-            //alert("Equipment Selected=="+link.text.split("-")[1].trim());
+            alert("Equipment Selected=="+link.text.split("-")[0].trim());
 
 
-            $("#generalTab").attr("class", "active");
+          
             loadJobPlan();
+            loadSpareparts();
 
              // window.EquipmentCode = autogenerateNextEquipmentCode(lastNode);
            //alert("NextEquipmentCode"+   window.EquipmentCode)
