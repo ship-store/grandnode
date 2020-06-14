@@ -375,6 +375,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                         jp.Add(new JobPlanForDisplay() {
                             EquipmentName = item.EquipmentName,
                             EquipmentCode = item.EquipmentCode,
+                            UniversalJobCode=item.UniversalJobCode,
                             Vessel = item.Vessel,
                             JobTitle = item.JobTitle,
                             JobDescription = item.JobDescription,

@@ -12,6 +12,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
     {
         public string Cbm_Name { get; set; }
         public string equipmentComponent { get; set; }
+        public string jobCode { get; set; }
 
     }
 }
