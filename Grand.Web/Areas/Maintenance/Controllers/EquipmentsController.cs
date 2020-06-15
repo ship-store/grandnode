@@ -31,6 +31,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
     [Area("Maintenance")]
     public class EquipmentsController : BaseAdminController
     {
+
         private readonly ICbmMappingService _cbmMappingService;
         private readonly ICbmMappingViewModelService _cbmMappingViewModelService;
         private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
@@ -173,14 +174,27 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     }
                     ViewModel vm = new ViewModel();
                     vm.AllEquipments = selectedEquipment;
-                    var equiomentList= await _cbmMappingViewModelService.GetAllCbmMappingAsList("");
+
+                    #region DatafromCbmType
+                    //var equiomentList= await _cbmMappingViewModelService.GetAllCbmMappingAsList("");
+                    //List<string> equipmentTypetList = new List<string>();
+                    //foreach (var item in equiomentList)
+                    //{
+
+                    //    equipmentTypetList.Add(item.equipmentComponent);
+                    //}
+                    //vm.EquipmentTypeList = equipmentTypetList;
+                    #endregion
+
                     List<string> equipmentTypetList = new List<string>();
-                    foreach (var item in equiomentList)
+                    var equipmentTypes = await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
+                   foreach (var item in equipmentTypes)
                     {
 
-                        equipmentTypetList.Add(item.equipmentComponent);
+                        equipmentTypetList.Add(item.Equipment_type);
                     }
                     vm.EquipmentTypeList = equipmentTypetList;
+
                     return View(vm);
 
                 }
