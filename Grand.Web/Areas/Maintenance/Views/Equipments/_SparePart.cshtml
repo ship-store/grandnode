@@ -19,7 +19,16 @@
 
     <script>
         $(document).ready(function () {
-            $("#grid3").kendoGrid({
+            loadSpareparts();
+            $("#btn2").click(function () {
+
+                  loadSpareparts();
+
+            });
+        });
+
+        function loadSpareparts() {
+             $("#grid3").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -125,7 +134,8 @@
                     editable: "inline"
 
             });
-        });
+        }
+
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();
                         $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
@@ -136,6 +146,7 @@
 
                 var data = { selectedEquipmentCode : window["selectedEquipmentCode"] };
                 //data.selectedEquipmentCode = window["selectedEquipmentCode"];
+                       // alert("Equipment Selected=_"+ window["selectedEquipmentCode"]);
                 addAntiForgeryToken(data);
                 return data;
         }

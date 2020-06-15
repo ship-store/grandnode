@@ -85,7 +85,7 @@
                             <li class="data">
 
                                 <span>
-                                    <a onclick="jsFunction(this); return false;" style="color: #7273a3"
+                                    <a onclick="equipmentSelected(this); return false;" style="color: #7273a3"
                                        alt="Sub1_number-Sub1_description-@item.Id">@item.Sub1_number-@item.Sub1_description</a>
                                 </span>
 
@@ -96,7 +96,7 @@
                                        // var  lastNode2 = Model.AllEquipments.Where(f => f.Sub2_number != null && f.Sub2_description != null && f.Type == item.Type).Last().Sub2_number;
                                         <li class="data">
 
-                                            <a class="id1" href="#" onclick="jsFunsction(this); return false;"
+                                            <a class="id1" href="#" onclick="equipmentSelected(this); return false;"
                                                style="color:#7273a3" 
                                                alt="Sub2_number-Sub2_description-@item2.Id">@item2.Sub2_number-@item2.Sub2_description</a>
 
@@ -107,7 +107,7 @@
                                                 {
                                                    // var lastNode3 = Model.AllEquipments.Where(f => f.Sub3_number != null && f.Sub3_description != null && f.Type == item2.Type).Last().Sub3_number;
                                                     <li class="data">
-                                                        <a onclick="jsFunction(this); return false;" style="color:#7273a3"
+                                                        <a onclick="equipmentSelected(this); return false;" style="color:#7273a3"
                                                             alt="Sub3_number-Sub3_description-@item3.Id">@item3.Sub3_number-@item3.Sub3_description</a>
                                                         <ul>
                                                         </ul>
@@ -155,9 +155,9 @@
                         <div class="body">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                                <li role="presentation" class="active"><a href="#general" data-toggle="tab">GENERAL</a></li>
+                                <li role="presentation" class="active"><a href="#general" data-toggle="tab" id="generalTab">GENERAL</a></li>
                                 <li role="presentation" ><a href="#jobplan" data-toggle="tab" id="btn1">JOB PLAN</a></li>
-                                <li role="presentation"><a href="#spareparts" data-toggle="tab">SPARE PARTS</a></li>
+                                <li role="presentation"><a href="#spareparts" data-toggle="tab" id="btn2">SPARE PARTS</a></li>
 
                             </ul>
 
@@ -247,11 +247,69 @@
 
 
     <script>
-    var x = "";
-    $(function () {
-        $("#p1").hide();
-    });
-        function jsFunction(link) {
+    
+
+        function equipmentSelected(link) {
+            //alert("Equipment Selected=="+link.text.split("-")[0].trim());
+
+
+          
+            loadJobPlan();
+            loadSpareparts();
+
+             // window.EquipmentCode = autogenerateNextEquipmentCode(lastNode);
+           //alert("NextEquipmentCode"+   window.EquipmentCode)
+            window.selectedEquipmentCode = link.text.split("-")[0].trim();
+            window.selectedEquipmentName = link.text.split("-")[1].trim();
+
+           
+              window.sub_number = link.getAttribute("alt").split("-")[0].trim();
+              window.EquipmentId= link.getAttribute("alt").split("-")[2].trim();
+              //alert("ID=" + link.getAttribute("alt").split("-")[2].trim());
+              // alert("Your Equipment Code" + window.sub_number);
+                $("#SubNumber").val(sub_number);
+        
+       // $("#grid").data("kendoGrid").dataSource.read();
+      //  $("#grid3").data("kendoGrid").dataSource.read();
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetEquipmentDetails")" + "?equipmentCode=" + window.selectedEquipmentCode,
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (datas) {
+                var data = JSON.parse(datas);
+                //alert("VesselName= " + data.Vessel);
+                //alert("2nd"+posts.Vessel);
+              //  $("#id17").val(data.Sub1_number);
+
+                $("#eqptype_").val(data.Equipment_type);
+                $("#dvalue").html(data.Equipment_type);
+                $("#id17").val(window.selectedEquipmentCode);
+                $("#id18").val(data.Sub2_number);
+                $("#id1").val(window.selectedEquipmentName);
+                //$("#id1").val(window.selctedEquipmentName);
+                $("#id2").val(data.Sub2_description);
+                $("#id3").val(data.Sub3_number);
+               // $("#id4").val(Sub5_description);
+                $("#id5").val(data.Safety_level);
+                $("#id6").val(data.Maker);
+                $("#id7").val(data.Model);
+                $("#id8").val(data.Drawing_no);
+                $("#id9").val(data.Department);
+                $("#id10").val(data.Department);
+                $("#id11").val(data.Location);
+                $("#id12").val(data.Equipment_Status);
+                $("#id13").val(data.Type);
+                $("#id14").val(data.Vessel);
+              //  $("#id15").val(data.Type);
+
+
+            }
+        });
+        }
+
+        function jsFunction(link, lastNode) {
 
            // window.EquipmentCode = autogenerateNextEquipmentCode(lastNode);
            //alert("NextEquipmentCode"+   window.EquipmentCode)
@@ -265,8 +323,8 @@
               // alert("Your Equipment Code" + window.sub_number);
                 $("#SubNumber").val(sub_number);
         
-     //  $("#grid").data("kendoGrid").dataSource.read();
-      //$("#grid3").data("kendoGrid").dataSource.read();
+       // $("#grid").data("kendoGrid").dataSource.read();
+      //  $("#grid3").data("kendoGrid").dataSource.read();
         $.ajax({
             type: "GET",
             url: "@Url.Action("GetEquipmentDetails")" + "?equipmentCode=" + window.selectedEquipmentCode,
