@@ -25,6 +25,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
     [Area("Maintenance")]
     public class ImportEquipmentController : BaseAdminController
     {
+        private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
         private readonly IVesselService _vesselService;
         private readonly IHostingEnvironment env;
         private readonly EquipmentImportManger _equipmentImportManger;
@@ -32,7 +33,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IEquipmentService _equipmentService;
         private readonly IEquipmentViewModelService _equipmentViewModelService;
         public ImportEquipmentController(EquipmentImportManger _equipmentImportManger, IImportFileService _importFileService,
-            IEquipmentService _equipmentService, IVesselService _vesselService, IHostingEnvironment env, IEquipmentViewModelService _equipmentViewModelService)
+            IEquipmentService _equipmentService, IVesselService _vesselService, IHostingEnvironment env,
+            IEquipmentViewModelService _equipmentViewModelService, IEquipmentTypeViewModelService _equipmentTypeViewModelService)
         {
             this._equipmentImportManger = _equipmentImportManger;
             this._importFileService = _importFileService;
@@ -40,6 +42,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._vesselService = _vesselService;
             this.env = env;
             this._equipmentViewModelService = _equipmentViewModelService;
+            this._equipmentTypeViewModelService = _equipmentTypeViewModelService;
         }
         public IActionResult Index()
         {
@@ -135,6 +138,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> Map(string id)
         {
             await Task.FromResult(0);
+            // EquipmentType Adding
+          EquipmentTypeModel equipmentType = new EquipmentTypeModel();
+
+
             var importFile = await _importFileService.GetById(id);
             if (importFile.Status == "Pending")
             {
@@ -162,10 +169,22 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     newEquipment.Remark = item["Remark"];
                     newEquipment.Vessel = item["Vessel"];
                     newEquipment.Type = item["Type"];
-                    // write Service
 
+
+                    // write Service
+                 
+                  
+                    //Adding Equipment
                     await _equipmentService.InsertEquipment(newEquipment);
+
+                    //Adding EquipmentType
+
+                    await _equipmentTypeViewModelService.PrepareEquipmentTypeModel(equipmentType, "", true);
                 }
+
+
+                ///  
+
                 //return Content("Already imported, Contact Admin");
             }
             var properties = GetFieldNames(importFile.Content);
