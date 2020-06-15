@@ -178,8 +178,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     await _equipmentService.InsertEquipment(newEquipment);
 
                     //Adding EquipmentType
-
-                    await _equipmentTypeViewModelService.PrepareEquipmentTypeModel(equipmentType, "", true);
+                    EquipmentTypeModel equipmentTypeModel = new EquipmentTypeModel();
+                    equipmentTypeModel.Equipment_type = item["Equipment_type"];
+                    await _equipmentTypeViewModelService.PrepareEquipmentTypeModel(equipmentTypeModel, "", true);
                 }
 
 

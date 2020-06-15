@@ -193,7 +193,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
                         equipmentTypetList.Add(item.Equipment_type);
                     }
-                    vm.EquipmentTypeList = equipmentTypetList;
+                    vm.EquipmentTypeList = equipmentTypetList.Distinct().ToList();
 
                     return View(vm);
 
