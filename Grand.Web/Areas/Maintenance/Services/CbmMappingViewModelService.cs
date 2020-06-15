@@ -62,6 +62,7 @@ namespace Grand.Web.Areas.Maintenance.Services
 
                 cbmMapping.Cbm_Name = addNewCbmMapping.Cbm_Name;
                 cbmMapping.equipmentComponent = addNewCbmMapping.equipmentComponent;
+                cbmMapping.jobCode = addNewCbmMapping.jobCode;
 
                 await _cbmMappingService.InsertCbmMapping(cbmMapping);
             }
@@ -71,6 +72,7 @@ namespace Grand.Web.Areas.Maintenance.Services
 
                 cbmMapping.Cbm_Name = addNewCbmMapping.Cbm_Name;
                 cbmMapping.equipmentComponent = addNewCbmMapping.equipmentComponent;
+                cbmMapping.jobCode = addNewCbmMapping.jobCode;
 
                 await _cbmMappingService.InsertCbmMapping(cbmMapping);
 
