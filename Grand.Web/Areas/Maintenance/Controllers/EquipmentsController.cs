@@ -25,13 +25,14 @@ using Grand.Core.Domain.Sparepart;
 using Grand.Core.Domain.CbmEntity;
 using Grand.Services.CbmMapping;
 using System.Text;
+using Grand.Services.EquipmentType;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
     [Area("Maintenance")]
     public class EquipmentsController : BaseAdminController
     {
-
+        private readonly IEquipmentTypeService _equipmentTypeService;
         private readonly ICbmMappingService _cbmMappingService;
         private readonly ICbmMappingViewModelService _cbmMappingViewModelService;
         private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
@@ -52,7 +53,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             ISparepartService _sparepartService,
             IEquipmentTypeViewModelService _equipmentTypeViewModelService, IJobTypeViewModelService _jobTypeViewModelService,
             ICbmMappingViewModelService _cbmMappingViewModelService,
-            ICbmMappingService _cbmMappingService
+            ICbmMappingService _cbmMappingService,
+             IEquipmentTypeService _equipmentTypeService
             )
         {
 
@@ -68,6 +70,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._jobTypeViewModelService = _jobTypeViewModelService;
             this._cbmMappingViewModelService = _cbmMappingViewModelService;
             this._cbmMappingService = _cbmMappingService;
+            this._equipmentTypeService = _equipmentTypeService;
         }
 
 
@@ -187,8 +190,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     #endregion
 
                     List<string> equipmentTypetList = new List<string>();
-                    var equipmentTypes = await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
-                   foreach (var item in equipmentTypes)
+                    var equipmentTypes = await _equipmentTypeService.GetAllEquipmentTypes("", 0, 500, true);
+                    foreach (var item in equipmentTypes)
                     {
 
                         equipmentTypetList.Add(item.Equipment_type);
