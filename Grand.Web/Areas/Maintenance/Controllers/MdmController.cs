@@ -111,6 +111,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             ViewModel vm = new ViewModel();
 
+            List<string> eqpTypeList= new List<string>();
             var equipmentType = await _equipmentTypeService.GetAllEquipmentTypes("", 0, 500, true);
             var equipmentTypeList = equipmentType.ToList();
 
@@ -120,7 +121,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var jobplans = await _jobplanService.GetAllJobplan("", 0, 500, true);
             var jobplansList = jobplans.ToList();
 
-            vm.equipmentTypeList = equipmentTypeList;
+           
+            foreach(var item in equipmentTypeList)
+            {
+                eqpTypeList.Add(item.Equipment_type);
+            }
+            // vm.equipmentTypeList = equipmentTypeList;
+            vm.EquipmentTypeList = eqpTypeList;
+
+
             vm.cbmList = cbmList;
             vm.JobplansList = jobplansList;
 

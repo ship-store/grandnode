@@ -42,10 +42,10 @@
                                             <td>
                                                 <select class="form-control show-tick" name="equipmentComponent" id="test">
                                                     <option selected disabled>Select</option>
-                                                    @foreach (var item in Model.equipmentTypeList)
+                                                    @foreach (var item in Model.EquipmentTypeList.Distinct().ToList())
                                                     {
 
-                                                        <option value=@item.Equipment_type name=@item.Equipment_type>@item.Equipment_type</option>
+                                                        <option value=@item name=@item>@item</option>
 
 
                                                     }
