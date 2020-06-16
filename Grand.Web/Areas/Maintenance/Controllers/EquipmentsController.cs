@@ -355,10 +355,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             StringBuilder cbmParameters = new StringBuilder();
             var cbmMappinglist = await _cbmMappingService.GetAllCbmMapping("", command.Page, command.PageSize);
 
-            if (!String.IsNullOrEmpty(SelectedEquipmentType))
-            {
-                cbmParameterList = cbmMappinglist.Where(x => x.equipmentComponent.ToLower() == SelectedEquipmentType.ToLower()).FirstOrDefault().Cbm_Name;
-            }
+            //if (!String.IsNullOrEmpty(SelectedEquipmentType))
+            //{
+            //    cbmParameterList = cbmMappinglist.Where(x => x.equipmentComponent.ToLower() == SelectedEquipmentType.ToLower()).FirstOrDefault().Cbm_Name;
+            //}
            
             List<string> dummyList = new List<string>() { "Vishnu1","Vipin1"};
             //foreach (var item in cbmParameterList)
@@ -383,6 +383,20 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
                 foreach (var item in jobplan)
                 {
+                            if (!String.IsNullOrEmpty(item.UniversalJobCode) )
+                            {
+                               // cbmParameterList = cbmMappinglist.Where(x => x.jobCode!=null && x.jobCode == item.UniversalJobCode).FirstOrDefault().Cbm_Name;
+
+                                foreach (var i in cbmMappinglist)
+                                {
+                                    if(i.jobCode==item.UniversalJobCode   &&  i.jobCode!=null)
+                                    {
+                                     cbmParameterList = i.Cbm_Name;
+                                    }
+                                }
+                    
+                            }
+                    
                     if (item.Vessel.ToLower() == VesselName.ToLower())
                     {
                         var hrsfrq = Convert.ToInt32(item.RunFrequency);
