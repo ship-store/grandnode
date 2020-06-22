@@ -196,7 +196,7 @@
                         },
                         {
                             field: "Cbm",
-                            template: '<a class="k-link"  onclick="ViewCbm(this)">#:Cbm#</a>',
+                            template: '<a class="btn btn-primary btn1"  onclick="ViewCbm(this)" alt="#:Cbm#">View</a>',
                             title: "Cbm",
                             width: "150px"
                         }
@@ -725,18 +725,29 @@
 
 
 <script>
+    $(function () {
+
+        $("#btn1").text();
+    });
     function ViewCbm(data) {
         //alert("hai==" + data.text);
-
-         var myHeading = `<p>${data.text} </p>`;
-     $("#modal-body").html(myHeading);   
+        var myHeading ="";
+        var cbm = data.getAttribute("alt").split(',');
+       
+        for (var i = 0; i < cbm.length-1; i++) {
+          //  alert("hai==" + cbm[i]);
+            myHeading = myHeading + "<p>" + cbm[i] + "<p><hr>";
+           
+        }
+       
+    $("#modal-body").html(myHeading);   
      $('#modal').modal('show');
     }
 </script>
 <!----modal starts here--->
-<div id="modal" class="modal fade col-4" role='dialog'>
+<div id="modal" class="modal fade" role='dialog' tabindex="-1">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content"  style="width:50%; height:50%; border:solid 2px #7273a3">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Cbm parameter</h4>
