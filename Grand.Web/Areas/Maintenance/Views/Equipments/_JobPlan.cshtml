@@ -39,7 +39,7 @@
                 loadJobPlan();
                   //alert("hai");
               });
-                
+
         });
 
 
@@ -177,7 +177,7 @@
                            format: "{0:dd-MM-yyyy}",
                             width: "150px"
                         },
-                        
+
                         {
                             field: "PreviousReading",
                             title: "Current Hrs",
@@ -195,7 +195,8 @@
                             width: "150px"
                         },
                         {
-                             field: "Cbm",
+                            field: "Cbm",
+                            template: '<a class="k-link"  onclick="ViewCbm(this)">#:Cbm#</a>',
                             title: "Cbm",
                             width: "150px"
                         }
@@ -723,5 +724,31 @@
 </div>
 
 
+<script>
+    function ViewCbm(data) {
+        //alert("hai==" + data.text);
 
+         var myHeading = `<p>${data.text} </p>`;
+     $("#modal-body").html(myHeading);   
+     $('#modal').modal('show');
+    }
+</script>
+<!----modal starts here--->
+<div id="modal" class="modal fade col-4" role='dialog'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Cbm parameter</h4>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <p>Here the description starts here........</p>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal ends here--->
