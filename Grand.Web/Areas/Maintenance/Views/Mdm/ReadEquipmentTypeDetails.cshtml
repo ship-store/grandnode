@@ -6,40 +6,107 @@
 
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
-
-
+<script type="text/javascript">
+   function onButtonClick(){
+       document.getElementById('textInput')= "show";
+        document.getElementById('bu')= "show";
+    }
+</script>
+<style>
+    .red {
+    color: darkblue;
+}
+    .hide{
+  display:none;
+    }
+.show{
+  display:block;
+    }</style>
 <div class="row" id="SearchSection">
     <div class="col-md-12">
         @*<div class="x_panel light form-fit">*@
-            <div class="x_title">
-                <div class="caption">
-                    <i class="fa fa-cubes"></i>
-                    Equipment component list
-                </div>
-                <div class="actions btn-group btn-group-devided">
-                    @*<a href="@Url.Action("AddVessel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs">Job Postpone @T("Admin.Common.AddNew") </span></a>*@
-                    <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                    <a href="@Url.Action("AddEquipmentType")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"></span></a>
-                    <a href="#" class="btn btn-success"><i class="fa fa-pencil-square-o"></i><span class="hidden-xs"> </span></a>
-                    <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> </span></a>
-
-                    @*<button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>*@
-                    @*<button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>*@
-                </div>
-
+        <div class="x_title">
+            <div class="caption" style="color:#0E5679;font-weight:900">
+                <i class="fa fa-cubes" style="color:#0E5679"></i>
+                EQUIPMENT TYPE
+            </div>
+            <div class="actions btn-group btn-group-devided">
+                @*<a href="@Url.Action("AddVessel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs">Job Postpone @T("Admin.Common.AddNew") </span></a>*@
+                <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+                @*<input type="button" name="answer" value="Show Text Field" onclick="onButtonClick()" />*@
+                @*<a href="#">
+                    <i class="material-icons" style="font-size:25px;color:#0E5679;font-weight:900;" id="check" name="check" onclick="onButtonClick()">add</i>
+                </a>
+                &nbsp; &nbsp;*@
+                <a href="#" style="background:white;border:white;color:#0E5679;"><i style="font-size:27px" class="fa">&#xf044;</i></a>
+                &nbsp; &nbsp;
+                <a href="#" style="        background: white;
+        border: white;
+        color: red;
+"><i style="font-size: 27px" class="fa">&#xf014;</i></a>
+                &nbsp; &nbsp;
+                <a href="#" style="background:white;border:white;color:#0E5679;"><i style="font-size:27px" class="fa">&#xf205;</i></a>
+                &nbsp; &nbsp; &nbsp;
+                @*<button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>*@
+                @*<button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>*@
             </div>
 
-            <div class="x_content">
-                <div id="vessel-grid"></div>
-            </div>
+        </div>
+
+        <div class="x_content">
+            <div id="vessel-grid"></div>
+        </div>
         @*</div>*@
     </div>
 </div>
 
-<div id="example">
-    <antiforgery-token />
-    <div id="EquipmentTypeGrid"></div>
-    <script>
+        
+        
+        
+            <form action="AddEquipmentTypeDetails" method="post">
+
+                 
+                        <table class="table">
+
+                            <tr>
+                                <td>
+
+                                    <div style="float:left;max-width:50%;position:relative;left:-2px;">
+
+                                        <input type="text" class="form-control" id="textInput" name="Equipment_type" style="height:auto;color:#0E5679;" />
+                                    </div>
+                                    &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
+                                    @Html.AntiForgeryToken()
+                                    <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
+
+                                </td>
+                              
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="float: left; width: 15%;left:-8px;">
+                                        <button class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </div>
+                                    <div style="float:left;max-width:18%;position:relative;left:-120px;height:auto;">
+                                        <input class="form-control" id="searchbar" onkeyup="search_sidebar()" type="text"
+                                               name="search" placeholder="Search .." style="height:auto;">
+                                    </div>
+                                </td>
+                            </tr>
+
+
+
+                           
+                               
+                        </table>
+                
+            </form>
+        
+    
+            <div id="example">
+                <antiforgery-token />
+                <div id="EquipmentTypeGrid"></div>
+                <script>
         $(document).ready(function () {
             $("#EquipmentTypeGrid").kendoGrid({
                 dataSource: {
@@ -83,35 +150,56 @@
                                     validation: { required: true },
                                     editable: false,
                                 },
-                                    
+
                             }
                         }
                     },
-                    pageSize: 30
+                    pageSize: 25
+                  
                 },
                 height: 470,
+                batch: 10,
+                width:500,
                 sortable: true,
                 reorderable: true,
-                groupable: true,
+                groupable: false,
                 resizable: true,
                 filterable: true,
                 columnMenu: true,
-                pageable: false,
+                pageable: true,
                 selectable: true,
                 allowCopy: true,
+      
                 columns: [
                     {
-                            field: "Equipment_type",
-                            title: "Equipment type",
-                            width: "100px"
-                        },
+                            field: "Id",
+                            headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
+                            template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
+                        width: 50,
+                            locked: true,
+                        lockable: false,
 
-                        
+                        },
+                    {
+                            field: "Equipment_type",
+                            title: "Equipment Type List",
+                        width: "200px",
+                           template: '#=SetColor(Equipment_type)#'
+                        }
+
+
                         ],
                     editable: "inline"
 
             });
         });
+                     function SetColor(Equipment_type)
+        {
+            if(Equipment_type=="Online")
+                return "<font color=\"red\">"+Equipment_type+"</font>";
+            else
+                return Equipment_type;
+        }
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();
                         $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
@@ -123,8 +211,19 @@
                         addAntiForgeryToken(data);
                         return data;
         }
-    </script>
-</div>
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $(".c1").hide();
+                        $("#cEnable").click(function () {
+                              $(".c1").show();
+                        });
+                        $("#rEnable").click(function () {
+                            $(".c1").hide();
+                        }
+    }
+        </script>
+</div >
 
 
 
