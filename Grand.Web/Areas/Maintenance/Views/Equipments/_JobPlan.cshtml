@@ -39,7 +39,7 @@
                 loadJobPlan();
                   //alert("hai");
               });
-                
+
         });
 
 
@@ -177,7 +177,7 @@
                            format: "{0:dd-MM-yyyy}",
                             width: "150px"
                         },
-                        
+
                         {
                             field: "PreviousReading",
                             title: "Current Hrs",
@@ -195,7 +195,8 @@
                             width: "150px"
                         },
                         {
-                             field: "Cbm",
+                            field: "Cbm",
+                            template: '<a class="btn btn-primary btn1"  onclick="ViewCbm(this)" alt="#:Cbm#">View</a>',
                             title: "Cbm",
                             width: "150px"
                         }
@@ -723,5 +724,42 @@
 </div>
 
 
+<script>
+    $(function () {
 
+        $("#btn1").text();
+    });
+    function ViewCbm(data) {
+        //alert("hai==" + data.text);
+        var myHeading ="";
+        var cbm = data.getAttribute("alt").split(',');
+       
+        for (var i = 0; i < cbm.length-1; i++) {
+          //  alert("hai==" + cbm[i]);
+            myHeading = myHeading + "<p>" + cbm[i] + "<p><hr>";
+           
+        }
+       
+    $("#modal-body").html(myHeading);   
+     $('#modal').modal('show');
+    }
+</script>
+<!----modal starts here--->
+<div id="modal" class="modal fade" role='dialog' tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content"  style="width:50%; height:50%; border:solid 2px #7273a3">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Cbm parameter</h4>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <p>Here the description starts here........</p>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal ends here--->
