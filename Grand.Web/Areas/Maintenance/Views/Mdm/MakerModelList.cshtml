@@ -12,19 +12,19 @@
     <div class="col-md-12">
         @*<div class="x_panel light form-fit">*@
         <div class="x_title">
-            <div class="caption">
-                <i class="fa fa-cubes"></i>
-                Maker Model
+            <div class="caption" style="color:#0E5679;font-weight:900">
+                <i class="fa fa-cubes" style="color:#0E5679"></i>
+                MODEL
             </div>
             <div class="actions btn-group btn-group-devided">
-                @*<a href="@Url.Action("AddVessel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs">Job Postpone @T("Admin.Common.AddNew") </span></a>*@
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                <a href="@Url.Action("AddMakerModel")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"></span></a>
-                <a href="#" class="btn btn-success"><i class="fa fa-pencil-square-o"></i><span class="hidden-xs"> </span></a>
-                <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> </span></a>
 
-                @*<button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>*@
-                @*<button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>*@
+                <a href="#" style="background:white;border:white;color:#0E5679;"><i style="font-size:27px" class="fa">&#xf044;</i></a>
+                &nbsp; &nbsp;
+                <a href="#" style="background: white;border: white;color: red;"><i style="font-size: 27px" class="fa">&#xf014;</i></a>
+                &nbsp; &nbsp;
+                <a href="#" style="background:white;border:white;color:#0E5679;"><i style="font-size:27px" class="fa">&#xf205;</i></a>
+                &nbsp; &nbsp; &nbsp;
             </div>
 
         </div>
@@ -35,7 +35,59 @@
         @*</div>*@
     </div>
 </div>
+<form action="AddModelDetails" method="get">
 
+    <table class="table">
+
+        <tr>
+            <td>
+                <select class="form-control show-tick" name="Maker" style="float:left;width:20%;height:auto;color:#0E5679;">
+                    @foreach (var item in Model)
+                    {
+
+                        <option value=@item.Name name=@item.Name>@item.Name</option>
+
+
+                    }
+
+                </select>
+
+             
+
+
+                <input type="text" class="form-control" id="textInput" placeholder="Model" name="Model" style="margin-left:22px;float:left;width:20%;height:auto;color:#0E5679;" />
+
+
+                <div style="float:left;max-width:50%;position:relative;left:-2px;">
+
+                    <input type="text" class="form-control" id="Remark" placeholder="Remark" name="Remark" style="margin-left:22px;height:auto;color:#0E5679;" />
+                </div>
+
+                @Html.AntiForgeryToken()
+                <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="margin-left:60px;font-size:23px;color:#0E5679;background:white;border:white">
+
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <div style="float: left; width: 15%;left:-8px;">
+                    <button class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+                <div style="float:left;max-width:28%;position:relative;left:-120px;height:auto;">
+                    <input class="form-control" id="searchbar" onkeyup="search_sidebar()" type="text"
+                           name="search" placeholder="Search .." style="height:auto;">
+                </div>
+            </td>
+        </tr>
+
+
+
+
+
+    </table>
+
+</form>
 <div id="example">
     <antiforgery-token />
     <div id="MakerModelGrid"></div>

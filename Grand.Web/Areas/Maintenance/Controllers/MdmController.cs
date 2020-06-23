@@ -219,7 +219,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> AddEquipmentTypeDetails(EquipmentTypeModel addNewEquipmentType)
         {
             await _equipmentTypeViewModelService.PrepareEquipmentTypeModel(addNewEquipmentType, "", true);
-            return RedirectToAction("MdmList", "Mdm");
+            return RedirectToAction("ReadEquipmentTypeDetails", "Mdm");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
