@@ -733,13 +733,20 @@
         //alert("hai==" + data.text);
         var myHeading ="";
         var cbm = data.getAttribute("alt").split(',');
-       
-        for (var i = 0; i < cbm.length-1; i++) {
-          //  alert("hai==" + cbm[i]);
-            myHeading = myHeading + "<p>" + cbm[i] + "<p><hr>";
-           
+
+        if (data.getAttribute("alt")!="")
+        {
+            for (var i = 0; i < cbm.length - 1; i++) {
+                //  alert("hai==" + cbm[i]);
+                myHeading = myHeading + "<p>" + cbm[i] + "<p><hr>";
+
+            }
+
         }
-       
+        else
+        {
+            myHeading = myHeading + "<p style='color:red'>   No Cbm Parameter<p>";
+        }
     $("#modal-body").html(myHeading);   
      $('#modal').modal('show');
     }
@@ -756,9 +763,7 @@
                 <p>Here the description starts here........</p>
 
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+           
         </div>
     </div>
 </div>
