@@ -733,20 +733,27 @@
         //alert("hai==" + data.text);
         var myHeading ="";
         var cbm = data.getAttribute("alt").split(',');
-       
-        for (var i = 0; i < cbm.length-1; i++) {
-          //  alert("hai==" + cbm[i]);
-            myHeading = myHeading + "<p>" + cbm[i] + "<p><hr>";
-           
+
+        if (data.getAttribute("alt")!="")
+        {
+            for (var i = 0; i < cbm.length - 1; i++) {
+                //  alert("hai==" + cbm[i]);
+                myHeading = myHeading + "<p>" + cbm[i] + "<p><hr>";
+
+            }
+
         }
-       
+        else
+        {
+            myHeading = myHeading + "<p style='color:red'>   No Cbm Parameter<p>";
+        }
     $("#modal-body").html(myHeading);   
      $('#modal').modal('show');
     }
 </script>
 <!----modal starts here--->
 <div id="modal" class="modal fade" role='dialog' tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="margin-left:50%;margin-top:15%">
         <div class="modal-content"  style="width:50%; height:50%; border:solid 2px #7273a3">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -756,9 +763,7 @@
                 <p>Here the description starts here........</p>
 
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+           
         </div>
     </div>
 </div>
