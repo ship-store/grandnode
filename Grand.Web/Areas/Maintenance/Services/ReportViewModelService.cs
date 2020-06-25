@@ -134,7 +134,64 @@ namespace Grand.Web.Areas.Maintenance.Services
             }
         }
 
+        public virtual async Task PreparePostponedJobReportModel(DueJobReportModel model1, object p, bool v)
+        {
+            try
+            {
 
+                var report = new DueJobReport();
+                report.EquipmentCode = model1.EquipmentCode;
+                report.EquipmentName = model1.EquipmentName;
+                report.JobOrder = model1.JobOrder;
+                report.JobTitle = model1.JobTitle;
+                report.JobDescription = model1.JobDescription;
+                report.CalFrequency = model1.CalFrequency;
+                report.FrequencyType = model1.FrequencyType;
+                report.Vessel = model1.Vessel;
+                report.Department = model1.Department;
+                report.AssignedTo = model1.AssignedTo;
+                report.NEXT_DUE_DATE = model1.NEXT_DUE_DATE;
+                report.LAST_DONE_DATE = model1.LAST_DONE_DATE;
+                report.Job_Type = model1.Job_Type;
+                report.Maintenance_Type = model1.Maintenance_Type;
+                report.JobCompletedDate = model1.JobCompletedDate;
+                report.JobStatus = model1.JobStatus;
+                report.JobOrder = model1.JobOrder;
+                report.Reading = model1.Reading;
+                report.Remark = model1.Remark;
+                report.Status = "Completed";
+                report.Vessel = model1.Vessel;
+
+                await _reportService.InsertDueJobReport(report);
+
+            }
+            catch (Exception)
+            {
+                var report = new DueJobReport();
+                report.EquipmentCode = model1.EquipmentCode;
+                report.EquipmentName = model1.EquipmentName;
+                report.JobOrder = model1.JobOrder;
+                report.JobTitle = model1.JobTitle;
+                report.JobDescription = model1.JobDescription;
+                report.CalFrequency = model1.CalFrequency;
+                report.FrequencyType = model1.FrequencyType;
+                report.Vessel = model1.Vessel;
+                report.Department = model1.Department;
+                report.AssignedTo = model1.AssignedTo;
+                report.NEXT_DUE_DATE = model1.NEXT_DUE_DATE;
+                report.LAST_DONE_DATE = model1.LAST_DONE_DATE;
+                report.Job_Type = model1.Job_Type;
+                report.Maintenance_Type = model1.Maintenance_Type;
+                report.JobCompletedDate = model1.JobCompletedDate;
+                report.JobStatus = model1.JobStatus;
+                report.JobOrder = model1.JobOrder;
+                report.Reading = model1.Reading;
+                report.Status = model1.Status;
+                report.Status = "Completed";
+                await _reportService.InsertDueJobReport(report);
+
+            }
+        }
         public virtual async Task PrepareBreakdownJobReportModel(BreakdownJobReportModel model1, object p, bool v)
         {
             try

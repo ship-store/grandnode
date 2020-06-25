@@ -27,6 +27,12 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             //HttpContext.Session.SetString("Test", "Silpa");
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> List1()
+        {
+            //HttpContext.Session.SetString("Test", "Silpa");
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> List(DataSourceRequest command, JobplanListModel model)
@@ -84,6 +90,40 @@ namespace Grand.Web.Areas.Maintenance.Controllers
            
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> ReadData1(DataSourceRequest command, JobplanListModel model)
+        {
+            try
+            {
+                var VesselName = HttpContext.Session.GetString("VesselName").ToString();
+                var Jobplanlist = await _jobplanService.GetAllJobplans(model.SearchName, command.Page - 1, 500, true);
+                List<Jobplan> jobplanlist = new List<Jobplan>();
+
+                foreach (Jobplan item in Jobplanlist.Where(x => x.Vessel == VesselName.ToLower() && x.NEXT_DUE_DATE != null))
+                {
+                    var date = Convert.ToDateTime(item.NEXT_DUE_DATE);
+                    var dt = date.AddDays(-10).ToShortDateString();
+                    var today = DateTime.Now.ToShortDateString();
+
+                    if (today == dt)
+                    {
+                        jobplanlist.Add(item);
+
+                    }
+                    //  jobplanlist.Add(item);
+                }
+                var gridModel = new DataSourceResult { Data = jobplanlist.ToList().Where(x => x.JobStatus == 2) };
+                return Json(gridModel);
+            }
+            catch (System.Exception)
+            {
+
+                return RedirectToAction("ReadData");
+            }
+
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CompleteJob(Jobplan model, string dt, string Bid2)
@@ -119,7 +159,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
                 await _jobplanService.UpdateJobPlan(item);
             }
-
+           
             return RedirectToAction("List");
 
         }
