@@ -10,10 +10,10 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
         <div class="header">
-            <h2>
-                Add Job Plan
-            </h2>
-           
+            <div class="caption" style="color:#0E5679;font-weight:900;font-size:medium;">
+                <i class="fa fa-cubes" style="color:#0E5679"></i>
+                ADD JOB PLAN
+            </div>
            
         </div>
         @*<script type="text/javascript">
@@ -56,7 +56,7 @@
                     $(".c3").show();
                     $(".c4").hide();
                     $(".c5").show();
-                    $(".c6").show();
+                    $(".c6").hide();
                     $(".c7").hide();
                     $(".c8").hide();
                     $(".c9").hide();
@@ -73,10 +73,10 @@
                 <div class="actions">
                     <div class="btn-group btn-group-devided util-btn-margin-bottom-5">
 
-                       <input name="group1" type="radio" checked="checked" id="cEnable" class="radio-col-black" onclick="EnableDisableTextBox()" />
+                       <input name="group1" type="radio" checked="checked" id="cEnable" class="radio-col-black" onclick="EnableDisableTextBox()" style="color:#0E5679" />
                         <label for="chkYes">Calender Based</label>
 
-                        <input name="group1" type="radio" id="rEnable" class="radio-col-black" onclick="EnableDisableTextBox()" />
+                        <input name="group1" type="radio" id="rEnable" class="radio-col-black" onclick="EnableDisableTextBox()" style="color:#0E5679"/>
                         <label for="chkNo">Running Hour Based</label>
 
                      </div>
@@ -88,282 +88,161 @@
                 @*<input type="hidden" value="@vessel" name="Vessel" />*@
                 @*<input type="hidden" value="@equipment" name="Equipment" />*@
 
-                <div class="container-fluid" style="width: 80%;">
-                    <div class="table-responsive">
-
-                        <table class="table">
+                
+                <table class="table" style="color:#0E5679;border-color:#0E5679;">
 
 
-                            <tr>
-                                <td><label for="EquipmentCode">Equipment Code</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            @*<input type="text" name="EquipmentCode" value="@Model.SelectedEquipment.Sub1_number@Model.SelectedEquipment.Sub2_number@Model.SelectedEquipment.Sub3_number" class="form-control time24" placeholder="" />*@
+                    <tr>
+                        @*<td><label for="EquipmentCode">Equipment Code</label></td>*@
+                        <td>
 
-                                            <input type="text" class="form-control valid" readonly value="@ecode" name="EquipmentCode" id="n1" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label for="EquipmentName">Equipment Name</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            @*<input type="text" name="EquipmentName" value="@Model.SelectedEquipment.Sub1_description@Model.SelectedEquipment.Sub2_description@Model.SelectedEquipment.Sub3_description" class="form-control time24" placeholder="" />*@
+                            @*<input type="text" name="EquipmentCode" value="@Model.SelectedEquipment.Sub1_number@Model.SelectedEquipment.Sub2_number@Model.SelectedEquipment.Sub3_number" class="form-control time24" placeholder="" />*@
 
-                                            <input type="text" class="form-control valid" name="EquipmentName" id="n2" readonly value="@ename" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="c4">
-                                <td><label for="NEXT_DUE_DATE">Job Code</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control" name="UniversalJobCode" id="n16" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                            <input type="text" class="form-control valid" readonly value="@ecode" name="EquipmentCode" id="n1" style="float:left;width:21%;color:#0E5679;border-color:#0E5679" />
+                            &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
+                            <div style="float:left;position:relative;left:-2px;">
 
-                            <tr>
-                                <td><label for="Job Order">Job Order</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control valid" readonly name="JobOrder" id="n16" value="@joborder" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                <input type="text" class="form-control valid" name="EquipmentName" id="n2" readonly value="@ename" style="margin-left:30px;border-color:#0E5679;float:left;width:90%;height:auto;color:#0E5679;" />
+                            </div>
+                            <div style="float:left;position:relative;left:36px;">
 
-                            <tr>
-                                <td><label for="JobTitle">Job Title</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control valid" name="JobTitle" id="n2" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            @*<tr>
-            <td><label for="Vessel">Vessel</label></td>
-            <td>
-                <div class="form-group">
-                    <div class="form-line">
-                        <input type="text" class="form-control valid" name="Vessel" id="n3" />
-                    </div>
-                </div>
-            </td>
-        </tr>*@
-                            <tr>
-                                <td><label for="JobDescription">Job Description</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control valid" name="JobDescription" id="n3" />
-                                            @*<textarea></textarea>*@
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label for="Job_Type">Job Type</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control valid" name="Job_Type" id="n4" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                <input type="text" class="form-control valid" placeholder="Job Code" name="UniversalJobCode" id="n16" style="border-color:#0E5679;margin-left:5px;float:left;width:100%;height:auto;color:#0E5679;" />
+                            </div>
+                            <div style="float:left;position:relative;">
 
+                                <input type="text" class="form-control valid" readonly name="JobOrder" id="n16" value="@joborder" style="border-color:#0E5679;margin-left:65px;float:left;width:89%;height:auto;color:#0E5679;" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        @*<td><label for="EquipmentCode">Equipment Code</label></td>*@
+                        <td>
 
+                            @*<input type="text" name="EquipmentCode" value="@Model.SelectedEquipment.Sub1_number@Model.SelectedEquipment.Sub2_number@Model.SelectedEquipment.Sub3_number" class="form-control time24" placeholder="" />*@
 
-                            <tr class="c1" style="height:61px;">
-                                <td><label for="CalFrequency">Frequency</label></td>
-                                <td>
-                                    <select class="form-control show-tick" name="CalFrequency" id="n6">
-                                        <option value=""></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                        <option>12</option>
-                                    </select>
-                                </td>
-                            </tr>
+                            <input type="text" class="form-control valid" placeholder="Department" name="Department" id="n9" style="border-color:#0E5679;float:left;width:21%;color:#0E5679;" />
+                            &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
+                            <div style="float:left;position:relative;left:-2px;">
 
-                            @*<tr class="c2">
-            <td><label for="RunFrequency">Frequency</label></td>
-            <td>
-                <div class="form-group">
-                    <div class="form-line">
-                        <input type="text" class="form-controls valid" name="RunFrequency" id="n15" />
-                    </div>
-                </div>
-            </td>
-        </tr>*@
+                                <input type="text" class="form-control valid" placeholder="Piority" name="Priority" id="n10" style="border-color:#0E5679;margin-left:30px;float:left;width:90%;height:auto;color:#0E5679;" />
+                            </div>
+                            <div style="float:left;position:relative;left:36px;">
 
-                            <tr class="c2">
-                                <td><label for="RunFrequency">Frequency</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control" name="RunFrequency" id="n16" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                <input type="text" class="form-control valid" placeholder="Rank" name="Rank" id="n11" style="border-color:#0E5679;margin-left:5px;float:left;width:100%;height:auto;color:#0E5679;" />
+                            </div>
+                            <div style="float:left;position:relative;">
 
-                            <tr class="c6">
-                                <td><label for="FrequencyType">Frequency Type</label></td>
-                                <td>
-                                    <select class="form-control show-tick frequencytype" name="frequencytype" id="n5">
-                                        <option value=""></option>
-                                        <option class="c5">Hour</option>
-                                        <option class="c10">Days</option>
-                                        <option class="c9">Week</option>
-                                        <option class="c8">Month</option>
-                                        <option class="c7">Year</option>
+                                <input type="text" class="form-control valid" placeholder="Assigned to" name="AssignedTo" id="n12" style="border-color:#0E5679;margin-left:65px;float:left;width:90%;height:auto;color:#0E5679;" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        @*<td><label for="EquipmentCode">Equipment Code</label></td>*@
+                        <td>
 
-                                    </select>
-                                </td>
-                            </tr>
+                            @*<input type="text" name="EquipmentCode" value="@Model.SelectedEquipment.Sub1_number@Model.SelectedEquipment.Sub2_number@Model.SelectedEquipment.Sub3_number" class="form-control time24" placeholder="" />*@
 
-                            @*<tr>
-            <td><label for="Frequency">Frequency</label></td>
-            <td>
-                <div class="form-group">
-                    <div class="form-line">
-                        <input type="text" class="form-control valid" name="Frequency" id="n4" />
-                    </div>
-                </div>
-            </td>
-        </tr>*@
-                            @*<tr>
-            <td><label for="FrequencyType">Frequency Type</label></td>
-            <td>
-                <div class="form-group">
-                    <div class="form-line">
-                        <input type="text" class="form-control valid" name="FrequencyType" id="n4" />
-                    </div>
-                </div>
-            </td>
-        </tr>*@
+                            <input type="text" class="form-control valid" placeholder="Job Title" name="JobTitle" id="n2" style="float:left;width:21%;color:#0E5679;border-color:#0E5679" />
+                            &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
+                            <div style="float:left;position:relative;left:-2px;">
+
+                                <input type="text" class="form-control valid" placeholder="Job Description" name="JobDescription" id="n3" style="border-color:#0E5679;margin-left:30px;float:left;width:90%;height:auto;color:#0E5679;" />
+                            </div>
+                            <div style="float:left;position:relative;left:36px;">
+
+                                <input type="text" class="form-control valid" placeholder="Job Type" name="Job_Type" id="n4" style="border-color:#0E5679;margin-left:5px;float:left;width:100%;height:auto;color:#0E5679;" />
+                            </div>
+                            <div style="float:left;position:relative;">
+
+                                <input type="text" class="form-control valid" placeholder="Maintenance Type" name="Maintenance_Type" id="n8" style="border-color:#0E5679;margin-left:65px;float:left;width:90%;height:auto;color:#0E5679;" />
+                            </div>
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="float:left;position:relative;left:36px;">
+
+                                <input type="text" class="form-control valid" placeholder="Plan Horizon" name="PlanHorizon" id="n7" style="border-color:#0E5679;margin-left:-36px;float:left;width:172%;height:auto;color:#0E5679;" />
+                            </div>
+
+                            <div style="float:left;position:relative;" class="c1">
+
+                                <select class="form-control show-tick" name="CalFrequency" id="n6" style="border-color:#0E5679;margin-left:130px;float:left;width:79%;height:auto;color:#0E5679;">
+                                    <option value="" selected>Frequency</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                </select>
+                            </div>
+                            <div style="float:left;position:relative;left:-2px;" class="c6">
+
+                                <select class="form-control show-tick frequencytype" name="frequencytype" id="n5" style="border-color:#0E5679;margin-left:113px;float:left;width:70%;height:auto;color:#0E5679;">
+                                    <option value="">Frequency Type</option>
+                                    <option class="c5">Hour</option>
+                                    <option class="c10">Days</option>
+                                    <option class="c9">Week</option>
+                                    <option class="c8">Month</option>
+                                    <option class="c7">Year</option>
+
+                                </select>
+
+                            </div>
+                            <div class="c2">
+                                <input type="text" class="form-control" placeholder="Frequency" name="RunFrequency" id="n16" style="border-color:#0E5679;margin-left:130px;float:left;width:16%;color:#0E5679;" />
+                            </div>
+
+                        </td>
+                    </tr>
 
 
-                            <tr>
-                                <td><label for="PlanHorizon">Plan Horizon</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control valid" name="PlanHorizon" id="n7" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                    @*<tr>
+                        <td><label for="LAST_DONE_DATE">Last Done Date</label></td>
+                        <td>*@
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="hidden" class="form-control" name="LAST_DONE_DATE" id="n13" />
+                                </div>
+                            </div>
+                        @*</td>
+                    </tr>*@
+                    @*<tr class="c4">
+                        <td><label for="NEXT_DUE_DATE">Next Due Date</label></td>
+                        <td>*@
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="hidden" class="form-control" name="NEXT_DUE_DATE" id="n14" />
+                                </div>
+                            </div>
+                        @*</td>
+                    </tr>*@
 
-                            <tr>
-                                <td><label for="Maintenance_Type">Maintenance Type</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control valid" name="Maintenance_Type" id="n8" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label for="Department">Department</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control valid" name="Department" id="n9" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label for="Priority">Priority</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control valid" name="Priority" id="n10" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label for="Rank">Rank</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control valid" name="Rank" id="n11" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label for="AssignedTo">Assigned To</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control valid" name="AssignedTo" id="n12" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label for="LAST_DONE_DATE">Last Done Date</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="date" class="form-control valid" name="LAST_DONE_DATE" id="n13" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="c4">
-                                <td><label for="NEXT_DUE_DATE">Next Due Date</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="date" class="form-control" name="NEXT_DUE_DATE" id="n14" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                    @*<tr class="c3">
+                        <td><label for="Hrs">Next Due Hrs</label></td>
+                        <td>*@
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="hidden" class="form-control" name="Hrs" id="n15" />
+                                </div>
+                            </div>
+                        @*</td>
+                    </tr>*@
 
-                            <tr class="c3">
-                                <td><label for="Hrs">Next Due Hrs</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control" name="Hrs" id="n15" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                @Html.AntiForgeryToken()
-                                <td><input type="submit" value="&#xf0f6;" class="fa fa-floppy-o aria-hidden=true" style="width:30px;position:relative;height:30px;background-color:#0E5679;color:white;" id="submit" /></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+                    <tr>
+                        @Html.AntiForgeryToken()
+                        <td><input type="submit" value="&#xf0f6;" class="fa fa-floppy-o aria-hidden=true" style="float:right;right:250px;width:30px;position:relative;height:30px;background-color:#0E5679;color:white;" id="submit" /></td>
+                    </tr>
+                </table>
+                    
 
             </form>
         </div>
