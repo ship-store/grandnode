@@ -43,7 +43,7 @@
 
                 <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
-                    <input type="text" class="form-control" id="textInput" name="Status" style="height:auto;color:#0E5679;" />
+                    <input type="text" class="form-control" id="textInput" name="Status" style="height:auto;color:#0E5679;border-color:#0E5679;" />
                 </div>
                 &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
                 @Html.AntiForgeryToken()
@@ -54,12 +54,8 @@
         </tr>
         <tr>
             <td>
-                <div style="float: left; width: 15%;left:-8px;">
-                    <button class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
-                </div>
-                <div style="float:left;max-width:28%;position:relative;left:-120px;height:auto;">
-                    <input class="form-control" id="searchbar" onkeyup="search_sidebar()" type="text"
-                           name="search" placeholder="Search .." style="height:auto;">
+                <div class="active-pink-3 active-pink-4 mb-4">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" style="max-width:212px;max-height:16px;color:#0E5679;">
                 </div>
             </td>
         </tr>
