@@ -57,7 +57,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <input type="text" class="form-control" name="Sub1_number"
-                                                   value="@ViewBag.equipment_Code" required />
+                                                   value="@ViewBag.equipment_Code" required id="eqpCode"/>
                                             
                                             <input type="hidden"  value="@ViewBag.subNumber"/>
 
@@ -185,7 +185,14 @@
     </div>
 </div>
 
+<script>
+    $(function () {
+        if ($("#eqpCode").val() == "undefined") {
+            $("#eqpCode").val("");
+        }
+    });
 
+</script>
 
 
 
