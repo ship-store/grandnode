@@ -102,7 +102,7 @@
                             </h2> 
                         </div>
                         <div class="body" style="overflow: auto; max-height:400px;">
-                            <ul class="list-group">
+                            @*<ul class="list-group">
 
 
                                 @foreach (var item3 in Model.JobplansList)
@@ -121,7 +121,22 @@
                                 }
 
 
-                            </ul>
+                            </ul>*@
+
+                            <select class="form-control show-tick">
+                                @foreach (var item3 in Model.JobplansList)
+                                {
+                                    @if (item3.UniversalJobCode != null)
+                                    {
+
+                                      
+                                <option id="@item3.Id" class="filled-in" name="jobCode">@item3.UniversalJobCode</option>
+
+                                         
+                                    }
+                                }
+
+                            </select>
                         </div>
                     </div>
                 </div>
