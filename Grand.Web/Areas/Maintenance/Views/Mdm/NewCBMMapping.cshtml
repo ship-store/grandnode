@@ -9,7 +9,7 @@
 <style>
     .center {
   margin: auto;
-  width: 30%;
+  width: 40%;
   border: 3px solid #0E5679;
   background-color:#0E5679;
   color:white;
@@ -17,6 +17,8 @@
   font-size:medium;
  white-space:normal;
  font-weight:100;
+ height:200px;
+ word-spacing:4px;
 }
 </style>
 @*test*@
@@ -29,7 +31,7 @@
 
             <h4 style="color:#0E5679;">
                 <a onclick="goBack()" class="fa fa-arrow-circle-left"></a>
-                CBM To Equipment Components
+                CBM MAPPING
 
 
             </h4>
@@ -47,7 +49,7 @@
                     <table class="table" style="border:none;">
 
                         <tr style="width:10%;border:none;">
-                            <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;">Select Equipment type</label></td>
+                            <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;margin-left: 80px;">Select Equipment type</label></td>
                             <td style="border:none;">
                                 <select class="form-control show-tick" name="equipmentComponent" id="test" style="color:#0E5679;margin-left: 200px;width: 300px;">
                                     <option selected disabled>Select</option>
@@ -64,7 +66,7 @@
                         </tr>
                         <tr>
 
-                            <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;">Select Job code</label></td>
+                            <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;margin-left: 80px;">Select Job code</label></td>
 
                             <td style="border:none;">
                                 <select class="form-control show-tick" style="color:#0E5679;margin-left: 200px;width: 300px;">
@@ -101,32 +103,33 @@
                     Select CBM
                 </h2>
             </div>*@
-            <div class="center">
-                @*&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;*@
-
-                @foreach (var item2 in Model.cbmList)
-                {
-
-
-                    <input type="checkbox" id="@item2.Id" class="filled-in" name="Cbm_Name1" value="@item2.Cbm_Name" />
+        <div class="center">
+            @*&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;*@
+            <br />
+            @foreach (var item2 in Model.cbmList)
+            {
 
 
-                    @item2.Cbm_Name
+                <input type="checkbox" id="@item2.Id" class="filled-in" name="Cbm_Name1" value="@item2.Cbm_Name" style="word-spacing:4px;" />
 
 
-                }
+                @item2.Cbm_Name
 
 
-            </div>
+            }
+
+
+        </div>
 
 
 
         </div>
-        <div style="float:right;">
-            <input type="submit" onclick='printChecked()' id="getValues" class="btn btn-success" value="Submit" />
+        <br />
+        <br />
+            <input type="submit" onclick='printChecked()' id="getValues" class="btn btn-success" value="Save" style="margin-left:500px;"/>
             @*<a href="@Url.Action("AddMaker")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"> Submit </span></a>*@
-            <a href="@Url.Action("AddCBM")" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> Cancel </span></a>
-        </div>
+            <a href="@Url.Action("MdmList")" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> Cancel </span></a>
+       
         <input type="hidden" id="Cbm_Name" name="Cbm_Name" value="s" />
 
         <!-- #END# Circle -->
