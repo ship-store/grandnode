@@ -6,150 +6,136 @@
         window.history.back();
     }
 </script>
+<style>
+    .center {
+  margin: auto;
+  width: 30%;
+  border: 3px solid #0E5679;
+  background-color:#0E5679;
+  color:white;
+  padding: 10px;
+  font-size:medium;
+ white-space:normal;
+ font-weight:100;
+}
+</style>
 @*test*@
 <form action="AddCBMMapping" method="get">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
 
 
-            <div class="header">
 
+        <div class="header">
+
+            <h4 style="color:#0E5679;">
+                <a onclick="goBack()" class="fa fa-arrow-circle-left"></a>
+                CBM To Equipment Components
+
+
+            </h4>
+
+        </div>
+        <br>
+        <div class="body" style="max-height:800px;">
+
+            @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">*@
+
+            <div class="container-fluid" style="width: 80%;">
+                <div class="table-responsive">
+
+                    <table class="table" style="border:none;">
+
+                        <tr style="width:10%;border:none;">
+                            <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;">Select Equipment type</label></td>
+                            <td style="border:none;">
+                                <select class="form-control show-tick" name="equipmentComponent" id="test" style="color:#0E5679;margin-left: 200px;width: 300px;">
+                                    <option selected disabled>Select</option>
+                                    @foreach (var item in Model.EquipmentTypeList.Distinct().ToList())
+                                    {
+
+                                        <option value=@item name=@item>@item</option>
+
+
+                                    }
+
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;">Select Job code</label></td>
+
+                            <td style="border:none;">
+                                <select class="form-control show-tick" style="color:#0E5679;margin-left: 200px;width: 300px;">
+                                    @foreach (var item3 in Model.JobplansList)
+                                    {
+                                        @if (item3.UniversalJobCode != null)
+                                        {
+
+
+                                            <option id="@item3.Id" class="filled-in" name="jobCode">@item3.UniversalJobCode</option>
+
+
+                                        }
+                                    }
+
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+
+                    </table>
+                </div>
+            </div>
+            @*</div>
+            </div>*@
+
+
+
+            <!-- Color Variations -->
+            <!-- #END# Color Variations -->
+            <!-- Circle -->
+            @*<div class="header">
                 <h2>
-                    <a onclick="goBack()" class="fa fa-arrow-circle-left"></a>
-                    CBM To Equipment Components
-
-                    <div style="float:right;">
-                        <input type="submit" onclick='printChecked()' id="getValues" class="btn btn-success" value="Submit" />
-                        @*<a href="@Url.Action("AddMaker")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"> Submit </span></a>*@
-                        <a href="@Url.Action("AddCBM")" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> Cancel </span></a>
-                    </div>
+                    Select CBM
                 </h2>
-                
-            </div>
-            <br>
-            <div class="body">
+            </div>*@
+            <div class="center">
+                @*&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;*@
 
-                @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">*@
-  
-                            <div class="container-fluid" style="width: 80%;">
-                                <div class="table-responsive">
-
-                                    <table class="table">
-
-                                        <tr>
-                                            <td><label for="EquipmentName">Select Component</label></td>
-                                            <td>
-                                                <select class="form-control show-tick" name="equipmentComponent" id="test">
-                                                    <option selected disabled>Select</option>
-                                                    @foreach (var item in Model.EquipmentTypeList.Distinct().ToList())
-                                                    {
-
-                                                        <option value=@item name=@item>@item</option>
+                @foreach (var item2 in Model.cbmList)
+                {
 
 
-                                                    }
+                    <input type="checkbox" id="@item2.Id" class="filled-in" name="Cbm_Name1" value="@item2.Cbm_Name" />
 
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
 
-                                    </table>
-                                </div>
-                            </div>
-                    @*</div>
-                </div>*@
+                    @item2.Cbm_Name
+
+
+                }
+
+
             </div>
 
 
-            <div class="row clearfix" id="hidden_div" style="display: none;">
-                <!-- Color Variations -->
-                <!-- #END# Color Variations -->
-                <!-- Circle -->
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="card" style="min-height:400px;">
-                        <div class="header">
-                            <h2>
-                                Select CBM
-                            </h2>
-                        </div>
-                        <div class="body" style="overflow: auto; max-height:400px;">
-                            <ul class="list-group">
 
-                                @foreach (var item2 in Model.cbmList)
-                                {
+        </div>
+        <div style="float:right;">
+            <input type="submit" onclick='printChecked()' id="getValues" class="btn btn-success" value="Submit" />
+            @*<a href="@Url.Action("AddMaker")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"> Submit </span></a>*@
+            <a href="@Url.Action("AddCBM")" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> Cancel </span></a>
+        </div>
+        <input type="hidden" id="Cbm_Name" name="Cbm_Name" value="s" />
 
-                                    <li class="list-group-item clearfix">
-                                        @item2.Cbm_Name
-                                        <div class="pull-right">
-                                            <input type="checkbox" id="@item2.Id" class="filled-in" name="Cbm_Name1" value="@item2.Cbm_Name" />
-
-                                        </div>
-                                    </li>
-                                }
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="card" style="min-height:400px;">
-                        <div class="header">
-                            <h2>
-                               Select Job Code
-                            </h2> 
-                        </div>
-                        <div class="body" style="overflow: auto; max-height:400px;">
-                            @*<ul class="list-group">
+        <!-- #END# Circle -->
 
 
-                                @foreach (var item3 in Model.JobplansList)
-                                {
-                                    @if (item3.UniversalJobCode != null)
-                                    {
-
-                                        <li class="list-group-item clearfix">
-                                            @item3.UniversalJobCode
-                                            <div class="pull-right">
-                                                <input type="radio" id="@item3.Id" class="filled-in" name="jobCode" value="@item3.UniversalJobCode" />
-
-                                            </div>
-                                        </li>
-                                    }
-                                }
 
 
-                            </ul>*@
-
-                            <select class="form-control show-tick">
-                                @foreach (var item3 in Model.JobplansList)
-                                {
-                                    @if (item3.UniversalJobCode != null)
-                                    {
-
-                                      
-                                <option id="@item3.Id" class="filled-in" name="jobCode">@item3.UniversalJobCode</option>
-
-                                         
-                                    }
-                                }
-
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <input type="hidden" id="Cbm_Name" name="Cbm_Name" value="s" />
-
-                <!-- #END# Circle -->
-            </div>
-                
-
-            </div>
-                </div>
-            </div>
+    </div>
+          
 </form>
 <script>
     document.getElementById('test').addEventListener('change', function () {
