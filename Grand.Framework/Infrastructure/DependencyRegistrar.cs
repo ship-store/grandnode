@@ -73,6 +73,7 @@ using System.Reflection;
 using Grand.Services.Department;
 using Grand.Services.Location;
 using Grand.Services.SafetyLevel;
+using Grand.Services.EquipmentStatus;
 
 namespace Grand.Framework.Infrastructure
 {
@@ -184,6 +185,7 @@ namespace Grand.Framework.Infrastructure
             builder.RegisterType<DepartmentService>().As<IDepartmentService>().InstancePerLifetimeScope();
             builder.RegisterType<LocationService>().As<ILocationService>().InstancePerLifetimeScope();
             builder.RegisterType<SafetyLevelService>().As<ISafetyLevelService>().InstancePerLifetimeScope();
+            builder.RegisterType<EquipmentStatusService>().As<IEquipmentStatusService>().InstancePerLifetimeScope();
 
             builder.RegisterType<EquipmentService>().As<IEquipmentService>().InstancePerLifetimeScope();
             builder.RegisterType<JobTypeService>().As<IJobTypeService>().InstancePerLifetimeScope();

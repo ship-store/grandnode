@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using Grand.Services.Department;
 using Grand.Services.Location;
 using Grand.Services.SafetyLevel;
+using Grand.Services.EquipmentStatus;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -29,6 +30,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IJobTypeViewModelService _jobTypeViewModelService;
         private readonly IJobStatusService _jobStatusService;
         private readonly IJobStatusViewModelService _jobStatusViewModelService;
+        private readonly IEquipmentStatusService _equipmentStatusService;
+        private readonly IEquipmentStatusViewModelService _equipmentStatusViewModelService;
 
         private readonly IReportedByService _reportedByService;
         private readonly IReportedByViewModelService1 _reportedByViewModelService;
@@ -56,7 +59,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IJobplanService _jobplanService;
         //public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobStatusViewModelService _jobStatusViewModelService, IJobTypeViewModelService _jobTypeViewModelService, IJobStatusService _jobStatusService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
         //public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
-        public MdmController(ISafetyLevelViewModelService _safetyLevelViewModelService,ISafetyLevelService _safetyLevelService,ILocationViewModelService _locationViewModelService,ILocationService _locationService,IDepartmentViewModelService _departmentViewModelService,IDepartmentService _departmentService,IJobplanService _jobplanService, ICbmMappingViewModelService cbmMappingViewModelService, ICbmMappingService cbmMappingService,IJobStatusViewModelService _jobStatusViewModelService, IJobStatusService _jobStatusService, IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1,ICbmService _cbmService,ICbmViewModelService _cbmViewModelService)
+        public MdmController(IEquipmentStatusViewModelService _equipmentStatusViewModelService,IEquipmentStatusService _equipmentStatusService,ISafetyLevelViewModelService _safetyLevelViewModelService,ISafetyLevelService _safetyLevelService,ILocationViewModelService _locationViewModelService,ILocationService _locationService,IDepartmentViewModelService _departmentViewModelService,IDepartmentService _departmentService,IJobplanService _jobplanService, ICbmMappingViewModelService cbmMappingViewModelService, ICbmMappingService cbmMappingService,IJobStatusViewModelService _jobStatusViewModelService, IJobStatusService _jobStatusService, IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1,ICbmService _cbmService,ICbmViewModelService _cbmViewModelService)
         {
             this._cbmMappingViewModelService = cbmMappingViewModelService;
             this._cbmMappingService = cbmMappingService;
@@ -70,6 +73,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._jobTypeViewModelService = _jobTypeViewModelService;
             this._jobStatusService = _jobStatusService;
             this._jobStatusViewModelService = _jobStatusViewModelService;
+            this._equipmentStatusService = _equipmentStatusService;
+            this._equipmentStatusViewModelService = _equipmentStatusViewModelService;
+
             this._jobplanService = _jobplanService;
             this._reportedByService = _reportedByService;
             this._reportedByViewModelService = _reportedByViewModelService;
@@ -194,7 +200,12 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var model = await Task.FromResult<object>(null);
             return View();
         }
-       
+        [HttpGet]
+        public async Task<IActionResult> AddEquipmentStatus()
+        {
+            var model = await Task.FromResult<object>(null);
+            return View();
+        }
 
         [HttpGet]
         public async Task<IActionResult> MdmList()
@@ -240,6 +251,13 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> AddJobStatusDetails(JobStatusModel addNewJobStatus)
         {
             await _jobStatusViewModelService.PrepareJobStatusModel(addNewJobStatus, "", true);
+            return RedirectToAction("MdmList", "Mdm");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddEquipmentStatusDetails(EquipmentStatusModel addNewEquipmentStatus)
+        {
+            await _equipmentStatusViewModelService.PrepareEquipmentStatusModel(addNewEquipmentStatus, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
         [HttpPost]
@@ -353,7 +371,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(gridModel);
 
         }
+        [HttpPost]
+        public async Task<IActionResult> ReadEquipmentStatusDetails(DataSourceRequest command, EquipmentStatusModel model)
+        {
+            var equipmentStatuslist = await _equipmentStatusService.GetAllEquipmentStatus("", command.Page, command.PageSize);
+            //List<MakerModel> makerlist = new List<MakerModel>();
+            var gridModel = new DataSourceResult { Data = equipmentStatuslist.ToList() };
+            return Json(gridModel);
 
+        }
         [HttpPost]
         public async Task<IActionResult> ReadCBMDetails(DataSourceRequest command, CBMModel model)
         {
