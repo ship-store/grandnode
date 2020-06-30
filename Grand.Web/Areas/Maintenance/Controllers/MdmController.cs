@@ -16,6 +16,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grand.Services.Department;
+using Grand.Services.Location;
+using Grand.Services.SafetyLevel;
+
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
     [Area("Maintenance")]
@@ -38,6 +42,12 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IEquipmentTypeService _equipmentTypeService;
         private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
         private readonly IMakerService _makerService;
+        private readonly IDepartmentService _departmentService;
+        private readonly IDepartmentViewModelService _departmentViewModelService;
+        private readonly ILocationService _locationService;
+        private readonly ILocationViewModelService _locationViewModelService;
+        private readonly ISafetyLevelService _safetyLevelService;
+        private readonly ISafetyLevelViewModelService _safetyLevelViewModelService;
 
         private readonly IMakerService1 _makerService1;
         private readonly IMakerViewModelService _makerViewModelService;
@@ -46,7 +56,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IJobplanService _jobplanService;
         //public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobStatusViewModelService _jobStatusViewModelService, IJobTypeViewModelService _jobTypeViewModelService, IJobStatusService _jobStatusService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
         //public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
-        public MdmController(IJobplanService _jobplanService, ICbmMappingViewModelService cbmMappingViewModelService, ICbmMappingService cbmMappingService,IJobStatusViewModelService _jobStatusViewModelService, IJobStatusService _jobStatusService, IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1,ICbmService _cbmService,ICbmViewModelService _cbmViewModelService)
+        public MdmController(ISafetyLevelViewModelService _safetyLevelViewModelService,ISafetyLevelService _safetyLevelService,ILocationViewModelService _locationViewModelService,ILocationService _locationService,IDepartmentViewModelService _departmentViewModelService,IDepartmentService _departmentService,IJobplanService _jobplanService, ICbmMappingViewModelService cbmMappingViewModelService, ICbmMappingService cbmMappingService,IJobStatusViewModelService _jobStatusViewModelService, IJobStatusService _jobStatusService, IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1,ICbmService _cbmService,ICbmViewModelService _cbmViewModelService)
         {
             this._cbmMappingViewModelService = cbmMappingViewModelService;
             this._cbmMappingService = cbmMappingService;
@@ -63,7 +73,13 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._jobplanService = _jobplanService;
             this._reportedByService = _reportedByService;
             this._reportedByViewModelService = _reportedByViewModelService;
-             
+            this._departmentService = _departmentService;
+            this._departmentViewModelService = _departmentViewModelService;
+            this._locationService = _locationService;
+            this._locationViewModelService = _locationViewModelService;
+            this._safetyLevelService = _safetyLevelService;
+            this._safetyLevelViewModelService = _safetyLevelViewModelService;
+
             this._cbmService = _cbmService;
             this._cbmViewModelService = _cbmViewModelService;
 
@@ -148,7 +164,24 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var model = await Task.FromResult<object>(null);
             return View();
         }
-
+        [HttpGet]
+        public async Task<IActionResult> AddDepartment()
+        {
+            var model = await Task.FromResult<object>(null);
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> AddLocation()
+        {
+            var model = await Task.FromResult<object>(null);
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> AddSafetyLevel()
+        {
+            var model = await Task.FromResult<object>(null);
+            return View();
+        }
         [HttpGet]
         public async Task<IActionResult> AddJobType()
         {
@@ -161,12 +194,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var model = await Task.FromResult<object>(null);
             return View();
         }
-        //[HttpGet]
-        //public async Task<IActionResult> AddMakerModel()
-        //{
-        //    var model = await Task.FromResult<object>(null);
-        //    return View();
-        //}
+       
 
         [HttpGet]
         public async Task<IActionResult> MdmList()
@@ -219,7 +247,28 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> AddEquipmentTypeDetails(EquipmentTypeModel addNewEquipmentType)
         {
             await _equipmentTypeViewModelService.PrepareEquipmentTypeModel(addNewEquipmentType, "", true);
-            return RedirectToAction("MdmList/ReadEquipmentTypeDetails", "Mdm");
+            return RedirectToAction("MdmList", "Mdm");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddSafetyLevelDetails(SafetyLevelModel addNewSafetyLevel)
+        {
+            await _safetyLevelViewModelService.PrepareSafetyLevelModel(addNewSafetyLevel, "", true);
+            return RedirectToAction("MdmList", "Mdm");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddLocationDetails(LocationModel addNewLocation)
+        {
+            await _locationViewModelService.PrepareLocationModel(addNewLocation, "", true);
+            return RedirectToAction("MdmList", "Mdm");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddDepartmentDetails(DepartmentModel addNewDepartment)
+        {
+            await _departmentViewModelService.PrepareDepartmentModel(addNewDepartment, "", true);
+            return RedirectToAction("MdmList", "Mdm");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -248,7 +297,34 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(gridModel);
 
         }
+        [HttpPost]
+        public async Task<IActionResult> ReadDepartmentDetails(DataSourceRequest command, DepartmentModel model)
+        {
+            var departmentlist = await _departmentService.GetAllDepartments("", command.Page, command.PageSize);
+            //List<MakerModel> makerlist = new List<MakerModel>();
+            var gridModel = new DataSourceResult { Data = departmentlist.ToList() };
+            return Json(gridModel);
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ReadLocationDetails(DataSourceRequest command, LocationModel model)
+        {
+            var locationlist = await _locationService.GetAllLocations("", command.Page, command.PageSize);
+            //List<MakerModel> makerlist = new List<MakerModel>();
+            var gridModel = new DataSourceResult { Data = locationlist.ToList() };
+            return Json(gridModel);
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> ReadSafetyLevelDetails(DataSourceRequest command,SafetyLevelModel model)
+        {
+            var safetylevellist = await _safetyLevelService.GetAllSafetyLevels("", command.Page, command.PageSize);
+            //List<MakerModel> makerlist = new List<MakerModel>();
+            var gridModel = new DataSourceResult { Data = safetylevellist.ToList() };
+            return Json(gridModel);
+
+        }
         [HttpPost]
         public async Task<IActionResult> ReadReportedByDetails(DataSourceRequest command, ReportedByModel model)
         {

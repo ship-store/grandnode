@@ -6,9 +6,23 @@
 
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
-
+<script type="text/javascript">
+   function onButtonClick(){
+       document.getElementById('textInput')= "show";
+        document.getElementById('bu')= "show";
+    }
+</script>
 <style>
-    .active-pink-4 input[type=text]:focus:not([readonly]) {
+    .red {
+    color: darkblue;
+}
+    .hide{
+  display:none;
+    }
+.show{
+  display:block;
+    }
+.active-pink-4 input[type=text]:focus:not([readonly]) {
   border: 1px solid #0E5679;
   box-shadow: 0 0 0 1px #0E5679;
 }
@@ -37,23 +51,34 @@
     <div class="col-md-12">
         @*<div class="x_panel light form-fit">*@
         <div class="x_title">
-            <div class="caption" style="color:#0E5679;font-weight:900">
+            <div class="caption" style="        color: #0E5679;
+        font-weight: 900">
                 <i class="fa fa-cubes" style="color:#0E5679"></i>
-                JOB TYPE
+                LOCATION
             </div>
             <div class="actions btn-group btn-group-devided">
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-
-                <a href="#" style="background:white;border:white;color:#0E5679;"><i style="font-size:27px" class="fa">&#xf044;</i></a>
+                @*<input type="button" name="answer" value="Show Text Field" onclick="onButtonClick()" />*@
+                @*<a href="#">
+                    <i class="material-icons" style="font-size:25px;color:#0E5679;font-weight:900;" id="check" name="check" onclick="onButtonClick()">add</i>
+                </a>
+                &nbsp; &nbsp;*@
+                <a href="#" style="        background: white;
+        border: white;
+        color: #0E5679;
+"><i style="font-size: 27px" class="fa">&#xf044;</i></a>
                 &nbsp; &nbsp;
-                <a href="#" style="background: white;border: white;color: red;"><i style="font-size: 27px" class="fa">&#xf014;</i></a>
+                <a href="#" style="        background: white;
+        border: white;
+        color: red;"><i style="font-size: 27px" class="fa">&#xf014;</i></a>
                 &nbsp; &nbsp;
                 <a href="#" style="background:white;border:white;color:#0E5679;"><i style="font-size:27px" class="fa">&#xf205;</i></a>
                 &nbsp; &nbsp; &nbsp;
+                @*<button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>*@
+                @*<button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>*@
             </div>
 
         </div>
-
 
         <div class="x_content">
             <div id="vessel-grid"></div>
@@ -61,70 +86,65 @@
         @*</div>*@
     </div>
 </div>
-<form action="AddJobTypeDetails" method="post">
+
+        
+        
+        
+            <form action="AddLocationDetails" method="post">
+
+                 
+                        <table class="table">
+
+                            <tr>
+                                <td style="border:none;">
+
+                                    <div style="float:left;max-width:50%;position:relative;left:-2px;">
+
+                                        <input type="text" class="form-control" id="textInput" placeholder="Location" name="Locations" style="height:auto;color:#0E5679;border-color:#0E5679;" />
+                                    </div>
+                                    &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
+                                    @Html.AntiForgeryToken()
+                                    <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
+
+                                </td>
+                              
+                            </tr>
+                            <tr>
+                                <td style="border:none;">
+                                   
+                                    <div class="active-pink-3 active-pink-4 mb-4">
+                                        <input class="form-control" type="text" placeholder="Search" aria-label="Search" style="max-width:212px;max-height:16px;color:#0E5679;">
+                                    </div>
+                                </td>
+                            </tr>
 
 
-    <table class="table">
 
-        <tr>
-            <td style="border:none;">
-
-                <div style="float:left;max-width:50%;position:relative;left:-2px;">
-
-                    <input type="text" class="form-control" id="textInput" placeholder="Job Type" name="Job_type" style="height:auto;color:#0E5679;border-color:#0E5679;" />
-                </div>
-                &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
-                @Html.AntiForgeryToken()
-                <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
-
-            </td>
-
-        </tr>
-        <tr>
-            <td style="border:none;">
-                <div class="active-pink-3 active-pink-4 mb-4">
-                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" style="max-width:212px;max-height:16px;color:#0E5679;">
-                </div>
-            </td>
-        </tr>
-
-
-
-
-
-    </table>
-
-</form>
-<div id="example">
-    <antiforgery-token />
-    <div id="JobTypeGrid"></div>
-    <script>
+                           
+                               
+                        </table>
+                
+            </form>
+        
+    
+            <div id="example">
+                <antiforgery-token />
+                <div id="LocationGrid"></div>
+                <script>
         $(document).ready(function () {
-            $("#JobTypeGrid").kendoGrid({
+            $("#LocationGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
 
                          read:
                              {
-                                url: "@Html.Raw(Url.Action("ReadJobTypeDetails", "Mdm","Maintenance"))",
+                                url: "@Html.Raw(Url.Action("ReadLocationDetails", "Mdm","Maintenance"))",
                                 type: "POST",
                                 dataType: "json",
                                 data: additionalData
                         },
-                        @*update:
-                            {
-                                url: "@Html.Raw(Url.Action("EditItem","PostponeJob","Maintenance"))",
-                                type: "POST",
-                                dataType: "json",
-                                data: additionalData
-                            },
-                            create:
-                            {
-                                url: "@Html.Raw(Url.Action("EditItem","PostponeJob","Maintenance"))",
-                                type: "POST",
-                                dataType: "json"
-                            }*@
+                       
                     },
                     batch: true,
                     schema:
@@ -146,9 +166,10 @@
                             }
                         }
                     },
-                    pageSize: 30
+                    pageSize: 25
+                  
                 },
-                 height: 470,
+                height: 470,
                 width:1020,
                 sortable: true,
                 reorderable: true,
@@ -159,8 +180,9 @@
                 pageable: true,
                 selectable: true,
                 allowCopy: true,
+      
                 columns: [
-                     {
+                    {
                             field: "Id",
                             headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
                             template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
@@ -169,11 +191,12 @@
                         lockable: false,
 
                         },
-                    {
-                            field: "Job_type",
-                            title: "Job type",
-                            width: "1020px"
-                        },
+                        {
+                            field: "Locations",
+                            title: "Locations",
+                            width: "1020px",
+                            //template: '#=SetColor(Equipment_type)#'
+                        }
 
 
                         ],
@@ -181,6 +204,13 @@
 
             });
         });
+                     function SetColor(Equipment_type)
+        {
+            if(Equipment_type=="Online")
+                return "<font color=\"red\">"+Equipment_type+"</font>";
+            else
+                return Equipment_type;
+        }
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();
                         $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
@@ -192,8 +222,19 @@
                         addAntiForgeryToken(data);
                         return data;
         }
-    </script>
-</div>
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $(".c1").hide();
+                        $("#cEnable").click(function () {
+                              $(".c1").show();
+                        });
+                        $("#rEnable").click(function () {
+                            $(".c1").hide();
+                        }
+    }
+        </script>
+</div >
 
 
 

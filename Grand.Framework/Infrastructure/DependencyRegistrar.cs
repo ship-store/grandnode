@@ -70,6 +70,9 @@ using MongoDB.Driver;
 using System;
 using System.Linq;
 using System.Reflection;
+using Grand.Services.Department;
+using Grand.Services.Location;
+using Grand.Services.SafetyLevel;
 
 namespace Grand.Framework.Infrastructure
 {
@@ -178,6 +181,10 @@ namespace Grand.Framework.Infrastructure
 
             builder.RegisterType<MakerService1>().As<IMakerService1>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentTypeService>().As<IEquipmentTypeService>().InstancePerLifetimeScope();
+            builder.RegisterType<DepartmentService>().As<IDepartmentService>().InstancePerLifetimeScope();
+            builder.RegisterType<LocationService>().As<ILocationService>().InstancePerLifetimeScope();
+            builder.RegisterType<SafetyLevelService>().As<ISafetyLevelService>().InstancePerLifetimeScope();
+
             builder.RegisterType<EquipmentService>().As<IEquipmentService>().InstancePerLifetimeScope();
             builder.RegisterType<JobTypeService>().As<IJobTypeService>().InstancePerLifetimeScope();
             builder.RegisterType<CbmService>().As<ICbmService>().InstancePerLifetimeScope();
