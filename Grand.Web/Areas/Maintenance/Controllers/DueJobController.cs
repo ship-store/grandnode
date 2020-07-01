@@ -71,6 +71,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     //  jobplanlist.Add(item);
                 }
                 var gridModel = new DataSourceResult { Data = jobplanlist.ToList().Where(x => x.JobStatus == 0) };
+              
+             
                 return Json(gridModel);
             }
             catch (System.Exception)
@@ -157,8 +159,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     }
                 }
                 var p = jobplanlist.OrderBy(x => x.NEXT_DUE_DATE).ToList();
-                var gridModel = new DataSourceResult { Data = jobplanlist.ToList().Where(x => x.JobStatus == 0) };
+               // var gridModel = new DataSourceResult { Data = jobplanlist.ToList().Where(x => x.JobStatus == 0) };
 
+                var gridModel = new DataSourceResult { Data = jobplanlist.ToList().GroupBy(x => x.JobOrder).Select(x => x.First()).Where(y => y.JobStatus == 0) };
 
                 //for Dashbord values
                 var Data = jobplanlist.ToList().Where(x => x.JobStatus == 0);
