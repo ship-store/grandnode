@@ -90,7 +90,7 @@
         
         
         
-            <form action="AddDepartmentDetails" method="post">
+            @*<form action="AddDepartmentDetails" method="post">*@
 
                  
                         <table class="table">
@@ -100,11 +100,12 @@
 
                                     <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
-                                        <input type="text" class="form-control" id="textInput" placeholder="Department" name="Departments" style="height:auto;color:#0E5679;border-color:#0E5679;" />
+                                        <input type="text" class="form-control" id="textInput1" placeholder="Department" name="Departments" style="height:auto;color:#0E5679;border-color:#0E5679;" />
                                     </div>
                                     &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
                                     @Html.AntiForgeryToken()
-                                    <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
+                                    <input type="submit" onclick="AddDepartmentDetails()"
+                                           class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
 
                                 </td>
                               
@@ -124,7 +125,7 @@
                                
                         </table>
                 
-            </form>
+            @*</form>*@
         
     
             <div id="example">
@@ -227,13 +228,35 @@
                     $(document).ready(function () {
                         $(".c1").hide();
                         $("#cEnable").click(function () {
-                              $(".c1").show();
+                            $(".c1").show();
                         });
                         $("#rEnable").click(function () {
                             $(".c1").hide();
-                        }
-    }
-        </script>
+                        });
+                    });
+                
+
+                    function AddDepartmentDetails() {
+                        var deptName = $("#textInput1").val();
+
+                        var DepartmentModel = {
+                            Departments:deptName
+                            
+                        };
+                        alert("Hai" + deptName);
+                         $.ajax({
+                              url: "@Html.Raw(Url.Action("AddDepartmentDetails", "Mdm","Maintenance"))",
+                                type: 'post',
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                success: function (data) {
+                                    //$('#target').html(data.msg);
+                                  //  window.location.href = data;
+                                },
+                                data: JSON.stringify(DepartmentModel)
+                            });
+                    }
+            </script>
 </div >
 
 

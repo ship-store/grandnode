@@ -286,7 +286,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> AddDepartmentDetails(DepartmentModel addNewDepartment)
         {
             await _departmentViewModelService.PrepareDepartmentModel(addNewDepartment, "", true);
-            return RedirectToAction("MdmList", "Mdm");
+            // return RedirectToAction("MdmList", "Mdm");
+            return Json("");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
