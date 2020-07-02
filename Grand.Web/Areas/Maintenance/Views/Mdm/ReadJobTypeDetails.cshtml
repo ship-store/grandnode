@@ -61,7 +61,7 @@
         @*</div>*@
     </div>
 </div>
-<form action="AddJobTypeDetails" method="post">
+@*<form action="AddJobTypeDetails" method="post">*@
 
 
     <table class="table">
@@ -71,11 +71,12 @@
 
                 <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
-                    <input type="text" class="form-control" id="textInput" placeholder="Job Type" name="Job_type" style="height:auto;color:#0E5679;border-color:#0E5679;" />
+                    <input type="text" class="form-control" id="textInputJobType" placeholder="Job Type" name="Job_type" style="height:auto;color:#0E5679;border-color:#0E5679;" />
                 </div>
                 &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
                 @Html.AntiForgeryToken()
-                <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
+                <input type="submit" onclick="AddJobTypeDetails()"
+                       class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
 
             </td>
 
@@ -94,13 +95,13 @@
 
     </table>
 
-</form>
+@*</form>*@
 <div id="example">
     <antiforgery-token />
     <div id="JobTypeGrid"></div>
     <script>
-        $(document).ready(function () {
-            $("#JobTypeGrid").kendoGrid({
+        function LoadJobTypeGrid() {
+               $("#JobTypeGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -180,6 +181,9 @@
                     editable: "inline"
 
             });
+        }
+        $(document).ready(function () {
+            LoadJobTypeGrid();
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();
@@ -191,6 +195,27 @@
                         var data = {};
                         addAntiForgeryToken(data);
                         return data;
+        }
+
+        function AddJobTypeDetails() {
+            var Job_type = $("#textInputJobType").val();
+            alert("job" + Job_type);
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("AddJobTypeDetail")" +"?Job_type=" +Job_type,
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                               // alert("Success");
+                             $("#textInputJobType").val("");
+
+                                $('#JobTypeGrid').empty();
+                                LoadJobTypeGrid();
+
+                            }
+
+                        });
         }
     </script>
 </div>
