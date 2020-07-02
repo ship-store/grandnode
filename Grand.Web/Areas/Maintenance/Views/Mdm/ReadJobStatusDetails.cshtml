@@ -14,7 +14,7 @@
         <div class="x_title">
             <div class="caption" style="color:#0E5679;font-weight:900">
                 <i class="fa fa-cubes" style="color:#0E5679"></i>
-                JOB STATUS
+                JOB STATUS1
             </div>
             <div class="actions btn-group btn-group-devided">
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
@@ -34,7 +34,7 @@
         @*</div>*@
     </div>
 </div>
-<form action="AddJobStatusDetails" method="post">
+@*<form action="AddJobStatusDetails" method="post">*@
 
     <table class="table">
 
@@ -43,11 +43,12 @@
 
                 <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
-                    <input type="text" class="form-control" id="textInput" placeholder="Job Status" name="Status" style="height:auto;color:#0E5679;border-color:#0E5679;" />
+                    <input type="text" class="form-control" id="textInputStatus" placeholder="Job Status" name="Status" style="height:auto;color:#0E5679;border-color:#0E5679;" />
                 </div>
                 &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
                 @Html.AntiForgeryToken()
-                <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
+                <input type="submit" onclick="AddJobStatusDetails()"
+                       class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
 
             </td>
 
@@ -66,13 +67,13 @@
 
     </table>
 
-</form>
+@*</form>*@
 <div id="example">
     <antiforgery-token />
-    <div id="JobStatusGrid"></div>
+    <div id="JobStatusGrid1" class="JobStatusGrid"></div>
     <script>
-        $(document).ready(function () {
-            $("#JobStatusGrid").kendoGrid({
+        function LoadJobStatusGrid(){
+                 $("#JobStatusGrid1").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -152,6 +153,9 @@
                     editable: "inline"
 
             });
+        }
+        $(function () {
+            LoadJobStatusGrid();
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();
@@ -164,6 +168,33 @@
                         addAntiForgeryToken(data);
                         return data;
         }
+
+        function AddJobStatusDetails() {
+         //  alert("Hai");
+            var Status = $("#textInputStatus").val();
+            alert(`Status=${Status}`);
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("AddJobStatusDetail")" + "?Status=" + Status,
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (datas) {
+                   // alert("Success");
+                  ("#textInputStatus").val("");
+
+                    //'#JobStatusGrid1').empty();
+                     $('.JobStatusGrid').empty();
+                     LoadJobStatusGrid();
+
+                }
+              
+
+            });
+               $('.JobStatusGrid').empty();
+                     LoadJobStatusGrid();
+        }
+
     </script>
 </div>
 

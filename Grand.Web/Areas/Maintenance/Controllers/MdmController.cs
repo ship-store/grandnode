@@ -253,6 +253,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _jobStatusViewModelService.PrepareJobStatusModel(addNewJobStatus, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddJobStatusDetail(string Status)
+        {
+            JobStatusModel addNewJobStatus = new JobStatusModel();
+            addNewJobStatus.Status = Status;
+            await _jobStatusViewModelService.PrepareJobStatusModel(addNewJobStatus, "", true);
+            return Json("");
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddEquipmentStatusDetails(EquipmentStatusModel addNewEquipmentStatus)
