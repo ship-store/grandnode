@@ -286,6 +286,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> AddDepartmentDetails(DepartmentModel addNewDepartment)
         {
             await _departmentViewModelService.PrepareDepartmentModel(addNewDepartment, "", true);
+            return RedirectToAction("MdmList", "Mdm");
+           
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddDepartments(string Departments)
+        {
+            DepartmentModel addNewDepartment = new DepartmentModel();
+            addNewDepartment.Departments = Departments;
+            await _departmentViewModelService.PrepareDepartmentModel(addNewDepartment, "", true);
             // return RedirectToAction("MdmList", "Mdm");
             return Json("");
         }
