@@ -419,6 +419,19 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return RedirectToAction("MdmList", "Mdm");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AddModelDetail(string Maker,string Model, string Remark, string SearchName)
+        {
+            MakerModel1 addNewMaker1 = new MakerModel1() {
+                Maker = Maker,
+                Model = Model,
+                Remark = Remark,
+                SearchName = SearchName
+            };
+            await _makerViewModelService1.PrepareMakerModel(addNewMaker1, "", true);
+            return Json("");
+        }
+
         [HttpPost]
         public async Task<IActionResult> ReadMakerDetails(DataSourceRequest command, MakerModel model)
         {
