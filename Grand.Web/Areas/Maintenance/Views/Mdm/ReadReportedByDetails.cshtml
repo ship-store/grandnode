@@ -60,7 +60,7 @@
         @*</div>*@
     </div>
 </div>
-<form action="AddReportedByDetails" method="post">
+@*<form action="AddReportedByDetails" method="post">*@
 
 
     <table class="table">
@@ -70,11 +70,13 @@
 
                 <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
-                    <input type="text" class="form-control" id="textInput" placeholder="Reported by" name="Reported_By" style="height:auto;color:#0E5679;border-color:#0E5679;" />
+                    <input type="text" class="form-control" id="textInputReportBy" placeholder="Reported by" name="Reported_By" style="height:auto;color:#0E5679;border-color:#0E5679;" />
                 </div>
                 &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
                 @Html.AntiForgeryToken()
-                <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
+                <input type="submit" onclick="AddReportedByDetails()"
+                       
+                       class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
 
             </td>
 
@@ -93,13 +95,13 @@
 
     </table>
 
-</form>
+@*</form>*@
 <div id="example">
     <antiforgery-token />
     <div id="ReportedByGrid"></div>
     <script>
-        $(document).ready(function () {
-            $("#ReportedByGrid").kendoGrid({
+        function LoadReportedByGrid() {
+                  $("#ReportedByGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -179,7 +181,12 @@
                     editable: "inline"
 
             });
-        });
+       
+        }
+
+        $(document).ready(function () {
+            LoadReportedByGrid();
+             });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();
                         $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
@@ -191,6 +198,29 @@
                         addAntiForgeryToken(data);
                         return data;
         }
+
+        function AddReportedByDetails() {
+            var Reported_By= $("#textInputReportBy").val();
+              
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("AddReportedByDetails")" + "?Reported_By=" +Reported_By,
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                               // alert("Success");
+                               $("#textInput1").val("");
+
+                                $('#ReportedByGrid').empty();
+                                LoadReportedByGrid();
+
+                            }
+
+                        });
+
+        }
+
     </script>
 </div>
 

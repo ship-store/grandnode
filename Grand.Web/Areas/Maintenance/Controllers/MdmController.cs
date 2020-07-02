@@ -307,6 +307,17 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return RedirectToAction("MdmList", "Mdm");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AddReportedByDetails(string Reported_By)
+        {
+            ReportedByModel addNewReportedBy = new ReportedByModel();
+            addNewReportedBy.Reported_By = Reported_By;
+            await _reportedByViewModelService.PrepareReportedByModel(addNewReportedBy, "", true);
+            return Json("");
+        }
+
+
+
         [HttpPost]
         public async Task<IActionResult> ReadCBMMappingDetails(DataSourceRequest command, ReportedByModel model)
         {
