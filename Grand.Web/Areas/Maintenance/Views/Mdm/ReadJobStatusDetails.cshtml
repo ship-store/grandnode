@@ -172,7 +172,7 @@
         function AddJobStatusDetails() {
          //  alert("Hai");
             var Status = $("#textInputStatus").val();
-            alert(`Status=${Status}`);
+            //alert(`Status=${Status}`);
             $.ajax({
                 type: "GET",
                 url: "@Url.Action("AddJobStatusDetail")" + "?Status=" + Status,
