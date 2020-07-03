@@ -59,7 +59,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IJobplanService _jobplanService;
         //public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobStatusViewModelService _jobStatusViewModelService, IJobTypeViewModelService _jobTypeViewModelService, IJobStatusService _jobStatusService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
         //public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
-        public MdmController(IEquipmentStatusViewModelService _equipmentStatusViewModelService,IEquipmentStatusService _equipmentStatusService,ISafetyLevelViewModelService _safetyLevelViewModelService,ISafetyLevelService _safetyLevelService,ILocationViewModelService _locationViewModelService,ILocationService _locationService,IDepartmentViewModelService _departmentViewModelService,IDepartmentService _departmentService,IJobplanService _jobplanService, ICbmMappingViewModelService cbmMappingViewModelService, ICbmMappingService cbmMappingService,IJobStatusViewModelService _jobStatusViewModelService, IJobStatusService _jobStatusService, IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1,ICbmService _cbmService,ICbmViewModelService _cbmViewModelService)
+        public MdmController(IEquipmentStatusViewModelService _equipmentStatusViewModelService, IEquipmentStatusService _equipmentStatusService, ISafetyLevelViewModelService _safetyLevelViewModelService, ISafetyLevelService _safetyLevelService, ILocationViewModelService _locationViewModelService, ILocationService _locationService, IDepartmentViewModelService _departmentViewModelService, IDepartmentService _departmentService, IJobplanService _jobplanService, ICbmMappingViewModelService cbmMappingViewModelService, ICbmMappingService cbmMappingService, IJobStatusViewModelService _jobStatusViewModelService, IJobStatusService _jobStatusService, IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService, IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1, ICbmService _cbmService, ICbmViewModelService _cbmViewModelService)
         {
             this._cbmMappingViewModelService = cbmMappingViewModelService;
             this._cbmMappingService = cbmMappingService;
@@ -98,19 +98,18 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var model = new MakerListModel();
             var makers = await _makerService.GetAllMakers("", 0, 500, true);
             List<Maker> makerList = makers.ToList();
-            var gridModel = new DataSourceResult 
-            {
+            var gridModel = new DataSourceResult {
                 Data = makers.ToList()
             };
 
             return View(makerList);
         }
 
-       [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> AddMakerModel(DataSourceRequest command, MakerListModel model)
         {
             var makers = await _makerService.GetAllMakers("", 0, 500, true);
-            return View(makers);      
+            return View(makers);
         }
 
         [HttpGet]
@@ -128,12 +127,12 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
 
 
-       
+
         public async Task<IActionResult> NewCBMMapping()
         {
             ViewModel vm = new ViewModel();
 
-            List<string> eqpTypeList= new List<string>();
+            List<string> eqpTypeList = new List<string>();
             var equipmentType = await _equipmentTypeService.GetAllEquipmentTypes("", 0, 500, true);
             var equipmentTypeList = equipmentType.ToList();
 
@@ -143,8 +142,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var jobplans = await _jobplanService.GetAllJobplan("", 0, 500, true);
             var jobplansList = jobplans.ToList();
 
-           
-            foreach(var item in equipmentTypeList)
+
+            foreach (var item in equipmentTypeList)
             {
                 eqpTypeList.Add(item.Equipment_type);
             }
@@ -246,12 +245,29 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return RedirectToAction("MdmList", "Mdm");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AddJobTypeDetail(string Job_type)
+        {
+            JobTypeModel addNewJobType = new JobTypeModel() { Job_type = Job_type };
+            await _jobTypeViewModelService.PrepareJobTypeModel(addNewJobType, "", true);
+            return Json("");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddJobStatusDetails(JobStatusModel addNewJobStatus)
         {
             await _jobStatusViewModelService.PrepareJobStatusModel(addNewJobStatus, "", true);
             return RedirectToAction("MdmList", "Mdm");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddJobStatusDetail(string Status)
+        {
+            JobStatusModel addNewJobStatus = new JobStatusModel();
+            addNewJobStatus.Status = Status;
+            await _jobStatusViewModelService.PrepareJobStatusModel(addNewJobStatus, "", true);
+            return Json("");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -287,6 +303,17 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             await _departmentViewModelService.PrepareDepartmentModel(addNewDepartment, "", true);
             return RedirectToAction("MdmList", "Mdm");
+           
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddDepartments(string Departments)
+        {
+            DepartmentModel addNewDepartment = new DepartmentModel();
+            addNewDepartment.Departments = Departments;
+            await _departmentViewModelService.PrepareDepartmentModel(addNewDepartment, "", true);
+            // return RedirectToAction("MdmList", "Mdm");
+            return Json("");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -295,6 +322,17 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _reportedByViewModelService.PrepareReportedByModel(addNewReportedBy, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddReportedByDetails(string Reported_By)
+        {
+            ReportedByModel addNewReportedBy = new ReportedByModel();
+            addNewReportedBy.Reported_By = Reported_By;
+            await _reportedByViewModelService.PrepareReportedByModel(addNewReportedBy, "", true);
+            return Json("");
+        }
+
+
 
         [HttpPost]
         public async Task<IActionResult> ReadCBMMappingDetails(DataSourceRequest command, ReportedByModel model)
@@ -395,6 +433,19 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             await _makerViewModelService1.PrepareMakerModel(addNewMaker1, "", true);
             return RedirectToAction("MdmList", "Mdm");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddModelDetail(string Maker,string Model, string Remark, string SearchName)
+        {
+            MakerModel1 addNewMaker1 = new MakerModel1() {
+                Maker = Maker,
+                Model = Model,
+                Remark = Remark,
+                SearchName = SearchName
+            };
+            await _makerViewModelService1.PrepareMakerModel(addNewMaker1, "", true);
+            return Json("");
         }
 
         [HttpPost]
