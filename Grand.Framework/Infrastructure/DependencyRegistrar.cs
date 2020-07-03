@@ -74,6 +74,11 @@ using Grand.Services.Department;
 using Grand.Services.Location;
 using Grand.Services.SafetyLevel;
 using Grand.Services.EquipmentStatus;
+using Grand.Services.Frequency;
+using Grand.Services.FrequencyType;
+using Grand.Services.Rank;
+using Grand.Services.MaintenanceType;
+using Grand.Services.Priority;
 
 namespace Grand.Framework.Infrastructure
 {
@@ -186,7 +191,11 @@ namespace Grand.Framework.Infrastructure
             builder.RegisterType<LocationService>().As<ILocationService>().InstancePerLifetimeScope();
             builder.RegisterType<SafetyLevelService>().As<ISafetyLevelService>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentStatusService>().As<IEquipmentStatusService>().InstancePerLifetimeScope();
-
+            builder.RegisterType<FrequencyService>().As<IFrequencyService>().InstancePerLifetimeScope();
+            builder.RegisterType<FrequencyTypeService>().As<IFrequencyTypeService>().InstancePerLifetimeScope();
+            builder.RegisterType<RankService>().As<IRankService>().InstancePerLifetimeScope();
+            builder.RegisterType<MaintenanceTypeService>().As<IMaintenanceTypeService>().InstancePerLifetimeScope();
+            builder.RegisterType<PriorityService>().As<IPriorityService>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentService>().As<IEquipmentService>().InstancePerLifetimeScope();
             builder.RegisterType<JobTypeService>().As<IJobTypeService>().InstancePerLifetimeScope();
             builder.RegisterType<CbmService>().As<ICbmService>().InstancePerLifetimeScope();
