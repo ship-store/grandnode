@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grand.Web.Areas.Maintenance.DomainModels;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -26,6 +27,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         
         public async Task<IActionResult> Index()
         {
+            //Session value gettings
+            try
+            {
+                ViewBag.EmailAddress = HttpContext.Session.GetString("email").ToString();
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("LoginPage", "Register");
+            }
+
             var Vessels = await _vesselService.GetAllVessels("", 0, 500, true);
             var TotalVessel=Vessels.Count();
 
@@ -84,7 +95,13 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             ViewBag.DueOfWeek = DueOfWeek;
             ViewBag.DueofMonth = DueofMonth;
 
-            return View();
+            var jobToday = p.Where(x => x.NEXT_DUE_DATE == Today).ToList();
+            ViewModel jobViewModel = new ViewModel() 
+            {
+                jobsToday = jobToday,   
+            };
+
+            return View(jobViewModel);
         }
 
 
