@@ -346,6 +346,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _equipmentStatusViewModelService.PrepareEquipmentStatusModel(addNewEquipmentStatus, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddEquipmentStatusDetail(string Status)
+        {
+            EquipmentStatusModel addNewEquipmentStatus = new EquipmentStatusModel { Status = Status };
+            await _equipmentStatusViewModelService.PrepareEquipmentStatusModel(addNewEquipmentStatus, "", true);
+            return Json("");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddEquipmentTypeDetails(EquipmentTypeModel addNewEquipmentType)
