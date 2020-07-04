@@ -18,6 +18,7 @@
 @using Microsoft.AspNetCore.Http;
 @{
     var vessel = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+    var vesselPic = @HttpContextAccessor.HttpContext.Session.GetString("VesselImage");
     var currentUser = @HttpContextAccessor.HttpContext.Session.GetString("email");
     var currentCustomer = this.WorkContext.CurrentCustomer;
     var usernamesEnabled = customerSettings.UsernamesEnabled;
@@ -168,9 +169,9 @@
                             {
                                 <div class="class=" nav toggle"" style="padding-left:50px">
                                     <ul class="nav navbar-nav">
-                                        <li class="dropdown" role="presentation">
-                                            <a href="@Url.Action("VesselList", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
-                                                <i class="fa fa-ship" style="color:#0f5f86;"></i>&nbsp;&nbsp;@vessel
+                                        <li>
+                                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <img src="~/administration/build/images/plus1.png" alt="">
                                             </a>
                                         </li>
                                     </ul>
@@ -181,41 +182,47 @@
 
                                 <li>
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <img src="~/administration/build/images/avatar.png" alt="">
+                                        <img src="~/administration/build/images/man.png" alt="">
 
                                         @*@if (currentCustomer != null && currentCustomer.IsRegistered())
-                                            {*@
-                                        <div class="username-hide-on-mobile">
-                                            @currentUser  @*@(usernamesEnabled ? currentCustomer.Username : currentCustomer.Email)*@
-                                        </div>
+                {*@
+                                        @*<div class="username-hide-on-mobile">
+                    @currentUser
+                </div>*@
 
                                         @*}*@
-                                        <span class="fa fa-angle-down"></span>
+                                        @*<span class="fa fa-angle-down"></span>*@
                                     </a>
 
                                     <ul class="dropdown-menu dropdown-menu-default">
+                                        <li>
+                                            <a href="#">
+                                                <b>@currentUser</b>
+                                            </a>
+                                        </li>
                                         @*<li>
-                                                <a href="@Url.Action("Edit", "Customer", new { id = currentCustomer.Id, area = "Admin" })">
-                                                    <i class="icon-user"></i> @T("Admin.Header.Profile")
-                                                </a>
-                                            </li>*@
+                    <a href="@Url.Action("Edit", "Customer", new { id = currentCustomer.Id, area = "Admin" })">
+                    <i class="icon-user"></i> @T("Admin.Header.Profile")
+                    </a>
+                </li>*@
                                         <li>
                                             <a href="@Url.Action("Logout", "Register", new { area = "Maintenance" }, null)">
-                                                <i class="icon-logout"></i> @*@T("Admin.Header.Logout")*@Logout
+                                                @*<i class="icon-logout"></i>Logout*@
+                                                <b>Logout</b>
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
                                 @*<li class="dropdown" role="presentation">
-                                        <a href="@Url.Action("VesselList", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
-                                            <i class="fa fa-ship"></i>&nbsp;&nbsp;@vessel
-                                        </a>
-                                    </li>*@
-                                <li class="dropdown" role="presentation">
-                                    <a href="@Url.Action("Success", "Register", new { area = "Maintenance" })" class="dropdown-toggle">
-                                        <i class="icon-home"></i>
-                                    </a>
-                                </li>
+            <a href="@Url.Action("VesselList", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
+                <i class="fa fa-ship"></i>&nbsp;&nbsp;@vessel
+            </a>
+        </li>*@
+                                @*<li class="dropdown" role="presentation">
+            <a href="@Url.Action("Success", "Register", new { area = "Maintenance" })" class="dropdown-toggle">
+                <i class="icon-home"></i>
+            </a>
+        </li>*@
                                 <li role="presentation" class="dropdown">
                                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                                         <i class="icon-info"></i>
@@ -228,16 +235,16 @@
                                             </a>
                                         </li>
                                         @*<li>
-                                                <a href="http://grandnode.com/boards" target="_blank">
-                                                    <i class="icon-bubbles"></i>
-                                                    @T("Admin.Header.Community")
-                                                </a>
-                                            </li>*@
+                    <a href="http://grandnode.com/boards" target="_blank">
+                        <i class="icon-bubbles"></i>
+                        @T("Admin.Header.Community")
+                    </a>
+                </li>*@
                                         @*<li>
-                                                <a href="javascript:;">
-                                                    <i class="fa fa-dot-circle-o"></i>
-                                                </a>
-                                            </li>*@
+                    <a href="javascript:;">
+                        <i class="fa fa-dot-circle-o"></i>
+                    </a>
+                </li>*@
                                     </ul>
                                 </li>
                                 <li role="presentation" class="dropdown">
@@ -271,14 +278,27 @@
                                         }
                                     </ul>
                                 </li>
+
+                                @if (currentCustomer.IsAdmin())
+                                {
+                            <li class="dropdown" role="presentation">
+                                @*<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="~/Maintenance/Vessel/@vesselPic" alt="">
+                                    <img src="~/administration/build/images/man.png" alt="">
+                                </a>*@
+                                <a href="@Url.Action("VesselList", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
+                                    <i class="fa fa-ship" style="color:#0f5f86;"></i>&nbsp;&nbsp;@vessel
+                                </a>
+                            </li>
+                                }
                                 @*<li>
-                                            @if (ViewBag.VesselName != null)
-                                            {
-                                        <h3>
-                                            @ViewBag.VesselName
-                                        </h3>
-                                            }
-                                    </li>*@
+                @if (ViewBag.VesselName != null)
+                {
+            <h3>
+                @ViewBag.VesselName
+            </h3>
+                }
+        </li>*@
 
 
 

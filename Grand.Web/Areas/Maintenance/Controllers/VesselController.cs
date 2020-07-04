@@ -113,6 +113,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             VesselForDisplay display = new VesselForDisplay { VesselID = vessel.Id, Vessel_name = vessel.Vessel_name };
             HttpContext.Session.SetString("VesselId", display.VesselID);
             HttpContext.Session.SetString("VesselName", display.Vessel_name);
+            //HttpContext.Session.SetString("VesselImage", display.file.ToString());
 
             if (vessel == null)
             {
@@ -120,6 +121,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             }
    
             ViewBag.VesselName = HttpContext.Session.GetString("VesselName").ToString();
+            //ViewBag.VesselImage = HttpContext.Session.GetString("VesselImage").ToString();
 
             return RedirectToAction("VesselList");
         }

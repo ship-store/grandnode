@@ -31,6 +31,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public List<string> EquipmentTypeList { get; set; }
 
         public List<Core.Domain.Jobplan.Jobplan> JobplansList { get; set; }
+        public List<Jobplan> jobsToday { get; set; }
 
     }
 }
