@@ -109,10 +109,10 @@
 @*</form>*@
 <div id="example_1">
     <antiforgery-token />
-    <div id="CBMGrid2" class="CBMGrid"></div>
+    <div id="CBMGrid" class="CBMGrid"></div>
     <script>
         function LoadCbmGrid() {
-            $("#CBMGrid2").kendoGrid({
+          $("#CBMGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -193,6 +193,7 @@
 
             });
         }
+
         $(function () {
             LoadCbmGrid();
         });
@@ -208,8 +209,9 @@
                         return data;
         }
 
-        function AddCBMDetails() {
-            alert("Hi")
+
+         function AddCBMDetails() {
+           // alert("Hi");
              var  CBM_Name = $("#textCbmParamter").val();
 
                         $.ajax({
@@ -231,8 +233,9 @@
                         });
 
 
-                    }
+                    
         }
+       
     </script>
 </div>
 
