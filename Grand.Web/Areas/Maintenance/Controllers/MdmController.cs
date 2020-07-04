@@ -418,6 +418,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _frequencyViewModelService.PrepareFrequencyModel(addNewFrequency, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddFrequencyDetail(string Frequencie)
+        {
+            FrequencyModel addNewFrequency = new FrequencyModel();
+            addNewFrequency.Frequencies = Frequencie;
+            await _frequencyViewModelService.PrepareFrequencyModel(addNewFrequency, "", true);
+            return Json("");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddFrequencyTypeDetails(FrequencyTypeModel addNewFrequencyType)
