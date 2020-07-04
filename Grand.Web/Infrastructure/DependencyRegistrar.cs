@@ -106,6 +106,11 @@ namespace Grand.Web.Infrastructure
             builder.RegisterType<LocationViewModelService>().As<ILocationViewModelService>().InstancePerLifetimeScope();
             builder.RegisterType<SafetyLevelViewModelService>().As<ISafetyLevelViewModelService>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentStatusViewModelService>().As<IEquipmentStatusViewModelService>().InstancePerLifetimeScope();
+            builder.RegisterType<FrequencyViewModelService>().As<IFrequencyViewModelService>().InstancePerLifetimeScope();
+            builder.RegisterType<FrequencyTypeViewModelService>().As<IFrequencyTypeViewModelService>().InstancePerLifetimeScope();
+            builder.RegisterType<RankViewModelService>().As<IRankViewModelService>().InstancePerLifetimeScope();
+            builder.RegisterType<MaintenanceTypeViewModelService>().As<IMaintenanceTypeViewModelService>().InstancePerLifetimeScope();
+            builder.RegisterType<PriorityViewModelService>().As<IPriorityViewModelService>().InstancePerLifetimeScope();
 
             builder.RegisterType<MakerViewModelService1>().As<IMakerViewModelService1>().InstancePerLifetimeScope();
             //Equipment Service

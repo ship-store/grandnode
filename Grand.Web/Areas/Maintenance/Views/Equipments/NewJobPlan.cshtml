@@ -16,16 +16,7 @@
             </div>
            
         </div>
-        @*<script type="text/javascript">
-            function EnableDisableTextBox() {
-                var chkYes = document.getElementById("chkYes");
-                var txtPassportNumber = document.getElementById("n5");
-                txtPassportNumber.disabled = chkYes.checked ? false : true;
-                if (!txtPassportNumber.disabled) {
-                    txtPassportNumber.focus();
-                }
-            }
-        </script>*@
+       
 
         <script>
             $(document).ready(function ()
@@ -93,11 +84,9 @@
 
 
                     <tr>
-                        @*<td><label for="EquipmentCode">Equipment Code</label></td>*@
-                        <td>
+                        <td style="border:none;">
 
-                            @*<input type="text" name="EquipmentCode" value="@Model.SelectedEquipment.Sub1_number@Model.SelectedEquipment.Sub2_number@Model.SelectedEquipment.Sub3_number" class="form-control time24" placeholder="" />*@
-
+                           
                             <input type="text" class="form-control valid" readonly value="@ecode" name="EquipmentCode" id="n1" style="float:left;width:21%;color:#0E5679;border-color:#0E5679" />
                             &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
                             <div style="float:left;position:relative;left:-2px;">
@@ -115,7 +104,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td style="border:none;">
 
 
                             <input type="text" class="form-control valid" placeholder="Department" name="Department" id="n9" style="border-color:#0E5679;float:left;width:21%;color:#0E5679;" />
@@ -135,12 +124,9 @@
                         </td>
                     </tr>
                     <tr>
-                        @*<td><label for="EquipmentCode">Equipment Code</label></td>*@
-                        <td>
+                       <td style="border:none;">
 
-                            @*<input type="text" name="EquipmentCode" value="@Model.SelectedEquipment.Sub1_number@Model.SelectedEquipment.Sub2_number@Model.SelectedEquipment.Sub3_number" class="form-control time24" placeholder="" />*@
-
-                            <input type="text" class="form-control valid" placeholder="Job Title" name="JobTitle" id="n2" style="float:left;width:21%;color:#0E5679;border-color:#0E5679" />
+                           <input type="text" class="form-control valid" placeholder="Job Title" name="JobTitle" id="n2" style="float:left;width:21%;color:#0E5679;border-color:#0E5679" />
                             &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
                             <div style="float:left;position:relative;left:-2px;">
 
@@ -158,7 +144,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td style="border:none;">
                             <div style="float:left;position:relative;left:36px;">
 
                                 <input type="text" class="form-control valid" placeholder="Plan Horizon" name="PlanHorizon" id="n7" style="border-color:#0E5679;margin-left:-36px;float:left;width:172%;height:auto;color:#0E5679;" />
@@ -237,7 +223,7 @@
 
                     <tr>
                         @Html.AntiForgeryToken()
-                        <td><input type="submit" value="&#xf0f6;" class="fa fa-floppy-o aria-hidden=true" style="float:right;right:250px;width:30px;position:relative;height:30px;background-color:#0E5679;color:white;" id="submit" /></td>
+                        <td style="border:none;"><input type="submit" value="&#xf0f6;" class="fa fa-floppy-o aria-hidden=true" style="float:right;right:250px;width:30px;position:relative;height:30px;background-color:#0E5679;color:white;" id="submit" /></td>
                     </tr>
                 </table>
                     

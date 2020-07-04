@@ -7,45 +7,53 @@
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
 <script type="text/javascript">
-   function onButtonClick(){
-       document.getElementById('textInput')= "show";
-        document.getElementById('bu')= "show";
+    function onButtonClick() {
+        document.getElementById('textInput') = "show";
+        document.getElementById('bu') = "show";
     }
 </script>
 <style>
     .red {
-    color: darkblue;
-}
-    .hide{
-  display:none;
+        color: darkblue;
     }
-.show{
-  display:block;
+
+    .hide {
+        display: none;
     }
-.active-pink-4 input[type=text]:focus:not([readonly]) {
-  border: 1px solid #0E5679;
-  box-shadow: 0 0 0 1px #0E5679;
-}
-.active-pink-3 input[type=text] {
-  border: 1px solid #0E5679;
-  box-shadow: 0 0 0 1px #0E5679;
-}
-.active-purple-4 input[type=text]:focus:not([readonly]) {
-  border: 1px solid #0E5679;
-  box-shadow: 0 0 0 1px #0E5679;
-}
-.active-purple-3 input[type=text] {
-  border: 1px solid #0E5679;
-  box-shadow: 0 0 0 1px #0E5679;
-}
-.active-cyan-4 input[type=text]:focus:not([readonly]) {
-  border: 1px solid #0E5679;
-  box-shadow: 0 0 0 1px #0E5679;
-}
-.active-cyan-3 input[type=text] {
-  border: 1px solid #4dd0e1;
-  box-shadow: 0 0 0 1px #4dd0e1;
-}
+
+    .show {
+        display: block;
+    }
+
+    .active-pink-4 input[type=text]:focus:not([readonly]) {
+        border: 1px solid #0E5679;
+        box-shadow: 0 0 0 1px #0E5679;
+    }
+
+    .active-pink-3 input[type=text] {
+        border: 1px solid #0E5679;
+        box-shadow: 0 0 0 1px #0E5679;
+    }
+
+    .active-purple-4 input[type=text]:focus:not([readonly]) {
+        border: 1px solid #0E5679;
+        box-shadow: 0 0 0 1px #0E5679;
+    }
+
+    .active-purple-3 input[type=text] {
+        border: 1px solid #0E5679;
+        box-shadow: 0 0 0 1px #0E5679;
+    }
+
+    .active-cyan-4 input[type=text]:focus:not([readonly]) {
+        border: 1px solid #0E5679;
+        box-shadow: 0 0 0 1px #0E5679;
+    }
+
+    .active-cyan-3 input[type=text] {
+        border: 1px solid #4dd0e1;
+        box-shadow: 0 0 0 1px #4dd0e1;
+    }
 </style>
 <div class="row" id="SearchSection">
     <div class="col-md-12">
@@ -54,15 +62,15 @@
             <div class="caption" style="        color: #0E5679;
         font-weight: 900">
                 <i class="fa fa-cubes" style="color:#0E5679"></i>
-                LOCATION
+                RANK
             </div>
             <div class="actions btn-group btn-group-devided">
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
                 @*<input type="button" name="answer" value="Show Text Field" onclick="onButtonClick()" />*@
                 @*<a href="#">
-                    <i class="material-icons" style="font-size:25px;color:#0E5679;font-weight:900;" id="check" name="check" onclick="onButtonClick()">add</i>
-                </a>
-                &nbsp; &nbsp;*@
+                        <i class="material-icons" style="font-size:25px;color:#0E5679;font-weight:900;" id="check" name="check" onclick="onButtonClick()">add</i>
+                    </a>
+                    &nbsp; &nbsp;*@
                 <a href="#" style="        background: white;
         border: white;
         color: #0E5679;
@@ -87,64 +95,76 @@
     </div>
 </div>
 
-        
-        
-        
-            <form action="AddLocationDetails" method="post">
-
-                 
-                        <table class="table">
-
-                            <tr>
-                                <td style="border:none;">
-
-                                    <div style="float:left;max-width:50%;position:relative;left:-2px;">
-
-                                        <input type="text" class="form-control" id="textInput" placeholder="Location" name="Locations" style="height:auto;color:#0E5679;border-color:#0E5679;" />
-                                    </div>
-                                    &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
-                                    @Html.AntiForgeryToken()
-                                    <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
-
-                                </td>
-                              
-                            </tr>
-                            <tr>
-                                <td style="border:none;">
-                                   
-                                    <div class="active-pink-3 active-pink-4 mb-4">
-                                        <input class="form-control" type="text" placeholder="Search" aria-label="Search" style="max-width:212px;max-height:16px;color:#0E5679;">
-                                    </div>
-                                </td>
-                            </tr>
 
 
 
-                           
-                               
-                        </table>
-                
-            </form>
-        
-    
-            <div id="example">
-                <antiforgery-token />
-                <div id="LocationGrid"></div>
-                <script>
+<form action="AddRankDetails" method="post">
+
+
+    <table class="table">
+
+        <tr>
+            <td style="border:none;">
+
+                <div style="float:left;max-width:50%;position:relative;left:-2px;">
+
+                    <input type="text" class="form-control" id="textInput" placeholder="Rank" name="Ranks" style="height:auto;color:#0E5679;border-color:#0E5679;" />
+                </div>
+                &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
+                @Html.AntiForgeryToken()
+                <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
+
+            </td>
+
+        </tr>
+        <tr>
+            <td style="border:none;">
+
+                <div class="active-pink-3 active-pink-4 mb-4">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" style="max-width:212px;max-height:16px;color:#0E5679;">
+                </div>
+            </td>
+        </tr>
+
+
+
+
+
+    </table>
+
+</form>
+
+
+<div id="example">
+    <antiforgery-token />
+    <div id="RankGrid"></div>
+    <script>
         $(document).ready(function () {
-            $("#LocationGrid").kendoGrid({
+            $("#RankGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
 
                          read:
                              {
-                                url: "@Html.Raw(Url.Action("ReadLocationDetails", "Mdm","Maintenance"))",
+                                url: "@Html.Raw(Url.Action("ReadRankDetails", "Mdm","Maintenance"))",
                                 type: "POST",
                                 dataType: "json",
                                 data: additionalData
                         },
-                       
+                        @*update:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","PostponeJob","Maintenance"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: additionalData
+                            },
+                            create:
+                            {
+                                url: "@Html.Raw(Url.Action("EditItem","PostponeJob","Maintenance"))",
+                                type: "POST",
+                                dataType: "json"
+                            }*@
                     },
                     batch: true,
                     schema:
@@ -167,7 +187,7 @@
                         }
                     },
                     pageSize: 25
-                  
+
                 },
                 height: 470,
                 width:1020,
@@ -180,7 +200,7 @@
                 pageable: true,
                 selectable: true,
                 allowCopy: true,
-      
+
                 columns: [
                     {
                             field: "Id",
@@ -192,8 +212,8 @@
 
                         },
                         {
-                            field: "Locations",
-                            title: "Locations",
+                            field: "Ranks",
+                            title: "Rank",
                             width: "1020px",
                             //template: '#=SetColor(Equipment_type)#'
                         }
@@ -222,19 +242,19 @@
                         addAntiForgeryToken(data);
                         return data;
         }
-                </script>
-                <script>
-                    $(document).ready(function () {
-                        $(".c1").hide();
-                        $("#cEnable").click(function () {
-                            $(".c1").show();
-                        });
-                        $("#rEnable").click(function () {
-                            $(".c1").hide();
-                        });
-                    });
-        </script>
-</div >
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".c1").hide();
+            $("#cEnable").click(function () {
+                $(".c1").show();
+            });
+            $("#rEnable").click(function () {
+                $(".c1").hide();
+            });
+        });
+    </script>
+</div>
 
 
 

@@ -60,13 +60,13 @@
         @*</div>*@
     </div>
 </div>
-<form action="AddModelDetails" method="get">
+@*<form action="AddModelDetails" method="get">*@
 
     <table class="table">
 
         <tr>
             <td style="border:none;">
-                <select class="form-control show-tick" name="Maker" style="float:left;width:23%;color:#0E5679;border-color:#0E5679;">
+                <select class="form-control show-tick" name="Maker"  id="textInputmaker1" style="float:left;width:23%;color:#0E5679;border-color:#0E5679;">
                     @foreach (var item in Model)
                     {
 
@@ -80,16 +80,19 @@
              
 
 
-                <input type="text" class="form-control" id="textInput" placeholder="Model" name="Model" style="margin-left:22px;float:left;width:20%;height:auto;color:#0E5679;border-color:#0E5679;" />
+                <input type="text" class="form-control" id="textInputModel1" placeholder="Model"
+                       name="Model" style="margin-left:22px;float:left;width:20%;height:auto;color:#0E5679;border-color:#0E5679;" />
 
 
                 <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
-                    <input type="text" class="form-control" id="Remark" placeholder="Remark" name="Remark" style="margin-left:22px;height:auto;color:#0E5679;border-color:#0E5679;" />
+                    <input type="text" class="form-control" 
+                           id="textInputModelRemark1" placeholder="Remark" name="Remark" style="margin-left:22px;height:auto;color:#0E5679;border-color:#0E5679;" />
                 </div>
 
                 @Html.AntiForgeryToken()
-                <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="margin-left:60px;font-size:23px;color:#0E5679;background:white;border:white">
+                <input type="submit"  onclick="AddModelDetails()"
+                       class="fa fa-save" id="bu" value="&#xf0c7;" style="margin-left:60px;font-size:23px;color:#0E5679;background:white;border:white">
 
             </td>
 
@@ -97,7 +100,7 @@
         <tr>
             <td style="border:none;">
                 <div class="active-pink-3 active-pink-4 mb-4">
-                      <input class="form-control" type="text" placeholder="Search" aria-label="Search" style="max-width:212px;max-height:16px;color:#0E5679;">
+                      <input class="form-control" type="text"  id="textSearchModel" placeholder="Search" aria-label="Search" style="max-width:212px;max-height:16px;color:#0E5679;">
                
                 </div>
             </td>
@@ -109,13 +112,13 @@
 
     </table>
 
-</form>
+@*</form>*@
 <div id="example">
     <antiforgery-token />
     <div id="MakerModelGrid"></div>
     <script>
-        $(document).ready(function () {
-            $("#MakerModelGrid").kendoGrid({
+        function LoadMakerModelGrid() {
+             $("#MakerModelGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -194,6 +197,10 @@
                     editable: "inline"
 
             });
+        }
+
+        $(function () {
+            LoadMakerModelGrid();
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();
@@ -205,6 +212,35 @@
                         var data = {};
                         addAntiForgeryToken(data);
                         return data;
+        }
+
+
+        function AddModelDetails () {
+              
+            var Model = $("#textInputModel1").val();
+            var Remark = $("#textInputModelRemark1").val();
+            var Maker= $("#textInputMaker1").val();
+            var SearchName = $("#textSearchModel").val();
+           // alert(`Model=${Model} Remark=${Remark} Maker=${Maker}`);
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("AddModelDetail")" + "?Maker=" + Maker + "&Model="+ Model + "&=Remark" + Remark + "&=SerachName" + SearchName
+                            ,
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                               // alert("Success");
+                               $("#textInputModel").val("");
+                               $("#textInputRemark").val("");
+                                $("#textInputMaker").val("");
+                                $('#MakerModelGrid').empty();
+                                LoadMakerModelGrid();
+
+                            }
+
+                        });
+
         }
     </script>
 </div>
