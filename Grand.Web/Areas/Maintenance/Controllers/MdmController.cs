@@ -360,6 +360,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _safetyLevelViewModelService.PrepareSafetyLevelModel(addNewSafetyLevel, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddSafetyLevelDetail(string Safety_level)
+        {
+            SafetyLevelModel addNewSafetyLevel = new SafetyLevelModel();
+            addNewSafetyLevel.Safety_level = Safety_level;
+            await _safetyLevelViewModelService.PrepareSafetyLevelModel(addNewSafetyLevel, "", true);
+            return Json("");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddLocationDetails(LocationModel addNewLocation)
