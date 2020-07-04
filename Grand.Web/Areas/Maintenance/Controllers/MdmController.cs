@@ -367,6 +367,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _locationViewModelService.PrepareLocationModel(addNewLocation, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AddLocationDetail(string Locations)
+        {
+            LocationModel addNewLocation = new LocationModel();
+            addNewLocation.Locations = Locations;
+            await _locationViewModelService.PrepareLocationModel(addNewLocation, "", true);
+            return Json("");
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddPriorityDetails(PriorityModel addNewPriority)

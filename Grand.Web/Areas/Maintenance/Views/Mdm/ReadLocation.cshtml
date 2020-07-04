@@ -90,7 +90,7 @@
         
         
         
-            <form action="AddLocationDetails" method="post">
+            @*<form action="AddLocationDetails" method="post">*@
 
                  
                         <table class="table">
@@ -100,11 +100,12 @@
 
                                     <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
-                                        <input type="text" class="form-control" id="textInput" placeholder="Location" name="Locations" style="height:auto;color:#0E5679;border-color:#0E5679;" />
+                                        <input type="text" class="form-control" id="textInputLocation" placeholder="Location" name="Locations" style="height:auto;color:#0E5679;border-color:#0E5679;" />
                                     </div>
                                     &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
                                     @Html.AntiForgeryToken()
-                                    <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
+                                    <input type="submit" onclick="AddLocationDetail()"
+                                           class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
 
                                 </td>
                               
@@ -113,7 +114,7 @@
                                 <td style="border:none;">
                                    
                                     <div class="active-pink-3 active-pink-4 mb-4">
-                                        <input class="form-control" type="text" placeholder="Search" aria-label="Search" style="max-width:212px;max-height:16px;color:#0E5679;">
+                                        <input class="form-control" type="text"  id ="txtInputLocationSearch" placeholder="Search" aria-label="Search" style="max-width:212px;max-height:16px;color:#0E5679;">
                                     </div>
                                 </td>
                             </tr>
@@ -124,15 +125,15 @@
                                
                         </table>
                 
-            </form>
+            @*</form>*@
         
     
             <div id="example">
                 <antiforgery-token />
                 <div id="LocationGrid"></div>
                 <script>
-        $(document).ready(function () {
-            $("#LocationGrid").kendoGrid({
+                    function LoadLocationGrid() {
+                          $("#LocationGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -203,8 +204,15 @@
                     editable: "inline"
 
             });
-        });
-                     function SetColor(Equipment_type)
+                    }
+
+                    $(document).ready(function () {
+                        LoadLocationGrid();
+                     });
+
+
+
+        function SetColor(Equipment_type)
         {
             if(Equipment_type=="Online")
                 return "<font color=\"red\">"+Equipment_type+"</font>";
@@ -233,6 +241,33 @@
                             $(".c1").hide();
                         });
                     });
+
+
+                    function AddLocationDetail() {
+                        var Location = $("#textInputLocation").val();
+                         var SearchLocation = $("#txtInputLocationSearch").val();
+
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("AddLocationDetail")" + "?Locations=" + Location,
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                             // alert("Success");
+                            $("#textInputLocation").val("");
+
+                               $('#LocationGrid').empty();
+                                LoadLocationGrid();
+
+                               
+                            }
+
+                        });
+
+                    }
+
+
         </script>
 </div >
 
