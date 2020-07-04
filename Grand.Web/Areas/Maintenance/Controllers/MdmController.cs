@@ -231,6 +231,14 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> AddCBMDetail(string CBM_Name)
+        {
+            CBMModel addNewCBM = new CBMModel() { CBM_Name=CBM_Name};
+            await _cbmViewModelService.PrepareCbmModel(addNewCBM, "", true);
+            return Json("");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> AddCBMMapping(CBMMappingModel cbmMappingModel, string selcetedCBM)
         {
             await _cbmMappingViewModelService.PrepareCbmMappingModel(cbmMappingModel, "", true);
