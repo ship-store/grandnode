@@ -443,6 +443,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _frequencyTypeViewModelService.PrepareFrequencyTypeModel(addNewFrequencyType, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddFrequencyTypeDetail(string Frequency_type)
+        {
+            FrequencyTypeModel addNewFrequencyType = new FrequencyTypeModel() {
+                Frequency_type = Frequency_type
+            };
+            await _frequencyTypeViewModelService.PrepareFrequencyTypeModel(addNewFrequencyType, "", true);
+            return Json("");
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddDepartmentDetails(DepartmentModel addNewDepartment)

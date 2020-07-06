@@ -223,7 +223,7 @@
             var Remark = $("#txtModelRemark").val();
             var Maker=$("#textInputmaker11 option:selected").text();
             var SearchName = $("#textSearchModel").val();
-            alert(`Model=${Model} Remark=${Remark} Maker=${Maker}`);
+          //  alert(`Model=${Model} Remark=${Remark} Maker=${Maker}`);
                         $.ajax({
                             type: "GET",
                             url: "@Url.Action("AddModelDetail")" + "?Maker=" + Maker + "&Model="+ Model + "&Remark=" + Remark + "&SerachName=" + SearchName
