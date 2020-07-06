@@ -203,6 +203,7 @@
         $(function () {
            
             $("#tabMalerModel").click(function () {
+                    $("#MakerModelGrid").empty();
                  LoadMakerModelGrid();
             });
         });
@@ -239,7 +240,8 @@
                                $("#textInputModel1").val("");
                                 $("#txtModelRemark").val("");;
                                 $("#textInputMaker").val("");
-                                $('#MakerModelGrid').empty();
+
+                                $("#MakerModelGrid").empty();
                                 LoadMakerModelGrid();
 
                             }
