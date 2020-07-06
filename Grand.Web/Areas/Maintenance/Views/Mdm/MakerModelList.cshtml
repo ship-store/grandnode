@@ -66,11 +66,12 @@
 
         <tr>
             <td style="border:none;">
-                <select class="form-control show-tick" name="Maker"  id="textInputmaker1" style="float:left;width:23%;color:#0E5679;border-color:#0E5679;">
+                <select class="form-control show-tick" name="Maker"  id="textInputmaker11"
+                        style="float:left;width:23%;color:#0E5679;border-color:#0E5679;">
                     @foreach (var item in Model)
                     {
 
-                        <option value=@item.Name name=@item.Name>@item.Name</option>
+                        <option value='@item.Name'>@item.Name</option>
 
 
                     }
@@ -87,7 +88,7 @@
                 <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
                     <input type="text" class="form-control" 
-                           id="textInputModelRemark1" placeholder="Remark" name="Remark" style="margin-left:22px;height:auto;color:#0E5679;border-color:#0E5679;" />
+                           id="txtModelRemark" placeholder="Remark" name="Remark" style="margin-left:22px;height:auto;color:#0E5679;border-color:#0E5679;" />
                 </div>
 
                 @Html.AntiForgeryToken()
@@ -216,23 +217,24 @@
 
 
         function AddModelDetails () {
-              
+          
+         //   alert("maker" + $("#textInputmaker11 option:selected").text());
             var Model = $("#textInputModel1").val();
-            var Remark = $("#textInputModelRemark1").val();
-            var Maker= $("#textInputMaker1").val();
+            var Remark = $("#txtModelRemark").val();
+            var Maker=$("#textInputmaker11 option:selected").text();
             var SearchName = $("#textSearchModel").val();
-           // alert(`Model=${Model} Remark=${Remark} Maker=${Maker}`);
+            alert(`Model=${Model} Remark=${Remark} Maker=${Maker}`);
                         $.ajax({
                             type: "GET",
-                            url: "@Url.Action("AddModelDetail")" + "?Maker=" + Maker + "&Model="+ Model + "&=Remark" + Remark + "&=SerachName" + SearchName
+                            url: "@Url.Action("AddModelDetail")" + "?Maker=" + Maker + "&Model="+ Model + "&Remark=" + Remark + "&SerachName=" + SearchName
                             ,
                             data: "{}",
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (datas) {
                                // alert("Success");
-                               $("#textInputModel").val("");
-                               $("#textInputRemark").val("");
+                               $("#textInputModel1").val("");
+                                $("#txtModelRemark").val("");;
                                 $("#textInputMaker").val("");
                                 $('#MakerModelGrid').empty();
                                 LoadMakerModelGrid();

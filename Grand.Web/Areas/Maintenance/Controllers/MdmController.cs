@@ -279,6 +279,14 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddMakerDetail(MakerModel addNewMaker)
+        {
+            await _makerViewModelService.PrepareMakerModel(addNewMaker, "", true);
+            return Json("");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddCBMDetails(CBMModel addNewCBM)
         {
             await _cbmViewModelService.PrepareCbmModel(addNewCBM, "", true);
