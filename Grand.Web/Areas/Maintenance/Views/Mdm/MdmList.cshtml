@@ -18,10 +18,11 @@
     <admin-tabstrip name="mdm" SetTabPos="true">
         <items>
 
-            <tabstrip-item text="Maker" tab-index="0" id="tabMaker">
+            <tabstrip-item text="Maker" tab-index="0" id="tabMaker" class="tabMaker">
                 <content>
-                    <div>
-                        <partial name="MakerList" />
+                    <div id="divMaker">
+                        @*<partial name="MakerList" />*@
+
                     </div>
                 </content>
             </tabstrip-item>
@@ -141,3 +142,14 @@
     </admin-tabstrip>
 </div>
 
+<script>
+    $(function () {
+        $("#tabMaker").click(function () {
+            alert("hai");
+             $("#divMaker").load("MakerList");
+            LoadMakerGrid();
+        });
+       
+      
+    });
+</script>

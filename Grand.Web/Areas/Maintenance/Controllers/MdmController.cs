@@ -703,5 +703,12 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(gridModel);
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> MakerList()
+        {
+            return PartialView("MakerList");
+        }
+
     }
 }
