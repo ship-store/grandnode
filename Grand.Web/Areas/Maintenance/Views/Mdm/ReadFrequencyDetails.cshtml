@@ -98,7 +98,7 @@
 
 
 
-<form action="AddFrequencyDetails" method="post">
+@*<form action="AddFrequencyDetails" method="post">*@
 
 
     <table class="table">
@@ -108,11 +108,12 @@
 
                 <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
-                    <input type="text" class="form-control" id="textInput" placeholder="Frequency" name="Frequencies" style="height:auto;color:#0E5679;border-color:#0E5679;" />
+                    <input type="text" class="form-control" id="textFrequency" placeholder="Frequency" name="Frequencies" style="height:auto;color:#0E5679;border-color:#0E5679;" />
                 </div>
                 &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
                 @Html.AntiForgeryToken()
-                <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
+                <input type="submit"  onclick="AddFrequencyDetail()"
+                       class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
 
             </td>
 
@@ -132,14 +133,15 @@
 
     </table>
 
-</form>
+@*</form>*@
 
 
 <div id="example">
     <antiforgery-token />
-    <div id="FrequencyGrid"></div>
+    <div id="FrequencyGrid" class="FrequencyGrids"></div>
     <script>
-        $(document).ready(function () {
+        function LoadFrequencyGrid() {
+
             $("#FrequencyGrid").kendoGrid({
                 dataSource: {
 
@@ -223,8 +225,12 @@
                     editable: "inline"
 
             });
+        }
+        $(document).ready(function () {
+           LoadFrequencyGrid();
         });
-                     function SetColor(Equipment_type)
+
+        function SetColor(Equipment_type)
         {
             if(Equipment_type=="Online")
                 return "<font color=\"red\">"+Equipment_type+"</font>";
@@ -253,6 +259,30 @@
                 $(".c1").hide();
             });
         });
+
+        function AddFrequencyDetail() {
+            var  Frequencie= $("#textFrequency").val();
+
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("AddFrequencyDetail")" + "?Frequencie=" +Frequencie,
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                              // alert("Success");
+                             $("#textFrequency").val("");
+
+                                $('#FrequencyGrid').empty();
+                                 $('.FrequencyGrids').empty();
+                                LoadFrequencyGrid();
+
+                               
+                            }
+
+                        });
+
+        }
     </script>
 </div>
 

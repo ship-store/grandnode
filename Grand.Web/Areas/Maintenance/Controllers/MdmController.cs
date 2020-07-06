@@ -293,6 +293,14 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> AddCBMDetail(string CBM_Name)
+        {
+            CBMModel addNewCBM = new CBMModel() { CBM_Name=CBM_Name};
+            await _cbmViewModelService.PrepareCbmModel(addNewCBM, "", true);
+            return Json("");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> AddCBMMapping(CBMMappingModel cbmMappingModel, string selcetedCBM)
         {
             await _cbmMappingViewModelService.PrepareCbmMappingModel(cbmMappingModel, "", true);
@@ -338,6 +346,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _equipmentStatusViewModelService.PrepareEquipmentStatusModel(addNewEquipmentStatus, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddEquipmentStatusDetail(string Status)
+        {
+            EquipmentStatusModel addNewEquipmentStatus = new EquipmentStatusModel { Status = Status };
+            await _equipmentStatusViewModelService.PrepareEquipmentStatusModel(addNewEquipmentStatus, "", true);
+            return Json("");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddEquipmentTypeDetails(EquipmentTypeModel addNewEquipmentType)
@@ -352,12 +369,32 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _safetyLevelViewModelService.PrepareSafetyLevelModel(addNewSafetyLevel, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddSafetyLevelDetail(string Safety_level)
+        {
+            SafetyLevelModel addNewSafetyLevel = new SafetyLevelModel();
+            addNewSafetyLevel.Safety_level = Safety_level;
+            await _safetyLevelViewModelService.PrepareSafetyLevelModel(addNewSafetyLevel, "", true);
+            return Json("");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddLocationDetails(LocationModel addNewLocation)
         {
             await _locationViewModelService.PrepareLocationModel(addNewLocation, "", true);
             return RedirectToAction("MdmList", "Mdm");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AddLocationDetail(string Locations)
+        {
+            LocationModel addNewLocation = new LocationModel();
+            addNewLocation.Locations = Locations;
+            await _locationViewModelService.PrepareLocationModel(addNewLocation, "", true);
+            return Json("");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -381,6 +418,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _frequencyViewModelService.PrepareFrequencyModel(addNewFrequency, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddFrequencyDetail(string Frequencie)
+        {
+            FrequencyModel addNewFrequency = new FrequencyModel();
+            addNewFrequency.Frequencies = Frequencie;
+            await _frequencyViewModelService.PrepareFrequencyModel(addNewFrequency, "", true);
+            return Json("");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddFrequencyTypeDetails(FrequencyTypeModel addNewFrequencyType)
