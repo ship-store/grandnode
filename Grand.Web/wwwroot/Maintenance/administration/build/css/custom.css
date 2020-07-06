@@ -5225,7 +5225,7 @@ select.form-control {
 }
 
 .k-grid-header .k-header, .k-grid-header .k-header .k-link, .k-grid-header .k-link, .k-grid-header .k-link:link, .k-pager-info, .k-scheduler-agendaview .k-scheduler-datecolumn, .k-scheduler-header {
-    color: #000 !important;
+    color: white !important;
 }
 
 .mt-checkbox, .mt-radio {
@@ -5338,7 +5338,7 @@ a span.username {
     top: -20px;
     margin-left: 17px;
     left: 0;
-    background-color: #dddddd;
+    background-color: #d6dadc;
 }
 
 .control__indicator_custom2 {
@@ -5359,8 +5359,8 @@ a span.username {
 
 /* Checked state */
 
-.control input:checked~.control__indicator {
-    background: #1ABB9C;
+.control input:checked ~ .control__indicator {
+    background: #cccbd2;
 }
 
 /* Disabled state */
@@ -6183,6 +6183,8 @@ form>h4 {
 }*/
 .k-grid .k-grid-header .k-header {
     white-space: normal;
+    background-color:#0E5376;
+    color:white;
 }
 .k-window-title
 {
