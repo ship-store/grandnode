@@ -379,6 +379,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _equipmentTypeViewModelService.PrepareEquipmentTypeModel(addNewEquipmentType, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddEquipmentTypeDetail(string Equipment_type)
+        {
+            EquipmentTypeModel addNewEquipmentType = new EquipmentTypeModel() { Equipment_type=Equipment_type};
+
+            await _equipmentTypeViewModelService.PrepareEquipmentTypeModel(addNewEquipmentType, "", true);
+            return Json("");
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddSafetyLevelDetails(SafetyLevelModel addNewSafetyLevel)
@@ -420,12 +429,30 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _priorityViewModelService.PreparePriorityModel(addNewPriority, "", true);
             return RedirectToAction("MdmList", "Mdm");
         }
+
+
+       [HttpGet]
+        public async Task<IActionResult> AddPriorityDetail(string Priorities)
+        {
+            PriorityModel addNewPriority = new PriorityModel() { Priorities = Priorities };
+            await _priorityViewModelService.PreparePriorityModel(addNewPriority, "", true);
+            return Json("");
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddMaintenanceTypeDetails(MaintenanceTypeModel addNewMaintenanceType)
         {
             await _maintenanceTypeViewModelService.PrepareMaintenanceTypeModel(addNewMaintenanceType, "", true);
             return RedirectToAction("MdmList", "Mdm");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddMaintenanceTypeDetail(string Maintenance_type)
+        {
+            MaintenanceTypeModel addNewMaintenanceType = new MaintenanceTypeModel();
+            addNewMaintenanceType.Maintenance_type = Maintenance_type;
+            await _maintenanceTypeViewModelService.PrepareMaintenanceTypeModel(addNewMaintenanceType, "", true);
+            return Json("");
         }
 
         [HttpPost]

@@ -90,7 +90,7 @@
         
         
         
-            <form action="AddEquipmentTypeDetails" method="post">
+            @*<form action="AddEquipmentTypeDetails" method="post">*@
 
                  
                         <table class="table">
@@ -100,12 +100,14 @@
 
                                     <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
-                                        <input type="text" class="form-control" id="textInput" placeholder="Equipment type" name="Equipment_type" style="height:auto;color:#0E5679;border-color:#0E5679;" />
+                                        <input type="text" class="form-control" id="txtInputEqpType" placeholder="Equipment type" name="Equipment_type" style="height:auto;color:#0E5679;border-color:#0E5679;" />
                                     </div>
                                     &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
                                     @Html.AntiForgeryToken()
-                                    <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
-
+                                    <input type="submit" onclick="AddEquipmentTypeDetail()"
+                                           class="fa fa-save" id="btnSubmit" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
+                                    
+                                   
                                 </td>
                               
                             </tr>
@@ -124,13 +126,13 @@
                                
                         </table>
                 
-            </form>
+            @*</form>*@
         
     
-            <div id="example">
-                <antiforgery-token />
-                <div id="EquipmentTypeGrid"></div>
-                <script>
+<div id="example">
+    <antiforgery-token />
+    <div id="EquipmentTypeGrid"></div>
+    <script>
                     function LoadEquipmentTypeGrid() {
                                     $("#EquipmentTypeGrid").kendoGrid({
                 dataSource: {
@@ -179,7 +181,7 @@
                         }
                     },
                     pageSize: 25
-                  
+
                 },
                 height: 470,
                 width:1020,
@@ -192,7 +194,7 @@
                 pageable: true,
                 selectable: true,
                 allowCopy: true,
-      
+
                 columns: [
                     {
                             field: "Id",
@@ -218,7 +220,7 @@
                     }
 
         $(document).ready(function () {
-       
+
             $("#tabEquipmentType").click(function () {
                      LoadEquipmentTypeGrid();
             });
@@ -241,19 +243,49 @@
                         addAntiForgeryToken(data);
                         return data;
         }
-                </script>
-                <script>
-                    $(document).ready(function () {
-                        $(".c1").hide();
-                        $("#cEnable").click(function () {
-                            $(".c1").show();
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".c1").hide();
+            $("#cEnable").click(function () {
+                $(".c1").show();
+            });
+            $("#rEnable").click(function () {
+                $(".c1").hide();
+            });
+        });
+
+        $("#btnSubmit").click(function () {
+            alert("hi");
+            var Equipment_type = $("#txtInputEqpType").val();
+             alert(Equipment_type);
+                        // var SearchLocation = $("#txtInputLocationSearch").val();
+                     
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("AddEquipmentTypeDetail")" + "?Equipment_type=" +Equipment_type,
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                             // alert("Success");
+                            $("#txtInputEqpType").val("");
+
+                               $('#EquipmentTypeGrid').empty();
+                                LoadEquipmentTypeGrid();
+
+                               
+                            }
+
                         });
-                        $("#rEnable").click(function () {
-                            $(".c1").hide();
-                        });
-                    });
-        </script>
-</div >
+        });
+         function AddEquipmentTypeDetail() {
+         alrert("Hello");
+        
+    }
+    </script>
+   
+</div>
 
 
 
