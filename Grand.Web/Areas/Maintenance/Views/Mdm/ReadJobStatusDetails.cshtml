@@ -155,7 +155,10 @@
             });
         }
         $(function () {
-            LoadJobStatusGrid();
+           
+            $("#tabJobStatus").click(function () {
+                 LoadJobStatusGrid();
+            });
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();

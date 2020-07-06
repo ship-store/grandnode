@@ -132,7 +132,8 @@
                 <antiforgery-token />
                 <div id="DepartmentGrid"></div>
                 <script>
-                    function LoadList() {
+                    //
+                    function LoadDepartmentGrid() {
                            $("#DepartmentGrid").kendoGrid({
                                 dataSource: {
 
@@ -207,7 +208,10 @@
                     }
 
                     $(document).ready(function () {
-                        LoadList();  
+                        $("#tabDepartment").click(function () {
+
+                            LoadDepartmentGrid();
+                        });
         });
 
        function SetColor(Equipment_type)
@@ -275,7 +279,7 @@
                                $("#textInput1").val("");
 
                                 $('#DepartmentGrid').empty();
-                                LoadList();
+                               LoadDepartmentGrid();
 
                             }
 

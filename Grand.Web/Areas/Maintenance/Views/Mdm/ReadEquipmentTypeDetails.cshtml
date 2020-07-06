@@ -131,8 +131,8 @@
                 <antiforgery-token />
                 <div id="EquipmentTypeGrid"></div>
                 <script>
-        $(document).ready(function () {
-            $("#EquipmentTypeGrid").kendoGrid({
+                    function LoadEquipmentTypeGrid() {
+                                    $("#EquipmentTypeGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -214,6 +214,13 @@
                         ],
                     editable: "inline"
 
+            });
+                    }
+
+        $(document).ready(function () {
+       
+            $("#tabEquipmentType").click(function () {
+                     LoadEquipmentTypeGrid();
             });
         });
                      function SetColor(Equipment_type)

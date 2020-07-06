@@ -40,8 +40,10 @@
     <antiforgery-token />
     <div id="CBMMappingGrid"></div>
     <script>
-        $(document).ready(function () {
-            $("#CBMMappingGrid").kendoGrid({
+        //
+
+        function LoadCBMMappingGrid() {
+              $("#CBMMappingGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -119,6 +121,12 @@
                     
                        ],
                     editable: "inline"
+            });
+        }
+        $(document).ready(function () {
+            
+            $("#tabCbmConfigure").click(function () {
+                LoadCBMMappingGrid();
             });
         });
          function customBoolEditor(container, options) {

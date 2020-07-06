@@ -155,7 +155,10 @@
             });
         }
         $(document).ready(function () {
-            LoadEquipmentStatusGrid();
+            // 
+            $("#tabEquipmentStatus").click(function () {
+                 LoadEquipmentStatusGrid();
+            });
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();

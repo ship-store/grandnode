@@ -139,8 +139,12 @@
     <antiforgery-token />
     <div id="MaintenanceTypeGrid"></div>
     <script>
-        $(document).ready(function () {
-            $("#MaintenanceTypeGrid").kendoGrid({
+        //tabMaintenanceType
+        //AddMaintenanceTypeDetails
+        //MaintenanceTypeGrid
+
+        function LoadMaintenanceTypeGrid(){
+             $("#MaintenanceTypeGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -221,6 +225,12 @@
 
                         ],
                     editable: "inline"
+
+            });
+        }
+        $(document).ready(function () {
+            $("#tabMaintenanceType").click(function () {
+                LoadMaintenanceTypeGrid();
 
             });
         });

@@ -195,7 +195,10 @@
         }
 
         $(function () {
-            LoadCbmGrid();
+            // 
+            $("#tabCBM").click(function () {
+                LoadCbmGrid();
+            })
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();

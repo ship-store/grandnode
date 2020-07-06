@@ -183,7 +183,10 @@
             });
         }
         $(document).ready(function () {
-            LoadJobTypeGrid();
+          
+            $("#tabjobType").click(function () {
+                  LoadJobTypeGrid();
+            });
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();

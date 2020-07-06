@@ -139,8 +139,10 @@
     <antiforgery-token />
     <div id="PriorityGrid"></div>
     <script>
-        $(document).ready(function () {
-            $("#PriorityGrid").kendoGrid({
+
+        //tabPriority
+        function LoadPriorityGrid() {
+             $("#PriorityGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -210,6 +212,13 @@
                         ],
                     editable: "inline"
 
+            });
+        }
+        $(document).ready(function () {
+           
+            $("#tabPriority").click(function () {
+
+                 LoadPriorityGrid();
             });
         });
                      function SetColor(Equipment_type)
