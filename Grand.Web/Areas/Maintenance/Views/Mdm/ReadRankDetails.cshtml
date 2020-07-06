@@ -98,7 +98,7 @@
 
 
 
-<form action="AddRankDetails" method="post">
+@*<form action="AddRankDetails" method="post">*@
 
 
     <table class="table">
@@ -108,11 +108,12 @@
 
                 <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
-                    <input type="text" class="form-control" id="textInput" placeholder="Rank" name="Ranks" style="height:auto;color:#0E5679;border-color:#0E5679;" />
+                    <input type="text" class="form-control" id="txtInputRank" placeholder="Rank" name="Ranks" style="height:auto;color:#0E5679;border-color:#0E5679;" />
                 </div>
                 &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
                 @Html.AntiForgeryToken()
-                <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
+                <input type="submit" onclick="AddRankDetail()"
+                       class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
 
             </td>
 
@@ -132,15 +133,15 @@
 
     </table>
 
-</form>
+@*</form>*@
 
 
 <div id="example">
     <antiforgery-token />
     <div id="RankGrid"></div>
     <script>
-        $(document).ready(function () {
-            $("#RankGrid").kendoGrid({
+        function LoadRankGrid() {
+              $("#RankGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -223,6 +224,9 @@
                     editable: "inline"
 
             });
+        }
+        $(document).ready(function () {
+            LoadRankGrid();
         });
                      function SetColor(Equipment_type)
         {
@@ -253,6 +257,28 @@
                 $(".c1").hide();
             });
         });
+
+        function AddRankDetail() {
+            var Ranks = $("#txtInputRank").val();
+           
+                    $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("AddRankDetail")" + "?Ranks=" +Ranks,
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                            
+                             $("#textInputFrequencyType").val(" ");
+                                $('#RankGrid').empty();
+                                LoadRankGrid();
+
+                            }
+
+                        });
+
+
+        }
     </script>
 </div>
 

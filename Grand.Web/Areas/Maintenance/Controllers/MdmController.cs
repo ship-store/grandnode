@@ -301,6 +301,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> AddRankDetail(string Ranks)
+        {
+            RankModel addNewRank = new RankModel() { Ranks=Ranks};
+            await _rankViewModelService.PrepareRankModel(addNewRank, "", true);
+            return Json("");
+        }
+
+
+        [HttpGet]
         public async Task<IActionResult> AddCBMDetail(string CBM_Name)
         {
             CBMModel addNewCBM = new CBMModel() { CBM_Name=CBM_Name};
