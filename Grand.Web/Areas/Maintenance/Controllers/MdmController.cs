@@ -710,5 +710,117 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return PartialView("MakerList");
         }
 
+        [HttpGet]
+        public async Task<PartialViewResult> MakerModelList()
+        {
+
+            var model = await Task.FromResult<object>(null);
+            var makers = await _makerService.GetAllMakers("", 0, 500, true);
+            
+        
+            return PartialView("MakerModelList",makers );
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ReadReportedByDetails()
+        {
+            return PartialView("ReadReportedByDetails");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ReadJobStatusDetails()
+        {
+            return PartialView("ReadJobStatusDetails");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ReadEquipmentTypeDetails()
+        {
+            return PartialView("ReadEquipmentTypeDetails");
+        }
+        //
+        [HttpGet]
+        public async Task<IActionResult> ReadJobTypeDetails()
+        {
+            return PartialView("ReadJobTypeDetails");
+        }
+
+        //
+
+        [HttpGet]
+        public async Task<IActionResult> CBMList()
+        {
+            return PartialView("CBMList");
+        }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> CBMMappingList()
+        {
+            return PartialView("CBMMappingList");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ReadDepartment()
+        {
+            return PartialView("ReadDepartment");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ReadLocation()
+        {
+            return PartialView("ReadLocation");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ReadSafetyLevel()
+        {
+            return PartialView("ReadSafetyLevel");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ReadEquipmentStatusDetails()
+        {
+            return PartialView("ReadEquipmentStatusDetails");
+        }
+        //
+
+        [HttpGet]
+        public async Task<IActionResult> ReadFrequencyDetails()
+        {
+            return PartialView("ReadFrequencyDetails");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ReadFrequencyTypeDetails()
+        {
+            return PartialView("ReadFrequencyTypeDetails");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ReadRankDetails()
+        {
+            return PartialView("ReadRankDetails");
+        }
+
+        //
+
+        [HttpGet]
+        public async Task<IActionResult> ReadMaintenanceTypeDetails()
+        {
+            return PartialView("ReadMaintenanceTypeDetails");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ReadPriorityDetails()
+        {
+            return PartialView("ReadPriorityDetails");
+        }
     }
 }

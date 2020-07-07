@@ -247,6 +247,7 @@
     </script>
     <script>
         $(document).ready(function () {
+          //  AddEquipmentTypeDetail();
             $(".c1").hide();
             $("#cEnable").click(function () {
                 $(".c1").show();
@@ -255,14 +256,20 @@
                 $(".c1").hide();
             });
         });
-
+         LoadEquipmentTypeGrid();
         $("#btnSubmit").click(function () {
-            alert("hi");
+            AddEquipmentTypeDetail();
+                       
+        });
+
+
+        function AddEquipmentTypeDetail() {
+            //alert("hi");
             var Equipment_type = $("#txtInputEqpType").val();
-             alert(Equipment_type);
-                        // var SearchLocation = $("#txtInputLocationSearch").val();
+            
+                 var SearchLocation = $("#txtInputLocationSearch").val();
                      
-                        $.ajax({
+                      $.ajax({
                             type: "GET",
                             url: "@Url.Action("AddEquipmentTypeDetail")" + "?Equipment_type=" +Equipment_type,
                             data: "{}",
@@ -279,9 +286,6 @@
                             }
 
                         });
-        });
-         function AddEquipmentTypeDetail() {
-         alrert("Hello");
         
     }
     </script>

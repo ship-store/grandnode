@@ -155,12 +155,13 @@
             });
         }
         $(function () {
-           
-            $("#tabJobStatus").click(function () {
-                   $('.JobStatusGrid').empty();
-                 LoadJobStatusGrid();
+            LoadJobStatusGrid();
+            //$("#tabJobStatus").click(function () {
+            //     LoadJobStatusGrid();
+            //     //  $('.JobStatusGrid').empty();
+            //     //LoadJobStatusGrid();
 
-            });
+            //});
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();

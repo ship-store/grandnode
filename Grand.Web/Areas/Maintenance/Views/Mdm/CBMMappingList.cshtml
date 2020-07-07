@@ -124,10 +124,12 @@
             });
         }
         $(document).ready(function () {
+            $("#CBMMappingGrid").empty();
+            LoadCBMMappingGrid();
             
-            $("#tabCbmConfigure").click(function () {
-                LoadCBMMappingGrid();
-            });
+            //$("#tabCbmConfigure").click(function () {
+            //    LoadCBMMappingGrid();
+            //});
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();
