@@ -133,6 +133,7 @@
                 <div id="LocationGrid"></div>
                 <script>
                     function LoadLocationGrid() {
+
                           $("#LocationGrid").kendoGrid({
                 dataSource: {
 
@@ -207,7 +208,13 @@
                     }
 
                     $(document).ready(function () {
-                        LoadLocationGrid();
+
+                         $('#LocationGrid').empty();
+                         LoadLocationGrid();
+                        //$("#tabLocation").click(function () {
+                        //       $('#LocationGrid').empty();
+                        //       LoadLocationGrid();
+                        //});
                      });
 
 
@@ -233,6 +240,7 @@
                 </script>
                 <script>
                     $(document).ready(function () {
+                       
                         $(".c1").hide();
                         $("#cEnable").click(function () {
                             $(".c1").show();

@@ -202,6 +202,10 @@
 
         $(function () {
             LoadMakerModelGrid();
+            //$("#tabMakerModel").click(function () {
+            //        $("#MakerModelGrid").empty();
+            //     LoadMakerModelGrid();
+            //});
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();
@@ -236,7 +240,8 @@
                                $("#textInputModel1").val("");
                                 $("#txtModelRemark").val("");;
                                 $("#textInputMaker").val("");
-                                $('#MakerModelGrid').empty();
+
+                                $("#MakerModelGrid").empty();
                                 LoadMakerModelGrid();
 
                             }

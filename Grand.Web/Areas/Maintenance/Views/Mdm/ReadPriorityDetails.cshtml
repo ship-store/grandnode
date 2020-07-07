@@ -98,7 +98,7 @@
 
 
 
-<form action="AddPriorityDetails" method="post">
+@*<form action="AddPriorityDetails" method="post">*@
 
 
     <table class="table">
@@ -108,11 +108,12 @@
 
                 <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
-                    <input type="text" class="form-control" id="textInput" placeholder="Priority" name="Priorities" style="height:auto;color:#0E5679;border-color:#0E5679;" />
+                    <input type="text" class="form-control" id="txtInputPriority" placeholder="Priority" name="Priorities" style="height:auto;color:#0E5679;border-color:#0E5679;" />
                 </div>
                 &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
                 @Html.AntiForgeryToken()
-                <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
+                <input type="submit" onclick="AddPriorityDetail()"
+                       class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
 
             </td>
 
@@ -132,15 +133,17 @@
 
     </table>
 
-</form>
+@*</form>*@
 
 
 <div id="example">
     <antiforgery-token />
     <div id="PriorityGrid"></div>
     <script>
-        $(document).ready(function () {
-            $("#PriorityGrid").kendoGrid({
+
+        //tabPriority
+        function LoadPriorityGrid() {
+             $("#PriorityGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -211,6 +214,16 @@
                     editable: "inline"
 
             });
+        }
+        $(document).ready(function () {
+
+             $('#PriorityGrid').empty();
+            LoadPriorityGrid();
+
+            //$("#tabPriority").click(function () {
+            //      $('#PriorityGrid').empty();
+            //     LoadPriorityGrid();
+            //});
         });
                      function SetColor(Equipment_type)
         {
@@ -241,6 +254,29 @@
                 $(".c1").hide();
             });
         });
+
+        function AddPriorityDetail() {
+             var Priorities = $("#txtInputPriority").val();
+                        // var SearchLocation = $("#txtInputLocationSearch").val();
+
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("AddPriorityDetail")" + "?Priorities=" + Priorities,
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                             // alert("Success");
+                            $("#txtInputPriority").val("");
+
+                               $('#PriorityGrid').empty();
+                               LoadPriorityGrid();
+
+                               
+                            }
+
+                        });
+        }
     </script>
 </div>
 

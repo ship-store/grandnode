@@ -98,7 +98,7 @@
 
 
 
-<form action="AddMaintenanceTypeDetails" method="post">
+@*<form action="AddMaintenanceTypeDetails" method="post">*@
 
 
     <table class="table">
@@ -108,12 +108,15 @@
 
                 <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
-                    <input type="text" class="form-control" id="textInput" placeholder="Maintenance type" name="Maintenance_type" style="height:auto;color:#0E5679;border-color:#0E5679;" />
+                    <input type="text" class="form-control" id="txtInputMtype" placeholder="Maintenance type" name="Maintenance_type" style="height:auto;color:#0E5679;border-color:#0E5679;" />
                 </div>
                 &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
                 @Html.AntiForgeryToken()
-                <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
-
+                @*<input type="submit"  onlclick="AddMaintenanceTypeDetail1()"
+                       class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">*@
+              
+                <button onclick="AddMaintenanceTypeDetail1()"
+                         class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white"></button>
             </td>
 
         </tr>
@@ -132,15 +135,19 @@
 
     </table>
 
-</form>
+@*</form>*@
 
 
 <div id="example">
     <antiforgery-token />
     <div id="MaintenanceTypeGrid"></div>
     <script>
-        $(document).ready(function () {
-            $("#MaintenanceTypeGrid").kendoGrid({
+        //tabMaintenanceType
+        //AddMaintenanceTypeDetails
+        //MaintenanceTypeGrid
+
+        function LoadMaintenanceTypeGrid(){
+             $("#MaintenanceTypeGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -223,6 +230,16 @@
                     editable: "inline"
 
             });
+        }
+        $(document).ready(function () {
+                 $("#MaintenanceTypeGrid").empty();
+
+                   LoadMaintenanceTypeGrid();
+            //$("#tabMaintenanceType").click(function () {
+            //     $("#MaintenanceTypeGrid").empty();
+            //    LoadMaintenanceTypeGrid();
+
+            //});
         });
                      function SetColor(Equipment_type)
         {
@@ -253,6 +270,32 @@
                 $(".c1").hide();
             });
         });
+
+
+        function AddMaintenanceTypeDetail1() {
+           // alert("hai");
+            var Maintenance_type= $("#txtInputMtype").val();
+            var SearchLocation = $("#txtInputLocationSearch").val();
+          //  alert("hai" + Maintenance_type);
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("AddMaintenanceTypeDetail")" + "?Maintenance_type=" +Maintenance_type,
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                             // alert("Success");
+                           $("#txtInputMtype").val("");
+
+                               $("#MaintenanceTypeGrid").empty();
+                                LoadMaintenanceTypeGrid();
+
+                               
+                            }
+
+                        });
+
+        }
     </script>
 </div>
 

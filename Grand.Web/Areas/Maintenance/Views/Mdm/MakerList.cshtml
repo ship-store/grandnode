@@ -106,8 +106,8 @@
     <antiforgery-token />
     <div id="MakerGrid" "></div>
     <script>
-        $(document).ready(function () {
-            $("#MakerGrid").kendoGrid({
+        function LoadMakerGrid() {
+              $("#MakerGrid").kendoGrid({
                 dataSource: {
 
                     transport: {
@@ -186,6 +186,13 @@
                     editable: "inline"
 
             });
+        }
+        $(document).ready(function () {
+            LoadMakerGrid();
+
+            //$("#tabMaker").click(function () {
+            //    LoadMakerGrid();
+            //});
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();

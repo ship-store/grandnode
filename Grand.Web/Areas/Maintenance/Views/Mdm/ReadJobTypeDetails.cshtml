@@ -183,7 +183,11 @@
             });
         }
         $(document).ready(function () {
-            LoadJobTypeGrid();
+           LoadJobTypeGrid();
+            //$("#tabjobType").click(function () {
+            //       $('#JobTypeGrid').empty();
+            //      LoadJobTypeGrid();
+            //});
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();
@@ -199,7 +203,7 @@
 
         function AddJobTypeDetails() {
             var Job_type = $("#textInputJobType").val();
-            alert("job" + Job_type);
+            //alert("job" + Job_type);
                         $.ajax({
                             type: "GET",
                             url: "@Url.Action("AddJobTypeDetail")" +"?Job_type=" +Job_type,

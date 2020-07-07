@@ -155,7 +155,14 @@
             });
         }
         $(document).ready(function () {
-            LoadEquipmentStatusGrid();
+            $('#EquipmentStatusGrid').empty();
+              LoadEquipmentStatusGrid();
+
+
+            //$("#tabEquipmentStatus").click(function () {
+            //     $('#EquipmentStatusGrid').empty();
+            //     LoadEquipmentStatusGrid();
+            //});
         });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();

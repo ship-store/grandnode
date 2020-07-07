@@ -185,7 +185,11 @@
         }
 
         $(document).ready(function () {
-            LoadReportedByGrid();
+           LoadReportedByGrid();
+            $("#tabReportedBy").click(function () {
+                // $("#ReportedByGrid").empty();
+                //LoadReportedByGrid();
+            });
              });
          function customBoolEditor(container, options) {
                         var guid = kendo.guid();
@@ -201,7 +205,7 @@
 
         function AddReportedByDetails() {
             var Reported_By= $("#textInputReportBy").val();
-              
+               
                         $.ajax({
                             type: "GET",
                             url: "@Url.Action("AddReportedByDetails")" + "?Reported_By=" +Reported_By,
@@ -212,7 +216,7 @@
                                // alert("Success");
                                $("#textInput1").val("");
 
-                                $('#ReportedByGrid').empty();
+                                $("#ReportedByGrid").empty();
                                 LoadReportedByGrid();
 
                             }
