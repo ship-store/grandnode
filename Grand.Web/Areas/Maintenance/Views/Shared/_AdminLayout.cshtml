@@ -135,6 +135,27 @@
         }
 
     </script>
+    <style>
+         table {
+        border-collapse: separate;
+        border-spacing: 0 15px;
+        
+      }
+      th {
+       // background-color: #4287f5;
+        color: white;
+      }
+      th,
+      td {
+        width: 150px;
+        text-align: center;
+        //border: 1px solid black;
+        padding: 5px;
+      }
+      h2 {
+        color: #4287f5;
+      }
+    </style>
     <div class="container body">
         <div class="main_container">
             <vc:admin-widget widget-zone="admin_header_before" additional-data="null" />
@@ -170,7 +191,7 @@
                                 <div class="class=" nav toggle"" style="padding-left:50px">
                                     <ul class="nav navbar-nav">
                                         <li>
-                                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <a href="javascript:;" class="user-profile dropdown-toggle" data-target="#modal" data-toggle="modal" aria-expanded="false">
                                                 <img src="~/administration/build/images/plus1.png" alt="">
                                             </a>
                                         </li>
@@ -181,14 +202,14 @@
                             <ul class="nav navbar-nav navbar-right">
 
                                 <li>
-                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" aria-expanded="false" data-toggle="modal" data-target="#myModal">
                                         <img src="~/administration/build/images/man.png" alt="">
 
                                         @*@if (currentCustomer != null && currentCustomer.IsRegistered())
-                {*@
+                                            {*@
                                         @*<div class="username-hide-on-mobile">
-                    @currentUser
-                </div>*@
+                                                @currentUser
+                                            </div>*@
 
                                         @*}*@
                                         @*<span class="fa fa-angle-down"></span>*@
@@ -201,10 +222,10 @@
                                             </a>
                                         </li>
                                         @*<li>
-                    <a href="@Url.Action("Edit", "Customer", new { id = currentCustomer.Id, area = "Admin" })">
-                    <i class="icon-user"></i> @T("Admin.Header.Profile")
-                    </a>
-                </li>*@
+                                                <a href="@Url.Action("Edit", "Customer", new { id = currentCustomer.Id, area = "Admin" })">
+                                                <i class="icon-user"></i> @T("Admin.Header.Profile")
+                                                </a>
+                                            </li>*@
                                         <li>
                                             <a href="@Url.Action("Logout", "Register", new { area = "Maintenance" }, null)">
                                                 @*<i class="icon-logout"></i>Logout*@
@@ -214,15 +235,15 @@
                                     </ul>
                                 </li>
                                 @*<li class="dropdown" role="presentation">
-            <a href="@Url.Action("VesselList", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
-                <i class="fa fa-ship"></i>&nbsp;&nbsp;@vessel
-            </a>
-        </li>*@
+                                        <a href="@Url.Action("VesselList", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
+                                            <i class="fa fa-ship"></i>&nbsp;&nbsp;@vessel
+                                        </a>
+                                    </li>*@
                                 @*<li class="dropdown" role="presentation">
-            <a href="@Url.Action("Success", "Register", new { area = "Maintenance" })" class="dropdown-toggle">
-                <i class="icon-home"></i>
-            </a>
-        </li>*@
+                                        <a href="@Url.Action("Success", "Register", new { area = "Maintenance" })" class="dropdown-toggle">
+                                            <i class="icon-home"></i>
+                                        </a>
+                                    </li>*@
                                 <li role="presentation" class="dropdown">
                                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                                         <i class="icon-info"></i>
@@ -235,16 +256,16 @@
                                             </a>
                                         </li>
                                         @*<li>
-                    <a href="http://grandnode.com/boards" target="_blank">
-                        <i class="icon-bubbles"></i>
-                        @T("Admin.Header.Community")
-                    </a>
-                </li>*@
+                                                <a href="http://grandnode.com/boards" target="_blank">
+                                                    <i class="icon-bubbles"></i>
+                                                    @T("Admin.Header.Community")
+                                                </a>
+                                            </li>*@
                                         @*<li>
-                    <a href="javascript:;">
-                        <i class="fa fa-dot-circle-o"></i>
-                    </a>
-                </li>*@
+                                                <a href="javascript:;">
+                                                    <i class="fa fa-dot-circle-o"></i>
+                                                </a>
+                                            </li>*@
                                     </ul>
                                 </li>
                                 <li role="presentation" class="dropdown">
@@ -281,24 +302,24 @@
 
                                 @if (currentCustomer.IsAdmin())
                                 {
-                            <li class="dropdown" role="presentation">
-                                @*<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/Maintenance/Vessel/@vesselPic" alt="">
-                                    <img src="~/administration/build/images/man.png" alt="">
-                                </a>*@
-                                <a href="@Url.Action("VesselList", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
-                                    <i class="fa fa-ship" style="color:#0f5f86;"></i>&nbsp;&nbsp;@vessel
-                                </a>
-                            </li>
+                                    <li class="dropdown" role="presentation">
+                                        @*<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <img src="~/Maintenance/Vessel/@vesselPic" alt="">
+                                                <img src="~/administration/build/images/man.png" alt="">
+                                            </a>*@
+                                        <a href="@Url.Action("VesselList", "Vessel", new { area = "Maintenance" })" class="dropdown-toggle">
+                                            <i class="fa fa-ship" style="color:#0f5f86;"></i>&nbsp;&nbsp;@vessel
+                                        </a>
+                                    </li>
                                 }
                                 @*<li>
-                @if (ViewBag.VesselName != null)
-                {
-            <h3>
-                @ViewBag.VesselName
-            </h3>
-                }
-        </li>*@
+                                            @if (ViewBag.VesselName != null)
+                                            {
+                                        <h3>
+                                            @ViewBag.VesselName
+                                        </h3>
+                                            }
+                                    </li>*@
 
 
 
@@ -365,3 +386,49 @@
 
 </body>
 </html>
+<!----modal starts here--->
+<div id="modal" class="modal fade" role='dialog' tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="margin-left:35%;margin-top:15%">
+        <div class="modal-content" style="width:100%; height:100%; border:solid 2px #7273a3;vertical-align:central;border-color:#0E5376;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                
+            </div>
+            <div class="modal-body" id="modal-body">
+                      
+                    <h2>QUICK ADD/VIEW</h2>
+                    <table style="border:none;">
+                        <tr>
+                            <td width="500px"><a asp-controller="BreakdownJob" asp-action="List"> Breakdown Job</a></td>
+                            <td width="500px"><a asp-controller="UnplannedJobs" asp-action="List"> Unplanned Job</a></td>
+                            <td width="500px"><a asp-controller="UnplannedJobs" asp-action="List"> Maker</a></td>
+
+                        </tr>
+               
+                  
+                        <tr>
+                            <td width="500px"><a asp-controller="BreakdownJob" asp-action="List"> Model</a></td>
+                            <td width="500px"><a asp-controller="BreakdownJob" asp-action="List"> Breakdown Job</a></td>
+                            <td width="500px"><a asp-controller="UnplannedJobs" asp-action="List"> Unplanned Job</a></td>
+
+                        </tr>
+                        <tr>
+                            <td width="500px"><a asp-controller="BreakdownJob" asp-action="List"> Breakdown Job</a></td>
+                            <td width="500px"><a asp-controller="BreakdownJob" asp-action="List"> Breakdown Job</a></td>
+                            <td width="500px"><a asp-controller="UnplannedJobs" asp-action="List"> Unplanned Job</a></td>
+
+                        </tr>
+                        <tr>
+                            <td width="500px"><a asp-controller="BreakdownJob" asp-action="List"> Breakdown Job</a></td>
+                            <td width="500px"><a asp-controller="BreakdownJob" asp-action="List"> Breakdown Job</a></td>
+                            <td width="500px"><a asp-controller="UnplannedJobs" asp-action="List"> Unplanned Job</a></td>
+
+                        </tr>
+                </table>
+                   
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--Modal ends here--->
