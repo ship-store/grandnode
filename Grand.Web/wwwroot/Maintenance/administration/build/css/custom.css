@@ -1793,7 +1793,7 @@ table.display td {
 }
 
 table.display td.center {
-    text-align: center
+    text-align: left;
 }
 
 table.display thead th:active, table.display thead td:active {
@@ -6194,6 +6194,7 @@ form>h4 {
 .k-grid.k-widget {
     overflow-x: auto;
     color:#0E5679;
+
 }
 a.k-link:hover
 {
