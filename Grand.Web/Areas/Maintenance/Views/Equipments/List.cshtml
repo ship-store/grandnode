@@ -58,7 +58,25 @@
 
     <script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
+<style>
+    .tablink {
+  background-color: #0E5376;
+  color: red;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
 
+.tablink:hover {
+  background-color: #0e5376;
+  color:white;
+}
+
+</style>
     <section>
 
         <div>
@@ -158,11 +176,14 @@
                     <div class="card">
 
                         <div class="body">
+
                             <!-- Nav tabs -->
-                            <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                                <li role="presentation" class="active"><a href="#general" data-toggle="tab" id="generalTab">GENERAL</a></li>
-                                <li role="presentation" ><a href="#jobplan" data-toggle="tab" id="btn1">JOB PLAN</a></li>
-                                <li role="presentation"><a href="#spareparts" data-toggle="tab" id="btn2">SPARE PARTS</a></li>
+                            <ul class="nav nav-tabs tab-nav-right" role="tablist" style="height:70px;list-style-type:disc;list-style-position:outside;list-style-image:none;">
+                                <li role="presentation" class="tablink"><a href="#general" data-toggle="tab" id="generalTab" style="color:#bac2ba;">GENERAL</a></li>
+                                <li>&nbsp;&nbsp;</li>
+                                <li role="presentation" class="tablink"><a href="#jobplan" data-toggle="tab" id="btn1" style="color:#bac2ba;">JOB PLAN</a></li>
+                                <li>&nbsp;&nbsp;</li>
+                                <li role="presentation" class="tablink"><a href="#spareparts" data-toggle="tab" id="btn2" style="color:#bac2ba;">SPARE PARTS</a></li>
 
                             </ul>
 
