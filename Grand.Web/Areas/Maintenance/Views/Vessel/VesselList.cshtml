@@ -114,72 +114,19 @@
                 },*@
                 scrollable: false,
                 columns: [
-                    //{
-                    //    field: "Id",
-                    //    headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
-                    //    template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
-                    //    width: 30
-                    //},
+                   
                      {
                     field: "file",
                     title: "Image",
                     template: '<a class="k-link" href="VesselSession/#=Id#"><img src="#=file#" class="img-fluid" style="width:100px;height:60px"/></a>',
-                    width: 92
+                    width: "0px",
                     },
                     {
                     field: "Vessel_name",
                     title: "@T("maintenance.vessel.fields.vessel_name")",
-                    width: 600,
+                    width: "0px",
                     template: '<a class="k-link" href="VesselSession/#=Id#">#:Vessel_name#</a>',
-                }, @*{
-                    field: "Vessel_type",
-                    title: "@T("maintenance.vessel.fields.vessel_type")",
-                    width: 200,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Vessel_type#</a>',
-                    },
-                    {
-                    field: "Class",
-                    title: "@T("maintenance.vessel.fields.class")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Class#</a>',
-                    },
-                    {
-                    field: "Flag",
-                    title: "@T("maintenance.vessel.fields.flag")",
-                    width: 150,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Flag#</a>',
-                    },
-                    {
-                    field: "Auxiliary_Engine",
-                    title: "@T("maintenance.vessel.fields.auxiliary_engine")",
-                    width: 350,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Auxiliary_Engine#</a>',
-                    },
-                    {
-                    field: "Main_Engine",
-                    title: "@T("maintenance.vessel.fields.main_engine")",
-                    width: 500,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Main_Engine#</a>',
-                    },
-                    {
-                    field: "Hull_no",
-                    title: "@T("maintenance.vessel.fields.hull_no")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Hull_no#</a>',
-                    },
-                    {
-                    field: "Shipyard",
-                    title: "@T("maintenance.vessel.fields.shipyard")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:Shipyard#</a>',
-                    },
-                    {
-                    field: "IMO",
-                    title: "@T("Maintenance.Vessel.Fields.IMO")",
-                    width: 300,
-                    template: '<a class="k-link" href="Edit/#=Id#">#:IMO#</a>',
-                    },*@
-
+                }, 
                 ]
             });
         });
