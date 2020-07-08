@@ -80,7 +80,20 @@
                             <i class="material-icons">turned_in_not</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" value="" style="color:#0E5679;" name="maker" class="form-control money-euro" placeholder="" id="id6" readonly="readonly">
+                            @*<input type="text" value="" style="color:#0E5679;" name="maker" class="form-control money-euro" placeholder="" id="id6"readonly="readonly">*@
+                       
+                            <select name="eqtype" class="form-control money-euro"
+                                    id="eqptype" style="color:#0E5679;border-color:#0E5679">
+                                
+                                @foreach (var item in Model.EquipmentTypeList)
+                                {
+
+
+                                    <option class="form-control money-euro"> item</option>
+
+                                }
+                            </select>
+                        
                         </div>
                     </div>
                 </div>
@@ -93,7 +106,19 @@
                             <i class="material-icons">turned_in_not</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" value="" style="color:#0E5679;" name="model" class="form-control money-euro" placeholder="" id="id7" readonly="readonly">
+                            @*<input type="text" value="" style="color:#0E5679;" name="model" class="form-control money-euro" placeholder="" id="id7" readonly="readonly">*@
+                            <select name="eqtype" class="form-control money-euro"
+                                    id="eqptype" style="color:#0E5679;border-color:#0E5679">
+
+                                @foreach (var item in Model.EquipmentTypeList)
+                                {
+
+
+                                    <option class="form-control money-euro"> item</option>
+
+                                }
+                            </select>
+
                         </div>
                     </div>
                 </div>
@@ -105,7 +130,7 @@
                             <i class="material-icons">turned_in_not</i>
                         </span>
                         <div class="form-line">
-        @*<input type="text" name="eqtype" value="" class="form-control money-euro" placeholder="" id="id8" readonly="readonly">*@
+        @*<input type="text" name="eqtype" value="" class="form-control money-euro" placeholder="" id="id8" readonly="readonly">
                   @*<input type="text" id="eqptype_">*@
                           <select name="eqtype" class="form-control money-euro" id="eqptype" style="color:#0E5679;border-color:#0E5679" disabled>
                             <option id="dvalue"></option>
