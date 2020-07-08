@@ -14,10 +14,11 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
         <div class="header">
-            <h2>
-                <a onclick="goBack()" class="fa fa-arrow-circle-left"></a>
-                Breakdown Jobs
-            </h2>
+              <div class="caption" style="color:#0E5679;font-weight:900;font-size:medium;">
+                    <i class="fa fa-cubes" style="color:#0E5679"></i>
+                    ADD UNPLANNED JOB
+                </div>
+            
             @*<ul class="header-dropdown m-r--5">
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -37,97 +38,70 @@
             <form action="AddBreakdownJobDetails" method="post" name="contact_form" id="first_form">
 
                 <input type="hidden" value="@vessel" name="Vessel" />
-                <div class="container-fluid" style="width: 80%;">
-                    <div class="table-responsive">
-                        <table class="table">
+                      <table class="table" style="color:#0E5679;border-color:#0E5679;">
                             <tr>
-                                <td><label for="EquipmentName">Equipment Name</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <select id="ddlFruits" name="EquipmentName" class="form-line form-group form-control valid">
-                                                <option value="">Please select Equipment</option>
-                                                @foreach (var item in Model)
-                                                {
+                                <td style="border:none;">
+                                    <select id="ddlFruits" name="EquipmentName" class="form-control valid" style="float:left;width:21%;color:#0E5679;border-color:#0E5679">
+                                        <option value="">Please select Equipment</option>
+                                        @foreach (var item in Model)
+                                        {
 
-                                                    <option value="@item.Sub1_description@item.Sub2_description@item.Sub3_description@item.Sub4_description@item.Sub5_description">@item.Sub1_description@item.Sub2_description@item.Sub3_description@item.Sub4_description@item.Sub5_description</option>
+                                            <option value="@item.Sub1_description@item.Sub2_description@item.Sub3_description@item.Sub4_description@item.Sub5_description">@item.Sub1_description@item.Sub2_description@item.Sub3_description@item.Sub4_description@item.Sub5_description</option>
 
 
-                                                }
-                                            </select>
-                                        </div>
+                                        }
+                                    </select>
+                                    <div style="float:left;position:relative;left:-2px;">
+                                        <input type="text" class="form-control valid" readonly value="@joborder" name="JobOrder" id="n2" style="margin-left:30px;border-color:#0E5679;float:left;width:90%;height:auto;color:#0E5679;" />
+                                    </div>
+                                    <div style="float:left;position:relative;left:36px;">
+                                        <input type="text" class="form-control valid" placeholder="Description" name="Title" id="n3" style="border-color:#0E5679;margin-left:5px;float:left;width:100%;height:auto;color:#0E5679;" />
+
+                                    </div>
+                                    <div style="float:left;position:relative;">
+                                        <input type="date" class="form-control valid" name="JobReportedDate" id="n4" style="border-color:#0E5679;margin-left:65px;float:left;width:89%;color:#0E5679;" />
+
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td><label for="Job Order">Job Order</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control valid" readonly name="JobOrder" id="n2" value="@joborder" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label for="Title">Title</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control valid" name="Title" id="n3" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label for="JobReportedDate">Job Reported Date</label></td>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="date" class="form-control valid" name="JobReportedDate" id="n4" />
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td><label for="ReportedBy">Reported By</label></td>
-                                <td>
-                                  
-                                    <select class="form-control show-tick" name="ReportedBy">
+                                <td style="border:none;">
+
+                                    <select class="form-control show-tick" name="ReportedBy" style="float:left;width:21%;color:#0E5679;border-color:#0E5679">
                                         @foreach (var reporter in reporterList)
                                         {
 
-                                        <option value=@reporter.Reported_By name=@reporter.Reported_By>@reporter.Reported_By</option>
+                                            <option value=@reporter.Reported_By name=@reporter.Reported_By>@reporter.Reported_By</option>
 
 
                                         }
 
                                     </select>
+                                    <div style="float:left;position:relative;left:-2px;">
+                                        <select class="form-control show-tick" name="Status" style="margin-left:30px;border-color:#0E5679;float:left;width:125%;height:auto;color:#0E5679;">
+                                            @foreach (var status in statusList)
+                                            {
+
+                                                <option value=@status.Status name=@status.Status>@status.Status</option>
+
+
+                                            }
+
+                                        </select>
+                                    </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><label for="Status">Status</label></td>
-                                <td>
-                                    <select class="form-control show-tick" name="Status">
-                                        @foreach (var status in statusList)
-                                        {
 
-                                            <option value=@status.Status name=@status.Status>@status.Status</option>
-
-
-                                        }
-
-                                    </select>
-                                </td>
-                            </tr>
                             <tr>
                                 @Html.AntiForgeryToken()
-                                <td><input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="width:35px;position:relative;height:33px;background-color:#0E5679;color:white;" id="submit" /></td>
+                                <td style="border:none;"><input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="float:right;right:21%;width:30px;position:relative;height:30px;background-color:#0E5679;color:white;" id="submit" /></td>
                             </tr>
+                            @*<tr>
+                @Html.AntiForgeryToken()
+                <td><input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="width:35px;position:relative;height:33px;background-color:#0E5679;color:white;" id="submit" /></td>
+            </tr>*@
                         </table>
-                    </div>
-                </div>
+                   
             </form>
         </div>
     </div>
