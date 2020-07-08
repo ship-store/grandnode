@@ -63,12 +63,11 @@
     <div class="col-md-12">
         <div class="x_panel light form-fit">
             <div class="x_title">
-                <div class="caption">
-                    <i class="fa fa-cubes"></i>
-
-                    Due Jobs
-
+                <div class="caption" style="color:#0E5679;font-weight:900">
+                    <i class="fa fa-cubes" style="color:#0E5679"></i>
+                    DUE JOBS
                 </div>
+
                 <div class="actions btn-group btn-group-devided">
 
                     <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
@@ -359,11 +358,12 @@
 
 <div class="modal fade  come-from-modal right" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width:400px">
-        <div class="modal-content">
+        <div class="modal-content" style="border-color:#0E5679;border-width:3px;color:#0E5679;">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Postpone Job</h4>
-                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
-
+                <div class="caption" style="color:#0E5679;font-weight:900;font-size:medium;">
+                    <i class="fa fa-cubes" style="color:#0E5679"></i>
+                    POSTPONE JOB
+                </div>
             </div>
             <form action="PostponeJob" method="post">
                 <div class="modal-body" style="left:5%">
@@ -375,7 +375,7 @@
 
                                 <div class="form-line">
                                     <input type="text" id="Bid" name="Bid" readonly hidden>
-                                    <input type="text" id="JobOrder" readonly class="form-control time24" hidden>
+                                    <input type="text" style="color:#0E5679;" id="JobOrder" readonly class="form-control time24" hidden>
                                 </div>
                             </div>
                         </div>
@@ -385,7 +385,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="ECode" name="ECode" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="ECode" name="ECode" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -396,7 +396,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="Ename" name="Ename" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="Ename" name="Ename" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -408,7 +408,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="jobTitle" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="jobTitle" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -418,19 +418,19 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="CalFrequency"  readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="CalFrequency" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
                         <br /><br />
 
-                       
+
                         <div class="col-md-12">
                             <b>Postpone To</b>
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="date" id="nextDueDate" name="dt" value="" class="form-control time24">
+                                    <input type="date" style="color:#0E5679;" id="nextDueDate" name="dt" value="" class="form-control time24">
                                 </div>
                             </div>
                         </div>
@@ -441,7 +441,7 @@
 
                                 <div class="form-line">
 
-                                    <textarea rows="5" cols="100" id="remark" name="remark" class="form-control time24"></textarea>
+                                    <textarea rows="5" style="color:#0E5679;" cols="100" id="remark" name="remark" class="form-control time24"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -449,11 +449,12 @@
                     </div>
                     @Html.AntiForgeryToken()
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" data-dismiss="modal" style="width:30px;position:relative;height:30px;background-color:#0E5679;color:white;;right:20px;"><i class="fa fa fa-close" aria-hidden="true"></i></button>
 
-                        <input type="submit" class="btn btn-primary" value="Postpone Job" id="submit" />
+                        <input type="submit" value="Postpone Job" class="" style="width:auto;position:relative;height:30px;background-color:#0E5679;color:white;right:18px;" id="submit" />
 
                     </div>
+                   
                 </div>
             </form>
 
@@ -476,9 +477,10 @@
     <div class="modal-dialog" role="document" style="width:400px">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Complete Job</h4>
-                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
-
+                <div class="caption" style="color:#0E5679;font-weight:900;font-size:medium;">
+                    <i class="fa fa-cubes" style="color:#0E5679"></i>
+                    COMPLETE JOB
+                </div>
             </div>
             <form action="CompleteJob" method="post">
                 <div class="modal-body" style="left:5%">
@@ -490,7 +492,7 @@
 
                                 <div class="form-line">
                                     <input type="text" id="Bid1" name="Bid1" readonly hidden>
-                                    <input type="text" id="JobOrder1" name="JobOrder1" readonly class="form-control time24" hidden>
+                                    <input type="text" style="color:#0E5679;" id="JobOrder1" name="JobOrder1" readonly class="form-control time24" hidden>
                                 </div>
                             </div>
                         </div>
@@ -500,7 +502,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="ECode1" name="ECode1" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="ECode1" name="ECode1" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -511,7 +513,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="Ename1" name="Ename1" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="Ename1" name="Ename1" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -523,7 +525,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="jobTitle1" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="jobTitle1" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -533,7 +535,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="frequency1" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="frequency1" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -544,7 +546,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="department1" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="department1" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -556,7 +558,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="date" id="nextDueDate" name="dt" value="" class="form-control time24">
+                                    <input type="date" style="color:#0E5679;" id="nextDueDate" name="dt" value="" class="form-control time24">
                                 </div>
                             </div>
                         </div>
@@ -567,7 +569,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="vessel" name="vessel" value="" class="form-control time24">
+                                    <input type="text" id="vessel" style="color:#0E5679;" name="vessel" value="" class="form-control time24">
                                 </div>
                             </div>
                         </div>
@@ -578,7 +580,7 @@
 
                                 <div class="form-line">
 
-                                    <textarea rows="5" cols="100" id="remark" name="remark" class="form-control time24"></textarea>
+                                    <textarea rows="5" style="color:#0E5679;" cols="100" id="remark" name="remark" class="form-control time24"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -586,11 +588,12 @@
                     </div>
                     @Html.AntiForgeryToken()
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" data-dismiss="modal" style="width:30px;position:relative;height:30px;background-color:#0E5679;color:white;;right:20px;"><i class="fa fa fa-close" aria-hidden="true"></i></button>
 
-                        <input type="submit" class="btn btn-primary" value="Complete Job" id="submit" />
+                        <input type="submit" value="Complete Job" class="" style="width:auto;position:relative;height:30px;background-color:#0E5679;color:white;right:18px;" id="submit" />
 
                     </div>
+                   
                 </div>
             </form>
 

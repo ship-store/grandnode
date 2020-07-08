@@ -64,11 +64,11 @@
     <div class="col-md-12">
         <div class="x_panel light form-fit">
             <div class="x_title">
-                <div class="caption">
-                    <i class="fa fa-cubes"></i>
-
-                    Breakdown Jobs
+                <div class="caption" style="color:#0E5679;font-weight:900">
+                    <i class="fa fa-cubes" style="color:#0E5679"></i>
+                    BREAKDOWN JOBS
                 </div>
+
 
                 <div class="actions btn-group btn-group-devided">
                     <a href="@Url.Action("AddBreakdownJob")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> </span></a>
@@ -370,10 +370,13 @@
     <div class="modal-dialog" style="width:auto;padding:10px">
 
 
-        <div class="modal-content" style="padding:40px">
+        <div class="modal-content" style="padding:40px;border-color:#0E5679;border-width:3px;color:#0E5679">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">View Breakdown Job</h4>
+                <div class="caption" style="color:#0E5679;font-weight:900;font-size:medium;">
+                    <i class="fa fa-cubes" style="color:#0E5679"></i>
+                    VIEW BREAKDOWN JOB
+                </div>
             </div>
             <div class="modal-body">
 
@@ -392,7 +395,7 @@
                                         <i class="material-icons">turned_in_not</i>
                                     </span>
                                     <div class="form-line">
-                                        <input type="text" id="JobOrder" readonly value="" class="form-control time24" placeholder="">
+                                        <input type="text" style="color:#0E5679;" id="JobOrder" readonly value="" class="form-control time24" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -405,7 +408,7 @@
                                     </span>
                                     <div class="form-line">
 
-                                        <input type="text" id="Ename" readonly value="" class="form-control time24" placeholder="">
+                                        <input type="text" style="color:#0E5679;" id="Ename" readonly value="" class="form-control time24" placeholder="">
 
                                     </div>
                                 </div>
@@ -418,7 +421,7 @@
                                         <i class="material-icons">turned_in_not</i>
                                     </span>
                                     <div class="form-line">
-                                        <input type="text" id="Title" readonly value="" class="form-control key" placeholder="">
+                                        <input type="text" style="color:#0E5679;" id="Title" readonly value="" class="form-control key" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -431,7 +434,7 @@
                                         <i class="material-icons">turned_in_not</i>
                                     </span>
                                     <div class="form-line">
-                                        <input type="text" id="JobReportedDate" readonly value="" class="form-control key" placeholder="">
+                                        <input type="text" style="color:#0E5679;" id="JobReportedDate" readonly value="" class="form-control key" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -445,7 +448,7 @@
                                         <i class="material-icons">turned_in_not</i>
                                     </span>
                                     <div class="form-line">
-                                        <input type="text" id="ReportedBy" readonly value="" class="form-control key" placeholder="">
+                                        <input type="text" style="color:#0E5679;" id="ReportedBy" readonly value="" class="form-control key" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -459,7 +462,7 @@
                                         <i class="material-icons">turned_in_not</i>
                                     </span>
                                     <div class="form-line">
-                                        <input type="text" id="Status" readonly value="" class="form-control key" placeholder="">
+                                        <input type="text" style="color:#0E5679;" id="Status" readonly value="" class="form-control key" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -472,7 +475,7 @@
                                         <i class="material-icons">turned_in_not</i>
                                     </span>
                                     <div class="form-line">
-                                        <input type="text" readonly value="" class="form-control key" placeholder="">
+                                        <input type="text" style="color:#0E5679;" readonly value="" class="form-control key" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -504,10 +507,12 @@
 
 <div class="modal fade  come-from-modal right" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width:400px">
-        <div class="modal-content">
+        <div class="modal-content" style="border-color:#0E5679;border-width:3px;color:#0E5679;">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Complete Job</h4>
-
+                <div class="caption" style="color:#0E5679;font-weight:900;font-size:medium;">
+                    <i class="fa fa-cubes" style="color:#0E5679"></i>
+                    COMPLETE JOB
+                </div>
 
             </div>
             <form action="EditItem2" method="post">
@@ -520,7 +525,7 @@
 
                                 <div class="form-line">
                                     <input type="text" id="Bid" name="Bid" readonly hidden>
-                                    <input type="text" id="JobOrder1" name="JobOrder1" readonly value="" class="form-control time24" hidden>
+                                    <input type="text" style="color:#0E5679;" id="JobOrder1" name="JobOrder1" readonly value="" class="form-control time24" hidden>
                                 </div>
                             </div>
                         </div>
@@ -530,7 +535,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="Ename1" name="Ename" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="Ename1" name="Ename" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -542,7 +547,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="Title1" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="Title1" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -552,7 +557,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="JobReportedDate1" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="JobReportedDate1" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -562,7 +567,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="ReportedBy1" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="ReportedBy1" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -572,7 +577,7 @@
                             <div class="input-group" style="width:90%">
 
                                 <div class="form-line">
-                                    <input type="text" id="Vessel1" readonly value="" class="form-control time24" placeholder="">
+                                    <input type="text" style="color:#0E5679;" id="Vessel1" readonly value="" class="form-control time24" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -583,7 +588,7 @@
 
                                 <div class="form-line">
 
-                                    <textarea rows="5" cols="100" id="remark" name="remark" class="form-control time24"></textarea>
+                                    <textarea rows="5" style="color:#0E5679;" cols="100" id="remark" name="remark" class="form-control time24"></textarea>
                                 </div>
                             </div>
                         </div>
