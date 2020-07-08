@@ -700,6 +700,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var makerlist = await _makerService1.GetAllMakers("", command.Page, command.PageSize);
             //List<MakerModel> makerlist = new List<MakerModel>();
             var gridModel = new DataSourceResult { Data = makerlist.ToList() };
+           
             return Json(gridModel);
 
         }
