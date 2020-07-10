@@ -8,6 +8,7 @@ using Grand.Core.Domain.JobType;
 
 using System.Threading.Tasks;
 using Grand.Core.Domain.CbmEntity;
+using Grand.Core.Domain.MakerEntity;
 
 namespace Grand.Web.Areas.Maintenance.DomainModels
 {
@@ -32,6 +33,8 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 
         public List<Core.Domain.Jobplan.Jobplan> JobplansList { get; set; }
         public List<Jobplan> jobsToday { get; set; }
+
+        public List<Maker> Makers { get; set; }
 
     }
 }
