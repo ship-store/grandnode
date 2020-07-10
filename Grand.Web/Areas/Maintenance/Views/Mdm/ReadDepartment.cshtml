@@ -12,7 +12,11 @@
         document.getElementById('bu') = "show";
     }
 </script>
-
+<script>
+    function reloadPage() {
+        location.reload(true);
+    }
+</script>
 <script type="text/javascript">
     $(function () {
         $("input[name=btnPassport]").click(function () {
@@ -123,7 +127,7 @@
             @Html.AntiForgeryToken()
             <input type="submit" onclick="AddDepartmentDetails()"
                    class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
-            <input type="button" value="X" name="btnPassport" style="color:red;font-size:23px;border:none;background-color:white;" />
+            <input type="button" onclick="AddDepartmentDetails()" value="X" name="btnPassport" style="color:red;font-size:23px;border:none;background-color:white;" />
         </td>
 
     </tr>
@@ -261,25 +265,6 @@
 
                     function AddDepartmentDetails() {
                         var deptName = $("#textInput1").val();
-
-                        //var DepartmentModel = {
-                        //    Departments:deptName
-
-                        //};
-                      //  alert("Hai" + deptName);
-                        // $.ajax({
-                        //      url: "localhost:16592/Maintenance/Mdm/AddDepartmentDetails",
-                        //        type: 'post',
-                        //        dataType: 'json',
-                        //        contentType:'application/json',
-                        //        success: function (data) {
-                        //            //$('#target').html(data.msg);
-                        //          //  window.location.href = data;
-                        //        },
-                        //        data: JSON.stringify(DepartmentModel)
-                        // });
-
-
 
 
                         $.ajax({
