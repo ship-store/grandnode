@@ -82,13 +82,14 @@
                         <div class="form-line">
                             @*<input type="text" value="" style="color:#0E5679;" name="maker" class="form-control money-euro" placeholder="" id="id6"readonly="readonly">*@
                        
-                            <select name="eqtype" class="form-control money-euro"
-                                    id="maker" style="color:#0E5679;border-color:#0E5679">
+                            <select name="maker" class="form-control money-euro"
+                                    id="maker" style="color:#0E5679;border-color:#0E5679" disabled>
+                                <option id="makerValue"></option>
                                 <option>Select</option>
                                 @foreach (var item in Model.Makers)
                                 {
 
-                                   
+
                                     <option class="form-control money-euro" id="@item.Id"> @item.Name</option>
 
                                 }
@@ -107,9 +108,9 @@
                         </span>
                         <div class="form-line">
                             @*<input type="text" value="" style="color:#0E5679;" name="model" class="form-control money-euro" placeholder="" id="id7" readonly="readonly">*@
-                            <select name="makerModel" class="form-control money-euro"
-                                    id="makerModel" style="color:#0E5679;border-color:#0E5679">
-
+                            <select name="model" class="form-control money-euro"
+                                    id="makerModel" style="color:#0E5679;border-color:#0E5679" disabled>
+                                <option id="modelValue"></option>
                                 @foreach (var item in Model.EquipmentTypeList)
                                 {
 
@@ -369,7 +370,9 @@
         window.location.href = url;
     }
     function MakedropDownEditable() {
-       $("#eqptype").removeAttr('disabled');
+        $("#eqptype").removeAttr('disabled');
+        $("#maker").removeAttr('disabled');
+        $("#makerModel").removeAttr('disabled');
     }
 
 </script>
