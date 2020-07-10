@@ -15,6 +15,10 @@
         $("#addFrequency").click(function () {
             $("#priority").show();
         });
+
+        $("#btnCancel").click(function () {
+            $("#priority").hide();
+        });
     });
 </script>
 <script type="text/javascript">
@@ -123,7 +127,7 @@
                 @Html.AntiForgeryToken()
                 <input type="submit" onclick="AddPriorityDetail()"
                        class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
-                            <input type="button" value="X" name="btnPassport" style="color:red;font-size:23px;border:none;background-color:white;" />
+                            <input type="button" id="btnCancel" value="X" name="btnPassport" style="color:red;font-size:23px;border:none;background-color:white;" />
 
             </td>
 
