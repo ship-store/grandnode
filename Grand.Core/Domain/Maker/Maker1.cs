@@ -10,10 +10,11 @@ namespace Grand.Core.Domain.MakerEntity
     {
 
 
-
+       // public string MakerId { get; set; }
         public string Maker { get; set; }
         public string Model{ get; set; }
         public string Remark { get; set; }
+
       
         
 

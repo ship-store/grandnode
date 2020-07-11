@@ -33,6 +33,21 @@
   box-shadow: 0 0 0 1px #4dd0e1;
 }
 </style>
+<script type="text/javascript">
+    $(function () {
+        $("#maker").hide();
+        //addFrequency
+        //$("input[name=btnPassport]").click(function () {
+
+        $("#addMaker").click(function () {
+            $("#maker").show();
+        });
+
+        $("#btnCancel").click(function () {
+            $("#maker").hide();
+        });
+    });
+</script>
 <div class="row" id="SearchSection">
     <div class="col-md-12">
         @*<div class="x_panel light form-fit">*@
@@ -43,6 +58,7 @@
             </div>
             <div class="actions btn-group btn-group-devided">
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+                <input type="button" value="+" id="addMaker" class="fa fa-plus" style="font-size:40px;color:#0E5679;border:none;background-color:white;font-weight:600;" />
 
                 <a href="#" style="background:white;border:white;color:#0E5679;"><i style="font-size:27px" class="fa">&#xf044;</i></a>
                 &nbsp; &nbsp;
@@ -65,24 +81,25 @@
 
     <table class="table">
 
-        <tr>
+        <tr id="maker" style="display: none">
             <td style="border:none;">
 
-               
-                    <input type="text" class="form-control" placeholder="Name" id="textInput" name="Name" style="float:left;width:20%;height:auto;color:#0E5679;border-color:#0E5679;" />
-                
 
-               
-                    <input type="text" class="form-control" id="textInput" placeholder="Code" name="Code" style="margin-left:22px;float:left;width:20%;height:auto;color:#0E5679;border-color:#0E5679;" />
-              
-                
+                <input type="text" class="form-control" placeholder="Name" id="textInput" name="Name" style="float:left;width:20%;height:auto;color:#0E5679;border-color:#0E5679;" />
+
+
+
+                <input type="text" class="form-control" id="textInput" placeholder="Code" name="Code" style="margin-left:22px;float:left;width:20%;height:auto;color:#0E5679;border-color:#0E5679;" />
+
+
                 <div style="float:left;max-width:50%;position:relative;left:-2px;">
 
                     <input type="text" class="form-control" id="textInput" placeholder="Country" name="Country" style="margin-left:22px;height:auto;color:#0E5679;border-color:#0E5679;" />
                 </div>
-             
+
                 @Html.AntiForgeryToken()
                 <input type="submit" class="fa fa-save" id="bu" value="&#xf0c7;" style="margin-left:6%;font-size:23px;color:#0E5679;background:white;border:white">
+                <input type="button" value="X" id="btnCancel" style="color:red;font-size:23px;border:none;background-color:white;" />
 
             </td>
 

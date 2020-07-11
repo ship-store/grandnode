@@ -26,6 +26,8 @@ using Grand.Core.Domain.CbmEntity;
 using Grand.Services.CbmMapping;
 using System.Text;
 using Grand.Services.EquipmentType;
+using Grand.Services.Maker;
+using Newtonsoft.Json;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -45,6 +47,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly ISparepartService _sparepartService;
         private readonly ISparepartViewModelService _sparepartViewModelService;
         private readonly IJobPlanViewModelService _jobPlanViewModelService;
+        private readonly IMakerService _makerService;
+        private readonly IMakerService1 _makerService1;
         public EquipmentsController(IJobPlanViewModelService _jobPlanViewModelService, 
             ISparepartViewModelService _sparepartViewModelService, IJobplanService _jobplanService, 
             IVesselViewModelService _vesselViewModelService, 
@@ -54,7 +58,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             IEquipmentTypeViewModelService _equipmentTypeViewModelService, IJobTypeViewModelService _jobTypeViewModelService,
             ICbmMappingViewModelService _cbmMappingViewModelService,
             ICbmMappingService _cbmMappingService,
-             IEquipmentTypeService _equipmentTypeService
+             IEquipmentTypeService _equipmentTypeService,
+             IMakerService _makerService,
+             IMakerService1 _makerService1
             )
         {
 
@@ -71,6 +77,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._cbmMappingViewModelService = _cbmMappingViewModelService;
             this._cbmMappingService = _cbmMappingService;
             this._equipmentTypeService = _equipmentTypeService;
+            this._makerService = _makerService;
+            this._makerService1 =_makerService1;
         }
 
 
@@ -198,6 +206,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     }
                     vm.EquipmentTypeList = equipmentTypetList.Distinct().ToList();
 
+                    var makers = await _makerService.GetAllMakers("", 0, 500, true);
+
+                    vm.Makers = makers.ToList();
                     return View(vm);
 
                 }
@@ -211,6 +222,23 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 return RedirectToAction("Success", "Register");
             }          
         }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> ReadMakerModelDetails(string Id, string MakerName)
+        {
+            var ModelList= await _makerService1.GetAllMakers("", 0, 100);
+            //List<MakerModel> makerlist = new List<MakerModel>();
+            var Models = ModelList.ToList().Where(x => x.Maker.ToString().Trim().ToLower() == MakerName.ToString().Trim().ToLower()).ToList();
+                //(x=>x.Maker.ToLower()==MakerName.ToLower()).ToList();
+
+            string jsonList = JsonConvert.SerializeObject(Models);
+            return Json(jsonList);
+
+        }
+
+
 
         [HttpGet]
         public async Task<IActionResult> NewJobPlan()

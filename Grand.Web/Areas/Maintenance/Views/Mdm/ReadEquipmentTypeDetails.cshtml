@@ -8,12 +8,16 @@
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        $("input[name=btnPassport]").click(function () {
-            if ($(this).val() == "+") {
-                $("#dvPassport").show();
-            } else {
-                $("#dvPassport").hide();
-            }
+        $("#equipmenttype").hide();
+        //addFrequency
+        //$("input[name=btnPassport]").click(function () {
+
+        $("#addEquipmentType").click(function () {
+            $("#equipmenttype").show();
+        });
+
+        $("#btnCancel").click(function () {
+            $("#equipmenttype").hide();
         });
     });
 </script>
@@ -69,7 +73,7 @@
             </div>
             <div class="actions btn-group btn-group-devided">
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                <input type="button" value="+" name="btnPassport" class="fa fa-plus" style="font-size:40px;color:#0E5679;border:none;background-color:white;font-weight:600;" />
+                <input type="button" value="+" name="btnPassport" id="addEquipmentType"class="fa fa-plus" style="font-size:40px;color:#0E5679;border:none;background-color:white;font-weight:600;" />
 
                 <a href="#" style="        background: white;
         border: white;
@@ -103,7 +107,7 @@
                  
                         <table class="table">
 
-                            <tr id="dvPassport" style="display: none">
+                            <tr id="equipmenttype" style="display: none">
                                 <td style="border:none;">
 
                                     <div style="float:left;max-width:50%;position:relative;left:-2px;">
@@ -114,7 +118,7 @@
                                     @Html.AntiForgeryToken()
                                     <input type="submit" onclick="AddEquipmentTypeDetail()"
                                            class="fa fa-save" id="btnSubmit" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
-                                    <input type="button" value="X" name="btnPassport" style="color:red;font-size:23px;border:none;background-color:white;" />
+                                    <input type="button" value="X" id="btnCancel" name="btnPassport" style="color:red;font-size:23px;border:none;background-color:white;" />
 
 
                                 </td>

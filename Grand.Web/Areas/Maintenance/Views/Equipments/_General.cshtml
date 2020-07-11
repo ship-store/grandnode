@@ -82,14 +82,15 @@
                         <div class="form-line">
                             @*<input type="text" value="" style="color:#0E5679;" name="maker" class="form-control money-euro" placeholder="" id="id6"readonly="readonly">*@
                        
-                            <select name="eqtype" class="form-control money-euro"
-                                    id="eqptype" style="color:#0E5679;border-color:#0E5679">
-                                
-                                @foreach (var item in Model.EquipmentTypeList)
+                            <select name="maker" class="form-control money-euro"
+                                    id="maker" style="color:#0E5679;border-color:#0E5679" disabled>
+                                <option id="makerValue"></option>
+                                <option>Select</option>
+                                @foreach (var item in Model.Makers)
                                 {
 
 
-                                    <option class="form-control money-euro"> item</option>
+                                    <option class="form-control money-euro" id="@item.Id"> @item.Name</option>
 
                                 }
                             </select>
@@ -107,9 +108,9 @@
                         </span>
                         <div class="form-line">
                             @*<input type="text" value="" style="color:#0E5679;" name="model" class="form-control money-euro" placeholder="" id="id7" readonly="readonly">*@
-                            <select name="eqtype" class="form-control money-euro"
-                                    id="eqptype" style="color:#0E5679;border-color:#0E5679">
-
+                            <select name="model" class="form-control money-euro"
+                                    id="makerModel" style="color:#0E5679;border-color:#0E5679" disabled>
+                                <option id="modelValue"></option>
                                 @foreach (var item in Model.EquipmentTypeList)
                                 {
 
@@ -318,7 +319,50 @@
 
 </script>*@
 <script>
-    
+
+    window.MakerName = "";
+    window.MakerId = "";
+    $(function () {
+        $("#maker").change(function () {
+
+            window.MakerName = $("#maker option:selected").text();
+          //  alert("mnmame" + window.MakerName);
+            window.MakerId = $("#maker option:selected").attr("id");
+             $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("ReadMakerModelDetails")" + "?Id=" +window.MakerId+"&MakerName="+ window.MakerName,
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                                console.log(JSON.parse(datas));
+                               var results= JSON.parse(datas);
+                             // alert("Success");
+                            let data = JSON.stringify(datas);
+
+                             //   alert("name=" + data.Model + " " + results[0].Model);
+                                if (window.MakerName.length == 0)
+                                {
+                                    $("#makerModel").html("<option></option>");
+                                }
+                                else {
+                                    var makerModel = "";
+                                    for (var i = 0; i <results.length; i++) {
+                                        //$("#makerModel").html("<option>"+data[i]+"</option>");
+                                        makerModel += "<option>" + results[i].Model + "</option>";
+                                        $("#makerModel").html(makerModel);
+                                    }
+
+                                }
+                               
+                               
+                            }
+
+                        });
+
+        //alert("Id" + MakerId + "MakerName" + MakerName);
+        });
+    });
     function AddEquipment(data) {
         //  var url = location.origin + '/Maintenance/Equipments/AddEquipment?equipment_Code=' + window.selectedEquipmentCode;
         var url = location.origin + '/Maintenance/Equipments/AddEquipment?equipment_Code='
@@ -326,7 +370,9 @@
         window.location.href = url;
     }
     function MakedropDownEditable() {
-       $("#eqptype").removeAttr('disabled');
+        $("#eqptype").removeAttr('disabled');
+        $("#maker").removeAttr('disabled');
+        $("#makerModel").removeAttr('disabled');
     }
 
 </script>
