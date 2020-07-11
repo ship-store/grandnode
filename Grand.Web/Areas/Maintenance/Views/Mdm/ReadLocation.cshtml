@@ -8,12 +8,16 @@
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        $("input[name=btnPassport]").click(function () {
-            if ($(this).val() == "+") {
-                $("#dvPassport").show();
-            } else {
-                $("#dvPassport").hide();
-            }
+        $("#location").hide();
+        //addFrequency
+        //$("input[name=btnPassport]").click(function () {
+
+        $("#addLocation").click(function () {
+            $("#location").show();
+        });
+
+        $("#btnCancel").click(function () {
+            $("#location").hide();
         });
     });
 </script>
@@ -69,7 +73,7 @@
             </div>
             <div class="actions btn-group btn-group-devided">
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                <input type="button" value="+" name="btnPassport" class="fa fa-plus" style="font-size:40px;color:#0E5679;border:none;background-color:white;font-weight:600;" />
+                <input type="button" value="+" id="addLocation" class="fa fa-plus" style="font-size:40px;color:#0E5679;border:none;background-color:white;font-weight:600;" />
 
                 <a href="#" style="        background: white;
         border: white;
@@ -103,7 +107,7 @@
                  
                         <table class="table">
 
-                            <tr id="dvPassport" style="display: none">
+                            <tr id="location" style="display: none">
                                 <td style="border:none;">
 
                                     <div style="float:left;max-width:50%;position:relative;left:-2px;">
@@ -114,7 +118,7 @@
                                     @Html.AntiForgeryToken()
                                     <input type="submit" onclick="AddLocationDetail()"
                                            class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
-                                    <input type="button" onclick="AddLocationDetail()" value="X" name="btnPassport" style="color:red;font-size:23px;border:none;background-color:white;" />
+                                    <input type="button" value="X" name="btnCancel" style="color:red;font-size:23px;border:none;background-color:white;" />
 
                                 </td>
                               

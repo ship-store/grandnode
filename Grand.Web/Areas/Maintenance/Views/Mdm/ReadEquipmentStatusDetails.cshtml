@@ -8,16 +8,19 @@
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        $("input[name=btnPassport]").click(function () {
-            if ($(this).val() == "+") {
-                $("#dvPassport").show();
-            } else {
-                $("#dvPassport").hide();
-            }
+        $("#equipmentstatus").hide();
+        //addFrequency
+        //$("input[name=btnPassport]").click(function () {
+
+        $("#addEquipmentStatus").click(function () {
+            $("#equipmentstatus").show();
+        });
+
+        $("#btnCancel").click(function () {
+            $("#equipmentstatus").hide();
         });
     });
 </script>
-
 <div class="row" id="SearchSection">
     <div class="col-md-12">
         @*<div class="x_panel light form-fit">*@
@@ -28,7 +31,7 @@
             </div>
             <div class="actions btn-group btn-group-devided">
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                <input type="button" value="+" name="btnPassport" class="fa fa-plus" style="font-size:40px;color:#0E5679;border:none;background-color:white;font-weight:600;" />
+                <input type="button" value="+" name="btnPassport" id="addEquipmentStatus" class="fa fa-plus" style="font-size:40px;color:#0E5679;border:none;background-color:white;font-weight:600;" />
 
                 <a href="#" style="background:white;border:white;color:#0E5679;"><i style="font-size:27px" class="fa">&#xf044;</i></a>
                 &nbsp; &nbsp;
@@ -49,7 +52,7 @@
 
     <table class="table">
 
-        <tr id="dvPassport" style="display: none">
+        <tr id="equipmentstatus" style="display: none">
             <td style="border:none;">
 
                 <div style="float:left;max-width:50%;position:relative;left:-2px;">
@@ -60,7 +63,7 @@
                 @Html.AntiForgeryToken()
                 <input type="submit" onclick="AddEquipmentStatusDetail()"
                        class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
-                <input type="button" onclick="AddEquipmentStatusDetail()" value="X" name="btnPassport" style="color:red;font-size:23px;border:none;background-color:white;" />
+                <input type="button" value="X" name="btnPassport" id="btnCancel" style="color:red;font-size:23px;border:none;background-color:white;" />
 
             </td>
 
