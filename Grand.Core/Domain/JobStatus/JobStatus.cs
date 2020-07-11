@@ -10,6 +10,7 @@ namespace Grand.Core.Domain.JobStatusEntity
     {
         
         public string Status{ get; set; }
-        
+        public int DeleteStatus { get; set; }
+
     }
 }

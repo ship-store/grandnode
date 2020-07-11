@@ -50,6 +50,14 @@ namespace Grand.Services.ReportedBy
 
 
         }
+        public virtual async Task UpdateReportedBy(Core.Domain.ReportedByEntity.ReportedBy reportedBy)
+        {
+            await _reportedByRepository.UpdateAsync(reportedBy);
+        }
+        public virtual Task<Core.Domain.ReportedByEntity.ReportedBy> GetReportedByById(string reportedBy)
+        {
+            return _reportedByRepository.GetByIdAsync(reportedBy);
+        }
 
     }
 }

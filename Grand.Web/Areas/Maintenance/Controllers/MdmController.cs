@@ -627,6 +627,17 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> ReadReportedByDetails(DataSourceRequest command, ReportedByModel model)
+        //{
+        //    var reportedBylist = await _reportedByService.GetAllReportedBy("", command.Page, command.PageSize);
+        //    var reportedByList = reportedBylist.ToList().Where(x => x.DeleteStatus != 1);
+        //    //List<MakerModel> makerlist = new List<MakerModel>();
+        //    var gridModel = new DataSourceResult { Data = reportedByList.ToList() };
+        //    return Json(gridModel);
+
+        //}
+
         [HttpPost]
         public async Task<IActionResult> ReadJobTypeDetails(DataSourceRequest command, JobTypeModel model)
         {
@@ -645,6 +656,17 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(gridModel);
 
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> ReadJobStatusDetails(DataSourceRequest command, JobStatusModel model)
+        //{
+        //    var jobStatuslist = await _jobStatusService.GetAllJobStatus("", command.Page, command.PageSize);
+        //    var jobStatusList = jobStatuslist.ToList().Where(x => x.DeleteStatus != 1);
+        //    //List<MakerModel> makerlist = new List<MakerModel>();
+        //    var gridModel = new DataSourceResult { Data = jobStatusList.ToList() };
+        //    return Json(gridModel);
+
+        //}
         [HttpPost]
         public async Task<IActionResult> ReadEquipmentStatusDetails(DataSourceRequest command, EquipmentStatusModel model)
         {
@@ -823,5 +845,53 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             return PartialView("ReadPriorityDetails");
         }
+        //[HttpGet]
+        //public async Task<IActionResult> DeleteSelectedReportedBy(string selectedIds)
+        //{
+        //    await Task.FromResult(0);
+
+        //    string[] strlist = selectedIds.Split(",");
+
+        //    var SelectedList = strlist.ToList();
+        //    if (selectedIds != null)
+        //    {
+        //        for (int i = 0; i < strlist.Length; i++)
+        //        {
+
+
+        //            var selectedReportedBy = await _reportedByService.GetReportedByById(strlist[i].Trim(new char[] { (char)39 }));
+
+        //            selectedReportedBy.DeleteStatus = 1;//changin job to postponed
+        //            await _reportedByService.UpdateReportedBy(selectedReportedBy);
+        //        }
+        //    }
+
+        //    //return Json(new { Result = true });
+        //    return RedirectToAction("MdmList");
+        //}
+        //[HttpGet]
+        //public async Task<IActionResult> DeleteSelectedJobStatus(string selectedIds)
+        //{
+        //    await Task.FromResult(0);
+
+        //    string[] strlist = selectedIds.Split(",");
+
+        //    var SelectedList = strlist.ToList();
+        //    if (selectedIds != null)
+        //    {
+        //        for (int i = 0; i < strlist.Length; i++)
+        //        {
+
+
+        //            var selectedJobStatus = await _jobStatusService.GetJobStatusById(strlist[i].Trim(new char[] { (char)39 }));
+
+        //            selectedJobStatus.DeleteStatus = 1;//changin job to postponed
+        //            await _jobStatusService.UpdateJobStatus(selectedJobStatus);
+        //        }
+        //    }
+
+        //    //return Json(new { Result = true });
+        //    return RedirectToAction("MdmList");
+        //}
     }
 }

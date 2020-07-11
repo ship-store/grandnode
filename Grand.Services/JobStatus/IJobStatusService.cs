@@ -17,5 +17,7 @@ namespace Grand.Services.JobStatus
            Task PrepareJobStatusModel(Grand.Core.Domain.JobStatusEntity.JobStatus model1, object p, bool v);
        
         Task InsertJobStatus(Core.Domain.JobStatusEntity.JobStatus jobStatus);
+        Task<Core.Domain.JobStatusEntity.JobStatus> GetJobStatusById(string Id);
+        Task UpdateJobStatus(Core.Domain.JobStatusEntity.JobStatus jobStatus);
     }
 }
