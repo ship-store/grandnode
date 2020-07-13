@@ -17,5 +17,7 @@ namespace Grand.Services.ReportedBy
            Task PrepareReportedByModel(Grand.Core.Domain.ReportedByEntity.ReportedBy model1, object p, bool v);
        
         Task InsertReportedBy(Core.Domain.ReportedByEntity.ReportedBy reportedBy);
+        Task UpdateReportedBy(Core.Domain.ReportedByEntity.ReportedBy reportedBy);
+        Task<Core.Domain.ReportedByEntity.ReportedBy> GetReportedByById(string Id);
     }
 }

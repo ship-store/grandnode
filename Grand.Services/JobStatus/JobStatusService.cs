@@ -50,6 +50,14 @@ namespace Grand.Services.JobStatus
 
 
         }
+        public virtual Task<Core.Domain.JobStatusEntity.JobStatus> GetJobStatusById(string jobStatusId)
+        {
+            return _jobStatusRepository.GetByIdAsync(jobStatusId);
+        }
+        public virtual async Task UpdateJobStatus(Core.Domain.JobStatusEntity.JobStatus jobStatus)
+        {
+            await _jobStatusRepository.UpdateAsync(jobStatus);
+        }
 
     }
 }

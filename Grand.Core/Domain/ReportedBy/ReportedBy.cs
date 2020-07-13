@@ -10,6 +10,7 @@ namespace Grand.Core.Domain.ReportedByEntity
     {
         
         public string Reported_By{ get; set; }
-        
+        public int DeleteStatus { get; set; }
+
     }
 }
