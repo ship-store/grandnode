@@ -1,4 +1,4 @@
-﻿
+﻿@model DepartmentListModel
 
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
@@ -81,7 +81,7 @@
             </div>
             <div class="actions btn-group btn-group-devided">
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                <input type="button" value="+" name="btnPassport"  id="addFrequency"
+                <input type="button" value="+" name="btnPassport" id="addFrequency"
                        class="fa fa-plus" style="font-size:40px;color:#0E5679;border:none;background-color:white;font-weight:600;" />
 
                 <a href="#" style="        background: white;
@@ -114,6 +114,13 @@
 @*<form action="AddPriorityDetails" method="post">*@
 
 
+
+
+@*</form>*@
+
+
+<div id="example">
+    <antiforgery-token />
     <table class="table">
 
         <tr id="priority" style="display: none">
@@ -127,16 +134,22 @@
                 @Html.AntiForgeryToken()
                 <input type="submit" onclick="AddPriorityDetail()"
                        class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
-                            <input type="button" id="btnCancel" value="X" name="btnPassport" style="color:red;font-size:23px;border:none;background-color:white;" />
+                <input type="button" id="btnCancel" value="X" name="btnPassport" style="color:red;font-size:23px;border:none;background-color:white;" />
 
             </td>
 
         </tr>
         <tr>
             <td style="border:none;">
-
-                <div class="active-pink-3 active-pink-4 mb-4">
-                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" style="max-width:212px;max-height:16px;color:#0E5679;">
+                <div class="row" id="SearchSection">
+                    <div class="form-body col-md-6 advanced-filter">
+                        <div class="form-group">
+                            <input id="SearchInput" type="text" placeholder="Search.." class="form-control" style="max-width:212px;max-height:16px;color:#0E5679;border-width:1px;border-color:#0E5679;">
+                        </div>
+                    </div>
+                    <div class="x_content">
+                        <div id="PriorityGrid"></div>
+                    </div>
                 </div>
             </td>
         </tr>
@@ -144,15 +157,8 @@
 
 
 
-
     </table>
 
-@*</form>*@
-
-
-<div id="example">
-    <antiforgery-token />
-    <div id="PriorityGrid"></div>
     <script>
 
         //tabPriority
@@ -286,11 +292,99 @@
                                $('#PriorityGrid').empty();
                                LoadPriorityGrid();
 
-                               
+
                             }
 
                         });
         }
+    </script>
+    <script type="text/javascript">
+            var selectedIds = [];
+        $(document).ready(function () {
+            //search button
+            $('#search-department').click(function () {
+                //search
+                var grid = $('#PriorityGrid').data('kendoGrid');
+                grid.dataSource.page(1); //new search. Set page size to 1
+                //grid.dataSource.read(); we already loaded the grid above using "page" function
+                return false;
+            });
+
+            $("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
+                if (event.keyCode == 13) {
+                    $("#search-department").click();
+                    return false;
+                }
+            });
+        });
+
+            //delete selected
+            $('#delete-selected').click(function(e) {
+
+                e.preventDefault();
+
+                var postData = {
+                    selectedIds: selectedIds
+                };
+                addAntiForgeryToken(postData);
+
+
+        // Look for all checkboxes that have a specific class and was checked
+                 var chkArray = [];
+        $(".chk:checked").each(function() {
+            chkArray.push($(this).val());
+        });
+
+
+               // calling  via jquery
+                $.get("http://localhost:16592/Maintenance/Vessel/DeleteSelected?selectedIds='" + chkArray + "'");
+                window.location.reload();
+                return false;
+            });
+
+            $('#mastercheckbox').click(function () {
+                $('.checkboxGroups').prop('checked', $(this).is(':checked')).change();
+
+                  //wire up checkboxes.
+            $('#vessel-grid').on('change', 'input[type=checkbox][id!=mastercheckbox]', function (e) {
+                var $check = $(this);
+                if ($check.is(":checked") == true) {
+                    var checked = jQuery.inArray($check.val(), selectedIds);
+                    if (checked == -1) {
+                        //add id to selectedIds.
+                        selectedIds.push($check.val());
+                    }
+                }
+                else {
+                    var checked = jQuery.inArray($check.val(), selectedIds);
+                    if (checked > -1) {
+                        //remove id from selectedIds.
+                        selectedIds = $.grep(selectedIds, function (item, index) {
+                            return item != $check.val();
+                        });
+                    }
+                }
+                updateMasterCheckbox();
+            });
+            });
+
+        function additionalData() {
+            var data = {
+                SearchName: $('#@Html.FieldIdFor(model => model.SearchName)').val()
+            };
+            addAntiForgeryToken(data);
+            return data;
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#SearchInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#SearchSection tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
     </script>
 </div>
 
