@@ -9,6 +9,7 @@ using Grand.Core.Domain.JobType;
 using System.Threading.Tasks;
 using Grand.Core.Domain.CbmEntity;
 using Grand.Core.Domain.MakerEntity;
+using Grand.Framework.Mvc.ModelBinding;
 
 namespace Grand.Web.Areas.Maintenance.DomainModels
 {
@@ -36,5 +37,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 
         public List<Maker> Makers { get; set; }
 
+        [GrandResourceDisplayName("Maintenance.Vessel.List.SearchName")]
+        public string SearchName { get; set; }
     }
 }

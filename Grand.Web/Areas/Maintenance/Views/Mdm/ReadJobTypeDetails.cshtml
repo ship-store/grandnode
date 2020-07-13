@@ -1,5 +1,5 @@
-﻿
-@model DepartmentListModel
+﻿@model DepartmentListModel
+
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.mobile.min.css" />
@@ -273,7 +273,7 @@
             var selectedIds = [];
         $(document).ready(function () {
             //search button
-            $('#search-department').click(function () {
+            $('#search-jobtype').click(function () {
                 //search
                 var grid = $('#JobTypeGrid').data('kendoGrid');
                 grid.dataSource.page(1); //new search. Set page size to 1
@@ -283,7 +283,7 @@
 
             $("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
                 if (event.keyCode == 13) {
-                    $("#search-department").click();
+                    $("#search-jobtype").click();
                     return false;
                 }
             });
