@@ -10,6 +10,8 @@ namespace Grand.Core.Domain.RankEntity
     {
         
         public string Ranks{ get; set; }
-        
+        public int DeleteStatus { get; set; }
+
+
     }
 }

@@ -10,6 +10,8 @@ namespace Grand.Core.Domain.PriorityEntity
     {
         
         public string Priorities{ get; set; }
-        
+        public int DeleteStatus { get; set; }
+
+
     }
 }

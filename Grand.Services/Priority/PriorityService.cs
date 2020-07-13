@@ -50,6 +50,15 @@ namespace Grand.Services.Priority
 
 
         }
+        public virtual async Task UpdatePriority(Core.Domain.PriorityEntity.Priority priority)
+        {
+            await _priorityRepository.UpdateAsync(priority);
+        }
+        public virtual Task<Core.Domain.PriorityEntity.Priority> GetPriorityById(string priorityId)
+        {
+            return _priorityRepository.GetByIdAsync(priorityId);
+        }
+
 
     }
 }

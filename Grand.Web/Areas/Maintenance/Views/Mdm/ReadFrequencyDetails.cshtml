@@ -86,7 +86,7 @@
         color: #0E5679;
 "><i style="font-size: 27px" class="fa">&#xf044;</i></a>
                 &nbsp; &nbsp;
-                <a href="#" style="        background: white;
+                <a href="#sign_up" style="        background: white;
         border: white;
         color: red;"><i style="font-size: 27px" class="fa">&#xf014;</i></a>
                 &nbsp; &nbsp;
@@ -260,6 +260,25 @@
                         addAntiForgeryToken(data);
                         return data;
         }
+         $('a[href="#sign_up"]').click(function () {
+                       
+        
+            
+            //var postData = {selectedIds: selectedIds};
+            //addAntiForgeryToken(postData);
+
+            // Look for all checkboxes that have a specific class and was checked
+            var chkArray = [];
+            $(".chk:checked").each(function ()
+            {
+                chkArray.push($(this).val());
+            });
+
+            // calling  via jquery
+            $.get("http://localhost:16582/Maintenance/Mdm/DeleteSelectedFrequency?selectedIds='" + chkArray + "'");
+            window.location.reload();
+            return false;
+       });       
     </script>
     <script>
         $(document).ready(function () {

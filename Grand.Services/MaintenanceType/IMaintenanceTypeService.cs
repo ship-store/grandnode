@@ -17,5 +17,7 @@ namespace Grand.Services.MaintenanceType
            Task PrepareMaintenanceTypeModel(Grand.Core.Domain.MaintenanceTypeEntity.MaintenanceType model1, object p, bool v);
        
         Task InsertMaintenanceType(Core.Domain.MaintenanceTypeEntity.MaintenanceType maintenanceType);
+        Task<Core.Domain.MaintenanceTypeEntity.MaintenanceType> GetMaintenanceTypeById(string Id);
+        Task UpdateMaintenanceType(Core.Domain.MaintenanceTypeEntity.MaintenanceType maintenanceType);
     }
 }

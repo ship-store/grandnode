@@ -50,6 +50,14 @@ namespace Grand.Services.FrequencyType
 
 
         }
+        public virtual Task<Core.Domain.FrequencyTypeEntity.FrequencyType> GetFrequencyTypeById(string frequencyTypeId)
+        {
+            return _frequencyTypeRepository.GetByIdAsync(frequencyTypeId);
+        }
+        public virtual async Task UpdateFrequencyType(Core.Domain.FrequencyTypeEntity.FrequencyType frequencyType)
+        {
+            await _frequencyTypeRepository.UpdateAsync(frequencyType);
+        }
 
     }
 }

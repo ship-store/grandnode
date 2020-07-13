@@ -50,6 +50,14 @@ namespace Grand.Services.Rank
 
 
         }
+        public virtual async Task UpdateRank(Core.Domain.RankEntity.Rank rank)
+        {
+            await _rankRepository.UpdateAsync(rank);
+        }
+        public virtual Task<Core.Domain.RankEntity.Rank> GetRankById(string rankId)
+        {
+            return _rankRepository.GetByIdAsync(rankId);
+        }
 
     }
 }

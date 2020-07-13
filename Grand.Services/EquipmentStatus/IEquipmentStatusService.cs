@@ -17,5 +17,7 @@ namespace Grand.Services.EquipmentStatus
            Task PrepareEquipmentStatusModel(Grand.Core.Domain.EquipmentStatusEntity.EquipmentStatus model1, object p, bool v);
        
         Task InsertEquipmentStatus(Core.Domain.EquipmentStatusEntity.EquipmentStatus equipmentStatus);
+        Task<Core.Domain.EquipmentStatusEntity.EquipmentStatus> GetEquipmentStatusById(string Id);
+        Task UpdateEquipmentStatus(Core.Domain.EquipmentStatusEntity.EquipmentStatus equipmentStatus);
     }
 }

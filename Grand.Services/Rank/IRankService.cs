@@ -17,5 +17,7 @@ namespace Grand.Services.Rank
            Task PrepareRankModel(Grand.Core.Domain.RankEntity.Rank model1, object p, bool v);
        
         Task InsertRank(Core.Domain.RankEntity.Rank rank);
+        Task UpdateRank(Core.Domain.RankEntity.Rank rank);
+        Task<Core.Domain.RankEntity.Rank> GetRankById(string Id);
     }
 }

@@ -561,8 +561,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> ReadFrequencyDetails(DataSourceRequest command, FrequencyModel model)
         {
             var frequencylist = await _frequencyService.GetAllFrequencies("", command.Page, command.PageSize);
+            var frequencyList = frequencylist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = frequencylist.ToList() };
+            var gridModel = new DataSourceResult { Data = frequencyList.ToList() };
             return Json(gridModel);
 
         }
@@ -570,8 +571,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> ReadRankDetails(DataSourceRequest command, RankModel model)
         {
             var ranklist = await _rankService.GetAllRanks("", command.Page, command.PageSize);
+            var rankList = ranklist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = ranklist.ToList() };
+            var gridModel = new DataSourceResult { Data = rankList.ToList() };
             return Json(gridModel);
 
         }
@@ -580,7 +582,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             var frequencyTypelist = await _frequencyTypeService.GetAllFrequencyTypes("", command.Page, command.PageSize);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = frequencyTypelist.ToList() };
+            var frequencyTypeList = frequencyTypelist.ToList().Where(x => x.DeleteStatus != 1);
+            var gridModel = new DataSourceResult { Data = frequencyTypeList.ToList() };
             return Json(gridModel);
 
         }
@@ -588,8 +591,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> ReadPriorityDetails(DataSourceRequest command, PriorityModel model)
         {
             var prioritylist = await _priorityService.GetAllPriorities("", command.Page, command.PageSize);
+            var priorityList = prioritylist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = prioritylist.ToList() };
+            var gridModel = new DataSourceResult { Data = priorityList.ToList() };
             return Json(gridModel);
 
         }
@@ -608,7 +612,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             var maintenanceTypelist = await _maintenanceTypeService.GetAllMaintenanceTypes("", command.Page, command.PageSize);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = maintenanceTypelist.ToList() };
+            var maintenanceTypeList = maintenanceTypelist.ToList().Where(x => x.DeleteStatus != 1);
+            var gridModel = new DataSourceResult { Data = maintenanceTypeList.ToList() };
             return Json(gridModel);
 
         }
@@ -669,8 +674,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> ReadEquipmentStatusDetails(DataSourceRequest command, EquipmentStatusModel model)
         {
             var equipmentStatuslist = await _equipmentStatusService.GetAllEquipmentStatus("", command.Page, command.PageSize);
+            var equipmentStatusList = equipmentStatuslist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = equipmentStatuslist.ToList() };
+            var gridModel = new DataSourceResult { Data = equipmentStatusList.ToList() };
             return Json(gridModel);
 
         }
@@ -1039,5 +1045,152 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             //return Json(new { Result = true });
             return RedirectToAction("MdmList");
         }
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedEquipmentStatus(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedEquipmentStatus = await _equipmentStatusService.GetEquipmentStatusById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedEquipmentStatus.DeleteStatus = 1;//changing job to postponed
+                    await _equipmentStatusService.UpdateEquipmentStatus(selectedEquipmentStatus);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedFrequency(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedFrequency = await _frequencyService.GetFrequencyById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedFrequency.DeleteStatus = 1;//changing job to postponed
+                    await _frequencyService.UpdateFrequency(selectedFrequency);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedFrequencyType(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedFrequencyType = await _frequencyTypeService.GetFrequencyTypeById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedFrequencyType.DeleteStatus = 1;//changing job to postponed
+                    await _frequencyTypeService.UpdateFrequencyType(selectedFrequencyType);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedRank(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedRank = await _rankService.GetRankById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedRank.DeleteStatus = 1;//changing job to postponed
+                    await _rankService.UpdateRank(selectedRank);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedMaintenanceType(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedMaintenanceType = await _maintenanceTypeService.GetMaintenanceTypeById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedMaintenanceType.DeleteStatus = 1;//changing job to postponed
+                    await _maintenanceTypeService.UpdateMaintenanceType(selectedMaintenanceType);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedPriority(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedPriority = await _priorityService.GetPriorityById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedPriority.DeleteStatus = 1;//changing job to postponed
+                    await _priorityService.UpdatePriority(selectedPriority);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+
     }
 }

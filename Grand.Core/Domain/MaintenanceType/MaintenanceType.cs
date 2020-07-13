@@ -10,6 +10,8 @@ namespace Grand.Core.Domain.MaintenanceTypeEntity
     {
         
         public string Maintenance_type{ get; set; }
-        
+        public int DeleteStatus { get; set; }
+
+
     }
 }
