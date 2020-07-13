@@ -17,5 +17,7 @@ namespace Grand.Services.JobType
            Task PrepareJobTypeModel(Grand.Core.Domain.JobType.JobType model1, object p, bool v);
        
         Task InsertJobType(Core.Domain.JobType.JobType jobType);
+        Task<Core.Domain.JobType.JobType> GetJobTypeById(string Id);
+        Task UpdateJobType(Core.Domain.JobType.JobType jobType);
     }
 }

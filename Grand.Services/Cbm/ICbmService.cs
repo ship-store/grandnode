@@ -17,6 +17,8 @@ namespace Grand.Services.Cbm
          Task PrepareCbmModel(Grand.Core.Domain.CbmEntity.CBM model1, object p, bool v);
 
         Task InsertCbm(Core.Domain.CbmEntity.CBM cbm);
+        Task UpdateCbm(Core.Domain.CbmEntity.CBM cbm);
+        Task<Core.Domain.CbmEntity.CBM> GetCbmById(string Id);
 
     }
 }

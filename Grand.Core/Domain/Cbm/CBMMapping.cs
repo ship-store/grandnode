@@ -12,7 +12,8 @@ namespace Grand.Core.Domain.CbmEntity
         public string Cbm_Name{ get; set; }
         public string equipmentComponent { get; set; }// EquipmentType
         public string jobCode { get; set; }
-        
+        public int DeleteStatus { get; set; }
+
     }
 }
 

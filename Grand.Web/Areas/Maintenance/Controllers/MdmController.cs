@@ -530,8 +530,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> ReadCBMMappingDetails(DataSourceRequest command, ReportedByModel model)
         {
             var cbmMappinglist = await _cbmMappingService.GetAllCbmMapping("", command.Page, command.PageSize);
+            var cbmMappingList = cbmMappinglist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = cbmMappinglist.ToList() };
+            var gridModel = new DataSourceResult { Data = cbmMappingList.ToList() };
             return Json(gridModel);
 
         }
@@ -540,8 +541,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> ReadEquipmentTypeDetails(DataSourceRequest command, EquipmentTypeModel model)
         {
             var equipmentTypelist = await _equipmentTypeService.GetAllEquipmentTypes("", command.Page, command.PageSize);
+            var equipmentTypeList = equipmentTypelist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = equipmentTypelist.ToList() };
+            var gridModel = new DataSourceResult { Data = equipmentTypeList.ToList() };
             return Json(gridModel);
 
         }
@@ -617,56 +619,49 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(gridModel);
 
         }
-        [HttpPost]
-        public async Task<IActionResult> ReadReportedByDetails(DataSourceRequest command, ReportedByModel model)
-        {
-            var reportedBylist = await _reportedByService.GetAllReportedBy("", command.Page, command.PageSize);
-            //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = reportedBylist.ToList() };
-            return Json(gridModel);
-
-        }
-
         //[HttpPost]
         //public async Task<IActionResult> ReadReportedByDetails(DataSourceRequest command, ReportedByModel model)
         //{
         //    var reportedBylist = await _reportedByService.GetAllReportedBy("", command.Page, command.PageSize);
-        //    var reportedByList = reportedBylist.ToList().Where(x => x.DeleteStatus != 1);
         //    //List<MakerModel> makerlist = new List<MakerModel>();
-        //    var gridModel = new DataSourceResult { Data = reportedByList.ToList() };
+        //    var gridModel = new DataSourceResult { Data = reportedBylist.ToList() };
         //    return Json(gridModel);
 
         //}
+
+        [HttpPost]
+        public async Task<IActionResult> ReadReportedByDetails(DataSourceRequest command, ReportedByModel model)
+        {
+            var reportedBylist = await _reportedByService.GetAllReportedBy("", command.Page, command.PageSize);
+            var reportedByList = reportedBylist.ToList().Where(x => x.DeleteStatus != 1);
+            //List<MakerModel> makerlist = new List<MakerModel>();
+            var gridModel = new DataSourceResult { Data = reportedByList.ToList() };
+            return Json(gridModel);
+
+        }
 
         [HttpPost]
         public async Task<IActionResult> ReadJobTypeDetails(DataSourceRequest command, JobTypeModel model)
         {
             var jobTypelist = await _jobTypeService.GetAllJobTypes("", command.Page, command.PageSize);
+            var jobTypeList = jobTypelist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = jobTypelist.ToList() };
+            var gridModel = new DataSourceResult { Data = jobTypeList.ToList() };
             return Json(gridModel);
-
         }
+
+
+
         [HttpPost]
         public async Task<IActionResult> ReadJobStatusDetails(DataSourceRequest command, JobStatusModel model)
         {
             var jobStatuslist = await _jobStatusService.GetAllJobStatus("", command.Page, command.PageSize);
+            var jobStatusList = jobStatuslist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = jobStatuslist.ToList() };
+            var gridModel = new DataSourceResult { Data = jobStatusList.ToList() };
             return Json(gridModel);
 
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> ReadJobStatusDetails(DataSourceRequest command, JobStatusModel model)
-        //{
-        //    var jobStatuslist = await _jobStatusService.GetAllJobStatus("", command.Page, command.PageSize);
-        //    var jobStatusList = jobStatuslist.ToList().Where(x => x.DeleteStatus != 1);
-        //    //List<MakerModel> makerlist = new List<MakerModel>();
-        //    var gridModel = new DataSourceResult { Data = jobStatusList.ToList() };
-        //    return Json(gridModel);
-
-        //}
         [HttpPost]
         public async Task<IActionResult> ReadEquipmentStatusDetails(DataSourceRequest command, EquipmentStatusModel model)
         {
@@ -680,8 +675,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> ReadCBMDetails(DataSourceRequest command, CBMModel model)
         {
             var cbmlist = await _cbmService.GetAllCbm("", command.Page, command.PageSize);
+            var cbmList = cbmlist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = cbmlist.ToList() };
+            var gridModel = new DataSourceResult { Data = cbmList.ToList() };
             return Json(gridModel);
 
         }
@@ -845,53 +841,125 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             return PartialView("ReadPriorityDetails");
         }
-        //[HttpGet]
-        //public async Task<IActionResult> DeleteSelectedReportedBy(string selectedIds)
-        //{
-        //    await Task.FromResult(0);
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedReportedBy(string selectedIds)
+        {
+            await Task.FromResult(0);
 
-        //    string[] strlist = selectedIds.Split(",");
+            string[] strlist = selectedIds.Split(",");
 
-        //    var SelectedList = strlist.ToList();
-        //    if (selectedIds != null)
-        //    {
-        //        for (int i = 0; i < strlist.Length; i++)
-        //        {
-
-
-        //            var selectedReportedBy = await _reportedByService.GetReportedByById(strlist[i].Trim(new char[] { (char)39 }));
-
-        //            selectedReportedBy.DeleteStatus = 1;//changin job to postponed
-        //            await _reportedByService.UpdateReportedBy(selectedReportedBy);
-        //        }
-        //    }
-
-        //    //return Json(new { Result = true });
-        //    return RedirectToAction("MdmList");
-        //}
-        //[HttpGet]
-        //public async Task<IActionResult> DeleteSelectedJobStatus(string selectedIds)
-        //{
-        //    await Task.FromResult(0);
-
-        //    string[] strlist = selectedIds.Split(",");
-
-        //    var SelectedList = strlist.ToList();
-        //    if (selectedIds != null)
-        //    {
-        //        for (int i = 0; i < strlist.Length; i++)
-        //        {
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
 
 
-        //            var selectedJobStatus = await _jobStatusService.GetJobStatusById(strlist[i].Trim(new char[] { (char)39 }));
+                    var selectedReportedBy = await _reportedByService.GetReportedByById(strlist[i].Trim(new char[] { (char)39 }));
 
-        //            selectedJobStatus.DeleteStatus = 1;//changin job to postponed
-        //            await _jobStatusService.UpdateJobStatus(selectedJobStatus);
-        //        }
-        //    }
+                    selectedReportedBy.DeleteStatus = 1;//changin job to postponed
+                    await _reportedByService.UpdateReportedBy(selectedReportedBy);
+                }
+            }
 
-        //    //return Json(new { Result = true });
-        //    return RedirectToAction("MdmList");
-        //}
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedJobStatus(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedJobStatus = await _jobStatusService.GetJobStatusById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedJobStatus.DeleteStatus = 1;//changin job to postponed
+                    await _jobStatusService.UpdateJobStatus(selectedJobStatus);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelected(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedEquipmentComponent = await _equipmentTypeService.GetEquipmentTypeById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedEquipmentComponent.DeleteStatus = 1;//changin job to postponed
+                    await _equipmentTypeService.UpdateEquipmentType(selectedEquipmentComponent);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedJobType(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedJobType = await _jobTypeService.GetJobTypeById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedJobType.DeleteStatus = 1;//changing job to postponed
+                    await _jobTypeService.UpdateJobType(selectedJobType);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedCbm(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedCbm = await _cbmService.GetCbmById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedCbm.DeleteStatus = 1;//changing job to postponed
+                    await _cbmService.UpdateCbm(selectedCbm);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
     }
 }

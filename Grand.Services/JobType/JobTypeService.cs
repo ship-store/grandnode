@@ -50,6 +50,15 @@ namespace Grand.Services.JobType
 
 
         }
+        public virtual Task<Core.Domain.JobType.JobType> GetJobTypeById(string jobTypeId)
+        {
+            return _jobTypeRepository.GetByIdAsync(jobTypeId);
+        }
+        public virtual async Task UpdateJobType(Core.Domain.JobType.JobType jobType)
+        {
+            await _jobTypeRepository.UpdateAsync(jobType);
+        }
+
 
     }
 }

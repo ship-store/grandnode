@@ -43,6 +43,14 @@ namespace Grand.Services.Cbm
         {
             await _CbmRepository.InsertAsync(cbm);
         }
+        public virtual async Task UpdateCbm(Core.Domain.CbmEntity.CBM cbm)
+        {
+            await _CbmRepository.UpdateAsync(cbm);
+        }
+        public virtual Task<Core.Domain.CbmEntity.CBM> GetCbmById(string cbm)
+        {
+            return _CbmRepository.GetByIdAsync(cbm);
+        }
 
     }
 }

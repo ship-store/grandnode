@@ -50,6 +50,15 @@ namespace Grand.Services.EquipmentType
 
 
         }
+        public virtual Task<Core.Domain.EquipmentTypeEntity.EquipmentType> GetEquipmentTypeById(string equipmentTypeId)
+        {
+            return _equipmentTypeRepository.GetByIdAsync(equipmentTypeId);
+        }
+        public virtual async Task UpdateEquipmentType(Core.Domain.EquipmentTypeEntity.EquipmentType equipmentType)
+        {
+            await _equipmentTypeRepository.UpdateAsync(equipmentType);
+        }
+
 
     }
 }

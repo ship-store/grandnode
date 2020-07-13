@@ -10,6 +10,6 @@ namespace Grand.Core.Domain.JobType
     {
         
         public string Job_type{ get; set; }
-        
+        public int DeleteStatus { get; set; }
     }
 }

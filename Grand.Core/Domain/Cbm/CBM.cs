@@ -10,6 +10,7 @@ namespace Grand.Core.Domain.CbmEntity
     {
         
         public string Cbm_Name{ get; set; }
-        
+        public int DeleteStatus { get; set; }
+
     }
 }

@@ -17,5 +17,7 @@ namespace Grand.Services.EquipmentType
            Task PrepareEquipmentTypeModel(Grand.Core.Domain.EquipmentTypeEntity.EquipmentType model1, object p, bool v);
        
         Task InsertEquipmentType(Core.Domain.EquipmentTypeEntity.EquipmentType equipmentType);
+        Task<Core.Domain.EquipmentTypeEntity.EquipmentType> GetEquipmentTypeById(string Id);
+        Task UpdateEquipmentType(Core.Domain.EquipmentTypeEntity.EquipmentType equipmentType);
     }
 }
