@@ -10,6 +10,8 @@ namespace Grand.Core.Domain.SafetyLevelEntity
     {
         
         public string Safety_level{ get; set; }
-        
+        public int DeleteStatus { get; set; }
+
+
     }
 }

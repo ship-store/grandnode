@@ -17,5 +17,7 @@ namespace Grand.Services.Location
            Task PrepareLocationModel(Grand.Core.Domain.LocationEntity.Location model1, object p, bool v);
        
         Task InsertLocation(Core.Domain.LocationEntity.Location location);
+        Task<Core.Domain.LocationEntity.Location> GetLocationById(string Id);
+        Task UpdateLocation(Core.Domain.LocationEntity.Location location);
     }
 }

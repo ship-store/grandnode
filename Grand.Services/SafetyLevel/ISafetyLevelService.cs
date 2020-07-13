@@ -17,5 +17,7 @@ namespace Grand.Services.SafetyLevel
            Task PrepareSafetyLevelModel(Grand.Core.Domain.SafetyLevelEntity.SafetyLevel model1, object p, bool v);
        
         Task InsertSafetyLevel(Core.Domain.SafetyLevelEntity.SafetyLevel safetyLevel);
+        Task<Core.Domain.SafetyLevelEntity.SafetyLevel> GetSafetyLevelById(string Id);
+        Task UpdateSafetyLevel(Core.Domain.SafetyLevelEntity.SafetyLevel safetyLevel);
     }
 }

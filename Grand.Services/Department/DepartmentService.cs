@@ -50,6 +50,14 @@ namespace Grand.Services.Department
 
 
         }
+        public virtual Task<Core.Domain.DepartmentEntity.Department> GetDepartmentById(string departmentId)
+        {
+            return _departmentRepository.GetByIdAsync(departmentId);
+        }
+        public virtual async Task UpdateDepartment(Core.Domain.DepartmentEntity.Department department)
+        {
+            await _departmentRepository.UpdateAsync(department);
+        }
 
     }
 }

@@ -10,6 +10,7 @@ namespace Grand.Core.Domain.LocationEntity
     {
         
         public string Locations{ get; set; }
-        
+        public int DeleteStatus { get; set; }
+
     }
 }

@@ -17,5 +17,7 @@ namespace Grand.Services.Department
            Task PrepareDepartmentModel(Grand.Core.Domain.DepartmentEntity.Department model1, object p, bool v);
        
         Task InsertDepartment(Core.Domain.DepartmentEntity.Department department);
+        Task<Core.Domain.DepartmentEntity.Department> GetDepartmentById(string Id);
+        Task UpdateDepartment(Core.Domain.DepartmentEntity.Department department);
     }
 }

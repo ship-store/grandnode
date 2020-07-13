@@ -552,7 +552,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             var departmentlist = await _departmentService.GetAllDepartments("", command.Page, command.PageSize);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = departmentlist.ToList() };
+            var departmentList= departmentlist.ToList().Where(x => x.DeleteStatus != 1);
+            var gridModel = new DataSourceResult { Data = departmentList.ToList() };
             return Json(gridModel);
 
         }
@@ -596,8 +597,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> ReadLocationDetails(DataSourceRequest command, LocationModel model)
         {
             var locationlist = await _locationService.GetAllLocations("", command.Page, command.PageSize);
+            var locationList = locationlist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = locationlist.ToList() };
+            var gridModel = new DataSourceResult { Data = locationList.ToList() };
             return Json(gridModel);
 
         }
@@ -614,8 +616,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> ReadSafetyLevelDetails(DataSourceRequest command,SafetyLevelModel model)
         {
             var safetylevellist = await _safetyLevelService.GetAllSafetyLevels("", command.Page, command.PageSize);
+            var safetylevelList = safetylevellist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = safetylevellist.ToList() };
+            var gridModel = new DataSourceResult { Data = safetylevelList.ToList() };
             return Json(gridModel);
 
         }
@@ -955,6 +958,81 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
                     selectedCbm.DeleteStatus = 1;//changing job to postponed
                     await _cbmService.UpdateCbm(selectedCbm);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedDepartment(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedDepartment = await _departmentService.GetDepartmentById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedDepartment.DeleteStatus = 1;//changing job to postponed
+                    await _departmentService.UpdateDepartment(selectedDepartment);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedLocation(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedLocation = await _locationService.GetLocationById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedLocation.DeleteStatus = 1;//changing job to postponed
+                    await _locationService.UpdateLocation(selectedLocation);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("MdmList");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedSafetyLevel(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedSafetyLevel = await _safetyLevelService.GetSafetyLevelById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedSafetyLevel.DeleteStatus = 1;//changing job to postponed
+                    await _safetyLevelService.UpdateSafetyLevel(selectedSafetyLevel);
                 }
             }
 

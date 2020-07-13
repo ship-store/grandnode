@@ -10,6 +10,7 @@ namespace Grand.Core.Domain.DepartmentEntity
     {
         
         public string Departments{ get; set; }
-        
+        public int DeleteStatus { get; set; }
+
     }
 }

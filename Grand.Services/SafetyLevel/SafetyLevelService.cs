@@ -50,6 +50,14 @@ namespace Grand.Services.SafetyLevel
 
 
         }
+        public virtual Task<Core.Domain.SafetyLevelEntity.SafetyLevel> GetSafetyLevelById(string safetyLevelId)
+        {
+            return _safetyLevelRepository.GetByIdAsync(safetyLevelId);
+        }
+        public virtual async Task UpdateSafetyLevel(Core.Domain.SafetyLevelEntity.SafetyLevel safetyLevel)
+        {
+            await _safetyLevelRepository.UpdateAsync(safetyLevel);
+        }
 
     }
 }

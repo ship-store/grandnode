@@ -50,6 +50,13 @@ namespace Grand.Services.Location
 
 
         }
-
+        public virtual Task<Core.Domain.LocationEntity.Location> GetLocationById(string locationId)
+        {
+            return _locationRepository.GetByIdAsync(locationId);
+        }
+        public virtual async Task UpdateLocation(Core.Domain.LocationEntity.Location location)
+        {
+            await _locationRepository.UpdateAsync(location);
+        }
     }
 }
