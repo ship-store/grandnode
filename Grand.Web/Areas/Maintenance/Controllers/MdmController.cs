@@ -715,8 +715,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> ReadMakerDetails(DataSourceRequest command, MakerModel model)
         {
             var makerlist = await _makerService.GetAllMakers("", command.Page, command.PageSize);
+            var makerList = makerlist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = makerlist.ToList()};
+            var gridModel = new DataSourceResult { Data = makerList.ToList()};
             return Json(gridModel);  
            
         }
@@ -724,9 +725,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         [HttpPost]
         public async Task<IActionResult> ReadMakerModelDetails(DataSourceRequest command, MakerModel model)
         {
-            var makerlist = await _makerService1.GetAllMakers("", command.Page, command.PageSize);
+            var makerModellist = await _makerService1.GetAllMakers("", command.Page, command.PageSize);
+            var makerModelList = makerModellist.ToList().Where(x => x.DeleteStatus != 1);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = makerlist.ToList() };
+            var gridModel = new DataSourceResult { Data = makerModelList.ToList() };
            
             return Json(gridModel);
 
@@ -1189,7 +1191,60 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             }
 
             //return Json(new { Result = true });
-            return RedirectToAction("MdmList");
+            return RedirectToAction("ReadPriorityDetails");
+            //return PartialView("ReadPriorityDetails");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedMaker(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedMaker = await _makerService.GetMakerById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedMaker.DeleteStatus = 1;//changing job to postponed
+                    await _makerService.UpdateMaker(selectedMaker);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("ReadPriorityDetails");
+            //return PartialView("ReadPriorityDetails");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedMakerModel(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedMakerModel = await _makerService1.GetMakerModelById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedMakerModel.DeleteStatus = 1;//changing job to postponed
+                    await _makerService1.UpdateMakerModel(selectedMakerModel);
+                }
+            }
+
+            //return Json(new { Result = true });
+            return RedirectToAction("ReadPriorityDetails");
+            //return PartialView("ReadPriorityDetails");
         }
 
     }
