@@ -19,20 +19,15 @@
 </script>
 <script type="text/javascript">
     $(function () {
-        $("#department").hide();
-        //addFrequency
-        //$("input[name=btnPassport]").click(function () {
-
-        $("#addDepartment").click(function () {
-            $("#department").show();
-        });
-
-        $("#btnCancel").click(function () {
-            $("#department").hide();
+        $("input[name=btnCancel]").click(function () {
+            if ($(this).val() == "+") {
+                $("#department").show();
+            } else {
+                $("#department").hide();
+            }
         });
     });
 </script>
-
 <style>
     .red {
         color: darkblue;
@@ -87,7 +82,7 @@
             </div>
             <div class="actions btn-group btn-group-devided">
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                <input type="button" value="+" name="btnPassport" id="addDepartment" class="fa fa-plus" style="font-size:40px;color:#0E5679;border:none;background-color:white;font-weight:600;" />
+                <input type="button" value="+" name="btnCancel"  class="fa fa-plus" style="font-size:40px;color:#0E5679;border:none;background-color:white;font-weight:600;" />
 
                 <a href="#" style="        background: white;
         border: white;
@@ -137,7 +132,7 @@
                 @Html.AntiForgeryToken()
                 <input type="submit" onclick="AddDepartmentDetails()"
                        class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
-                <input type="button" value="X" name="btnPassport" id="btnCancel" style="color:red;font-size:23px;border:none;background-color:white;" />
+                <input type="button" value="X" name="btnCancel" style="color:red;font-size:23px;border:none;background-color:white;" />
             </td>
 
         </tr>

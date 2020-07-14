@@ -40,16 +40,12 @@
 </style>
 <script type="text/javascript">
     $(function () {
-        $("#makermodel").hide();
-        //addFrequency
-        //$("input[name=btnPassport]").click(function () {
-
-        $("#addMakerModel").click(function () {
-            $("#makermodel").show();
-        });
-
-        $("#btnCancel").click(function () {
-            $("#makermodel").hide();
+        $("input[name=btnCancel]").click(function () {
+            if ($(this).val() == "+") {
+                $("#makermodel").show();
+            } else {
+                $("#makermodel").hide();
+            }
         });
     });
 </script>
@@ -63,7 +59,7 @@
             </div>
             <div class="actions btn-group btn-group-devided">
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                <input type="button" value="+" id="addMakerModel" class="fa fa-plus" style="font-size:40px;color:#0E5679;border:none;background-color:white;font-weight:600;" />
+                <input type="button" value="+" name="btnCancel" class="fa fa-plus" style="font-size:40px;color:#0E5679;border:none;background-color:white;font-weight:600;" />
 
                 <a href="#" style="background:white;border:white;color:#0E5679;"><i style="font-size:27px" class="fa">&#xf044;</i></a>
                 &nbsp; &nbsp;
@@ -115,7 +111,7 @@
             @Html.AntiForgeryToken()
             <input type="submit" onclick="AddModelDetails()"
                    class="fa fa-save" id="bu" value="&#xf0c7;" style="margin-left:6%;font-size:23px;color:#0E5679;background:white;border:white">
-            <input type="button" value="X" id="btnCancel" style="color:red;font-size:23px;border:none;background-color:white;" />
+            <input type="button" value="X" name="btnCancel" style="color:red;font-size:23px;border:none;background-color:white;" />
 
         </td>
 
