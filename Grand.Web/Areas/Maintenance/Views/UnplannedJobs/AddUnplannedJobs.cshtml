@@ -23,7 +23,7 @@
                 <table class="table" style="color:#0E5679;border-color:#0E5679;">
                     <tr>
                         <td style="border:none;">
-                            <select id="ddlFruits" name="EquipmentName" class="form-control valid" style="float:left;width:21%;color:#0E5679;border-color:#0E5679">
+                            <select id="ddlFruits" name="EquipmentName" class="form-control valid" style="float:left;width:18%;color:#0E5679;border-color:#0E5679">
                                 <option value="">Please select Equipment</option>
                                 @foreach (var item in Model)
                                 {
@@ -34,14 +34,14 @@
                                 }
                             </select>
                             <div style="float:left;position:relative;left:-2px;">
-                                <input type="text" class="form-control valid" readonly value="@JobOrder" name="JobOrder" id="n2" style="margin-left:30px;border-color:#0E5679;float:left;width:90%;height:auto;color:#0E5679;" />
+                                <input type="text" class="form-control valid" readonly value="@JobOrder" name="JobOrder" id="n2" style="margin-left:15%;border-color:#0E5679;float:left;width:110%;height:auto;color:#0E5679;" />
                             </div>
                             <div style="float:left;position:relative;left:36px;">
-                                <input type="text" class="form-control valid" placeholder="Description" name="Title" id="n3" style="border-color:#0E5679;margin-left:5px;float:left;width:100%;height:auto;color:#0E5679;" />
+                                <input type="text" class="form-control valid" placeholder="Description" name="Title" id="n3" style="border-color:#0E5679;margin-left:16%;float:left;width:110%;height:auto;color:#0E5679;" />
 
                             </div>
                             <div style="float:left;position:relative;">
-                                <input type="date" class="form-control valid" name="JobReportedDate" id="n4" style="border-color:#0E5679;margin-left:65px;float:left;width:89%;color:#0E5679;" />
+                                <input type="date" class="form-control valid" name="JobReportedDate" id="n4" style="border-color:#0E5679;margin-left:58%;float:left;width:110%;color:#0E5679;" />
 
                             </div>
                         </td>
@@ -49,7 +49,7 @@
                     <tr>
                         <td style="border:none;">
                             
-                            <select class="form-control show-tick" name="ReportedBy" style="float:left;width:21%;color:#0E5679;border-color:#0E5679">
+                            <select class="form-control show-tick" name="ReportedBy" style="float:left;width:18%;color:#0E5679;border-color:#0E5679">
                                 @foreach (var reporter in reporterList)
                                 {
 
@@ -60,7 +60,7 @@
 
                             </select>
                             <div style="float:left;position:relative;left:-2px;">
-                                <select class="form-control show-tick" name="Status" style="margin-left:30px;border-color:#0E5679;float:left;width:125%;height:auto;color:#0E5679;">
+                                <select class="form-control show-tick" name="Status" style="margin-left:21%;border-color:#0E5679;float:left;width:165%;height:auto;color:#0E5679;">
                                     @foreach (var status in statusList)
                                     {
 
