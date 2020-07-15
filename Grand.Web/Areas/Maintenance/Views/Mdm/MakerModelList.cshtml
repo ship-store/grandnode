@@ -118,13 +118,18 @@
     </tr>
     <tr>
         <td style="border:none;">
-            <div class="active-pink-3 active-pink-4 mb-4">
-                <input class="form-control" type="text" id="textSearchModel" placeholder="Search" aria-label="Search" style="max-width:212px;max-height:16px;color:#0E5679;">
-
+            <div class="row" id="SearchSection">
+                <div class="form-body col-md-6 advanced-filter">
+                    <div class="form-group">
+                        <input id="SearchInput" type="text" placeholder="Search.." class="form-control" style="max-width:212px;max-height:16px;color:#0E5679;border-width:1px;border-color:#0E5679;">
+                    </div>
+                </div>
+                <div class="x_content">
+                    <div id="MakerModelGrid"></div>
+                </div>
             </div>
         </td>
     </tr>
-
 
 
 
@@ -134,7 +139,7 @@
 @*</form>*@
 <div id="example">
     <antiforgery-token />
-    <div id="MakerModelGrid"></div>
+    
     <script>
         function LoadMakerModelGrid() {
              $("#MakerModelGrid").kendoGrid({
