@@ -6,15 +6,23 @@
 
             <div class="col-md-3" style="float:right">
                 <button onclick="AddEquipment('')"
-                   class="btn btn-success" style="width:auto;position:relative;right:-3%">
+                        class="btn btn-success" style="width:auto;position:relative;right:-3%">
                     <i class="fa fa-plus"></i>
                     @*<span class="hidden-xs">Add</span>*@
                 </button>
 
             </div>
+            <div class="col-md-3" style="float:right">
+                <button onclick="DeleteEquipment()"
+                        class="btn btn-success" style="width:auto;position:relative;right:-3%">
+                    <i class="fa fa-plus"></i>
+                    <span class="hidden-xs">Delete</span>
+                </button>
+
+            </div>
             <div class="col-md-4" style="float:left">
                 <button class="btn btn-success makeEditable col-md-offset-10 c"
-                        type="submit" name="Edit" style="width:auto;position:relative;right:-180%" 
+                        type="submit" name="Edit" style="width:auto;position:relative;right:-180%"
                         onclick="MakedropDownEditable()">
                     <i class="fa fa-pencil"></i>
 
@@ -26,7 +34,7 @@
             <form action="GeneralEdit" method="post">
                 <div class="col-md-2" style="float:right">
 
-                    <input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="width:33px;position:relative;right:-205%;height:33px;background:#0E5679;color:white;"  />
+                    <input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="width:33px;position:relative;right:-205%;height:33px;background:#0E5679;color:white;" />
 
                 </div>
 
@@ -81,7 +89,7 @@
                         </span>
                         <div class="form-line">
                             @*<input type="text" value="" style="color:#0E5679;" name="maker" class="form-control money-euro" placeholder="" id="id6"readonly="readonly">*@
-                       
+
                             <select name="maker" class="form-control money-euro"
                                     id="maker" style="color:#0E5679;border-color:#0E5679" disabled>
                                 <option id="makerValue"></option>
@@ -94,7 +102,7 @@
 
                                 }
                             </select>
-                        
+
                         </div>
                     </div>
                 </div>
@@ -131,21 +139,21 @@
                             <i class="material-icons">turned_in_not</i>
                         </span>
                         <div class="form-line">
-        @*<input type="text" name="eqtype" value="" class="form-control money-euro" placeholder="" id="id8" readonly="readonly">
-                  @*<input type="text" id="eqptype_">*@
-                          <select name="eqtype" class="form-control money-euro" id="eqptype" style="color:#0E5679;border-color:#0E5679" disabled>
-                            <option id="dvalue"></option>
-                            @foreach (var item in Model.EquipmentTypeList)
-                            {
+                            @*<input type="text" name="eqtype" value="" class="form-control money-euro" placeholder="" id="id8" readonly="readonly">
+                        @*<input type="text" id="eqptype_">*@
+                            <select name="eqtype" class="form-control money-euro" id="eqptype" style="color:#0E5679;border-color:#0E5679" disabled>
+                                <option id="dvalue"></option>
+                                @foreach (var item in Model.EquipmentTypeList)
+                                {
 
 
-                                <option class="form-control money-euro" > @item</option>
+                                    <option class="form-control money-euro"> @item</option>
 
-                            }
-                        </select>
-                            </div>  
-
+                                }
+                            </select>
                         </div>
+
+                    </div>
                 </div>
 
 
@@ -231,16 +239,16 @@
                     </div>
                 </div>
                 @*<div class="col-md-4">
-                    <b>Universal Job Code</b>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">turned_in_not</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="text" value="" name="type" class="form-control money-euro" placeholder="" readonly="readonly">
-                        </div>
+                <b>Universal Job Code</b>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">turned_in_not</i>
+                    </span>
+                    <div class="form-line">
+                        <input type="text" value="" name="type" class="form-control money-euro" placeholder="" readonly="readonly">
                     </div>
-                </div>*@
+                </div>
+            </div>*@
                 @Html.AntiForgeryToken()
             </form>
         </div>
@@ -375,4 +383,15 @@
         $("#makerModel").removeAttr('disabled');
     }
 
+    function DeleteEquipment() {
+        alert("Hello");
+        $("#divTreeView").empty();
+
+        $("#divTreeView").load("TreeView",ViewModel);
+       // $("#divTreeView").show();
+    }
+
 </script>
+
+
+

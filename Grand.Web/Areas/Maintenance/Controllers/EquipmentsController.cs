@@ -226,6 +226,70 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
 
         [HttpGet]
+        public async Task<IActionResult> JsonList(string equipmentCode)
+        {
+            try
+            {
+                //Load tree first
+                var VesselName = HttpContext.Session.GetString("VesselName").ToString();
+                if (VesselName != null)
+                {
+                    List<Equipment> equipmentList = new List<Equipment>();
+                    List<EquipmentModel> equipmentModels = new List<EquipmentModel>();
+                    var equipments = await _equipmentService.GetAllEquipment("Equipment", 0, 500, true);
+                    List<Equipment> selectedEquipment = new List<Equipment>();
+                    foreach (Equipment item in equipments)
+                    {
+                        if (item.Vessel.ToLower() == VesselName.ToLower())
+                        {
+                            selectedEquipment.Add(item);
+                        }
+                    }
+                    ViewModel vm = new ViewModel();
+                    vm.AllEquipments = selectedEquipment;
+
+                    #region DatafromCbmType
+                    //var equiomentList= await _cbmMappingViewModelService.GetAllCbmMappingAsList("");
+                    //List<string> equipmentTypetList = new List<string>();
+                    //foreach (var item in equiomentList)
+                    //{
+
+                    //    equipmentTypetList.Add(item.equipmentComponent);
+                    //}
+                    //vm.EquipmentTypeList = equipmentTypetList;
+                    #endregion
+
+                    List<string> equipmentTypetList = new List<string>();
+                    var equipmentTypes = await _equipmentTypeService.GetAllEquipmentTypes("", 0, 500, true);
+                    foreach (var item in equipmentTypes)
+                    {
+
+                        equipmentTypetList.Add(item.Equipment_type);
+                    }
+                    vm.EquipmentTypeList = equipmentTypetList.Distinct().ToList();
+
+                    var makers = await _makerService.GetAllMakers("", 0, 500, true);
+
+                    vm.Makers = makers.ToList();
+
+                    var Result= JsonConvert.SerializeObject(vm);
+
+                    return Json(Result);
+
+                }
+                else
+                {
+                    return RedirectToAction("Success", "Register");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return RedirectToAction("Success", "Register");
+            }
+        }
+
+
+        [HttpGet]
         public async Task<IActionResult> ReadMakerModelDetails(string Id, string MakerName)
         {
             var ModelList= await _makerService1.GetAllMakers("", 0, 100);
