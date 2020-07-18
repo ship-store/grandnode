@@ -1,0 +1,135 @@
+﻿@model ViewModel
+@inject AdminAreaSettings adminAreaSettings
+@{
+    var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
+    var SessionVar = @HttpContextAccessor.HttpContext.Session.GetString("email");
+    if (VesselName == null)
+    {
+        <script>
+
+        $(window).load(function(){
+            swal({
+
+                title: 'Vessel Not Selected!',
+                allowOutsideClick: false,
+                text: 'Please select a Vessel',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function () {
+                    window.location.href = '@Url.Action("VesselList","Vessel")';
+                })
+
+            });
+
+        </script>
+    }
+
+    if (SessionVar == null)
+    {
+        <script>
+
+            $(window).load(function ()
+            {
+            swal({
+
+                title: 'TimeOut!',
+                allowOutsideClick: false,
+                text: '"Time Out! , Please Login"',
+                background: 'white',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#48b4e0',
+            })
+                .then(function ()
+                {
+                    window.location.href = '@Url.Action("LoginPage","Register")';
+                })
+
+            });
+
+        </script>
+    }
+
+}
+
+@*<ul id="treeview" style="height:621px; overflow:auto; font-size:small;">
+    <li class="data">
+        <span style="color: #7273a3;font-size:14px">EQUIPMENTS</span>
+        <ul>
+
+            @foreach (var item in Model.AllEquipments.Where(f => f.Sub1_number != null && f.Sub1_description != null))
+            {
+                // var lastNode1 = Model.AllEquipments.Where(f => f.Sub1_number != null && f.Sub1_description != null).Last().Sub1_number;
+                <li class="data">
+
+                    <span>
+                        <a onclick="equipmentSelected(this); return false;" style="color: #7273a3"
+                           alt="Sub1_number-Sub1_description-@item.Id">@item.Sub1_number-@item.Sub1_description</a>
+                    </span>
+
+                    <ul>
+                        @foreach (var item2 in Model.AllEquipments.Where(f => f.Sub2_number != null && f.Sub2_description != null && f.Type == item.Type))
+                        {
+
+                            // var  lastNode2 = Model.AllEquipments.Where(f => f.Sub2_number != null && f.Sub2_description != null && f.Type == item.Type).Last().Sub2_number;
+                            <li class="data">
+
+                                <a class="id1" href="#" onclick="equipmentSelected(this); return false;"
+                                   style="color:#7273a3"
+                                   alt="Sub2_number-Sub2_description-@item2.Id">@item2.Sub2_number-@item2.Sub2_description</a>
+
+
+                                <ul>
+
+                                    @foreach (var item3 in Model.AllEquipments.Where(f => f.Sub3_number != null && f.Sub3_description != null && f.Type == item2.Type))
+                                    {
+                                        // var lastNode3 = Model.AllEquipments.Where(f => f.Sub3_number != null && f.Sub3_description != null && f.Type == item2.Type).Last().Sub3_number;
+                                        <li class="data">
+                                            <a onclick="equipmentSelected(this); return false;" style="color:#7273a3"
+                                               alt="Sub3_number-Sub3_description-@item3.Id">@item3.Sub3_number-@item3.Sub3_description</a>
+                                            <ul>
+                                            </ul>
+
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+
+                        }
+
+                    </ul>
+                </li>
+
+
+            }
+        </ul>
+    </li>
+</ul>*@
+
+<script>
+    $(function () {
+
+          $.ajax({
+                          type: "GET",
+                            url: "@Url.Action("JsonList")" + "?equipmentCode=" + 'hai',
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                                alert("Success");
+                                var results = JSON.parse(datas);
+                                alert(results);
+                                for (var i = 0; i < results[1].length; i++) {
+                                    alert("hai");
+                                        alert("hi"+data[1].AllEquipments.Sub1_number);
+                                        
+                                    }
+                                }
+
+                        });
+
+    });
+
+</script>
+<h1>Tree View</h1>
