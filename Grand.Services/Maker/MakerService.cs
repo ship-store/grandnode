@@ -50,6 +50,15 @@ namespace Grand.Services.Maker
 
 
         }
+        public virtual Task<Core.Domain.MakerEntity.Maker> GetMakerById(string makerId)
+        {
+            return _makerRepository.GetByIdAsync(makerId);
+        }
+        public virtual async Task UpdateMaker(Core.Domain.MakerEntity.Maker maker)
+        {
+            await _makerRepository.UpdateAsync(maker);
+        }
+
 
     }
 }

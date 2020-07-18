@@ -10,11 +10,11 @@
     .center {
   margin: auto;
   width: 40%;
-  border: 3px solid #0E5679;
-  background-color:#0E5679;
-  color:white;
+  border: 2px solid #0E5679;
+  background-color:white;
+  color:#0E5679;
   padding: 10px;
-  font-size:medium;
+  font-size:15px;
  white-space:normal;
  font-weight:100;
  height:200px;
@@ -51,7 +51,7 @@
                         <tr style="width:10%;border:none;">
                             <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;margin-left: 80px;">Select Equipment type</label></td>
                             <td style="border:none;">
-                                <select class="form-control show-tick" name="equipmentComponent" id="test" style="color:#0E5679;margin-left: 200px;width: 300px;">
+                                <select class="form-control show-tick" name="equipmentComponent" id="test" style="color:#0E5679;margin-left: 20%;width: 300px;">
                                     <option selected disabled>Select</option>
                                     @foreach (var item in Model.EquipmentTypeList.Distinct().ToList())
                                     {
@@ -69,7 +69,8 @@
                             <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;margin-left: 80px;">Select Job code</label></td>
 
                             <td style="border:none;">
-                                <select class="form-control show-tick" style="color:#0E5679;margin-left: 200px;width: 300px;">
+                                <select class="form-control show-tick" style="color:#0E5679;margin-left: 20%;width: 300px;">
+                                    <option selected disabled>Select</option>
                                     @foreach (var item3 in Model.JobplansList)
                                     {
                                         @if (item3.UniversalJobCode != null)
@@ -104,21 +105,20 @@
                 </h2>
             </div>*@
         <div class="center">
-            @*&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;*@
-            <br />
+           <br />
             @foreach (var item2 in Model.cbmList)
             {
 
 
-                <input type="checkbox" id="@item2.Id" class="filled-in" name="Cbm_Name1" value="@item2.Cbm_Name" style="word-spacing:4px;" />
+                <input type="checkbox" id="@item2.Id" class="filled-in" name="Cbm_Name1" value="@item2.Cbm_Name" style="margin-left:5%" />
 
 
                 @item2.Cbm_Name
-
+                
 
             }
 
-
+            
         </div>
 
 

@@ -11,9 +11,10 @@
     <div class="col-md-12">
         <div class="x_panel light form-fit">
             <div class="x_title">
-                <div class="caption">
-                    <i class="fa fa-list-alt"></i>
-                    Import Sparepart
+                <div class="caption" style="color:#0E5679;font-weight:900">
+                    <i class="fa fa-cubes" style="color:#0E5679"></i>
+
+                    IMPORT SPAREPART
                 </div>
                 <div class="actions btn-group btn-group-devided">
                   
@@ -21,12 +22,10 @@
                 </div>
             </div>
             <div class="x_content form">
-                <div class="note note-info">
-                    <h4>Import Products Wizard:</h4>
+                <div class="note note-info" style="border-color:#0E5679;color:#0E5679;">
+                    <h4>Import Sparepart Wizard:</h4>
                     <ol>
                         <li>Make sure the file is <b>.xlsx</b>.</li>
-                        <li>Make sure there is NO Formula in the excel.</li>
-                        <li>Categories : Multiple categories can be entered by seperating with semicolon (;)</li>
                         <li>Import can take up to several minutes.</li>
                     </ol>
                 </div>
@@ -105,7 +104,7 @@
     });
 </script>
 
-<div class="modal-dialog" id="importfile-window" style="display:none; padding: 0 10px;">
+<div class="modal-dialog" id="importfile-window" style="display:none; padding: 0 10px;color:#0E5679">
     <form asp-controller="SparepartImport" asp-action="ImportExcel" method="post" enctype="multipart/form-data">
         <antiforgery-token />
         <ul class="common-list">

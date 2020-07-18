@@ -15,6 +15,8 @@
             <div class="caption" style="color:#0E5679;font-weight:900;font-size:medium;">
                 <i class="fa fa-cubes" style="color:#0E5679"></i>
                 ADD EQUIPMENT
+                <a asp-controller="Equipments" asp-action="List" style="font-size:20px;color:#0E5679;float:right;margin-right:1%;"><i class="fa fa-close"></i></a>
+
             </div>
 
             
@@ -29,16 +31,16 @@
                         <td style="border:none;">
 
 
-                            <input type="text" class="form-control valid" placeholder="Equipment name" name="Sub1_description" required style="float:left;width:21%;color:#0E5679;border-color:#0E5679" />
+                            <input type="text" class="form-control valid" placeholder="Equipment name" name="Sub1_description" required style="float:left;width:16%;color:#0E5679;border-color:#0E5679" />
                             <input type="hidden" value="@ViewBag.EquipmentId" name="Id" />
                             <div style="float:left;position:relative;left:-2px;">
                                 <input type="text" class="form-control valid" name="Sub1_number"
-                                       value="@ViewBag.equipment_Code" placeholder="Equipment Code" required id="eqpCode" style="margin-left:30px;border-color:#0E5679;float:left;width:90%;height:auto;color:#0E5679;" />
+                                       value="@ViewBag.equipment_Code" placeholder="Equipment Code" required id="eqpCode" style="margin-left:17%;border-color:#0E5679;float:left;width:104%;height:auto;color:#0E5679;" />
 
                                 <input type="hidden" value="@ViewBag.subNumber" />
                             </div>
                             <div style="float:left;position:relative;left:36px;">
-                                <select class="form-control show-tick chosen" id="chose" name="Equipment_Type" required style="border-color:#0E5679;margin-left:5px;float:left;width:89%;height:auto;color:#0E5679;">
+                                <select class="form-control show-tick chosen" id="chose" name="Equipment_Type" required style="border-color:#0E5679;margin-left:16%;float:left;width:89%;height:auto;color:#0E5679;">
 
                                     <option value=""></option>
                                     @foreach (var item in Model)
@@ -51,47 +53,54 @@
 
                             </div>
                             <div style="float:left;position:relative;">
-                                <input type="text" class="form-control valid" placeholder="Safety level" name="Safety_level" style="border-color:#0E5679;margin-left:40px;float:left;width:89%;height:auto;color:#0E5679;" />
+                                <input type="text" class="form-control valid" placeholder="Safety level" name="Safety_level" style="border-color:#0E5679;margin-left:42%;float:left;width:104%;height:auto;color:#0E5679;" />
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td style="border:none;">
-                            <input type="text" class="form-control valid" placeholder="Flag" name="Flag" style="float:left;width:21%;color:#0E5679;border-color:#0E5679" />
+                            <input type="text" class="form-control valid" placeholder="Flag" name="Flag" style="float:left;width:16%;color:#0E5679;border-color:#0E5679" />
                             <div style="float:left;position:relative;left:-2px;">
-                                <input type="text" class="form-control valid" placeholder="Drawing number" name="Drawing_no" style="margin-left:30px;border-color:#0E5679;float:left;width:90%;height:auto;color:#0E5679;" />
+                                <input type="text" class="form-control valid" placeholder="Drawing number" name="Drawing_no" style="margin-left:16%;border-color:#0E5679;float:left;width:104%;height:auto;color:#0E5679;" />
                             </div>
                             <div style="float:left;position:relative;left:36px;">
 
-                                <input type="text" class="form-control valid" placeholder="Department" name="Department" style="border-color:#0E5679;margin-left:5px;float:left;width:100%;height:auto;color:#0E5679;" />
+                                <input type="text" class="form-control valid" placeholder="Department" name="Department" style="border-color:#0E5679;margin-left:19%;float:left;width:104%;height:auto;color:#0E5679;" />
                             </div>
                             <div style="float:left;position:relative;">
-                                <input type="text" class="form-control valid" placeholder="Location" name="Location" style="border-color:#0E5679;margin-left:65px;float:left;width:80%;height:auto;color:#0E5679;" />
+                                <input type="text" class="form-control valid" placeholder="Location" name="Location" style="border-color:#0E5679;margin-left:56%;float:left;width:104%;height:auto;color:#0E5679;" />
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td style="border:none;">
 
-                            <input type="text" class="form-control valid" placeholder="Equipment Status" name="Equipment_Status" style="float:left;width:21%;color:#0E5679;border-color:#0E5679" />
+                            <input type="text" class="form-control valid" placeholder="Equipment Status" name="Equipment_Status" style="float:left;width:16%;color:#0E5679;border-color:#0E5679" />
                             <div style="float:left;position:relative;left:-2px;">
-                                <input type="text" readonly class="form-control valid" name="Vessel" value="@ViewBag.VesselName" style="margin-left:30px;border-color:#0E5679;float:left;width:90%;height:auto;color:#0E5679;" />
+                                <input type="text" readonly class="form-control valid" name="Vessel" value="@ViewBag.VesselName" style="margin-left:16%;border-color:#0E5679;float:left;width:104%;height:auto;color:#0E5679;" />
 
                             </div>
                             <div style="float:left;position:relative;left:36px;">
-                                <input type="text" class="form-control valid" placeholder="Remark" name="Remark" style="border-color:#0E5679;margin-left:5px;float:left;width:100%;height:auto;color:#0E5679;" />
+                                <input type="text" class="form-control valid" placeholder="Remark" name="Remark" style="border-color:#0E5679;margin-left:19%;float:left;width:104%;height:auto;color:#0E5679;" />
 
                             </div>
                         </td>
                     </tr>
                     <tr>
                         @Html.AntiForgeryToken()
-                        <td style="border:none;"><input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="float:right;right:270px;width:30px;position:relative;height:30px;background-color:#0E5679;color:white;" id="submit" /></td>
+                        <td style="border:none;">
+                            <input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="float:right;right:29%;width:30px;position:relative;height:30px;background-color:#0E5679;color:white;" id="submit" />
+                            
+                        </td>
+
+
                     </tr>
-                   
+
+
                 </table>
-                   
+
             </form>
+           
         </div>
     </div>
 </div>

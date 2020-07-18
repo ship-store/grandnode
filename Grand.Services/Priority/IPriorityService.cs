@@ -17,5 +17,7 @@ namespace Grand.Services.Priority
            Task PreparePriorityModel(Grand.Core.Domain.PriorityEntity.Priority model1, object p, bool v);
        
         Task InsertPriority(Core.Domain.PriorityEntity.Priority priority);
+        Task UpdatePriority(Core.Domain.PriorityEntity.Priority priority);
+        Task<Core.Domain.PriorityEntity.Priority> GetPriorityById(string Id);
     }
 }

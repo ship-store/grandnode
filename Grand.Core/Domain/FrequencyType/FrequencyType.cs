@@ -10,6 +10,8 @@ namespace Grand.Core.Domain.FrequencyTypeEntity
     {
         
         public string Frequency_type{ get; set; }
-        
+        public int DeleteStatus { get; set; }
+
+
     }
 }

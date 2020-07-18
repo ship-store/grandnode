@@ -10,6 +10,7 @@ namespace Grand.Core.Domain.EquipmentStatusEntity
     {
         
         public string Status{ get; set; }
-        
+        public int DeleteStatus { get; set; }
+
     }
 }

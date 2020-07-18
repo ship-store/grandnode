@@ -17,5 +17,7 @@ namespace Grand.Services.Maker
            Task PrepareMakerModel(Grand.Core.Domain.MakerEntity.Maker1 model1, object p, bool v);
        
         Task InsertMaker(Core.Domain.MakerEntity.Maker1 maker);
+        Task<Core.Domain.MakerEntity.Maker1> GetMakerModelById(string Id);
+        Task UpdateMakerModel(Core.Domain.MakerEntity.Maker1 makerModel);
     }
 }

@@ -17,5 +17,7 @@ namespace Grand.Services.FrequencyType
            Task PrepareFrequencyTypeModel(Grand.Core.Domain.FrequencyTypeEntity.FrequencyType model1, object p, bool v);
        
         Task InsertFrequencyType(Core.Domain.FrequencyTypeEntity.FrequencyType frequencyType);
+        Task<Core.Domain.FrequencyTypeEntity.FrequencyType> GetFrequencyTypeById(string Id);
+        Task UpdateFrequencyType(Core.Domain.FrequencyTypeEntity.FrequencyType frequencyType);
     }
 }

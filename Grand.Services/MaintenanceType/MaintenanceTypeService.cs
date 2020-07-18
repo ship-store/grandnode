@@ -50,6 +50,14 @@ namespace Grand.Services.MaintenanceType
 
 
         }
+        public virtual Task<Core.Domain.MaintenanceTypeEntity.MaintenanceType> GetMaintenanceTypeById(string maintenanceTypeId)
+        {
+            return _maintenanceTypeRepository.GetByIdAsync(maintenanceTypeId);
+        }
+        public virtual async Task UpdateMaintenanceType(Core.Domain.MaintenanceTypeEntity.MaintenanceType maintenanceType)
+        {
+            await _maintenanceTypeRepository.UpdateAsync(maintenanceType);
+        }
 
     }
 }

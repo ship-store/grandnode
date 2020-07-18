@@ -50,6 +50,15 @@ namespace Grand.Services.EquipmentStatus
 
 
         }
+        public virtual Task<Core.Domain.EquipmentStatusEntity.EquipmentStatus> GetEquipmentStatusById(string equipmentStatusId)
+        {
+            return _equipmentStatusRepository.GetByIdAsync(equipmentStatusId);
+        }
+        public virtual async Task UpdateEquipmentStatus(Core.Domain.EquipmentStatusEntity.EquipmentStatus equipmentStatus)
+        {
+            await _equipmentStatusRepository.UpdateAsync(equipmentStatus);
+        }
+
 
     }
 }
