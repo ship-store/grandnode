@@ -15,6 +15,8 @@
             <div class="caption" style="color:#0E5679;font-weight:900;font-size:medium;">
                 <i class="fa fa-cubes" style="color:#0E5679"></i>
                 ADD EQUIPMENT
+                <a asp-controller="Equipments" asp-action="List" style="font-size:20px;color:#0E5679;float:right;margin-right:1%;"><i class="fa fa-close"></i></a>
+
             </div>
 
             
@@ -87,17 +89,18 @@
                     <tr>
                         @Html.AntiForgeryToken()
                         <td style="border:none;">
-                            <input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="float:right;right:32%;width:30px;position:relative;height:30px;background-color:#0E5679;color:white;" id="submit" />
-                            <button style="font-size:18px;color:red;float:right;margin-right:26%;max-width: 30px;max-height: 30px;background-color: #0e5679;"><i class="fa fa-close"></i></button>
+                            <input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="float:right;right:29%;width:30px;position:relative;height:30px;background-color:#0E5679;color:white;" id="submit" />
+                            
                         </td>
-                        
+
 
                     </tr>
-                   
-    
+
+
                 </table>
-                   
+
             </form>
+           
         </div>
     </div>
 </div>
