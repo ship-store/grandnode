@@ -52,6 +52,7 @@
                         <td style="border:none;">
                             
                             <select class="form-control show-tick" name="ReportedBy" style="float:left;width:18%;color:#0E5679;border-color:#0E5679">
+                                <option value="">Reported by</option>
                                 @foreach (var reporter in reporterList)
                                 {
 
@@ -63,6 +64,7 @@
                             </select>
                             <div style="float:left;position:relative;left:-2px;">
                                 <select class="form-control show-tick" name="Status" style="margin-left:21%;border-color:#0E5679;float:left;width:165%;height:auto;color:#0E5679;">
+                                    <option value="">Status</option>
                                     @foreach (var status in statusList)
                                     {
 
@@ -80,10 +82,7 @@
                         @Html.AntiForgeryToken()
                         <td style="border:none;"><input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="float:right;right:21%;width:30px;position:relative;height:30px;background-color:#0E5679;color:white;" id="submit" /></td>
                     </tr>
-                    @*<tr>
-                        @Html.AntiForgeryToken()
-                        <td><input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="width:35px;position:relative;height:33px;background-color:#0E5679;color:white;" id="submit" /></td>
-                    </tr>*@
+                   
                 </table>
                    
             </form>
