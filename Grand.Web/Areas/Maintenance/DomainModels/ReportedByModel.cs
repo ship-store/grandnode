@@ -11,5 +11,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
     public class ReportedByModel : BaseGrandEntityModel
     {
         public string Reported_By { get; set; }
+        public int DeleteStatus { get; set; }
+
     }
 }
