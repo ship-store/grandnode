@@ -1,13 +1,13 @@
-﻿<div class="x_title">
+﻿@inject AdminAreaSettings adminAreaSettings
+
+<div class="x_title">
     <div class="actions">
         <div class="btn-group btn-group-devided util-btn-margin-bottom-5">
-            <button type="button" id="btnSelectRow" value="GetValue" class="btn green" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" aria-hidden="true"></i></button>
+            <button type="button" id="btnSelectRow1" value="GetValue" class="btn green" data-toggle="modal" data-target="#myModal1"><i class="fa fa-eye" aria-hidden="true"></i></button>
+
             <a href="@Url.Action("AddSparepart")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> </span></a>
             <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-            @*<button type="button" name="delete-selected" id="delete-selected" class="btn red">
-                    <i class="fa fa-trash-o"></i>
-                    @T("Admin.Common.Delete.Selected")
-                </button>*@
+
         </div>
     </div>
 </div>
@@ -20,7 +20,7 @@
     <script>
         $(document).ready(function () {
             loadSpareparts();
-            $("#btn2").click(function () {
+            $("#btn1").click(function () {
 
                   loadSpareparts();
 
@@ -145,7 +145,7 @@
                     function additionalData() {
 
                 var data = { selectedEquipmentCode : window["selectedEquipmentCode"] };
-                //data.selectedEquipmentCode = window["selectedEquipmentCode"];
+                data.selectedEquipmentCode = window["selectedEquipmentCode"];
                        // alert("Equipment Selected=_"+ window["selectedEquipmentCode"]);
                 addAntiForgeryToken(data);
                 return data;
@@ -153,7 +153,187 @@
 
 
     </script>
-
-
 </div>
+<script>
+    $("#btnSelectRow1").click(function () {
+
+        var grid = $("#grid3").data("kendoGrid");
+        var selectedItem = grid.dataItem(grid.select());
+
+        $("#lblEquipmentCode").text(selectedItem.EquipmentCode);
+        $("#lblEquipmentName").text(selectedItem.EquipmentName);
+        $("#lblSPAR_PARTS_DESCRIPTION").text(selectedItem.SPAR_PARTS_DESCRIPTION);
+        $("#lblPART_NUMBER").text(selectedItem.PART_NUMBER);
+        $("#lblDRAWING_NO").text(selectedItem.DRAWING_NO);
+        $("#lblSPECIFICATION").text(selectedItem.SPECIFICATION);
+        $("#lblPOSITION_NUMBER").text(selectedItem.POSITION_NUMBER);
+
+
+        var ecode = selectedItem.EquipmentCode;
+        var EquipmentName = selectedItem.EquipmentName;
+        var SparepartDescription = selectedItem.SPAR_PARTS_DESCRIPTION;
+        var PartNo = selectedItem.PART_NUMBER;
+        var Specification = selectedItem.SPECIFICATION;
+        //var lastDoneDate = selectedItem.LAST_DONE_DATE;
+        var PositionNumber = selectedItem.POSITION_NUMBER;
+
+        document.getElementById("EquipmentCode").value = ecode;
+        document.getElementById("EquipmentName").value = EquipmentName;
+        document.getElementById("Sparepart").value = SparepartDescription;
+        document.getElementById("PartNo").value = PartNo;
+        document.getElementById("Specification").value = Specification;
+        document.getElementById("PositionNo").value = PositionNumber;
+
+
+    })
+</script>
+
+<div id="myModal1" class="modal fade" role="dialog" style="top:auto;">
+
+    <div class="modal-content">
+        <div class="modal-header">
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="caption" style="color:#0E5679;font-weight:900">
+                <i class="fa fa-cubes" style="color:#0E5679"></i>
+                SPAREPART DETAILS
+            </div>
+        </div>
+
+        <div class="modal-body" style="height:350px;overflow:auto;border:10px;border-color:#0E5679;">
+
+            <div id="example">
+                <div class="demo-section k-content">
+                    <div id="tabstrip" style="color:#0E5679;">
+                        
+                        <div>
+                            <span class="rainy">&nbsp;</span>
+                            <div class="row clearfix">
+
+                                <div class="col-md-3">
+                                    <b>Equipment Code</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="EquipmentCode" readonly value="" class="form-control money-euro" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <b>Equipment Name</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+
+                                            <input type="text" id="EquipmentName" readonly value="" class="form-control time24" placeholder="">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <b>Sparepart Description</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="Sparepart" readonly value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <b>Part Number</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="PartNo" readonly value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <b>Specification</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="Specification" readonly value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <b>Position Number</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">turned_in_not</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" id="PositionNo" readonly value="" class="form-control key" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <style>
+
+
+
+                    #tabstrip h2 {
+                        font-weight: lighter;
+                        font-size: 5em;
+                        line-height: 1;
+                        padding: 0 0 0 30px;
+                        margin: 0;
+                    }
+
+                        #tabstrip h2 span {
+                            background: none;
+                            padding-left: 5px;
+                            font-size: .3em;
+                            vertical-align: top;
+                        }
+
+                    #tabstrip p {
+                        margin: 0;
+                        padding: 0;
+                    }
+                </style>
+
+                <script>
+                    $(document).ready(function () {
+                        $("#tabstrip").kendoTabStrip({
+                            animation: {
+                                open: {
+                                    effects: "fadeIn"
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+</div>
+
 

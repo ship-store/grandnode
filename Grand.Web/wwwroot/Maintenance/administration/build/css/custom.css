@@ -5472,7 +5472,7 @@ a span.username {
 .form .form-bordered .form-group>div {
     padding: 15px;
 }
-
+5
 .btn.yellow:not(.btn-outline) {
     color: #fff;
     background-color: #c49f47;
@@ -5485,7 +5485,7 @@ a span.username {
 
 .x_title .caption {
     float: left;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 18px;
     font-weight: 400;
     align-self: flex-start;
@@ -6188,7 +6188,7 @@ form>h4 {
 }
 .k-window-title
 {
-    color:#000;
+    color:#0E5679;
 }
 
 .k-grid.k-widget {

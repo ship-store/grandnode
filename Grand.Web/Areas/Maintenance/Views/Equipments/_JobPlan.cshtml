@@ -11,11 +11,7 @@
 
 
             <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-            @*<button type="button" name="delete-selected" id="delete-selected" class="btn red">
-                    <i class="fa fa-trash-o"></i>
-                    @T("Admin.Common.Delete.Selected")
-                </button>*@
-        </div>
+           </div>
     </div>
 </div>
 
@@ -31,13 +27,9 @@
     <script>
         var eqp=sessionStorage.getItem("EquipmentCode")
         $(document).ready(function () {
-            // alert("hai");
             loadJobPlan();
             $("#btn1").click(function () {
-                  //  alert("hello");
-                    // alert("n="+ );
                 loadJobPlan();
-                  //alert("hai");
               });
 
         });
@@ -136,18 +128,18 @@
 
                          {
                             field: "CalFrequency",
-                            title: "Frequency",
+                            title: "Cal Frequency",
                             width: "120px"
                         },
                          {
                             field: "RunFrequency",
-                            title: "Frequency",
+                            title: "Run Frequency",
                             width: "120px"
                         },
                           {
                             field: "FrequencyType",
                             title: "Frequency Type",
-                            width: "170px"
+                            width: "150px"
                         },
                          {
                             field: "Department",
@@ -159,11 +151,7 @@
                             title: "Job Title",
                             width: "200px"
                         },
-                        {
-                            field: "Maintenance_Type",
-                            title: "Maintenance Type",
-                            width: "170px"
-                        },
+                        
                         {
                             field: "LAST_DONE_DATE",
                             title: "Last Done Date",

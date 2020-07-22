@@ -14,10 +14,12 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
         <div class="header">
-              <div class="caption" style="color:#0E5679;font-weight:900;font-size:medium;">
-                    <i class="fa fa-cubes" style="color:#0E5679"></i>
-                    ADD UNPLANNED JOB
-                </div>
+            <div class="caption" style="color:#0E5679;font-weight:900;font-size:medium;">
+                <i class="fa fa-cubes" style="color:#0E5679"></i>
+                ADD UNPLANNED JOB
+                <a asp-controller="BreakdownJob" asp-action="List" style="font-size:20px;color:#0E5679;float:right;margin-right:1%;"><i class="fa fa-close"></i></a>
+
+            </div>
             
            
         </div>
@@ -57,6 +59,7 @@
                                 <td style="border:none;">
 
                                     <select class="form-control show-tick" name="ReportedBy" style="float:left;width:18%;color:#0E5679;border-color:#0E5679">
+                                       <option>Reported by</option>
                                         @foreach (var reporter in reporterList)
                                         {
 
@@ -68,6 +71,7 @@
                                     </select>
                                     <div style="float:left;position:relative;left:-2px;">
                                         <select class="form-control show-tick" name="Status" style="margin-left:23%;border-color:#0E5679;float:left;width:165%;height:auto;color:#0E5679;">
+                                           
                                             @foreach (var status in statusList)
                                             {
 

@@ -5,7 +5,11 @@
 
 }
 <!DOCTYPE html>
-
+<style>
+    .bcolor{
+        background-color:#0E5679;
+    }
+</style>
 @{
     var VesselName = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
     var SessionVar = @HttpContextAccessor.HttpContext.Session.GetString("email");
@@ -86,8 +90,9 @@
 
     <section class="content">
         <div class="container-fluid">
-            <div class="block-header">
-                <h2>STATISTICS</h2>
+            <div class="caption" style="color: #0E5679; font-weight: 900;font-size:20px;">
+                <i class="fa fa-cubes" style="color:#0E5679"></i>
+                STATISTICS
             </div>
 
             <!-- Widgets -->
@@ -153,31 +158,34 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
-                    <h2>
-                        DUE FOR THE DAY
-                    </h2>
+
+                    <div class="caption" style="color: #0E5679;font-weight: 900">
+                        <i class="fa fa-cubes" style="color:#0E5679"></i>
+                       DUE FOR THE DAY
+                    </div>
+
                     @*<ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="javascript:void(0);">Action</a></li>
-                                    <li><a href="javascript:void(0);">Another action</a></li>
-                                    <li><a href="javascript:void(0);">Something else here</a></li>
-                                </ul>
-                            </li>
-                        </ul>*@
+            <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="javascript:void(0);">Action</a></li>
+                    <li><a href="javascript:void(0);">Another action</a></li>
+                    <li><a href="javascript:void(0);">Something else here</a></li>
+                </ul>
+            </li>
+        </ul>*@
                 </div>
                 <div class="body">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                             <thead>
                                 <tr>
-                                    <th>Job Order</th>
-                                    <th>Equipment Code</th>
-                                    <th>Equipment Name</th>
-                                    <th>Job Title</th>
+                                    <th class="bcolor">Job Order</th>
+                                    <th class="bcolor">Equipment Code</th>
+                                    <th class="bcolor">Equipment Name</th>
+                                    <th class="bcolor">Job Title</th>
                                 </tr>
                             </thead>
                             @*<tfoot>
