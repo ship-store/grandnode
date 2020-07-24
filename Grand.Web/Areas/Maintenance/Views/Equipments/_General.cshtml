@@ -372,7 +372,10 @@
     function MakedropDownEditable() {
         $("#eqptype").removeAttr('disabled');
         $("#maker").removeAttr('disabled');
-        $("#makerModel").removeAttr('disabled');
+        $("#maker").click(function () {
+
+              $("#makerModel").removeAttr('disabled');
+        });
     }
 
 </script>
