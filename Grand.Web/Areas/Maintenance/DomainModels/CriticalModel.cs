@@ -11,5 +11,6 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
     public class CriticalModel : BaseGrandEntityModel
     {
         public string Criticals { get; set; }
+
     }
 }
