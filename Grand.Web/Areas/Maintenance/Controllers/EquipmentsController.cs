@@ -171,6 +171,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
 
             var selectedEquipments = await _equipmentService.GetAllEquipment("", 0, 500, true);
+
+
             var SelectedEquipment = selectedEquipments.ToList().Where(src => src.Sub2_number == equipmentCode || src.Sub1_number == equipmentCode || src.Sub3_number == equipmentCode || src.Sub4_number == equipmentCode).First();
           
             await _equipmentService.RemoveEquipment(SelectedEquipment);
@@ -191,7 +193,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     List<EquipmentModel> equipmentModels = new List<EquipmentModel>();
                     var equipments = await _equipmentService.GetAllEquipment("Equipment", 0, 500, true);
                     List<Equipment> selectedEquipment = new List<Equipment>();
-                    foreach (Equipment item in equipments)
+                    foreach (Equipment item in equipments.Where(x=>x.DeleteStatus==0))
                     {
                         if (item.Vessel.ToLower() == VesselName.ToLower())
                         {

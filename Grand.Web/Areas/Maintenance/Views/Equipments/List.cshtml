@@ -103,7 +103,7 @@
                              <span style="color: #7273a3;font-size:13px">EQUIPMENTS</span>
                              <ul>
 
-                                 @foreach (var item in Model.AllEquipments.Where(f => f.Sub1_number != null && f.Sub1_description != null && f.DeleteStatus!=1))
+                                 @foreach (var item in Model.AllEquipments.Where(f => f.Sub1_number != null && f.Sub1_description != null))
                                  {
                                      // var lastNode1 = Model.AllEquipments.Where(f => f.Sub1_number != null && f.Sub1_description != null).Last().Sub1_number;
                                      <li class="data">
