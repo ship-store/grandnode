@@ -69,7 +69,7 @@
                             <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;margin-left: 80px;">Select Job code</label></td>
 
                             <td style="border:none;">
-                                <select class="form-control show-tick" style="color:#0E5679;margin-left: 20%;width: 300px;">
+                                <select class="form-control show-tick" style="color:#0E5679;margin-left: 20%;width: 300px;" id="_jobCode" name="jobCode">
                                     <option selected disabled>Select</option>
                                     @foreach (var item3 in Model.JobplansList)
                                     {
@@ -163,5 +163,9 @@
         //var selectedItemsPass = selectedItems.split(',');
         //alert(selectedItems);
         document.getElementById("Cbm_Name").value = selectedItems;
+        var _jobcode = document.getElementById("_jobCode").value();
+        alert(_jobcode);
+
+
     }
 </script>
