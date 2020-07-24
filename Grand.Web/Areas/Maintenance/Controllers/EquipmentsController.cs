@@ -91,7 +91,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             //  var EquipmentTypeList=await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
             var equiomentList = await _cbmMappingViewModelService.GetAllCbmMappingAsList("");
             List<string> equipmentTypetList = new List<string>();
-            foreach (var item in equiomentList)
+            foreach (var item in equiomentList.Where(x=>x.DeleteStatus!=1).ToList())
             {
 
                 equipmentTypetList.Add(item.equipmentComponent);
@@ -199,7 +199,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
                     List<string> equipmentTypetList = new List<string>();
                     var equipmentTypes = await _equipmentTypeService.GetAllEquipmentTypes("", 0, 500, true);
-                    foreach (var item in equipmentTypes)
+                    foreach (var item in equipmentTypes.Where(x=>x.DeleteStatus!=1).ToList())
                     {
 
                         equipmentTypetList.Add(item.Equipment_type);

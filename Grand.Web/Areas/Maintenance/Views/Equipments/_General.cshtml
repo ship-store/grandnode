@@ -86,7 +86,7 @@
                                     id="maker" style="color:#0E5679;border-color:#0E5679" disabled>
                                 <option id="makerValue"></option>
                                 <option>Select</option>
-                                @foreach (var item in Model.Makers)
+                                @foreach (var item in Model.Makers.Where(x=>x.DeleteStatus!=1).ToList())
                                 {
 
 
@@ -115,7 +115,7 @@
                                 {
 
 
-                                    <option class="form-control money-euro"> item</option>
+                                    <option class="form-control money-euro"> @item</option>
 
                                 }
                             </select>

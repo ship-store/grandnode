@@ -156,11 +156,11 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             var reporters = await _reportedByService.GetAllReportedBy("", 0, 500, true);
             List<ReportedBy> reporterList = reporters.ToList();
-            ViewBag.ReporterList = reporterList;
+            ViewBag.ReporterList = reporterList.Where(x=>x.DeleteStatus!=1).ToList();
 
             var statuses = await _jobStatusService.GetAllJobStatus("", 0, 500, true);
             List<JobStatus> statusList = statuses.ToList();
-            ViewBag.StatusList = statusList;
+            ViewBag.StatusList = statusList.Where(x => x.DeleteStatus != 1).ToList();
 
             var model = await Task.FromResult<object>(null);
 
