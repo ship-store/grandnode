@@ -520,6 +520,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             // return RedirectToAction("MdmList", "Mdm");
             return Json("");
         }
+        [HttpGet]
+        public async Task<IActionResult> AddCriticals(string Criticals)
+        {
+            CriticalModel addNewCritical = new CriticalModel();
+            addNewCritical.Criticals = Criticals;
+            await _criticalViewModelService.PrepareCriticalModel(addNewCritical, "", true);
+            // return RedirectToAction("MdmList", "Mdm");
+            return Json("");
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddReportedByDetails(ReportedByModel addNewReportedBy)
@@ -567,6 +576,16 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             //List<MakerModel> makerlist = new List<MakerModel>();
             var departmentList= departmentlist.ToList().Where(x => x.DeleteStatus != 1);
             var gridModel = new DataSourceResult { Data = departmentList.ToList() };
+            return Json(gridModel);
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> ReadCriticalDetails(DataSourceRequest command, CriticalModel model)
+        {
+            var criticallist = await _criticalService.GetAllCriticals("", command.Page, command.PageSize);
+            //List<MakerModel> makerlist = new List<MakerModel>();
+            var criticalList = criticallist.ToList().Where(x => x.DeleteStatus != 1);
+            var gridModel = new DataSourceResult { Data = criticalList.ToList() };
             return Json(gridModel);
 
         }
@@ -812,7 +831,11 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             return PartialView("ReadDepartment");
         }
-
+        [HttpGet]
+        public async Task<IActionResult> ReadCritical()
+        {
+            return PartialView("ReadCritical");
+        }
         [HttpGet]
         public async Task<IActionResult> ReadLocation()
         {
