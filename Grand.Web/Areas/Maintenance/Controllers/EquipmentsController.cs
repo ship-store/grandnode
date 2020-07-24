@@ -164,6 +164,21 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
 
 
+
+        [HttpGet]
+        public async Task<IActionResult> DelteEquipment(string equipmentCode)
+        {
+
+
+            var selectedEquipments = await _equipmentService.GetAllEquipment("", 0, 500, true);
+            var SelectedEquipment = selectedEquipments.ToList().Where(src => src.Sub2_number == equipmentCode || src.Sub1_number == equipmentCode || src.Sub3_number == equipmentCode || src.Sub4_number == equipmentCode).First();
+          
+            await _equipmentService.RemoveEquipment(SelectedEquipment);
+
+
+            return Json("");
+        }
+
         public async Task<IActionResult> List(string equipmentCode)
         {
             try

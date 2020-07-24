@@ -23,6 +23,7 @@ namespace Grand.Services.Equipments
 
         public virtual async Task InsertEquipment(Grand.Core.Domain.Equipment.Equipment equipment)
         {
+            equipment.DeleteStatus = 0;
             await _equipmentRepository.InsertAsync(equipment);
 
         }
@@ -35,6 +36,12 @@ namespace Grand.Services.Equipments
         }
         public virtual async Task UpdateEquipment(Core.Domain.Equipment.Equipment equipment)
         {
+            await _equipmentRepository.UpdateAsync(equipment);
+        }
+
+        public virtual async Task RemoveEquipment(Equipment equipment)
+        {
+            equipment.DeleteStatus = 1;
             await _equipmentRepository.UpdateAsync(equipment);
         }
     }

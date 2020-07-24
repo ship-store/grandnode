@@ -14,5 +14,7 @@ namespace Grand.Services.Equipments
         Task InsertEquipment(Grand.Core.Domain.Equipment.Equipment equipment);
         Task<Grand.Core.Domain.Equipment.Equipment> GetEquipmentById(string Id);
         Task UpdateEquipment(Grand.Core.Domain.Equipment.Equipment equipment);
+
+        Task RemoveEquipment(Grand.Core.Domain.Equipment.Equipment equipment);
     }
 }
