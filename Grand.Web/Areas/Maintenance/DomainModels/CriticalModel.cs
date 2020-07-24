@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace Grand.Web.Areas.Maintenance.DomainModels
 {
-    public class ReportedByModel : BaseGrandEntityModel
+    public class CriticalModel : BaseGrandEntityModel
     {
-        public string Reported_By { get; set; }
-        public int DeleteStatus { get; set; }
-
+        public string Criticals { get; set; }
     }
 }

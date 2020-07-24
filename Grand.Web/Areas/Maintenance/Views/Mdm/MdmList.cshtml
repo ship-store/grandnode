@@ -29,112 +29,103 @@
             <tabstrip-item text="Maker Model" tab-index="1" id="tabMakerModel">
                 <content>
                     <div id="divMakerModel">
-                        @*<partial name="MakerModelList" />*@
                     </div>
                 </content>
             </tabstrip-item>
-            <tabstrip-item text="Reported By" tab-index="2" id="tabReportedBy">
-                <content>
-                    <div id="divReportedBy">
-                        @*<partial name="ReadReportedByDetails" model="Model" />*@
-                    </div>
-                </content>
-            </tabstrip-item>
+
             <tabstrip-item text="Job Status" tab-index="3" id="tabJobStatus">
                 <content>
                     <div id="divJobStatus">
-                        @*<partial name="ReadJobStatusDetails" model="Model" />*@
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="Equipment Type" tab-index="4" id="tabEquipmentType">
                 <content>
                     <div id="divEquipmentType">
-                        @*<partial name="ReadEquipmentTypeDetails" />*@
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="Job Type" tab-index="5" id="tabjobType">
                 <content>
                     <div id="divJobType">
-                        @*<partial name="ReadJobTypeDetails" />*@
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="CBM" tab-index="6" id="tabCBM">
                 <content>
                     <div id="divCBM">
-                        @*<partial name="CBMList" />*@
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="CBM Configure" tab-index="6" id="tabCbmConfigure">
                 <content>
                     <div id="divCbmConfigure">
-                        @*<partial name="CBMMappingList" />*@
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="Department" tab-index="7" id="tabDepartment">
                 <content>
                     <div id="divDepartment">
-                        @*<partial name="ReadDepartment" />*@
+                    </div>
+                </content>
+            </tabstrip-item>
+            <tabstrip-item text="Reported By" tab-index="2" id="tabReportedBy">
+                <content>
+                    <div id="divReportedBy">
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="Location" tab-index="7" id="tabLocation">
                 <content>
                     <div id="divLocation">
-                        @*<partial name="ReadLocation" />*@
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="Safety level" tab-index="8" id="tabSafetyLevel">
                 <content>
                     <div id="divSafetyLevel">
-                        @*<partial name="ReadSafetyLevel" />*@
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="Equipment Status" tab-index="9" id="tabEquipmentStatus">
                 <content>
                     <div id="divEquipmentStatus">
-                        @*<partial name="ReadEquipmentStatusDetails" />*@
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="Frequency" tab-index="10" id="tabFrequency">
                 <content>
                     <div id="divFrequency">
-                        @*<partial name="ReadFrequencyDetails" />*@
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="Frequency Type" tab-index="10" id="tabFrequencyType">
                 <content>
                     <div id="divFrequencyType">
-                        @*<partial name="ReadFrequencyTypeDetails" />*@
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="Rank" tab-index="11" id="tabRank">
                 <content>
                     <div id="divRank">
-                        @*<partial name="ReadRankDetails" />*@
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="Maintenance type" tab-index="12" id="tabMaintenanceType">
                 <content>
                     <div id="divMaintenanceType">
-                        @*<partial name="ReadMaintenanceTypeDetails" />*@
                     </div>
                 </content>
             </tabstrip-item>
             <tabstrip-item text="Priority" tab-index="13" id="tabPriority">
                 <content>
                     <div id="divPriority">
-                        @*<partial name="ReadPriorityDetails" />*@
+                    </div>
+                </content>
+            </tabstrip-item>
+            <tabstrip-item text="Critical" tab-index="14" id="tabCritical">
+                <content>
+                    <div id="divCritical">
                     </div>
                 </content>
             </tabstrip-item>
@@ -144,15 +135,10 @@
 
 <script>
     $(function () {
-        //$("#tabMaker").click(function () {
-        //    alert("hai");
-        //     $("#divMaker").load("MakerList");
-        //    LoadMakerGrid();
-        //});
+       
 
         $("#tabMakerModel").click(function () {
-         //   alert("hai");
-            
+        
             $("#divMakerModel").load("MakerModelList");
               $("#MakerModelGrid").empty();
                LoadMakerModelGrid();
@@ -160,7 +146,6 @@
         });
 
          $("#tabReportedBy").click(function () {
-          //  alert("hai");
             $("#divReportedBy").load("ReadReportedByDetails");
               $("#ReportedByGrid").empty();
               LoadReportedByGrid();
@@ -168,7 +153,6 @@
 
         
          $("#tabJobStatus").click(function () {
-           // alert("hai");
             $("#divJobStatus").load("ReadJobStatusDetails");
             $('.JobStatusGrid').empty();
              LoadJobStatusGrid();
@@ -176,14 +160,12 @@
 
          
          $("#tabEquipmentType").click(function () {
-         //  alert("hai");
             $("#divEquipmentType").load("ReadEquipmentTypeDetails");
             $('#EquipmentTypeGrid').empty();
             LoadEquipmentTypeGrid();
         });
 
         $("#tabjobType").click(function () {
-         //  alert("hai");
             $("#divJobType").load("ReadJobTypeDetails");
           $('#JobTypeGrid').empty();
            LoadJobTypeGrid();
@@ -191,7 +173,6 @@
 
         
         $("#tabCBM").click(function () {
-         //  alert("hai");
           $("#divCBM").load("CBMList");
           $('.CBMGrid').empty();
             LoadCbmGrid();
@@ -199,7 +180,6 @@
        
 
          $("#tabCbmConfigure").click(function () {
-          //alert("hai");
           $("#divCbmConfigure").load("CBMMappingList");
           $("#CBMMappingGrid").empty();
             LoadCBMMappingGrid();
@@ -207,16 +187,14 @@
 
 
          $("#tabDepartment").click(function () {
-         // alert("hai");
           $("#divDepartment").load("ReadDepartment");
           $('#DepartmentGrid').empty();
           LoadDepartmentGrid();
         });
 
-
+        
         
          $("#tabLocation").click(function () {
-         // alert("hai");
           $("#divLocation").load("ReadLocation");
           $('#LocationGrid').empty();
           LoadLocationGrid();
@@ -225,7 +203,6 @@
 
         
          $("#tabSafetyLevel").click(function () {
-         // alert("hai");
           $("#divSafetyLevel").load("ReadSafetyLevel");
            $('#SafetyLevelGrid').empty();
                LoadSaftyGrid();
@@ -235,7 +212,6 @@
 
         
          $("#tabEquipmentStatus").click(function () {
-         // alert("hai");
           $("#divEquipmentStatus").load("ReadEquipmentStatusDetails");
            
                 $('#EquipmentStatusGrid').empty();
@@ -247,7 +223,6 @@
 
 
          $("#tabFrequency").click(function () {
-         // alert("hai");
           $("#divFrequency").load("ReadFrequencyDetails");
            
                $('#FrequencyGrid').empty();
@@ -258,7 +233,6 @@
 
 
          $("#tabFrequencyType").click(function () {
-         // alert("hai");
           $("#divFrequencyType").load("ReadFrequencyTypeDetails");
            
               $('#FrequencyTypeGrid').empty();
@@ -269,17 +243,14 @@
 
 
           $("#tabRank").click(function () {
-         // alert("hai");
           $("#divRank").load("ReadRankDetails");
            
              $('#RankGrid').empty();
-              LoadRankGrid();
         });
 
 
 
         $("#tabMaintenanceType").click(function () {
-         // alert("hai");
           $("#divMaintenanceType").load("ReadMaintenanceTypeDetails");
             $("#MaintenanceTypeGrid").empty();
                    LoadMaintenanceTypeGrid();
@@ -288,12 +259,17 @@
 
        
          $("#tabPriority").click(function () {
-         // alert("hai");
-          $("#divPriority").load("ReadPriorityDetails");
+            $("#divPriority").load("ReadPriorityDetails");
             $('#PriorityGrid').empty();
             LoadPriorityGrid();
-        });
+         });
 
+
+        $("#tabCritical").click(function () {
+          $("#divCritical").load("ReadCritical");
+          $('#CriticalGrid').empty();
+          LoadCriticalGrid();
+        });
 
        
       

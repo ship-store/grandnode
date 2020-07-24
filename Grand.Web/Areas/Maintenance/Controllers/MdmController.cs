@@ -10,7 +10,6 @@ using Grand.Services.CbmMapping;
 using Grand.Web.Areas.Admin.Controllers;
 using Grand.Services.Jobplan;
 using Grand.Web.Areas.Maintenance.DomainModels;
-
 using Grand.Web.Areas.Maintenance.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -25,6 +24,7 @@ using Grand.Services.FrequencyType;
 using Grand.Services.Rank;
 using Grand.Services.MaintenanceType;
 using Grand.Services.Priority;
+using Grand.Services.Critical;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -46,7 +46,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
         private readonly ICbmMappingService _cbmMappingService;
         private readonly ICbmMappingViewModelService _cbmMappingViewModelService;
-
         private readonly IEquipmentTypeService _equipmentTypeService;
         private readonly IEquipmentTypeViewModelService _equipmentTypeViewModelService;
         private readonly IMakerService _makerService;
@@ -56,7 +55,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly ILocationViewModelService _locationViewModelService;
         private readonly ISafetyLevelService _safetyLevelService;
         private readonly ISafetyLevelViewModelService _safetyLevelViewModelService;
-
         private readonly IMakerService1 _makerService1;
         private readonly IMakerViewModelService _makerViewModelService;
         private readonly IMakerViewModelService1 _makerViewModelService1;
@@ -70,11 +68,11 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IMaintenanceTypeViewModelService _maintenanceTypeViewModelService;
         private readonly IPriorityService _priorityService;
         private readonly IPriorityViewModelService _priorityViewModelService;
+        private readonly ICriticalService _criticalService;
+        private readonly ICriticalViewModelService _criticalViewModelService;
 
         private readonly IJobplanService _jobplanService;
-        //public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobStatusViewModelService _jobStatusViewModelService, IJobTypeViewModelService _jobTypeViewModelService, IJobStatusService _jobStatusService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
-        //public MdmController(IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService,IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1)
-        public MdmController(IPriorityViewModelService _priorityViewModelService,IPriorityService _priorityService,IMaintenanceTypeViewModelService _maintenanceTypeViewModelService,IMaintenanceTypeService _maintenanceTypeService,IRankViewModelService _rankViewModelService,IRankService _rankService,IFrequencyTypeViewModelService _frequencyTypeViewModelService,IFrequencyTypeService _frequencyTypeService,IFrequencyViewModelService _frequencyViewModelService,IFrequencyService _frequencyService,IEquipmentStatusViewModelService _equipmentStatusViewModelService, IEquipmentStatusService _equipmentStatusService, ISafetyLevelViewModelService _safetyLevelViewModelService, ISafetyLevelService _safetyLevelService, ILocationViewModelService _locationViewModelService, ILocationService _locationService, IDepartmentViewModelService _departmentViewModelService, IDepartmentService _departmentService, IJobplanService _jobplanService, ICbmMappingViewModelService cbmMappingViewModelService, ICbmMappingService cbmMappingService, IJobStatusViewModelService _jobStatusViewModelService, IJobStatusService _jobStatusService, IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService, IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1, ICbmService _cbmService, ICbmViewModelService _cbmViewModelService)
+        public MdmController(ICriticalViewModelService _criticalViewModelService,ICriticalService _criticalService,IPriorityViewModelService _priorityViewModelService,IPriorityService _priorityService,IMaintenanceTypeViewModelService _maintenanceTypeViewModelService,IMaintenanceTypeService _maintenanceTypeService,IRankViewModelService _rankViewModelService,IRankService _rankService,IFrequencyTypeViewModelService _frequencyTypeViewModelService,IFrequencyTypeService _frequencyTypeService,IFrequencyViewModelService _frequencyViewModelService,IFrequencyService _frequencyService,IEquipmentStatusViewModelService _equipmentStatusViewModelService, IEquipmentStatusService _equipmentStatusService, ISafetyLevelViewModelService _safetyLevelViewModelService, ISafetyLevelService _safetyLevelService, ILocationViewModelService _locationViewModelService, ILocationService _locationService, IDepartmentViewModelService _departmentViewModelService, IDepartmentService _departmentService, IJobplanService _jobplanService, ICbmMappingViewModelService cbmMappingViewModelService, ICbmMappingService cbmMappingService, IJobStatusViewModelService _jobStatusViewModelService, IJobStatusService _jobStatusService, IReportedByViewModelService1 _reportedByViewModelService, IReportedByService _reportedByService, IJobTypeViewModelService _jobTypeViewModelService, IJobTypeService _jobTypeService, IEquipmentTypeViewModelService _equipmentTypeViewModelService, IEquipmentTypeService _equipmentTypeService, IMakerViewModelService _makerViewModelService, IMakerService _makerService, IMakerViewModelService1 _makerViewModelService1, IMakerService1 _makerService1, ICbmService _cbmService, ICbmViewModelService _cbmViewModelService)
         {
             this._cbmMappingViewModelService = cbmMappingViewModelService;
             this._cbmMappingService = cbmMappingService;
@@ -96,7 +94,6 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._frequencyTypeViewModelService = _frequencyTypeViewModelService;
             this._maintenanceTypeService = _maintenanceTypeService;
             this._maintenanceTypeViewModelService = _maintenanceTypeViewModelService;
-
             this._jobplanService = _jobplanService;
             this._reportedByService = _reportedByService;
             this._reportedByViewModelService = _reportedByViewModelService;
@@ -110,9 +107,11 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             this._rankViewModelService = _rankViewModelService;
             this._priorityService = _priorityService;
             this._priorityViewModelService = _priorityViewModelService;
-
             this._cbmService = _cbmService;
             this._cbmViewModelService = _cbmViewModelService;
+            this._criticalService = _criticalService;
+            this._criticalViewModelService = _criticalViewModelService;
+
 
         }
 
@@ -196,6 +195,12 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> AddDepartment()
+        {
+            var model = await Task.FromResult<object>(null);
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> AddCritical()
         {
             var model = await Task.FromResult<object>(null);
             return View();
@@ -496,6 +501,14 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _departmentViewModelService.PrepareDepartmentModel(addNewDepartment, "", true);
             return RedirectToAction("MdmList", "Mdm");
            
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddCriticalDetails(CriticalModel addNewCritical)
+        {
+            await _criticalViewModelService.PrepareCriticalModel(addNewCritical, "", true);
+            return RedirectToAction("MdmList", "Mdm");
+
         }
 
         [HttpGet]

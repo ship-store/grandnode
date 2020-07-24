@@ -79,6 +79,7 @@ using Grand.Services.FrequencyType;
 using Grand.Services.Rank;
 using Grand.Services.MaintenanceType;
 using Grand.Services.Priority;
+using Grand.Services.Critical;
 
 namespace Grand.Framework.Infrastructure
 {
@@ -188,6 +189,8 @@ namespace Grand.Framework.Infrastructure
             builder.RegisterType<MakerService1>().As<IMakerService1>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentTypeService>().As<IEquipmentTypeService>().InstancePerLifetimeScope();
             builder.RegisterType<DepartmentService>().As<IDepartmentService>().InstancePerLifetimeScope();
+            builder.RegisterType<CriticalService>().As<ICriticalService>().InstancePerLifetimeScope();
+
             builder.RegisterType<LocationService>().As<ILocationService>().InstancePerLifetimeScope();
             builder.RegisterType<SafetyLevelService>().As<ISafetyLevelService>().InstancePerLifetimeScope();
             builder.RegisterType<EquipmentStatusService>().As<IEquipmentStatusService>().InstancePerLifetimeScope();
