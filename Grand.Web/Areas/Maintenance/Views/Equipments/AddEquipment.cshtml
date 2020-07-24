@@ -43,7 +43,7 @@
                                 <select class="form-control show-tick chosen" id="chose" name="Equipment_Type" required style="border-color:#0E5679;margin-left:16%;float:left;width:89%;height:auto;color:#0E5679;">
 
                                     <option value=""></option>
-                                    @foreach (var item in Model)
+                                    @foreach (var item in Model.Where(x=>x.De).ToList())
                                     {
                                         <option>@item</option>
                                     }
