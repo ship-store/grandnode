@@ -230,7 +230,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             var ModelList= await _makerService1.GetAllMakers("", 0, 100);
             //List<MakerModel> makerlist = new List<MakerModel>();
-            var Models = ModelList.ToList().Where(x => x.Maker.ToString().Trim().ToLower() == MakerName.ToString().Trim().ToLower()).ToList();
+            var Models = ModelList.ToList().Where(x => x.Maker.ToString().Trim().ToLower() == MakerName.ToString().Trim().ToLower()).ToList().Where(z=>z.DeleteStatus!=1).ToList();
                 //(x=>x.Maker.ToLower()==MakerName.ToLower()).ToList();
 
             string jsonList = JsonConvert.SerializeObject(Models);
