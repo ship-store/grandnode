@@ -397,7 +397,7 @@
 
                 var eqpCode = $("#id17").val();
                 var eqpName = $("#id1").val();
-                alert(eqpCode + "" + eqpCode);
+              //  alert(eqpCode + "" + eqpCode);
 
                 $.ajax({
                     type: "GET",
@@ -406,12 +406,13 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (datas) {
-                               alert("Success");
+                               //alert("Success");
                            
-
+                                window.location.reload();
                             }
 
-                        });
+                });
+                   window.location.reload();
             } else {
               //don't delete
             }
