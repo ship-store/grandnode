@@ -1019,7 +1019,7 @@ a:hover, a:focus {
 }
 
 .nav.side-menu > li > a, .nav.child_menu > li > a {
-    color: #333;
+    color: #0E5679;
     font-weight: bolder
 
 }
@@ -1156,7 +1156,7 @@ a:hover, a:focus {
 }
 
 .nav.child_menu > li > a {
-    color: #333;
+    color: #0E5679;
     font-size: 14px;
     padding: 6px 9px;
 }
