@@ -106,7 +106,7 @@
             </div>*@
         <div class="center">
            <br />
-            @foreach (var item2 in Model.cbmList)
+            @foreach (var item2 in Model.cbmList.Where(x=>x.DeleteStatus!=1).ToList())
             {
 
 
