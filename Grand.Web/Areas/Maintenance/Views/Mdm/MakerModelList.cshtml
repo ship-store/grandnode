@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<Grand.Core.Domain.MakerEntity.Maker>
+@{
 
+   var makerList= @ViewBag.makerList;
+}
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.mobile.min.css" />
@@ -83,7 +86,7 @@
         <td style="border:none;">
             <select class="form-control show-tick" name="Maker" id="textInputmaker11"
                     style="float:left;width:23%;color:#0E5679;border-color:#0E5679;">
-                @foreach (var item in Model)
+                @foreach (var item in  makerList )
                 {
 
                     <option value='@item.Name'>@item.Name</option>
@@ -137,7 +140,7 @@
 @*</form>*@
 <div id="example">
     <antiforgery-token />
-    
+
     <script>
         function LoadMakerModelGrid() {
              $("#MakerModelGrid").kendoGrid({
@@ -249,9 +252,9 @@
                         return data;
         }
          $('a[href="#sign_up"]').click(function () {
-                       
-        
-            
+
+
+
             //var postData = {selectedIds: selectedIds};
             //addAntiForgeryToken(postData);
 
@@ -266,7 +269,7 @@
             $.get("http://localhost:16582/Maintenance/Mdm/DeleteSelectedMakerModel?selectedIds='" + chkArray + "'");
             window.location.reload();
             return false;
-       });       
+       });
 
         function AddModelDetails () {
 

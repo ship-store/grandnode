@@ -35,6 +35,8 @@ namespace Grand.Web.Areas.Maintenance.Services
             return await PagedList<CBMMapping>.Create(query, 0, 500);
         }
 
+       
+
         async Task<IPagedList<CBMMapping>> ICbmMappingViewModelService.GetAllCbmMapping(string name, int pageIndex, int pageSize, bool showHidden)
         {
             var query = _cbmMappingRepository.Table;

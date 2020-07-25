@@ -164,9 +164,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             var cbmList = cbm.ToList();
 
             var jobplans = await _jobplanService.GetAllJobplan("", 0, 500, true);
-            var jobplansList = jobplans.ToList();
+            var jobplansList = jobplans.Where(x=>x.TakenOrNot!=1).ToList();
 
-
+            var jobpanList2 = await _cbmMappingViewModelService.GetAll();
             foreach (var item in equipmentTypeList)
             {
                 eqpTypeList.Add(item.Equipment_type);
@@ -325,7 +325,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         [HttpGet]
         public async Task<IActionResult> AddCBMMapping(CBMMappingModel cbmMappingModel, string selcetedCBM)
         {
+            // list
+           // await _cbmMappingViewModelService.GetAllCbmMappingAsList();
             await _cbmMappingViewModelService.PrepareCbmMappingModel(cbmMappingModel, "", true);
+
             return RedirectToAction("MdmList", "Mdm");
         }
 
@@ -778,8 +781,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
             var model = await Task.FromResult<object>(null);
             var makers = await _makerService.GetAllMakers("", 0, 500, true);
-            
-        
+            var makerList = makers.Where(x=>x.DeleteStatus!=1).ToList();
+
+            ViewBag.makerList = makerList;
             return PartialView("MakerModelList",makers );
         }
 

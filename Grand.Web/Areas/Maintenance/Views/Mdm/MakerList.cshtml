@@ -249,7 +249,26 @@
             });
 
             // calling  via jquery
-            $.get("http://localhost:16582/Maintenance/Mdm/DeleteSelectedMaker?selectedIds='" + chkArray + "'");
+         //   $.get("http://localhost:16582/Maintenance/Mdm/DeleteSelectedMaker?selectedIds='" + chkArray + "'");
+
+
+            alert("id" + chkArray);
+             $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("DeleteSelectedMaker")" + "?selectedIds=" +chkArray,
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                               alert("Success");
+                            
+
+
+                            }
+
+                        });
+
+
             window.location.reload();
             return false;
        });       
