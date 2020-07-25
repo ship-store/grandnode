@@ -36,6 +36,9 @@ namespace Grand.Core.Domain.Jobplan
         public int DueRhs { get; set; }
         public string UniversalJobCode { get; set; }
 
+
+        public int  TakenOrNot { get; set; }
+
     }
 
 

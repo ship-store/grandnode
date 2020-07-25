@@ -17,7 +17,9 @@ namespace Grand.Web.Areas.Maintenance.Interfaces
              int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
 
         Task<IPagedList<Core.Domain.CbmEntity.CBMMapping>> GetAll();
-       
+
+        
+
         Task<IPagedList<Core.Domain.CbmEntity.CBMMapping>> GetAllCbmMappingAsList(string id);
         Task PrepareCbmMappingModel(CBMMappingModel model1, object p, bool v);
         
