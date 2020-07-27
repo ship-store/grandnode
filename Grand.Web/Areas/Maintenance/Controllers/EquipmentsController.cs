@@ -90,6 +90,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
             //  var EquipmentTypeList=await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
             var equiomentList = await _cbmMappingViewModelService.GetAllCbmMappingAsList("");
+
+            var equiomentList2 = _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
+
             List<string> equipmentTypetList = new List<string>();
             foreach (var item in equiomentList.Where(x=>x.DeleteStatus!=1).ToList())
             {

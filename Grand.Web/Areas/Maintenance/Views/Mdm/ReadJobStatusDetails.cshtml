@@ -77,7 +77,9 @@
                         </div>
                     </div>
                     <div class="x_content">
-                        <div id="JobStatusGrid1" class="JobStatusGrid"></div>
+                        <div id="JobStatusGrid1" class="JobStatusGrid">
+
+                        </div>
                     </div>
                 </div>
             </td>
@@ -90,7 +92,7 @@
     </table>
     @*<div id="JobStatusGrid1" ></div>*@
     <script>
-        function LoadJobStatusGrid(){
+        function LoadJobStatusGrid1(){
                  $("#JobStatusGrid1").kendoGrid({
                 dataSource: {
 
@@ -173,11 +175,11 @@
             });
         }
         $(function () {
-            LoadJobStatusGrid();
+            LoadJobStatusGrid1();
             //$("#tabJobStatus").click(function () {
-            //     LoadJobStatusGrid();
+            //     LoadJobStatusGrid1();
             //     //  $('.JobStatusGrid').empty();
-            //     //LoadJobStatusGrid();
+            //     //LoadJobStatusGrid1();
 
             //});
         });
@@ -227,14 +229,14 @@
 
                     //'#JobStatusGrid1').empty();
                      $('.JobStatusGrid1').empty();
-                     LoadJobStatusGrid();
+                     LoadJobStatusGrid1();
 
                 }
 
 
             });
-               $('.JobStatusGrid').empty();
-                     LoadJobStatusGrid();
+               $('#JobStatusGrid1').empty();
+                     LoadJobStatusGrid1();
         }
 
     </script>
