@@ -616,6 +616,53 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return Json(gridModel);
 
         }
+
+        [HttpPost]
+       
+        public async Task<JsonResult> EditRankDetails(DataSourceRequest command, List<RankModel> models)
+        {
+            //foreach (var item in models)
+            //{
+
+            //    var vessel = await _breakdownJobService.GetBreakdownJobById(item.Id);
+            //    vessel.EquipmentName = item.EquipmentName;
+            //    vessel.JobOrder = item.JobOrder;
+
+            //    vessel.Title = item.Title;
+            //    vessel.JobReportedDate = item.JobReportedDate;
+            //    vessel.ReportedBy = item.ReportedBy;
+            //    vessel.Status = item.Status;
+
+
+            //    await _breakdownJobService.UpdateBreakdownJob(vessel);
+            //}
+            return Json("models");
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> EditRankDetails2(DataSourceRequest command,RankModel model)
+        {
+            //foreach (var item in models)
+            //{
+
+            //    var vessel = await _breakdownJobService.GetBreakdownJobById(item.Id);
+            //    vessel.EquipmentName = item.EquipmentName;
+            //    vessel.JobOrder = item.JobOrder;
+
+            //    vessel.Title = item.Title;
+            //    vessel.JobReportedDate = item.JobReportedDate;
+            //    vessel.ReportedBy = item.ReportedBy;
+            //    vessel.Status = item.Status;
+
+
+            //    await _breakdownJobService.UpdateBreakdownJob(vessel);
+            //}
+            return Json("models");
+        }
+
+
+
+
         [HttpPost]
         public async Task<IActionResult> ReadFrequencyTypeDetails(DataSourceRequest command, FrequencyTypeModel model)
         {
