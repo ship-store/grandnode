@@ -391,7 +391,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         [HttpGet]
         public async Task<IActionResult> AddEquipmentTypeDetail(string Equipment_type)
         {
-            EquipmentTypeModel addNewEquipmentType = new EquipmentTypeModel() { Equipment_type=Equipment_type};
+            EquipmentTypeModel addNewEquipmentType = new EquipmentTypeModel() { Equipment_type=Equipment_type,};
 
             await _equipmentTypeViewModelService.PrepareEquipmentTypeModel(addNewEquipmentType, "", true);
             return Json("");
@@ -566,9 +566,13 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> ReadEquipmentTypeDetails(DataSourceRequest command, EquipmentTypeModel model)
         {
             var equipmentTypelist = await _equipmentTypeService.GetAllEquipmentTypes("", command.Page, command.PageSize);
-            var equipmentTypeList = equipmentTypelist.ToList().Where(x => x.DeleteStatus != 1);
-            //List<MakerModel> makerlist = new List<MakerModel>();
-            var gridModel = new DataSourceResult { Data = equipmentTypeList.ToList() };
+            var equipmentTypeList1 = equipmentTypelist.Where(x=>x.DeleteStatus.ToString()==0.ToString()).ToList();
+            //var resultList = equipmentTypeList1.Select(y => y.Equipment_type).Distinct().ToList();
+            ////List<MakerModel> makerlist = new List<MakerModel>();
+            //resultList.Reverse();
+            //resultList.RemoveAt(0);
+            //resultList.Reverse();
+            var gridModel = new DataSourceResult { Data = equipmentTypeList1.GroupBy(x => x.Equipment_type).Select(x => x.First()).ToList() };
             return Json(gridModel);
 
         }
