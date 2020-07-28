@@ -73,11 +73,13 @@
                 <div class="row" id="SearchSection">
                     <div class="form-body col-md-6 advanced-filter">
                         <div class="form-group">
-                            <input id="SearchInput" type="text" placeholder="Search.." class="form-control" style="max-width:212px;max-height:16px;color:#0E5679;border-width:1px;border-color:#0E5679;">
+                            <input id="SearchJobStatus" type="text" placeholder="Search.." class="form-control" style="max-width:212px;max-height:16px;color:#0E5679;border-width:1px;border-color:#0E5679;">
                         </div>
                     </div>
                     <div class="x_content">
-                        <div id="JobStatusGrid1" class="JobStatusGrid"></div>
+                        <div id="JobStatusGrid1" class="JobStatusGrid">
+
+                        </div>
                     </div>
                 </div>
             </td>
@@ -90,7 +92,7 @@
     </table>
     @*<div id="JobStatusGrid1" ></div>*@
     <script>
-        function LoadJobStatusGrid(){
+        function LoadJobStatusGrid1(){
                  $("#JobStatusGrid1").kendoGrid({
                 dataSource: {
 
@@ -173,11 +175,11 @@
             });
         }
         $(function () {
-            LoadJobStatusGrid();
+            LoadJobStatusGrid1();
             //$("#tabJobStatus").click(function () {
-            //     LoadJobStatusGrid();
+            //     LoadJobStatusGrid1();
             //     //  $('.JobStatusGrid').empty();
-            //     //LoadJobStatusGrid();
+            //     //LoadJobStatusGrid1();
 
             //});
         });
@@ -227,14 +229,14 @@
 
                     //'#JobStatusGrid1').empty();
                      $('.JobStatusGrid1').empty();
-                     LoadJobStatusGrid();
+                     LoadJobStatusGrid1();
 
                 }
 
 
             });
-               $('.JobStatusGrid').empty();
-                     LoadJobStatusGrid();
+               $('#JobStatusGrid1').empty();
+                     LoadJobStatusGrid1();
         }
 
     </script>
@@ -242,7 +244,7 @@
             var selectedIds = [];
         $(document).ready(function () {
             //search button
-            $('#search-department').click(function () {
+            $('#SearchJobStatus').click(function () {
                 //search
                 var grid = $('#DepartmentGrid').data('kendoGrid');
                 grid.dataSource.page(1); //new search. Set page size to 1
@@ -252,7 +254,7 @@
 
             $("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
                 if (event.keyCode == 13) {
-                    $("#search-department").click();
+                    $("#SearchJobStatus").click();
                     return false;
                 }
             });
@@ -318,7 +320,7 @@
     </script>
     <script>
         $(document).ready(function () {
-            $("#SearchInput").on("keyup", function () {
+            $("#SearchJobStatus").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
                 $("#SearchSection tr").filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)

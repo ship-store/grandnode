@@ -49,16 +49,18 @@ namespace Grand.Web.Areas.Maintenance.Services
                 var equipmentType = new EquipmentType();
 
                 equipmentType.Equipment_type = addNewEquipmentType.Equipment_type;
-               
+
+                equipmentType.DeleteStatus = 0;//change to 1 when softdete works
+
                 await  _equipmentTypeService.InsertEquipmentType(equipmentType);
             }
             catch (Exception ex)
             {
-                var equipmentType = new EquipmentType();
+                //var equipmentType = new EquipmentType();
 
-                equipmentType.Equipment_type = addNewEquipmentType.Equipment_type;
+                //equipmentType.Equipment_type = addNewEquipmentType.Equipment_type;
 
-                await _equipmentTypeService.InsertEquipmentType(equipmentType);
+                //await _equipmentTypeService.InsertEquipmentType(equipmentType);
 
             }
         }
