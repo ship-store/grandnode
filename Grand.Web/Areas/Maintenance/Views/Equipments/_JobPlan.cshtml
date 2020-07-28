@@ -11,10 +11,16 @@
 
 
             <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-           </div>
+        </div>
     </div>
 </div>
 
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.mobile.min.css" />
+
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
 
 
 <script>
@@ -80,10 +86,24 @@
                                 id : "Id",
                                 fields:
                                 {
-                                    Id: { required: true },
+                                     Id:
+                                    {
+                                    validation: { required: true },
+                                    editable: false,
+                                    },
                                     JobOrder: { required: true, type: "int" },
                                     LAST_DONE_DATE: { editable: true,type: "date", format: "{0: dd/MM/yyyy}" },
-                                    NEXT_DUE_DATE: {type:"date"}
+                                    NEXT_DUE_DATE: { type: "date" },
+                                    EquipmentName: { type: "string" },
+                                    UniversalJobCode: { type: "string" },
+                                    CalFrequency: { type: null },
+                                    RunFrequency: { type: null },
+                                    FrequencyType: { type: "string" },
+                                    Department: { type: "string" },
+                                    JobTitle: { type: "string" },
+                                    PreviousReading: { type: "int" },
+                                    LastReading: {type:"int"},
+                                    DueRhs: {type:"int"},
                                 }
                             }
                         }
@@ -105,100 +125,92 @@
                 pageSizes: [@(adminAreaSettings.GridPageSizes)],
                     height: 545,
 
-                    columns: [
-                        {
+                     columns: [
+                         //{
+                         //   field: "Id",
+                         //   headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
+                         //   template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
+                         //   width: 50,
+                         //   locked: true,
+                         //   lockable: false,
+
+                         //},
+                         {
                         field: "JobOrder",
                         title: "JobOrder",
-                        width: "120px",
-                        lockable: true,
-
-                        },
-
-                        {
+                        width: 150
+                         }, {
                             field: "EquipmentName",
                             title: "Equipment Name",
-                            width: "200px"
-                        },
-
-                         {
+                            width: 190
+                        },{
                             field: "UniversalJobCode",
                             title: "Job code",
-                            width: "120px"
-                        },
-
-                         {
+                            width: 210
+                        },{
                             field: "CalFrequency",
                             title: "Cal Frequency",
-                            width: "120px"
-                        },
-                         {
+                            width: 190
+                        },{
                             field: "RunFrequency",
                             title: "Run Frequency",
-                            width: "120px"
-                        },
-                          {
+                            width: 190
+                        },{
                             field: "FrequencyType",
                             title: "Frequency Type",
-                            width: "150px"
-                        },
-                         {
+                            width: 190
+                        },{
                             field: "Department",
                             title: "Department",
-                            width: "120px"
-                        },
-                        {
+                            width: 120
+                        },{
                             field: "JobTitle",
                             title: "Job Title",
-                            width: "200px"
-                        },
-                        
-                        {
+                            width: 180
+                        },{
                             field: "LAST_DONE_DATE",
                             title: "Last Done Date",
                            format: "{0:dd-MM-yyyy}",
-                            width: "150px"
-                        },
-
-                        {
+                            width: 200
+                        },{
                             field: "NEXT_DUE_DATE",
                             title: "Next Due Date",
                            format: "{0:dd-MM-yyyy}",
-                            width: "150px"
-                        },
-
-                        {
+                            width: 200
+                        },{
                             field: "PreviousReading",
                             title: "Current Hrs",
-                            width: "180px"
-                        },
-                        {
+                            width: 180
+                        },{
                             field: "LastReading",
                             title: "Last Reading",
-                            width: "150px"
-                        },
-
-                        {
-                            field: "DueRhs",
-                            title: "Due Hrs",
-                            width: "150px"
-                        },
+                            width: 190
+                         }, {
+                             field: "DueRhs",
+                             title: "Due Hrs",
+                             width: 150
+                         },
                         {
                             field: "Cbm",
                             template: '<a class="btn btn-primary btn1"  onclick="ViewCbm(this)" alt="#:Cbm#">View</a>',
                             title: "Cbm",
-                            width: "150px"
-                        }
-
-                        //{
+                            width: 150
+                         },
+                        // {
                         //    command: ["edit"],
                         //    title: "&nbsp;",
-                        //    width: "100px"
-                        //}
-                    ],
+                        //    width: 200
+                         //}
+                     ],
                     editable: "inline",
 
                  });
         }
+ function customBoolEditor(container, options) {
+                        var guid = kendo.guid();
+                        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+                        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
+                    }
 
 
             function gridadditionalData()
@@ -719,11 +731,10 @@
     });
     function ViewCbm(data) {
         //alert("hai==" + data.text);
-        var myHeading ="";
+        var myHeading = "";
         var cbm = data.getAttribute("alt").split(',');
 
-        if (data.getAttribute("alt")!="")
-        {
+        if (data.getAttribute("alt") != "") {
             for (var i = 0; i < cbm.length - 1; i++) {
                 //  alert("hai==" + cbm[i]);
                 myHeading = myHeading + "<p>" + cbm[i] + "<p><hr>";
@@ -731,18 +742,17 @@
             }
 
         }
-        else
-        {
+        else {
             myHeading = myHeading + "<p style='color:red'>   No Cbm Parameter<p>";
         }
-    $("#modal-body").html(myHeading);   
-     $('#modal').modal('show');
+        $("#modal-body").html(myHeading);
+        $('#modal').modal('show');
     }
 </script>
 <!----modal starts here--->
 <div id="modal" class="modal fade" role='dialog' tabindex="-1">
     <div class="modal-dialog modal-dialog-centered" role="document" style="margin-left:50%;margin-top:15%">
-        <div class="modal-content"  style="width:50%; height:50%; border:solid 2px #7273a3">
+        <div class="modal-content" style="width:50%; height:50%; border:solid 2px #7273a3">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Cbm parameter</h4>
@@ -751,7 +761,7 @@
                 <p>Here the description starts here........</p>
 
             </div>
-           
+
         </div>
     </div>
 </div>

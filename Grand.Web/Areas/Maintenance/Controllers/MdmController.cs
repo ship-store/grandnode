@@ -1286,6 +1286,34 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return RedirectToAction("ReadPriorityDetails");
             //return PartialView("ReadPriorityDetails");
         }
+        [HttpPost]
+        public async Task<JsonResult> EditItem(DataSourceRequest command, List<ReportedByModel> models)
+        {
+            foreach (var item in models)
+            {
+
+                var reportedBy = await _reportedByService.GetReportedByById(item.Id);
+                reportedBy.Reported_By = item.Reported_By;
+
+
+                await _reportedByService.UpdateReportedBy(reportedBy);
+            }
+            return Json(models);
+        }
+        [HttpGet]
+        public async Task<JsonResult> EditPriority(DataSourceRequest command, List<PriorityModel> models)
+        {
+            foreach (var item in models)
+            {
+
+                var priority = await _priorityService.GetPriorityById(item.Id);
+                priority.Priorities = item.Priorities;
+
+
+                await _priorityService.UpdatePriority(priority);
+            }
+            return Json(models);
+        }
 
     }
 }

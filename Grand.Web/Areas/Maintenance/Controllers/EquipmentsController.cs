@@ -780,6 +780,52 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
             return RedirectToAction("List");
         }
+        [HttpPost]
+        public async Task<JsonResult> UpdateJobPlan(DataSourceRequest command, List<Jobplan> models)
+        {
+            foreach (var item in models)
+            {
+
+                var jobPlan = await _jobplanService.GetJobPlanById(item.Id);
+                jobPlan.JobTitle = item.JobTitle;
+                jobPlan.JobDescription = item.JobDescription;
+                jobPlan.CalFrequency = item.CalFrequency;
+                jobPlan.LAST_DONE_DATE = item.LAST_DONE_DATE;
+                jobPlan.NEXT_DUE_DATE = item.NEXT_DUE_DATE;
+                jobPlan.UniversalJobCode = item.UniversalJobCode;
+                jobPlan.CalFrequency = item.CalFrequency;
+                jobPlan.RunFrequency = item.RunFrequency;
+                jobPlan.FrequencyType = item.FrequencyType;
+                jobPlan.Department = item.Department;
+                jobPlan.JobTitle = item.JobTitle;
+                jobPlan.PreviousReading = item.PreviousReading;
+                jobPlan.LastReading = item.LastReading;
+                jobPlan.DueRhs = item.DueRhs;
+
+                await _jobplanService.UpdateJobPlan(jobPlan);
+            }
+            return Json(models);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> UpdateSpareParts(DataSourceRequest command, List<Sparepart> models)
+        {
+            foreach (var item in models)
+            {
+
+                var sparepart = await _sparepartService.GetSparepartById(item.Id);
+                sparepart.SPAR_PARTS_DESCRIPTION = item.SPAR_PARTS_DESCRIPTION;
+                sparepart.PART_NUMBER = item.PART_NUMBER;
+                sparepart.DRAWING_NO = item.DRAWING_NO;
+                sparepart.SPECIFICATION = item.SPECIFICATION;
+                sparepart.POSITION_NUMBER = item.POSITION_NUMBER;
+
+
+                await _sparepartService.UpdateSparePart(sparepart);
+            }
+            return Json(models);
+        }
+
 
     }
 }

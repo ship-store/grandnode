@@ -1,19 +1,21 @@
-﻿<div class="tab-content" >
+﻿<div class="tab-content">
 
-   
+    <div role="tabpanel" class="tab-pane fade " id="jobplan">
+
+
+        <partial name="_JobPlan" model="Model" />
+    </div>
+
+
+    @*---------------------------------------------------------Jobplan section---------------------------------------------------------------------*@
+
     <div role="tabpanel" class="tab-pane fade in active" id="general">
-     
-       <partial name="_General" model="Model" />
+
+        <partial name="_General" model="Model" />
     </div>
-        @*---------------------------------------------------------Jobplan section---------------------------------------------------------------------*@
-        <div role="tabpanel" class="tab-pane fade " id="jobplan">
+    @*--------------------------------------------------------------------SpareParts------------------------------------------------------*@
+    <div role="tabpanel" class="tab-pane fade" id="spareparts">
 
-
-            <partial name="_JobPlan" model="Model" />
-        </div>
-        @*--------------------------------------------------------------------SpareParts------------------------------------------------------*@
-        <div role="tabpanel" class="tab-pane fade" id="spareparts">
-
-            <partial name="_SparePart" model="Model" />
-        </div>
+        <partial name="_SparePart" model="Model" />
     </div>
+</div>
