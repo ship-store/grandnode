@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<Grand.Core.Domain.MakerEntity.Maker>
 @{
 
-   var makerList= @ViewBag.makerList;
+    var makerList = @ViewBag.makerList;
 }
+@model DepartmentListModel
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common.min.css" />
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.min.css" />
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.114/styles/kendo.uniform.mobile.min.css" />
@@ -86,7 +87,7 @@
         <td style="border:none;">
             <select class="form-control show-tick" name="Maker" id="textInputmaker11"
                     style="float:left;width:23%;color:#0E5679;border-color:#0E5679;">
-                @foreach (var item in  makerList )
+                @foreach (var item in makerList)
                 {
 
                     <option value='@item.Name'>@item.Name</option>
@@ -122,7 +123,7 @@
             <div class="row" id="SearchSection">
                 <div class="form-body col-md-6 advanced-filter">
                     <div class="form-group">
-                        <input id="SearchInput" type="text" placeholder="Search.." class="form-control" style="max-width:212px;max-height:16px;color:#0E5679;border-width:1px;border-color:#0E5679;">
+                        <input id="SearchMakerModel" type="text" placeholder="Search.." class="form-control" style="max-width:212px;max-height:16px;color:#0E5679;border-width:1px;border-color:#0E5679;">
                     </div>
                 </div>
                 <div class="x_content">
@@ -300,6 +301,33 @@
                         });
 
         }
+    </script>
+    <script>
+          var selectedIds = [];
+        $(document).ready(function () {
+
+            $('#SearchMakerModel').click(function () {
+                //search
+                var grid = $('#DepartmentGrid').data('kendoGrid');
+                grid.dataSource.page(1); //new search. Set page size to 1
+                //grid.dataSource.read(); we already loaded the grid above using "page" function
+                return false;
+            });
+
+            $("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
+                if (event.keyCode == 13) {
+                    $("#SearchMakerModel").click();
+                    return false;
+                }
+            });
+
+            $("#SearchMakerModel").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#SearchSection tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
     </script>
 </div>
 
