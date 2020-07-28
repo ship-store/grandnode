@@ -28,6 +28,8 @@ using System.Text;
 using Grand.Services.EquipmentType;
 using Grand.Services.Maker;
 using Newtonsoft.Json;
+using Grand.Services.Critical;
+using Grand.Core.Domain.CriticalEntity;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -49,7 +51,12 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly IJobPlanViewModelService _jobPlanViewModelService;
         private readonly IMakerService _makerService;
         private readonly IMakerService1 _makerService1;
-        public EquipmentsController(IJobPlanViewModelService _jobPlanViewModelService, 
+        private readonly ICriticalService _criticalService;
+        private readonly ICriticalViewModelService _criticaltViewModelService;
+
+        public EquipmentsController(IJobPlanViewModelService _jobPlanViewModelService,
+            ICriticalService _criticalService,
+            ICriticalViewModelService _criticaltViewModelService,
             ISparepartViewModelService _sparepartViewModelService, IJobplanService _jobplanService, 
             IVesselViewModelService _vesselViewModelService, 
             IEquipmentService _equipmentService, IVesselService _vesselService,
@@ -87,9 +94,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         [HttpGet]
         public async  Task<IActionResult> AddEquipment(string equipment_Code, string sub_number,string EquipmentId)
         {
+            var critical = await _criticalService.GetAllCriticals("", 0, 500, true);
+            List<Critical> criticalList = critical.ToList();
+            ViewBag.CriticalList = criticalList.Where(y => y.DeleteStatus != 1).ToList();
 
             //  var EquipmentTypeList=await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
             var equiomentList = await _cbmMappingViewModelService.GetAllCbmMappingAsList("");
+
+            var equiomentList2 = _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
+
             List<string> equipmentTypetList = new List<string>();
             foreach (var item in equiomentList.Where(x=>x.DeleteStatus!=1).ToList())
             {
@@ -523,7 +536,8 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                             PART_NUMBER=item.PART_NUMBER,
                             DRAWING_NO=item.DRAWING_NO,
                             SPECIFICATION=item.SPECIFICATION,
-                            POSITION_NUMBER=item.POSITION_NUMBER
+                            POSITION_NUMBER=item.POSITION_NUMBER,
+                            Criticals = item.Criticals
                         });
                        
                     }

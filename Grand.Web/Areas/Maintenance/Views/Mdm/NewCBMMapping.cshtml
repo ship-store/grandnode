@@ -49,9 +49,9 @@
                     <table class="table" style="border:none;">
 
                         <tr style="width:10%;border:none;">
-                            <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;margin-left: 80px;">Select Equipment type</label></td>
+                            <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;margin-left: 40%;">Select Equipment type</label></td>
                             <td style="border:none;">
-                                <select class="form-control show-tick" name="equipmentComponent" id="test" style="color:#0E5679;margin-left: 20%;width: 300px;">
+                                <select class="form-control show-tick" name="equipmentComponent" id="test" style="color:#0E5679;margin-left: 1%;width: 300px;">
                                     <option selected disabled>Select</option>
                                     @foreach (var item in Model.EquipmentTypeList.Distinct().ToList())
                                     {
@@ -66,10 +66,10 @@
                         </tr>
                         <tr>
 
-                            <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;margin-left: 80px;">Select Job code</label></td>
+                            <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;margin-left: 40%;">Select Job code</label></td>
 
                             <td style="border:none;">
-                                <select class="form-control show-tick" style="color:#0E5679;margin-left: 20%;width: 300px;" id="_jobCode" name="jobCode">
+                                <select class="form-control show-tick" style="color:#0E5679;margin-left: 1%;width: 300px;" id="_jobCode" name="jobCode">
                                     <option selected disabled>Select</option>
                                     @foreach (var item3 in Model.JobplansList)
                                     {

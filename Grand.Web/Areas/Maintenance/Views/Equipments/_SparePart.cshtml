@@ -66,18 +66,14 @@
                             id : "Id",
                             fields:
                             {
-                                Id:
-                                {
-                                    validation: { required: true },
-                                    editable: false,
-                                },
-                                EquipmentCode: { type: "string" },
-                                EquipmentName: { type: "string" },
-                                SPAR_PARTS_DESCRIPTION: { type: "string" },
-                                PART_NUMBER: { type: "string" },
-                                DRAWING_NO: { type: "string" },
-                                SPECIFICATION: { type: "string" },
-                                POSITION_NUMBER: { type: "string" },
+                              Id: { validation: { required: true } },
+                              EquipmentCode: { type: "string" },
+                              EquipmentName: { type: "string" },
+                              SPAR_PARTS_DESCRIPTION: { type: "string" },
+                              PART_NUMBER: { type: "string" },
+                              DRAWING_NO: { type: "string" },
+                              SPECIFICATION: { type: "string" },
+                              POSITION_NUMBER: { type: "string" }
                             }
                         }
                     },
@@ -98,28 +94,29 @@
                 allowCopy: true,
                     height: 540,
                  columns: [
-                     //{
-                     //       field: "Id",
-                     //       headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
-                     //       template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
-                     //       width: 50,
-                     //       locked: true,
-                     //       lockable: false,
-
-                     //},
                      {
+                          field: "Id",
+                            headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
+                            template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
+                        width: 50,
+                     },
+                    {
                     field: "EquipmentCode",
                     title: "Equipment Code",
                     width: 280
-                },{
+                },
+
+                    {
                     field: "EquipmentName",
                     title: "Equipment Name",
                     width: 280
-                },{
+                }, {
                     field: "SPAR_PARTS_DESCRIPTION",
                     title: "Description",
                     width: 220
-                  },{
+
+                },
+                     {
                     field: "PART_NUMBER",
                     title: "Part Number",
                     width: 150
@@ -135,23 +132,25 @@
                     field: "POSITION_NUMBER",
                     title: "Position Number",
                     width: 200
-                     },
-                    // {
-                    //command: ["edit"],
-                    //title: "&nbsp;",
-                    //width: 100
-                    // }
-                 ],
+                },{
+                    field: "Criticals",
+                    title: "Critical",
+                    width: 200
+                },{
+                    command: ["edit"],
+                    title: "&nbsp;",
+                    width: 100
+                  }],
                     editable: "inline"
 
             });
         }
 
-         //function customBoolEditor(container, options) {
-         //               var guid = kendo.guid();
-         //               $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-         //               $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-         //           }
+         function customBoolEditor(container, options) {
+                        var guid = kendo.guid();
+                        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+                        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
+                    }
 
                     function additionalData() {
 

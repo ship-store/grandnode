@@ -17,6 +17,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string DRAWING_NO { get; set; }
         public string SPECIFICATION { get; set; }
         public string POSITION_NUMBER { get; set; }
+        public string Criticals { get; set; }
     }
     public class SparepartForDisplayModel : BaseEntity
     {
@@ -29,5 +30,7 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
         public string DRAWING_NO { get; set; }
         public string SPECIFICATION { get; set; }
         public string POSITION_NUMBER { get; set; }
+        public string Criticals { get; set; }
+
     }
 }
