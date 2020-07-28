@@ -105,7 +105,7 @@
                 <div class="row" id="SearchSection">
                     <div class="form-body col-md-6 advanced-filter">
                         <div class="form-group">
-                            <input id="SearchInput" type="text" placeholder="Search.." class="form-control" style="max-width:212px;max-height:16px;color:#0E5679;border-width:1px;border-color:#0E5679;">
+                            <input id="SearchCbm" type="text" placeholder="Search.." class="form-control" style="max-width:212px;max-height:16px;color:#0E5679;border-width:1px;border-color:#0E5679;">
                         </div>
                     </div>
                     <div class="x_content">
@@ -273,7 +273,7 @@
             var selectedIds = [];
         $(document).ready(function () {
             //search button
-            $('#search-department').click(function () {
+            $('#SearchCbm').click(function () {
                 //search
                 var grid = $('#CBMGrid').data('kendoGrid');
                 grid.dataSource.page(1); //new search. Set page size to 1
@@ -283,7 +283,7 @@
 
             $("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
                 if (event.keyCode == 13) {
-                    $("#search-department").click();
+                    $("#SearchCbm").click();
                     return false;
                 }
             });
@@ -349,7 +349,7 @@
     </script>
     <script>
         $(document).ready(function () {
-            $("#SearchInput").on("keyup", function () {
+            $("#SearchCbm").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
                 $("#SearchSection tr").filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
