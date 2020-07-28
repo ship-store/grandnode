@@ -302,33 +302,7 @@
 
         }
     </script>
-    <script>
-          var selectedIds = [];
-        $(document).ready(function () {
-
-            $('#SearchMakerModel').click(function () {
-                //search
-                var grid = $('#DepartmentGrid').data('kendoGrid');
-                grid.dataSource.page(1); //new search. Set page size to 1
-                //grid.dataSource.read(); we already loaded the grid above using "page" function
-                return false;
-            });
-
-            $("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
-                if (event.keyCode == 13) {
-                    $("#SearchMakerModel").click();
-                    return false;
-                }
-            });
-
-            $("#SearchMakerModel").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#SearchSection tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    </script>
+    
 </div>
 
 
