@@ -14,8 +14,8 @@ namespace Grand.Core.Domain.Sparepart
         public string DRAWING_NO { get; set; }
         public string SPECIFICATION { get; set; }
         public string POSITION_NUMBER { get; set; }
-        
-       
+
+        public string Criticals { get; set; }
 
     }
     public class SparepartForDisplay : BaseEntity
@@ -29,7 +29,7 @@ namespace Grand.Core.Domain.Sparepart
         public string SPECIFICATION { get; set; }
         public string POSITION_NUMBER { get; set; }
 
-
+        public string Criticals { get; set; }
 
     }
 }

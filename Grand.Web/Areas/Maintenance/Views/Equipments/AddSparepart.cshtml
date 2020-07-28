@@ -8,8 +8,9 @@
             alert("please Select Vessel");
         </script>
     }
-     var ecode = ViewBag.code;
+    var ecode = ViewBag.code;
     var ename = ViewBag.name;
+    //var criticalList = ViewBag.CriticalList;
 }
 
 
@@ -62,6 +63,14 @@
                                     <div style="float:left;position:relative;left:36px;">
 
                                         <input type="text" class="form-control valid" placeholder="Position number" name="POSITION_NUMBER" id="n4" style="border-color:#0E5679;margin-left:16%;float:left;width:110%;height:auto;color:#0E5679;" />
+                                    </div>
+                                    <div style="float:left;position:relative;">
+                                        <select class="form-control show-tick" name="Criticals" style="border-color:#0E5679;margin-left:102%;float:left;width:200%;height:auto;color:#0E5679;">
+                                            <option>Critical</option>
+                                            <option>Low</option>
+                                            <option>Medium</option>
+                                            <option>High</option>
+                                        </select>
                                     </div>
                                 </td>
                             </tr>

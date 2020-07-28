@@ -35,7 +35,7 @@ namespace Grand.Web.Areas.Maintenance.Services
                 sparepart.SPECIFICATION = addNewSparepart.SPECIFICATION;
                 sparepart.POSITION_NUMBER = addNewSparepart.POSITION_NUMBER;
                 sparepart.Vessel = addNewSparepart.Vessel;
-
+                sparepart.Criticals = addNewSparepart.Criticals;
                 await _sparepartService.InsertSparepart(sparepart);
             }
             catch (Exception ex)
@@ -51,7 +51,7 @@ namespace Grand.Web.Areas.Maintenance.Services
                 sparepart.SPECIFICATION = addNewSparepart.SPECIFICATION;
                 sparepart.POSITION_NUMBER = addNewSparepart.POSITION_NUMBER;
                 sparepart.Vessel = addNewSparepart.Vessel;
-
+                sparepart.Criticals = addNewSparepart.Criticals;
                 await _sparepartService.InsertSparepart(sparepart);
             }
         }
