@@ -363,6 +363,23 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return RedirectToAction("MdmList", "Mdm");
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> AddCBMMappings(string Cbm_Name,string equipmentComponent,string jobCode)
+        {
+            // list
+            // await _cbmMappingViewModelService.GetAllCbmMappingAsList();
+
+            CBMMappingModel cbmMappingModel = new CBMMappingModel();
+            cbmMappingModel.Cbm_Name = Cbm_Name;
+            cbmMappingModel.equipmentComponent = equipmentComponent;
+            cbmMappingModel.jobCode = jobCode;
+
+            await _cbmMappingViewModelService.PrepareCbmMappingModel(cbmMappingModel, "", true);
+
+            return Json("");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddJobTypeDetails(JobTypeModel addNewJobType)
