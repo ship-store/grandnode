@@ -161,14 +161,14 @@
             var CBMName = selectedItems;
             var eqpName= $("#_eqpName1 option:selected").val();
             var _jobCode1 = $("#_jobCode1 option:selected").val();
-            //alert("b=" + eqpName);
+            alert("b=" + _jobCode1);
             //alert+"a=" +  _jobCode1 + "Cbm=" + CBMName);
 
             //
 
                 $.ajax({
                             type: "GET",
-                            url: "@Url.Action("AddCBMMappings")" + "?Cbm_Name=" + CBMName+"&equipmentComponent="+eqpName+"&jobCode"+ _jobCode1,
+                            url: "@Url.Action("AddCBMMappings")" + "?Cbm_Name=" + CBMName+"&equipmentComponent="+eqpName+"&jobCode="+ _jobCode1,
                             data: "{}",
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
