@@ -9,11 +9,6 @@
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="~/Maintenance/modal/style.css">
-
-
 <script type="text/javascript">
     $(function () {
         $("input[name=btnCancel]").click(function () {
@@ -111,6 +106,10 @@
 
 @*</form>*@
 
+<link rel="stylesheet" href="~/Maintenance/modal/style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
 
 <div id="example">
     <antiforgery-token />
@@ -124,7 +123,7 @@
                     <input type="text" class="form-control" id="txtInputRank" placeholder="Rank" name="Ranks" style="height:auto;color:#0E5679;border-color:#0E5679;" />
                 </div>
                 &nbsp; &nbsp;&nbsp; &nbsp;; &nbsp;
-               
+
                 <input type="submit" onclick="AddRankDetail()"
                        class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
                 <input type="button" value="X" name="btnCancel" style="color:red;font-size:23px;border:none;background-color:white;" />
@@ -141,8 +140,8 @@
                         </div>
                     </div>
                     <div class="x_content">
-                       
-                       
+
+
                         <div id="RankGrid"></div>
                     </div>
                 </div>
@@ -165,22 +164,26 @@
                                 url: "@Html.Raw(Url.Action("ReadRankDetails", "Mdm","Maintenance"))",
                                 type: "POST",
                                 dataType: "json",
-                                data: additionalData
+                                data: additionalData3
                            },
                          update:
                             {
                                 url: "@Html.Raw(Url.Action("EditRankDetails1","Mdm","Maintenance"))",
                                 type: "POST",
-                                dataType: "application/json; charset=utf-8",
-                                 data: additionalData
-                             
+                                dataType: "json",
+                                 data: additionalData3
+
                             },
                             create:
                             {
                                 url: "@Html.Raw(Url.Action("EditRankDetails","Mdm","Maintenance"))",
                                 type: "POST",
                                 dataType: "application/json; charset=utf-8",
-                                 data: additionalData
+                                data: additionalData,
+                                complete: function (e) {
+                                    alert("hi"+e.Ranks);
+                                }
+
                             }
                     },
                     batch: true,
@@ -191,7 +194,7 @@
                                errors: "Errors",
                         model:
                         {
-                            Ranks : "Ranks",
+                            Id : "Ranks",
                             fields:
                             {
                                 Id:
@@ -204,7 +207,7 @@
                                     type: "string",
                                     editable:true
                                 }
-                              
+
 
                             }
                         }
@@ -245,7 +248,7 @@
                         {
                             field: "Ranks",
                             title: "Rank",
-                            width: "50",
+                            width: "50"
                             //template: '#=SetColor(Equipment_type)#'
                         }
                         ,
@@ -282,7 +285,7 @@
                         $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
                     }
 
-                    function additionalData() {
+                    function additionalData3() {
                         var data = {};
                         addAntiForgeryToken(data);
                         return data;

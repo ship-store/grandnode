@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -3015,16 +3015,17 @@ fieldset[disabled] a.btn {
     background-color: #fff; }
 
 .btn-danger {
-  color: #fff;
-  background-color: #ed6b75;
-  border-color: #ea5460; }
+    color: #fff;
+    background-color: #ed6b75;
+    border-color: #0E5679;
+}
   .btn-danger:focus, .btn-danger.focus {
     color: #fff;
     background-color: #e73d4a;
-    border-color: #a91520; }
+    border-color: #0E5679; }
   .btn-danger:hover {
     color: #fff;
-    background-color: #e73d4a;
+    background-color: #0E5679;
     border-color: #e31d2d; }
   .btn-danger:active, .btn-danger.active,
   .open > .btn-danger.dropdown-toggle {
