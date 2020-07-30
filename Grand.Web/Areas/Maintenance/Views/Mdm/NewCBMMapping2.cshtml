@@ -1,0 +1,188 @@
+﻿@model ViewModel
+@*@model IEnumerable<ViewModel>*@
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>*@
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<style>
+    .center {
+        margin: auto;
+        width: 40%;
+        border: 2px solid #0E5679;
+        background-color: white;
+        color: #0E5679;
+        padding: 10px;
+        font-size: 15px;
+        white-space: normal;
+        font-weight: 100;
+        height: 200px;
+        word-spacing: 4px;
+    }
+</style>
+
+@*<form action="AddCBMMapping" method="get"  onSubmit="LoadCBMMappingList(); return false">*@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+
+
+    <div class="header">
+
+        <h4 style="color:#0E5679;">
+            <a onclick="goBack()" class="fa fa-arrow-circle-left"></a>
+            CBM MAPPING
+
+
+        </h4>
+
+    </div>
+    <br>
+    <div class="body" style="max-height:800px;">
+
+        @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">*@
+
+        <div class="container-fluid" style="width: 80%;">
+            <div class="table-responsive">
+
+                <table class="table" style="border:none;">
+
+                    <tr style="width:10%;border:none;">
+                        <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;margin-left: 40%;">Select Equipment type</label></td>
+                        <td style="border:none;">
+                            <select class="form-control show-tick"  id="_eqpName1" style="color:#0E5679;margin-left: 1%;width: 300px;">
+                                <option selected disabled>Select</option>
+                                @foreach (var item in Model.EquipmentTypeList.Distinct().ToList())
+                                {
+
+                                    <option value="@item">@item</option>
+
+
+                                }
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td style="border:none;"><label for="EquipmentName" style="color:#0E5679;margin-left: 40%;">Select Job code</label></td>
+
+                        <td style="border:none;">
+                            <select class="form-control show-tick" style="color:#0E5679;margin-left: 1%;width: 300px;" id="_jobCode1">
+                                <option selected disabled>Select</option>
+                                @foreach (var item3 in Model.JobplansList)
+                                {
+                                    @if (item3.UniversalJobCode != null)
+                                    {
+
+
+                                        <option  value="@item3.UniversalJobCode" id="@item3.Id" class="filled-in" name="jobCode">@item3.UniversalJobCode</option>
+
+
+                                    }
+                                }
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+
+                </table>
+            </div>
+        </div>
+        @*</div>
+            </div>*@
+
+
+
+        <!-- Color Variations -->
+        <!-- #END# Color Variations -->
+        <!-- Circle -->
+        @*<div class="header">
+                <h2>
+                    Select CBM
+                </h2>
+            </div>*@
+        <div class="center">
+            <br />
+            @foreach (var item2 in Model.cbmList.Where(x => x.DeleteStatus != 1).ToList())
+            {
+
+
+                <input type="checkbox" id="@item2.Id" class="filled-in" name="Cbm_Name1" value="@item2.Cbm_Name" style="margin-left:5%" />
+
+
+                @item2.Cbm_Name
+
+
+            }
+
+
+        </div>
+
+
+
+    </div>
+    <br />
+    <br />
+
+    <input type="button" onclick='printChecked()' id="getValues" class="btn btn-success" value="Save" style="margin-left:500px;" />
+    @*<a href="@Url.Action("AddMaker")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"> Submit </span></a>*@
+    <a href="@Url.Action("MdmList")" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> Cancel </span></a>
+
+    <input type="hidden" id="Cbm_Name" name="Cbm_Name" value="s" />
+
+    <!-- #END# Circle -->
+
+
+
+
+</div>
+
+@*</form>*@
+
+
+<script type="text/javascript">
+   
+
+
+    $(function () {
+        $("#getValues").click(function () {
+          //  alert("y");
+
+         var items = document.getElementsByName('Cbm_Name1');
+        var selectedItems = "";
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].type == 'checkbox' && items[i].checked == true)
+                selectedItems += items[i].value + " ,";
+        }
+        document.getElementById("Cbm_Name").value = selectedItems;
+            var CBMName = selectedItems;
+            var eqpName= $("#_eqpName1 option:selected").val();
+            var _jobCode1 = $("#_jobCode1 option:selected").val();
+            alert("b=" + _jobCode1);
+            //alert+"a=" +  _jobCode1 + "Cbm=" + CBMName);
+
+            //
+
+                $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("AddCBMMappings")" + "?Cbm_Name=" + CBMName+"&equipmentComponent="+eqpName+"&jobCode="+ _jobCode1,
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (datas) {
+                            //  alert("Success");
+                                $("#tabCbmConfigure").click();
+
+                            }
+
+                        });
+
+
+        });
+    });
+
+
+</script>

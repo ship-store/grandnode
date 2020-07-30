@@ -7,7 +7,6 @@
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/jquery.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
 
-
 <div class="row" id="SearchSection">
     <div class="col-md-12">
         @*<div class="x_panel light form-fit">*@
@@ -16,10 +15,12 @@
                 <i class="fa fa-cubes" style="color:#0E5679"></i>
                 CBM MAPPING LIST
             </div>
+
             <div class="actions btn-group btn-group-devided">
                 @*<a href="@Url.Action("AddVessel")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs">Job Postpone @T("Admin.Common.AddNew") </span></a>*@
                 <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-                <a href="@Url.Action("NewCBMMapping")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"> </span></a>
+                @*<a href="@Url.Action("NewCBMMapping")" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"> </span></a>*@
+                <a href="javascript:LoadNewMapping()" class="btn btn-success"><i class="fa fa-plus"></i><span class="hidden-xs"> </span></a>
                 <a href="#" class="btn btn-success"><i class="fa fa-pencil-square-o"></i><span class="hidden-xs"> </span></a>
                 <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> </span></a>
 
@@ -118,7 +119,7 @@
                         title: "Job Code",
                         width: "50px"
                     },
-                    
+
                        ],
                     editable: "inline"
             });
@@ -126,7 +127,7 @@
         $(document).ready(function () {
             $("#CBMMappingGrid").empty();
             LoadCBMMappingGrid();
-            
+
             //$("#tabCbmConfigure").click(function () {
             //    LoadCBMMappingGrid();
             //});
@@ -141,6 +142,13 @@
                         var data = {};
                         addAntiForgeryToken(data);
                         return data;
+        }
+
+        function LoadNewMapping(){
+
+            //$("#tabDepartment").click();
+            $("#divCbmConfigure").empty();
+             $("#divCbmConfigure").load("NewCBMMapping2");
         }
     </script>
 </div>
