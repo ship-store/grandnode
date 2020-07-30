@@ -7,7 +7,8 @@
             <button type="button" id="btnSelectRow" value="GetValue" class="btn green" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" aria-hidden="true"></i></button>
 
             <button type="button" id="btnSelectRowEdit" value="GetValue" class="btn green" data-toggle="modal" data-target="#edit"><i class="fa fa-eye" aria-hidden="true"></i></button>
-            <a href="@Url.Action(" NewJobPlan")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @*@T("Admin.Common.AddNew")*@ </span></a>
+            <a href="#sign_up" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-lg"> </span></a>
+            <a href="@Url.Action("NewJobPlan")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @*@T("Admin.Common.AddNew")*@ </span></a>
 
 
             <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
@@ -345,7 +346,26 @@
 
 
 
-    });
+      });
+     $('a[href="#sign_up"]').click(function () {
+                       
+        
+            
+            //var postData = {selectedIds: selectedIds};
+            //addAntiForgeryToken(postData);
+
+            // Look for all checkboxes that have a specific class and was checked
+            var chkArray = [];
+            $(".chk:checked").each(function ()
+            {
+                chkArray.push($(this).val());
+            });
+
+            // calling  via jquery
+            $.get("http://localhost:16582/Maintenance/Equipments/DeleteSelectedJobPlan?selectedIds='" + chkArray + "'");
+            window.location.reload();
+            return false;
+       });       
 </script>
 
 
