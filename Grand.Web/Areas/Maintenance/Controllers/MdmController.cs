@@ -181,6 +181,37 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             return View(vm);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> NewCBMMapping2()
+        {
+            ViewModel vm = new ViewModel();
+
+            List<string> eqpTypeList = new List<string>();
+            var equipmentType = await _equipmentTypeService.GetAllEquipmentTypes("", 0, 500, true);
+            var equipmentTypeList = equipmentType.ToList();
+
+            var cbm = await _cbmService.GetAllCbm("", 0, 500, true);
+            var cbmList = cbm.ToList();
+
+            var jobplans = await _jobplanService.GetAllJobplan("", 0, 500, true);
+            var jobplansList = jobplans.Where(x => x.TakenOrNot != 1).ToList();
+
+            var jobpanList2 = await _cbmMappingViewModelService.GetAll();
+            foreach (var item in equipmentTypeList)
+            {
+                eqpTypeList.Add(item.Equipment_type);
+            }
+            // vm.equipmentTypeList = equipmentTypeList;
+            vm.EquipmentTypeList = eqpTypeList;
+
+
+            vm.cbmList = cbmList;
+            vm.JobplansList = jobplansList;
+
+            return PartialView("NewCBMMapping2",vm);
+        }
+
         [HttpGet]
         public async Task<IActionResult> AddReportedBy()
         {
@@ -330,6 +361,23 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             await _cbmMappingViewModelService.PrepareCbmMappingModel(cbmMappingModel, "", true);
 
             return RedirectToAction("MdmList", "Mdm");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AddCBMMappings(string Cbm_Name,string equipmentComponent,string jobCode)
+        {
+            // list
+            // await _cbmMappingViewModelService.GetAllCbmMappingAsList();
+
+            CBMMappingModel cbmMappingModel = new CBMMappingModel();
+            cbmMappingModel.Cbm_Name = Cbm_Name;
+            cbmMappingModel.equipmentComponent = equipmentComponent;
+            cbmMappingModel.jobCode = jobCode;
+
+            await _cbmMappingViewModelService.PrepareCbmMappingModel(cbmMappingModel, "", true);
+
+            return Json("");
         }
 
         [HttpPost]
@@ -879,6 +927,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         {
             return PartialView("CBMMappingList");
         }
+
+
+
+        //[HttpGet]
+        //public async Task<IActionResult> NewCBMMapping2()
+        //{
+        //    return PartialView("NewCBMMapping2");
+        //}
+
 
 
         [HttpGet]

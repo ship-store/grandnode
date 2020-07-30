@@ -6,12 +6,12 @@
         <div class="btn-group btn-group-devided util-btn-margin-bottom-5">
             <button type="button" id="btnSelectRow" value="GetValue" class="btn green" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" aria-hidden="true"></i></button>
 
-
-            <a href="@Url.Action("NewJobPlan")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @*@T("Admin.Common.AddNew")*@ </span></a>
+            <button type="button" id="btnSelectRowEdit" value="GetValue" class="btn green" data-toggle="modal" data-target="#edit"><i class="fa fa-eye" aria-hidden="true"></i></button>
+            <a href="@Url.Action(" NewJobPlan")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @*@T("Admin.Common.AddNew")*@ </span></a>
 
 
             <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-           </div>
+        </div>
     </div>
 </div>
 
@@ -284,8 +284,70 @@
 
 
 
-    })
+    });
+      $("#btnSelectRowEdit").click(function () {
+
+        var grid = $("#grid").data("kendoGrid");
+        var selectedItem = grid.dataItem(grid.select());
+
+        $("#lblJobOrder").text(selectedItem.JobOrder);
+        $("#lblEquipmentName").text(selectedItem.EquipmentName);
+        $("#lblEquipmentcode").text(selectedItem.EquipmentCode);
+        $("#lblDepartment").text(selectedItem.Department);
+        $("#lblJobtitle").text(selectedItem.JobTitle);
+        $("#lblFrequency").text(selectedItem.Frequency);
+        $("#lblLastDoneDate").text(selectedItem.LAST_DONE_DATE);
+        $("#lblNextDueDate").text(selectedItem.NEXT_DUE_DATE);
+        $("#lblJobType").text(selectedItem.Job_Type);
+        $("#lblJobDescription").text(selectedItem.JobDescription);
+        $("#lblPriority").text(selectedItem.Priority);
+        $("#lblRank").text(selectedItem.Rank);
+        $("#lblAssignedTo").text(selectedItem.AssignedTo);
+
+
+
+        var enameEdit = selectedItem.EquipmentName;
+        var ecodeEdit = selectedItem.EquipmentCode;
+        var jobOrderEdit = selectedItem.JobOrder;
+        var departmentEdit = selectedItem.Department;
+        var jobTitleEdit = selectedItem.JobTitle;
+        var frequencyEdit = selectedItem.Frequency;
+        //var lastDoneDate = selectedItem.LAST_DONE_DATE;
+        var nextDueDateEdit = selectedItem.NEXT_DUE_DATE;
+        var FrequencyTypeEdit = selectedItem.FrequencyType
+        var Job_TypeEdit = selectedItem.Job_Type;
+        var JobDescriptionEdit = selectedItem.JobDescription;
+        var PriorityEdit = selectedItem.Priority;
+        var RankEdit = selectedItem.Rank;
+        var AssignedToEdit = selectedItem.AssignedTo;
+        var frequencyRhsEdit = selectedItem.frequencyRhs;
+        var PreviousReadingEdit = selectedItem.PreviousReading;
+
+        document.getElementById("EnameEdit").value = enameEdit;
+        document.getElementById("ECodeEdit").value = ecodeEdit;
+        document.getElementById("JobOrderEdit").value = selectedItem.JobOrder;
+       
+
+        document.getElementById("DepartmentEdit").value = departmentEdit;
+        document.getElementById("JobTitleEdit").value = jobTitleEdit;
+        document.getElementById("FrequencyEdit").value = frequencyEdit;
+        //document.getElementById("LastDoneDate").value = lastDoneDate;
+        document.getElementById("NextDueDateEdit").value = nextDueDateEdit;
+        document.getElementById("FrequencyTypeEdit").value = FrequencyTypeEdit;
+        document.getElementById("FrequencyType1Edit").value = FrequencyTypeEdit;
+        document.getElementById("Job_TypeEdit").value = Job_TypeEdit;
+        document.getElementById("JobDescriptionEdit").value = JobDescriptionEdit;
+        document.getElementById("PriorityEdit").value = PriorityEdit;
+        document.getElementById("RankEdit").value = RankEdit;
+        document.getElementById("AssignedToEdit").value = AssignedToEdit;
+        document.getElementById("frequencyRhsEdit").value = frequencyRhsEdit;
+        document.getElementById("PreviousReadingEdit").value = PreviousReadingEdit;
+
+
+
+    });
 </script>
+
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog" style="top:auto;">
@@ -719,8 +781,95 @@
     </div>
 </div>
 
+<div id="edit" class="modal fade" role="dialog" style="top:auto;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-<script>
+        </div>
+        <div class="modal-body" style="height:350px;overflow:auto">
+            <form action="EditJobplanModal" method="post">
+                <div class="row clearfix">
+
+                    <div class="col-md-3">
+                        <b>Job Order</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="JobOrderEdit" name="JobOrderEdit" readonly value="JobOrder" class="form-control time24" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <b>Equipment Name</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+
+                                <input type="text" id="EnameEdit" name="EnameEdit" value="" class="form-control time24" placeholder="">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Equipment Code</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="ECodeEdit" name="ECodeEdit" value="" class="form-control money-euro" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-3">
+                        <b>Job Title</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="JobTitleEdit" name="JobTitleEdit" value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <b>Department</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="DepartmentEdit" name="DepartmentEdit" value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @Html.AntiForgeryToken()
+
+
+                <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Update" id="submit" />
+</form>
+</div>
+        </div>
+
+
+</div>
+
+
+        <script>
     $(function () {
 
         $("#btn1").text();
@@ -743,24 +892,24 @@
         {
             myHeading = myHeading + "<p style='color:red'>   No Cbm Parameter<p>";
         }
-    $("#modal-body").html(myHeading);   
+    $("#modal-body").html(myHeading);
      $('#modal').modal('show');
     }
-</script>
-<!----modal starts here--->
-<div id="modal" class="modal fade" role='dialog' tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="margin-left:50%;margin-top:15%">
-        <div class="modal-content"  style="width:50%; height:50%; border:solid 2px #7273a3">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Cbm parameter</h4>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <p>Here the description starts here........</p>
+        </script>
+        <!----modal starts here--->
+        <div id="modal" class="modal fade" role='dialog' tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered" role="document" style="margin-left:50%;margin-top:15%">
+                <div class="modal-content" style="width:50%; height:50%; border:solid 2px #7273a3">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Cbm parameter</h4>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+                        <p>Here the description starts here........</p>
 
+                    </div>
+
+                </div>
             </div>
-           
         </div>
-    </div>
-</div>
-<!--Modal ends here--->
+        <!--Modal ends here--->

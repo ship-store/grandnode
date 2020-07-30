@@ -839,7 +839,43 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             }
             return Json(models);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditJobplanModal(int JobOrderEdit,string EnameEdit,string ECodeEdit,string JobTitleEdit,string DepartmentEdit)
+        {
+            var job = await _jobplanService.GetAllJobplan("", 0, 500, true);
+            var jobplan = job.ToList().FindAll(y => y.JobOrder == JobOrderEdit);
+            
+            foreach(var item in jobplan)
+            {
+                item.JobTitle = JobTitleEdit;
+                item.Department = DepartmentEdit;
+                await _jobplanService.UpdateJobPlan(item);
+            }
+           
+            return RedirectToAction("List");
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditSparepartModal(string id,string EquipmentCodeEdit, string EnameEdit, string SparepartEdit, string PartNoEdit, string SpecificationEdit,string PositionNoEdit)
+        {
+            var spareparts = await _sparepartService.GetAllSpareparts("", 0, 500, true);
+            var sparepart = spareparts.ToList().FindAll(y => y.Id == id);
+
+            foreach (var item in sparepart)
+            {
+                item.EquipmentCode = EquipmentCodeEdit;
+                item.EquipmentName = EnameEdit;
+                item.SPAR_PARTS_DESCRIPTION = SparepartEdit;
+                item.PART_NUMBER = PartNoEdit;
+                item.SPECIFICATION = SpecificationEdit;
+                item.POSITION_NUMBER = PositionNoEdit;
+                await _sparepartService.UpdateSparePart(item);
+            }
+
+            return RedirectToAction("List");
+        }
 
     }
 }
