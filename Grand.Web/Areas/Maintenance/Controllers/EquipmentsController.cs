@@ -94,9 +94,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         [HttpGet]
         public async  Task<IActionResult> AddEquipment(string equipment_Code, string sub_number,string EquipmentId)
         {
-            var critical = await _criticalService.GetAllCriticals("", 0, 500, true);
-            List<Critical> criticalList = critical.ToList();
-            ViewBag.CriticalList = criticalList.Where(y => y.DeleteStatus != 1).ToList();
+            //var critical = await _criticalService.GetAllCriticals("", 0, 500, true);
+            //List<Critical> criticalList = critical.ToList();
+            //ViewBag.CriticalList = criticalList.Where(y => y.DeleteStatus != 1).ToList();
 
             //  var EquipmentTypeList=await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
             var equiomentList = await _cbmMappingViewModelService.GetAllCbmMappingAsList("");

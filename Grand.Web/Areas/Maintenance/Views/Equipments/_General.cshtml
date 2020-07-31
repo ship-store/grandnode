@@ -331,7 +331,7 @@
     window.MakerId = "";
     $(function () {
         $("#maker").change(function () {
-
+            $("#makerModel").empty();
             window.MakerName = $("#maker option:selected").text();
           //  alert("mnmame" + window.MakerName);
             window.MakerId = $("#maker option:selected").attr("id");
