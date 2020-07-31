@@ -8,7 +8,7 @@
 <script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        $("input[name=btnPassport]").click(function () {
+        $("input[name=btnCancel]").click(function () {
             if ($(this).val() == "+") {
                 $("#dvPassport").show();
             } else {
@@ -95,7 +95,7 @@
                 @Html.AntiForgeryToken()
                 <input type="submit" onclick="AddCBMDetails()"
                        class="fa fa-save" id="bu" value="&#xf0c7;" style="font-size:23px;color:#0E5679;background:white;border:white">
-                <input type="button" value="X" name="btnPassport" style="color:red;font-size:23px;border:none;background-color:white;" />
+                <input type="button" value="X" name="btnCancel" style="color:red;font-size:23px;border:none;background-color:white;" />
 
             </td>
 

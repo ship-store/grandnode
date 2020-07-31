@@ -439,7 +439,7 @@ namespace Grand.Web.Areas.Maintenance.Controllers
 
                 var sparePart = spareparts.ToList().FindAll(y => y.EquipmentCode == selectedEquipment.Sub1_number || y.EquipmentCode == selectedEquipment.Sub2_number || y.EquipmentCode == selectedEquipment.Sub3_number || y.EquipmentCode == selectedEquipment.Sub4_number);
                 //var jobplan = jobplans.ToList().Where(y => y.EquipmentName.ToLower() == selectedEquipment.Sub1_description.ToLower() || y.EquipmentName.ToLower() == selectedEquipment.Sub2_description.ToLower() || y.EquipmentName.ToLower() == selectedEquipment.Sub3_description.ToLower() || y.EquipmentName.ToLower() == selectedEquipment.Sub4_description.ToLower()).First();
-                var jobplan = jobplans.ToList().FindAll(y => y.EquipmentCode == selectedEquipment.Sub1_number || y.EquipmentCode == selectedEquipment.Sub2_number || y.EquipmentCode == selectedEquipment.Sub3_number || y.EquipmentCode == selectedEquipment.Sub4_number);
+                var jobplan = jobplans.ToList().FindAll(y => (y.EquipmentCode == selectedEquipment.Sub1_number || y.EquipmentCode == selectedEquipment.Sub2_number || y.EquipmentCode == selectedEquipment.Sub3_number || y.EquipmentCode == selectedEquipment.Sub4_number) && y.DeleteStatus!=1);
                
 
                 foreach (var item in jobplan)
@@ -874,6 +874,30 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                 await _sparepartService.UpdateSparePart(item);
             }
 
+            return RedirectToAction("List");
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteSelectedJobPlan(string selectedIds)
+        {
+            await Task.FromResult(0);
+
+            string[] strlist = selectedIds.Split(",");
+
+            var SelectedList = strlist.ToList();
+            if (selectedIds != null)
+            {
+                for (int i = 0; i < strlist.Length; i++)
+                {
+
+
+                    var selectedJobPlan = await _jobplanService.GetJobPlanById(strlist[i].Trim(new char[] { (char)39 }));
+
+                    selectedJobPlan.DeleteStatus = 1;//changing job to postponed
+                    await _jobplanService.UpdateJobPlan(selectedJobPlan);
+                }
+            }
+
+            //return Json(new { Result = true });
             return RedirectToAction("List");
         }
 

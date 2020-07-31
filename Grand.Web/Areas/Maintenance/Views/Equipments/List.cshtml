@@ -85,14 +85,14 @@
         <div>
             <div id="example" style="float:left;width:25%; background-color:#fff; margin-left:2px;">
 
-                <div class="demo-section k-content" style="height: 700px;background-color: #ffff;padding-left:1em; padding-top:1em; padding-right:1em;">
+                <div class="demo-section k-content" style="height: 715px;background-color: #ffff;padding-left:1em; padding-top:1em; padding-right:1em;">
                     <div class="container">
                         <div style="float: left; width: 15%">
                             <button class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
                         <div style="float:left;width:80%;position:relative;left:-7px;">
                             <input class="form-control" id="searchbar" onkeyup="search_sidebar()" type="text"
-                                   name="search" placeholder="Search ..">
+                                   name="search" placeholder="Search Equipment" style="font-size:12px">
                         </div>
                         <br /><br />
 
@@ -100,7 +100,7 @@
 
                      <ul id="treeview" style="height:621px; overflow:auto; font-size:13px;">
                          <li  class="data">
-                             <span style="color: #7273a3;font-size:13px">EQUIPMENTS</span>
+                             <span style="color: #0e5679;font-size:13px">EQUIPMENTS</span>
                              <ul>
 
                                  @foreach (var item in Model.AllEquipments.Where(f => f.Sub1_number != null && f.Sub1_description != null))
@@ -109,7 +109,7 @@
                                      <li class="data">
 
                                          <span>
-                                             <a onclick="equipmentSelected(this); return false;" style="color: #7273a3"
+                                             <a onclick="equipmentSelected(this); return false;" style="color: #0e5679"
                                                 alt="Sub1_number-Sub1_description-@item.Id">@item.Sub1_number-@item.Sub1_description</a>
                                          </span>
 
@@ -121,7 +121,7 @@
                                                  <li class="data">
 
                                                      <a class="id1" href="#" onclick="equipmentSelected(this); return false;"
-                                                        style="color:#7273a3"
+                                                        style="color:#0e5679"
                                                         alt="Sub2_number-Sub2_description-@item2.Id">@item2.Sub2_number-@item2.Sub2_description</a>
 
 
@@ -131,7 +131,7 @@
                                                          {
                                                              // var lastNode3 = Model.AllEquipments.Where(f => f.Sub3_number != null && f.Sub3_description != null && f.Type == item2.Type).Last().Sub3_number;
                                                              <li class="data">
-                                                                 <a onclick="equipmentSelected(this); return false;" style="color:#7273a3"
+                                                                 <a onclick="equipmentSelected(this); return false;" style="color:#0e5679"
                                                                     alt="Sub3_number-Sub3_description-@item3.Id">@item3.Sub3_number-@item3.Sub3_description</a>
                                                                  <ul>
                                                                  </ul>
