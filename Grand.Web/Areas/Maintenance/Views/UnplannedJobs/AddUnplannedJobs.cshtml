@@ -1,4 +1,6 @@
-﻿@{
+﻿
+@{
+
     ViewBag.Title = T("Maintenance.Title.AddUnplannedJobs").Text;
     var vessel = @HttpContextAccessor.HttpContext.Session.GetString("VesselName");
     var JobOrder = ViewBag.joborder;
@@ -15,7 +17,7 @@
                 <a asp-controller="UnplannedJobs" asp-action="List" style="font-size:20px;color:#0E5679;float:right;margin-right:1%;"><i class="fa fa-close"></i></a>
 
             </div>
-           
+
         </div>
         <br>
 
@@ -50,7 +52,7 @@
                     </tr>
                     <tr>
                         <td style="border:none;">
-                            
+
                             <select class="form-control show-tick" name="ReportedBy" style="float:left;width:18%;color:#0E5679;border-color:#0E5679">
                                 <option value="">Reported by</option>
                                 @foreach (var reporter in reporterList)
@@ -76,15 +78,15 @@
                                 </select>
                             </div>
                         </td>
-                        </tr>
-                    
+                    </tr>
+
                     <tr>
                         @Html.AntiForgeryToken()
                         <td style="border:none;"><input type="submit" value="&#xf0f6" class="fa fa-floppy-o aria-hidden=true" style="float:right;right:21%;width:30px;position:relative;height:30px;background-color:#0E5679;color:white;" id="submit" /></td>
                     </tr>
-                   
+
                 </table>
-                   
+
             </form>
         </div>
     </div>
