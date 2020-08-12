@@ -6,7 +6,7 @@
         <div class="btn-group btn-group-devided util-btn-margin-bottom-5">
             <button type="button" id="btnSelectRow" value="GetValue" class="btn green" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" aria-hidden="true"></i></button>
 
-            <button type="button" id="btnSelectRowEdit" value="GetValue" class="btn green" data-toggle="modal" data-target="#edit"><i class="fa fa-eye" aria-hidden="true"></i></button>
+            @*<button type="button" id="btnSelectRowEdit" value="GetValue" class="btn green" data-toggle="modal" data-target="#edit"><i class="fa fa-eye" aria-hidden="true"></i></button>*@
             <a href="#sign_up" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-lg"> </span></a>
             <a href="@Url.Action("NewJobPlan")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> @*@T("Admin.Common.AddNew")*@ </span></a>
 
@@ -370,7 +370,7 @@
 
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog" style="top:auto;">
+<div id="myModal" class="modal fade" role="dialog" style="top:auto;color:#0e5679;">
 
     <div class="modal-content">
         <div class="modal-header">
@@ -407,7 +407,7 @@
                         <!---------------------------------------- Basic Details Start ---------------------------------------------->
                         <div>
                             <span class="rainy">&nbsp;</span>
-                            <div class="row clearfix">
+                            <div class="row clearfix" style="color:#0e5679;">
 
                                 <div class="col-md-3">
                                     <b>Job Order</b>
@@ -484,7 +484,7 @@
                                 <form action="EditJobplanCalendar" method="post">
                                     <span class="sunny">&nbsp;</span>
 
-                                    <div class="row clearfix">
+                                    <div class="row clearfix" style="color:#0e5679;">
                                         <input type="hidden" id="JobOrder2" name="JobOrder2" value="JobOrder">
                                         <div class="col-md-3">
                                             <b>Frequency</b>
@@ -586,7 +586,7 @@
 
                                         @Html.AntiForgeryToken()
 
-                                        <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Update" id="submit" />
+                                        <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Update" id="submit" style="float:right;background-color:#0e5679"/>
 
                                     </div>
 
@@ -600,7 +600,7 @@
                         <div>
                             <form action="EditJobplanRhs" method="post">
                                 <span class="rr">&nbsp;</span>
-                                <div class="row clearfix">
+                                <div class="row clearfix" style="color:#0e5679;">
 
 
                                     <input type="hidden" id="JobOrder3" name="JobOrder3" value="JobOrder">

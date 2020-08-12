@@ -75,7 +75,20 @@
                             <i class="material-icons">turned_in_not</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" style="color:#0E5679;" name="safety" value="" class="form-control money-euro" placeholder="" id="id5" readonly="readonly">
+                            @*<input type="text" style="color:#0E5679;" name="safety" value="" class="form-control money-euro" placeholder="" id="id5" readonly="readonly">*@
+                            <select name="safety" class="form-control money-euro"
+                                    id="safetylevel" style="color:#0E5679;border-color:#0E5679" disabled>
+                                <option id="safetyValue"></option>
+                                <option>Select</option>
+                                @foreach (var item in Model.SafetyLevel.Where(x => x.DeleteStatus != 1).ToList())
+                                {
+
+
+                                    <option class="form-control money-euro" id="@item.Id"> @item.Safety_level</option>
+
+                                }
+                            </select>
+
                         </div>
                     </div>
                 </div>
@@ -163,7 +176,7 @@
                             <i class="material-icons">turned_in_not</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" value="" style="color:#0E5679;" name="drawno" class="form-control money-euro" placeholder="" id="id9" readonly="readonly">
+                            <input type="text" value="" style="color:#0E5679;" name="drawno" class="form-control money-euro" placeholder="" id="id8" readonly="readonly">
                         </div>
                     </div>
                 </div>
@@ -175,7 +188,20 @@
                             <i class="material-icons">turned_in_not</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" value="" style="color:#0E5679;" name="dept" class="form-control money-euro" placeholder="" id="id10" readonly="readonly">
+                            @*<input type="text" value="" style="color:#0E5679;" name="dept" class="form-control money-euro" placeholder="" id="id10" readonly="readonly">*@
+                            <select name="dept" class="form-control money-euro"
+                                    id="department" style="color:#0E5679;border-color:#0E5679" disabled>
+                                <option id="deptValue"></option>
+                                <option>Select</option>
+                                @foreach (var item in Model.Department.Where(x => x.DeleteStatus != 1).ToList())
+                                {
+
+
+                                    <option class="form-control money-euro" id="@item.Id"> @item.Departments</option>
+
+                                }
+                            </select>
+
                         </div>
                     </div>
                 </div>
@@ -187,7 +213,20 @@
                             <i class="material-icons">turned_in_not</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" value="" style="color:#0E5679;" name="location" class="form-control money-euro" placeholder="" id="id11" readonly="readonly">
+                            @*<input type="text" value="" style="color:#0E5679;" name="location" class="form-control money-euro" placeholder="" id="id11" readonly="readonly">*@
+                            <select name="location" class="form-control money-euro"
+                                    id="loc" style="color:#0E5679;border-color:#0E5679" disabled>
+                                <option id="locValue"></option>
+                                <option>Select</option>
+                                @foreach (var item in Model.Location.Where(x => x.DeleteStatus != 1).ToList())
+                                {
+
+
+                                    <option class="form-control money-euro" id="@item.Id"> @item.Locations</option>
+
+                                }
+                            </select>
+
                         </div>
                     </div>
                 </div>
@@ -199,7 +238,17 @@
                             <i class="material-icons">turned_in_not</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" style="color:#0E5679;" value="" name="eqstatus" class="form-control money-euro" placeholder="" id="id12" readonly="readonly">
+                            @*<input type="text" style="color:#0E5679;" value="" name="eqstatus" class="form-control money-euro" placeholder="" id="id12" readonly="readonly">*@
+                            <select name="eqstatus" class="form-control money-euro" id="eqpstatus" style="color:#0E5679;border-color:#0E5679" disabled>
+                                <option id="statusvalue"></option>
+                                @foreach (var item in Model.Equipmentstatus)
+                                {
+
+
+                                    <option class="form-control money-euro" id="@item.Id"> @item.Status</option>
+
+                                }
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -211,7 +260,7 @@
                             <i class="material-icons">turned_in_not</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" style="color:#0E5679;" value="" name="remark" class="form-control money-euro" placeholder="" id="id13" readonly="readonly">
+                            <input type="text" style="color:#0E5679;" value="" name="remark" class="form-control money-euro" placeholder="" id="id15" readonly="readonly">
                         </div>
                     </div>
                 </div>
@@ -381,6 +430,10 @@
     function MakedropDownEditable() {
         $("#eqptype").removeAttr('disabled');
         $("#maker").removeAttr('disabled');
+        $("#eqpstatus").removeAttr('disabled')
+        $("#safetylevel").removeAttr('disabled')
+        $("#department").removeAttr('disabled')
+        $("#loc").removeAttr('disabled')
         $("#maker").click(function () {
 
               $("#makerModel").removeAttr('disabled');

@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using Grand.Core.Domain.CbmEntity;
 using Grand.Core.Domain.MakerEntity;
 using Grand.Framework.Mvc.ModelBinding;
+using Grand.Core.Domain.EquipmentStatusEntity;
+using Grand.Core.Domain.SafetyLevelEntity;
+using Grand.Core.Domain.DepartmentEntity;
+using Grand.Core.Domain.LocationEntity;
 
 namespace Grand.Web.Areas.Maintenance.DomainModels
 {
@@ -27,15 +31,21 @@ namespace Grand.Web.Areas.Maintenance.DomainModels
 
         //public Grand.Core.Domain.EquipmentTypeEntity.EquipmentType equipmentTypeList { get; set; }
         public List<Grand.Core.Domain.EquipmentTypeEntity.EquipmentType> equipmentTypeList { get; set; }
+        public List<EquipmentStatus> equipmentStatusList { get; set; }
 
         //public Grand.Core.Domain.CbmEntity.CBM cbmList { get; set; }
         public IEnumerable<Grand.Core.Domain.CbmEntity.CBM> cbmList { get; set; }
         public List<string> EquipmentTypeList { get; set; }
+        public List<string> EquipmentStatusList { get; set; }
 
         public List<Core.Domain.Jobplan.Jobplan> JobplansList { get; set; }
         public List<Jobplan> jobsToday { get; set; }
 
         public List<Maker> Makers { get; set; }
+        public List<EquipmentStatus> Equipmentstatus { get; set; }
+        public List<SafetyLevel> SafetyLevel { get; set; }
+        public List<Department> Department { get; set; }
+        public List<Location> Location { get; set; }
 
         [GrandResourceDisplayName("Maintenance.Vessel.List.SearchName")]
         public string SearchName { get; set; }
