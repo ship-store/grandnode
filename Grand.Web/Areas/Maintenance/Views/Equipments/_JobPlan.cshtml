@@ -289,7 +289,8 @@
       $("#btnSelectRowEdit").click(function () {
 
         var grid = $("#grid").data("kendoGrid");
-        var selectedItem = grid.dataItem(grid.select());
+          var selectedItem = grid.dataItem(grid.select());
+         
 
         $("#lblJobOrder").text(selectedItem.JobOrder);
         $("#lblEquipmentName").text(selectedItem.EquipmentName);
@@ -305,44 +306,109 @@
         $("#lblRank").text(selectedItem.Rank);
         $("#lblAssignedTo").text(selectedItem.AssignedTo);
 
+          alert("hi" + selectedItem.FrequencyType);
+          if (selectedItem.EquipmentName != null) {
+                  var enameEdit = selectedItem.EquipmentName;
+          }
+          if (selectedItem.EquipmentCode != null) {
+              var ecodeEdit = selectedItem.EquipmentCode;
+          }
+          if (selectedItem.JobOrder != null) {
+              var jobOrderEdit = selectedItem.JobOrder;
+          }
+          if (selectedItem.Department != null) {
+              var departmentEdit = selectedItem.Department;
+          }
+          if (selectedItem.JobTitle != null) {
+              var jobTitleEdit = selectedItem.JobTitle;
+          }
+          if (selectedItem.FrequencyType != null) {
+              var FrequencyTypeEdit = selectedItem.FrequencyType;
+          }
+          if (selectedItem.CalFrequency != null) {
+              var frequencyEdit = selectedItem.CalFrequency;
+          }
+          if (selectedItem.LAST_DONE_DATE != null) {
+              var lastDoneDateEdit = selectedItem.LAST_DONE_DATE;
+          }
+          if (selectedItem.NEXT_DUE_DATE != null) {
+              var nextDueDateEdit = selectedItem.NEXT_DUE_DATE;
+          }
+          if (selectedItem.Job_Type != null) {
+              var Job_TypeEdit = selectedItem.Job_Type;
+          }
+          if (selectedItem.JobDescription != null) {
+              var JobDescriptionEdit = selectedItem.JobDescription;
+          }
+          if (selectedItem.Priority != null) {
+              var PriorityEdit = selectedItem.Priority;
+          }
+          if (selectedItem.Rank != null) {
+              var RankEdit = selectedItem.Rank;
+          }
+          if (selectedItem.AssignedTo != null) {
+              var AssignedToEdit = selectedItem.AssignedTo;
+          }
+          //if (selectedItem.frequencyRhs != null) {
+          //    var frequencyRhsEdit = selectedItem.frequencyRhs;
+          //}
+          if (selectedItem.PreviousReading != null) {
+              var PreviousReadingEdit = selectedItem.PreviousReading;
+          }
+          if (selectedItem.EquipmentName != null) {
+                 document.getElementById("EnameEdit").value = enameEdit;
 
+          }
+          if (selectedItem.EquipmentCode != null) {
+              document.getElementById("ECodeEdit").value = ecodeEdit;
+          }
+          if (selectedItem.JobOrder != null) {
+              document.getElementById("JobOrderEdit").value = selectedItem.JobOrder;
+          }
 
-        var enameEdit = selectedItem.EquipmentName;
-        var ecodeEdit = selectedItem.EquipmentCode;
-        var jobOrderEdit = selectedItem.JobOrder;
-        var departmentEdit = selectedItem.Department;
-        var jobTitleEdit = selectedItem.JobTitle;
-        var frequencyEdit = selectedItem.Frequency;
-        //var lastDoneDate = selectedItem.LAST_DONE_DATE;
-        var nextDueDateEdit = selectedItem.NEXT_DUE_DATE;
-        var FrequencyTypeEdit = selectedItem.FrequencyType
-        var Job_TypeEdit = selectedItem.Job_Type;
-        var JobDescriptionEdit = selectedItem.JobDescription;
-        var PriorityEdit = selectedItem.Priority;
-        var RankEdit = selectedItem.Rank;
-        var AssignedToEdit = selectedItem.AssignedTo;
-        var frequencyRhsEdit = selectedItem.frequencyRhs;
-        var PreviousReadingEdit = selectedItem.PreviousReading;
+          if (selectedItem.Department != null) {
+              document.getElementById("DepartmentEdit").value = departmentEdit;
+          }
+          if (selectedItem.JobTitle != null) {
 
-        document.getElementById("EnameEdit").value = enameEdit;
-        document.getElementById("ECodeEdit").value = ecodeEdit;
-        document.getElementById("JobOrderEdit").value = selectedItem.JobOrder;
-       
-
-        document.getElementById("DepartmentEdit").value = departmentEdit;
-        document.getElementById("JobTitleEdit").value = jobTitleEdit;
-        document.getElementById("FrequencyEdit").value = frequencyEdit;
-        //document.getElementById("LastDoneDate").value = lastDoneDate;
-        document.getElementById("NextDueDateEdit").value = nextDueDateEdit;
-        document.getElementById("FrequencyTypeEdit").value = FrequencyTypeEdit;
-        document.getElementById("FrequencyType1Edit").value = FrequencyTypeEdit;
-        document.getElementById("Job_TypeEdit").value = Job_TypeEdit;
-        document.getElementById("JobDescriptionEdit").value = JobDescriptionEdit;
-        document.getElementById("PriorityEdit").value = PriorityEdit;
-        document.getElementById("RankEdit").value = RankEdit;
-        document.getElementById("AssignedToEdit").value = AssignedToEdit;
-        document.getElementById("frequencyRhsEdit").value = frequencyRhsEdit;
-        document.getElementById("PreviousReadingEdit").value = PreviousReadingEdit;
+              document.getElementById("JobTitleEdit").value = jobTitleEdit;
+          }
+          if (selectedItem.FrequencyType != null) {
+              document.getElementById("FrequencyTypeEdit").value = selectedItem.FrequencyType;
+          }
+          if (selectedItem.CalFrequency != null) {
+              document.getElementById("FrequencyEdit").value = selectedItem.CalFrequency;
+          }
+          if (selectedItem.LAST_DONE_DATE != null) {
+              document.getElementById("LastDoneDateEdit").value = lastDoneDateEdit;
+          }
+          if (selectedItem.NEXT_DUE_DATE != null) {
+              document.getElementById("NextDueDateEdit").value = nextDueDateEdit;
+          }
+          //if (selectedItem.FrequencyType != null) {
+          //    document.getElementById("FrequencyType1Edit").value = FrequencyTypeEdit;
+          //}
+          if (selectedItem.Job_Type != null) {
+              document.getElementById("Job_TypeEdit").value = Job_TypeEdit;
+          }
+          if (selectedItem.JobDescription != null) {
+              document.getElementById("JobDescriptionEdit").value = JobDescriptionEdit;
+          }
+          if (selectedItem.Priority != null) {
+              document.getElementById("PriorityEdit").value = PriorityEdit;
+          }
+          if (selectedItem.Rank != null) {
+              document.getElementById("RankEdit").value = RankEdit;
+          }
+          if (selectedItem.AssignedTo != null) {
+              document.getElementById("AssignedToEdit").value = AssignedToEdit;
+          }
+          //if (selectedItem.frequencyRhs != null) {
+          //    document.getElementById("frequencyRhsEdit").value = frequencyRhsEdit;
+          //}
+          if (selectedItem.PreviousReading != null) {
+              document.getElementById("PreviousReadingEdit").value = PreviousReadingEdit;
+          }
 
 
 
@@ -831,7 +897,7 @@
                             </span>
                             <div class="form-line">
 
-                                <input type="text" id="EnameEdit" name="EnameEdit" value="" class="form-control time24" placeholder="">
+                                <input type="text" id="EnameEdit" name="EnameEdit" readonly value="" class="form-control time24" placeholder="">
 
                             </div>
                         </div>
@@ -843,7 +909,7 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" id="ECodeEdit" name="ECodeEdit" value="" class="form-control money-euro" placeholder="">
+                                <input type="text" id="ECodeEdit" name="ECodeEdit" readonly value="" class="form-control money-euro" placeholder="">
                             </div>
                         </div>
                     </div>
@@ -858,7 +924,7 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" id="JobTitleEdit" name="JobTitleEdit" value="" class="form-control key" placeholder="">
+                                <input type="text" id="JobTitleEdit" name="JobTitleEdit" readonly value="" class="form-control key" placeholder="">
                             </div>
                         </div>
                     </div>
@@ -871,20 +937,121 @@
                                 <i class="material-icons">turned_in_not</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" id="DepartmentEdit" name="DepartmentEdit" value="" class="form-control key" placeholder="">
+                                <input type="text" id="DepartmentEdit" name="DepartmentEdit" readonly value="" class="form-control key" placeholder="">
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-3">
+                        <b>Frequency</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="FrequencyEdit" name="FrequencyEdit" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <b>Frequency Type</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="FrequencyTypeEdit" name="FrequencyTypeEdit" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Last Done Date</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="LastDoneDateEdit" name="LastDoneDateEdit" value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Due Date</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="NextDueDateEdit" name="NextDueDateEdit" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Job Type</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="Job_TypeEdit" name="Job_TypeEdit" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Priority</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="PriorityEdit" name="PriorityEdit" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <b>Rank</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="RankEdit" name="RankEdit" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Assigned To</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="AssignedToEdit" name="AssignedToEdit" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
                 @Html.AntiForgeryToken()
 
 
                 <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Update" id="submit" />
-</form>
-</div>
+            </form>
+            <input type="button" class="btn btn-primary m-t-15 waves-effect makeEditable" value="Edit" id="submit" />
         </div>
-
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $(".makeEditable").click(function () {
+                $('input:text').removeAttr("readonly");
+            });
+            
+        })
+    </script>
 
 </div>
 

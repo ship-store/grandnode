@@ -61,8 +61,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> List(DataSourceRequest command, VesselListModel model)
         {
             var vessels = await _vesselService.GetAllVessels(model.SearchName, command.Page - 1, command.PageSize, true);
+            var activeVessels = vessels.Where(x => x.ActiveStatus != 1);
             var gridModel = new DataSourceResult {
-            Data = vessels.ToList()
+            Data = activeVessels.ToList()
 
             };
             return Json(gridModel);
@@ -81,9 +82,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
             {
                 //return View(display);
                 var vessels = await _vesselService.GetAllVessels(model.SearchName, command.Page - 1, command.PageSize, true);
-                var gridModel = new DataSourceResult 
-                {
-                    Data = vessels.ToList()
+                var activeVessels = vessels.Where(x => x.ActiveStatus != 1);
+                var gridModel = new DataSourceResult {
+
+                    Data = activeVessels.ToList()
 
                 };
                 return Json(gridModel);

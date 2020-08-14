@@ -89,7 +89,7 @@ namespace Grand.Services.Vessel
             if (vessel == null)
                 throw new ArgumentNullException("Vessel");      
             //Soft deleting Vessel
-            vessel.ActiveStatus = 0;
+            vessel.ActiveStatus = 1;
             await _vesselRepository.UpdateAsync(vessel);
            
             //await _vesselRepository.DeleteAsync(vessel); hard delte 
