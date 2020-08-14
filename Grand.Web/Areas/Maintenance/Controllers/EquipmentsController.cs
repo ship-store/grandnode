@@ -30,6 +30,10 @@ using Grand.Services.Maker;
 using Newtonsoft.Json;
 using Grand.Services.Critical;
 using Grand.Core.Domain.CriticalEntity;
+using Grand.Services.EquipmentStatus;
+using Grand.Services.SafetyLevel;
+using Grand.Services.Department;
+using Grand.Services.Location;
 
 namespace Grand.Web.Areas.Maintenance.Controllers
 {
@@ -50,11 +54,20 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         private readonly ISparepartViewModelService _sparepartViewModelService;
         private readonly IJobPlanViewModelService _jobPlanViewModelService;
         private readonly IMakerService _makerService;
+        private readonly ISafetyLevelService _safetyLevelService;
+        private readonly IDepartmentService _departmentService;
+        private readonly ILocationService _locationService;
+
+        private readonly IEquipmentStatusService _equipmentStatusService;
         private readonly IMakerService1 _makerService1;
         private readonly ICriticalService _criticalService;
         private readonly ICriticalViewModelService _criticaltViewModelService;
 
         public EquipmentsController(IJobPlanViewModelService _jobPlanViewModelService,
+            ILocationService _locationService,
+            IDepartmentService _departmentService,
+            ISafetyLevelService _safetyLevelService,
+            IEquipmentStatusService _equipmentStatusService,
             ICriticalService _criticalService,
             ICriticalViewModelService _criticaltViewModelService,
             ISparepartViewModelService _sparepartViewModelService, IJobplanService _jobplanService, 
@@ -70,7 +83,10 @@ namespace Grand.Web.Areas.Maintenance.Controllers
              IMakerService1 _makerService1
             )
         {
-
+            this._locationService = _locationService;
+            this._departmentService = _departmentService;
+            this._safetyLevelService = _safetyLevelService;
+            this._equipmentStatusService = _equipmentStatusService;
             this._vesselViewModelService = _vesselViewModelService;
             this._vesselService = _vesselService;
             this._equipmentService = _equipmentService;
@@ -94,9 +110,9 @@ namespace Grand.Web.Areas.Maintenance.Controllers
         [HttpGet]
         public async  Task<IActionResult> AddEquipment(string equipment_Code, string sub_number,string EquipmentId)
         {
-            var critical = await _criticalService.GetAllCriticals("", 0, 500, true);
-            List<Critical> criticalList = critical.ToList();
-            ViewBag.CriticalList = criticalList.Where(y => y.DeleteStatus != 1).ToList();
+            //var critical = await _criticalService.GetAllCriticals("", 0, 500, true);
+            //List<Critical> criticalList = critical.ToList();
+            //ViewBag.CriticalList = criticalList.Where(y => y.DeleteStatus != 1).ToList();
 
             //  var EquipmentTypeList=await _equipmentTypeViewModelService.GetAllEquipmentTypeAsList("");
             var equiomentList = await _cbmMappingViewModelService.GetAllCbmMappingAsList("");
@@ -239,6 +255,15 @@ namespace Grand.Web.Areas.Maintenance.Controllers
                     var makers = await _makerService.GetAllMakers("", 0, 500, true);
 
                     vm.Makers = makers.ToList();
+                    var EquipmentStatusList = await _equipmentStatusService.GetAllEquipmentStatus("", 0, 500, true);
+                    vm.Equipmentstatus = EquipmentStatusList.ToList();
+                    var SafetyLevel = await _safetyLevelService.GetAllSafetyLevels("", 0, 500, true);
+                    vm.SafetyLevel = SafetyLevel.ToList();
+                    var Department = await _departmentService.GetAllDepartments("", 0, 500, true);
+                    vm.Department = Department.ToList();
+                    var Location = await _locationService.GetAllLocations("", 0, 500, true);
+                    vm.Location = Location.ToList();
+
                     return View(vm);
 
                 }
