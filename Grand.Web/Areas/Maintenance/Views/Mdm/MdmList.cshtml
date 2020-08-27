@@ -1,279 +1,369 @@
 ﻿<meta name="referrer" content="no-referrer" />
 
 @*<div class="row" id="SearchSection">
-    <div class="col-md-12">
-        <div class="x_panel light form-fit">
-            <div class="x_title">
-                <div class="caption">
-                    <i class="fa fa-cubes"></i>
+        <div class="col-md-12">
+            <div class="x_panel light form-fit">
+                <div class="x_title">
+                    <div class="caption">
+                        <i class="fa fa-cubes"></i>
 
-                    Master Data Management
+                        Master Data Management
 
+                    </div>
                 </div>
             </div>
         </div>
+    </div>*@
+@*<div style="height:100vh; overflow:auto">
+
+        <h4><font color="#0E5679">Master Data Management</font></h4>
+        <admin-tabstrip name="mdm" SetTabPos="true">
+            <items>
+                <tabstrip-item text="Maker" tab-index="0" id="tabMaker" class="tabMaker">
+                    <content>
+                        <div id="divMaker">
+                            <partial name="MakerList" />
+
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Maker Model" tab-index="1" id="tabMakerModel">
+                    <content>
+                        <div id="divMakerModel">
+                        </div>
+                    </content>
+                </tabstrip-item>
+
+                <tabstrip-item text="Job Status" tab-index="3" id="tabJobStatus">
+                    <content>
+                        <div id="divJobStatus">
+
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Equipment Type" tab-index="4" id="tabEquipmentType">
+                    <content>
+                        <div id="divEquipmentType">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Job Type" tab-index="5" id="tabjobType">
+                    <content>
+                        <div id="divJobType">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="CBM" tab-index="6" id="tabCBM">
+                    <content>
+                        <div id="divCBM">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="CBM Configure" tab-index="6" id="tabCbmConfigure">
+                    <content>
+                        <div id="divCbmConfigure">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Department" tab-index="7" id="tabDepartment">
+                    <content>
+                        <div id="divDepartment">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Reported By" tab-index="2" id="tabReportedBy">
+                    <content>
+                        <div id="divReportedBy">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Location" tab-index="7" id="tabLocation">
+                    <content>
+                        <div id="divLocation">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Safety level" tab-index="8" id="tabSafetyLevel">
+                    <content>
+                        <div id="divSafetyLevel">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Equipment Status" tab-index="9" id="tabEquipmentStatus">
+                    <content>
+                        <div id="divEquipmentStatus">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Frequency" tab-index="10" id="tabFrequency">
+                    <content>
+                        <div id="divFrequency">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Frequency Type" tab-index="10" id="tabFrequencyType">
+                    <content>
+                        <div id="divFrequencyType">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Rank" tab-index="11" id="tabRank">
+                    <content>
+                        <div id="divRank">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Maintenance type" tab-index="12" id="tabMaintenanceType">
+                    <content>
+                        <div id="divMaintenanceType">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Priority" tab-index="13" id="tabPriority">
+                    <content>
+                        <div id="divPriority">
+                        </div>
+                    </content>
+                </tabstrip-item>
+                <tabstrip-item text="Critical" tab-index="14" id="tabCritical">
+                    <content>
+                        <div id="divCritical">
+                        </div>
+                    </content>
+                </tabstrip-item>
+            </items>
+        </admin-tabstrip>
+    </div>*@
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+
+<div class="col-md-12">
+    <div class="x_panel light form-fit">
+        <div class="x_title">
+            <div class="caption" style="color:#0E5679;font-weight:900">
+                <i class="fa fa-cubes" style="color:#0E5679"></i>
+                Master Data Management
+            </div>
+            <select class="js-example-basic-single" name="state" style="width:250px; padding-left: 10px;">
+                <option value="AL">Maker</option>
+                <option value="WY">Maker Model</option>
+                <option value="WY">Job Status</option>
+                <option value="WY">Equipment Type</option>
+                <option value="WY">Job Type</option>
+                <option value="WY">CBM</option>
+                <option value="WY">CBM Configure</option>
+                <option value="WY">Department</option>
+                <option value="WY">Location</option>
+                <option value="WY">Safety level</option>
+                <option value="WY">Equipment Status</option>
+                <option value="WY">Frequency</option>
+                <option value="WY">Frequency Type</option>
+                <option value="WY">Rank</option>
+                <option value="WY">Maintenance type</option>
+                <option value="WY">Priority</option>
+                <option value="WY">Critical</option>
+            </select>
+            @*<div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+            <div id="myDropdown" class="dropdown-content">
+                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                <a href="#about">About</a>
+                <a href="#base">Base</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact</a>
+                <a href="#custom">Custom</a>
+                <a href="#support">Support</a>
+                <a href="#tools">Tools</a>
+            </div>
+        </div>*@
+
+
+            @*<div class="actions btn-group btn-group-devided">
+            <a href="@Url.Action("AddBreakdownJob")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> </span></a>
+
+            <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
+            <button type="button" name="delete-selected" id="delete-selected" class="btn red">
+                <i class="fa fa-trash-o"></i>
+
+            </button>
+            <button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" aria-hidden="true"></i></button>
+
+            <button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>
+        </div>*@
+
+        </div>
+
+
+        <div class="x_content">
+            <div id="vessel-grid"></div>
+        </div>
     </div>
-</div>*@
-<div style="height:100vh; overflow:auto">
-   
-    <h4><font color="#0E5679">Master Data Management</font></h4>
-    <admin-tabstrip name="mdm" SetTabPos="true">
-        <items>
-            <tabstrip-item text="Maker" tab-index="0" id="tabMaker" class="tabMaker">
-                <content>
-                    <div id="divMaker">
-                        <partial name="MakerList" />
-
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Maker Model" tab-index="1" id="tabMakerModel">
-                <content>
-                    <div id="divMakerModel">
-                    </div>
-                </content>
-            </tabstrip-item>
-
-            <tabstrip-item text="Job Status" tab-index="3" id="tabJobStatus">
-                <content>
-                    <div id="divJobStatus">
-
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Equipment Type" tab-index="4" id="tabEquipmentType">
-                <content>
-                    <div id="divEquipmentType">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Job Type" tab-index="5" id="tabjobType">
-                <content>
-                    <div id="divJobType">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="CBM" tab-index="6" id="tabCBM">
-                <content>
-                    <div id="divCBM">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="CBM Configure" tab-index="6" id="tabCbmConfigure">
-                <content>
-                    <div id="divCbmConfigure">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Department" tab-index="7" id="tabDepartment">
-                <content>
-                    <div id="divDepartment">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Reported By" tab-index="2" id="tabReportedBy">
-                <content>
-                    <div id="divReportedBy">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Location" tab-index="7" id="tabLocation">
-                <content>
-                    <div id="divLocation">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Safety level" tab-index="8" id="tabSafetyLevel">
-                <content>
-                    <div id="divSafetyLevel">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Equipment Status" tab-index="9" id="tabEquipmentStatus">
-                <content>
-                    <div id="divEquipmentStatus">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Frequency" tab-index="10" id="tabFrequency">
-                <content>
-                    <div id="divFrequency">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Frequency Type" tab-index="10" id="tabFrequencyType">
-                <content>
-                    <div id="divFrequencyType">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Rank" tab-index="11" id="tabRank">
-                <content>
-                    <div id="divRank">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Maintenance type" tab-index="12" id="tabMaintenanceType">
-                <content>
-                    <div id="divMaintenanceType">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Priority" tab-index="13" id="tabPriority">
-                <content>
-                    <div id="divPriority">
-                    </div>
-                </content>
-            </tabstrip-item>
-            <tabstrip-item text="Critical" tab-index="14" id="tabCritical">
-                <content>
-                    <div id="divCritical">
-                    </div>
-                </content>
-            </tabstrip-item>
-        </items>
-    </admin-tabstrip>
 </div>
 
+@*<div style="height:100vh; overflow:auto">
+
+    <h4><font color="#0E5679">Master Data Management</font></h4>
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+        <div id="myDropdown" class="dropdown-content">
+            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+            <a href="#about">About</a>
+            <a href="#base">Base</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+            <a href="#custom">Custom</a>
+            <a href="#support">Support</a>
+            <a href="#tools">Tools</a>
+        </div>
+    </div>*@
+
+<script>
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+    });
+</script>
+
+@*</div>*@
 <script>
     $(function () {
-       
+
 
         $("#tabMakerModel").click(function () {
-        
+
             $("#divMakerModel").load("MakerModelList");
-              $("#MakerModelGrid").empty();
-              // LoadMakerModelGrid();
-             
+            $("#MakerModelGrid").empty();
+            // LoadMakerModelGrid();
+
         });
 
-         $("#tabReportedBy").click(function () {
+        $("#tabReportedBy").click(function () {
             $("#divReportedBy").load("ReadReportedByDetails");
-              $("#ReportedByGrid").empty();
-             // LoadReportedByGrid();
+            $("#ReportedByGrid").empty();
+            // LoadReportedByGrid();
         });
 
-        
-         $("#tabJobStatus").click(function () {
+
+        $("#tabJobStatus").click(function () {
             $("#divJobStatus").load("ReadJobStatusDetails");
             $('#JobStatusGrid1').empty();
-           //  LoadJobStatusGrid1();
-         });
+            //  LoadJobStatusGrid1();
+        });
 
-         
-         $("#tabEquipmentType").click(function () {
+
+        $("#tabEquipmentType").click(function () {
             $("#divEquipmentType").load("ReadEquipmentTypeDetails");
             $('#EquipmentTypeGrid').empty();
-           // LoadEquipmentTypeGrid();
+            // LoadEquipmentTypeGrid();
         });
 
         $("#tabjobType").click(function () {
             $("#divJobType").load("ReadJobTypeDetails");
-          $('#JobTypeGrid').empty();
-          // LoadJobTypeGrid();
+            $('#JobTypeGrid').empty();
+            // LoadJobTypeGrid();
         });
 
-        
+
         $("#tabCBM").click(function () {
-          $("#divCBM").load("CBMList");
-          $('.CBMGrid').empty();
-           // LoadCbmGrid();
-        });
-       
-
-         $("#tabCbmConfigure").click(function () {
-          $("#divCbmConfigure").load("CBMMappingList");
-          $("#CBMMappingGrid").empty();
-          //  LoadCBMMappingGrid();
+            $("#divCBM").load("CBMList");
+            $('.CBMGrid').empty();
+            // LoadCbmGrid();
         });
 
 
-         $("#tabDepartment").click(function () {
-          $("#divDepartment").load("ReadDepartment");
-          $('#DepartmentGrid').empty();
-         // LoadDepartmentGrid();
-        });
-
-        
-        
-         $("#tabLocation").click(function () {
-          $("#divLocation").load("ReadLocation");
-          $('#LocationGrid').empty();
-         // LoadLocationGrid();
+        $("#tabCbmConfigure").click(function () {
+            $("#divCbmConfigure").load("CBMMappingList");
+            $("#CBMMappingGrid").empty();
+            //  LoadCBMMappingGrid();
         });
 
 
-        
-         $("#tabSafetyLevel").click(function () {
-          $("#divSafetyLevel").load("ReadSafetyLevel");
-           $('#SafetyLevelGrid').empty();
-               //LoadSaftyGrid();
-         });
-
-
-
-        
-         $("#tabEquipmentStatus").click(function () {
-          $("#divEquipmentStatus").load("ReadEquipmentStatusDetails");
-           
-                $('#EquipmentStatusGrid').empty();
-             // LoadEquipmentStatusGrid();
-
-
+        $("#tabDepartment").click(function () {
+            $("#divDepartment").load("ReadDepartment");
+            $('#DepartmentGrid').empty();
+            // LoadDepartmentGrid();
         });
 
 
 
-         $("#tabFrequency").click(function () {
-          $("#divFrequency").load("ReadFrequencyDetails");
-           
-               $('#FrequencyGrid').empty();
-                $('.FrequencyGrids').empty();
-              //  LoadFrequencyGrid();
-
+        $("#tabLocation").click(function () {
+            $("#divLocation").load("ReadLocation");
+            $('#LocationGrid').empty();
+            // LoadLocationGrid();
         });
 
 
-         $("#tabFrequencyType").click(function () {
-          $("#divFrequencyType").load("ReadFrequencyTypeDetails");
-           
-              $('#FrequencyTypeGrid').empty();
-             // LoadFrequencyTypeGrid();
+
+        $("#tabSafetyLevel").click(function () {
+            $("#divSafetyLevel").load("ReadSafetyLevel");
+            $('#SafetyLevelGrid').empty();
+            //LoadSaftyGrid();
         });
 
 
 
 
-          $("#tabRank").click(function () {
-          $("#divRank").load("ReadRankDetails");
-           
-             $('#RankGrid').empty();
+        $("#tabEquipmentStatus").click(function () {
+            $("#divEquipmentStatus").load("ReadEquipmentStatusDetails");
+
+            $('#EquipmentStatusGrid').empty();
+            // LoadEquipmentStatusGrid();
+
+
+        });
+
+
+
+        $("#tabFrequency").click(function () {
+            $("#divFrequency").load("ReadFrequencyDetails");
+
+            $('#FrequencyGrid').empty();
+            $('.FrequencyGrids').empty();
+            //  LoadFrequencyGrid();
+
+        });
+
+
+        $("#tabFrequencyType").click(function () {
+            $("#divFrequencyType").load("ReadFrequencyTypeDetails");
+
+            $('#FrequencyTypeGrid').empty();
+            // LoadFrequencyTypeGrid();
+        });
+
+
+
+
+        $("#tabRank").click(function () {
+            $("#divRank").load("ReadRankDetails");
+
+            $('#RankGrid').empty();
         });
 
 
 
         $("#tabMaintenanceType").click(function () {
-          $("#divMaintenanceType").load("ReadMaintenanceTypeDetails");
+            $("#divMaintenanceType").load("ReadMaintenanceTypeDetails");
             $("#MaintenanceTypeGrid").empty();
-                //   LoadMaintenanceTypeGrid();
+            //   LoadMaintenanceTypeGrid();
         });
 
 
-       
-         $("#tabPriority").click(function () {
+
+        $("#tabPriority").click(function () {
             $("#divPriority").load("ReadPriorityDetails");
             $('#PriorityGrid').empty();
-          //  LoadPriorityGrid();
-         });
+            //  LoadPriorityGrid();
+        });
 
 
         $("#tabCritical").click(function () {
-          $("#divCritical").load("ReadCritical");
-          $('#CriticalGrid').empty();
-          //LoadCriticalGrid();
+            $("#divCritical").load("ReadCritical");
+            $('#CriticalGrid').empty();
+            //LoadCriticalGrid();
         });
 
-       
-      
+
+
     });
 </script>
