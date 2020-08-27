@@ -112,7 +112,7 @@
                                             headerTemplate: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input id='mastercheckbox' type='checkbox'/><div class='control__indicator control__indicator_custom mt-top2 rtlabel'></div></label>",
                                             template: "<label class='mt-checkbox mt-checkbox-outline control control-checkbox mt-NoMargin'><input type='checkbox' value='#=Id#' class='checkboxGroups chk'/><div class='control__indicator control__indicator_custom mt-top2'></div></label>",
                                         width: 50,
-                                            
+
 
                                         },
                         {
@@ -160,7 +160,7 @@
                             title: "Job Title",
                             width: "200px"
                         },
-                        
+
                         {
                             field: "LAST_DONE_DATE",
                             title: "Last Done Date",
@@ -286,11 +286,11 @@
 
 
     });
-      $("#btnSelectRowEdit").click(function () {
+    $("#btnSelectRowEdit").click(function () {
 
         var grid = $("#grid").data("kendoGrid");
-          var selectedItem = grid.dataItem(grid.select());
-         
+        var selectedItem = grid.dataItem(grid.select());
+
 
         $("#lblJobOrder").text(selectedItem.JobOrder);
         $("#lblEquipmentName").text(selectedItem.EquipmentName);
@@ -306,519 +306,486 @@
         $("#lblRank").text(selectedItem.Rank);
         $("#lblAssignedTo").text(selectedItem.AssignedTo);
 
-          alert("hi" + selectedItem.FrequencyType);
-          if (selectedItem.EquipmentName != null) {
-                  var enameEdit = selectedItem.EquipmentName;
-          }
-          if (selectedItem.EquipmentCode != null) {
-              var ecodeEdit = selectedItem.EquipmentCode;
-          }
-          if (selectedItem.JobOrder != null) {
-              var jobOrderEdit = selectedItem.JobOrder;
-          }
-          if (selectedItem.Department != null) {
-              var departmentEdit = selectedItem.Department;
-          }
-          if (selectedItem.JobTitle != null) {
-              var jobTitleEdit = selectedItem.JobTitle;
-          }
-          if (selectedItem.FrequencyType != null) {
-              var FrequencyTypeEdit = selectedItem.FrequencyType;
-          }
-          if (selectedItem.CalFrequency != null) {
-              var frequencyEdit = selectedItem.CalFrequency;
-          }
-          if (selectedItem.LAST_DONE_DATE != null) {
-              var lastDoneDateEdit = selectedItem.LAST_DONE_DATE;
-          }
-          if (selectedItem.NEXT_DUE_DATE != null) {
-              var nextDueDateEdit = selectedItem.NEXT_DUE_DATE;
-          }
-          if (selectedItem.Job_Type != null) {
-              var Job_TypeEdit = selectedItem.Job_Type;
-          }
-          if (selectedItem.JobDescription != null) {
-              var JobDescriptionEdit = selectedItem.JobDescription;
-          }
-          if (selectedItem.Priority != null) {
-              var PriorityEdit = selectedItem.Priority;
-          }
-          if (selectedItem.Rank != null) {
-              var RankEdit = selectedItem.Rank;
-          }
-          if (selectedItem.AssignedTo != null) {
-              var AssignedToEdit = selectedItem.AssignedTo;
-          }
-          //if (selectedItem.frequencyRhs != null) {
-          //    var frequencyRhsEdit = selectedItem.frequencyRhs;
-          //}
-          if (selectedItem.PreviousReading != null) {
-              var PreviousReadingEdit = selectedItem.PreviousReading;
-          }
-          if (selectedItem.EquipmentName != null) {
-                 document.getElementById("EnameEdit").value = enameEdit;
+        alert("hi" + selectedItem.FrequencyType);
+        if (selectedItem.EquipmentName != null) {
+            var enameEdit = selectedItem.EquipmentName;
+        }
+        if (selectedItem.EquipmentCode != null) {
+            var ecodeEdit = selectedItem.EquipmentCode;
+        }
+        if (selectedItem.JobOrder != null) {
+            var jobOrderEdit = selectedItem.JobOrder;
+        }
+        if (selectedItem.Department != null) {
+            var departmentEdit = selectedItem.Department;
+        }
+        if (selectedItem.JobTitle != null) {
+            var jobTitleEdit = selectedItem.JobTitle;
+        }
+        if (selectedItem.FrequencyType != null) {
+            var FrequencyTypeEdit = selectedItem.FrequencyType;
+        }
+        if (selectedItem.CalFrequency != null) {
+            var frequencyEdit = selectedItem.CalFrequency;
+        }
+        if (selectedItem.LAST_DONE_DATE != null) {
+            var lastDoneDateEdit = selectedItem.LAST_DONE_DATE;
+        }
+        if (selectedItem.NEXT_DUE_DATE != null) {
+            var nextDueDateEdit = selectedItem.NEXT_DUE_DATE;
+        }
+        if (selectedItem.Job_Type != null) {
+            var Job_TypeEdit = selectedItem.Job_Type;
+        }
+        if (selectedItem.JobDescription != null) {
+            var JobDescriptionEdit = selectedItem.JobDescription;
+        }
+        if (selectedItem.Priority != null) {
+            var PriorityEdit = selectedItem.Priority;
+        }
+        if (selectedItem.Rank != null) {
+            var RankEdit = selectedItem.Rank;
+        }
+        if (selectedItem.AssignedTo != null) {
+            var AssignedToEdit = selectedItem.AssignedTo;
+        }
+        //if (selectedItem.frequencyRhs != null) {
+        //    var frequencyRhsEdit = selectedItem.frequencyRhs;
+        //}
+        if (selectedItem.PreviousReading != null) {
+            var PreviousReadingEdit = selectedItem.PreviousReading;
+        }
+        if (selectedItem.EquipmentName != null) {
+            document.getElementById("EnameEdit").value = enameEdit;
 
-          }
-          if (selectedItem.EquipmentCode != null) {
-              document.getElementById("ECodeEdit").value = ecodeEdit;
-          }
-          if (selectedItem.JobOrder != null) {
-              document.getElementById("JobOrderEdit").value = selectedItem.JobOrder;
-          }
+        }
+        if (selectedItem.EquipmentCode != null) {
+            document.getElementById("ECodeEdit").value = ecodeEdit;
+        }
+        if (selectedItem.JobOrder != null) {
+            document.getElementById("JobOrderEdit").value = selectedItem.JobOrder;
+        }
 
-          if (selectedItem.Department != null) {
-              document.getElementById("DepartmentEdit").value = departmentEdit;
-          }
-          if (selectedItem.JobTitle != null) {
+        if (selectedItem.Department != null) {
+            document.getElementById("DepartmentEdit").value = departmentEdit;
+        }
+        if (selectedItem.JobTitle != null) {
 
-              document.getElementById("JobTitleEdit").value = jobTitleEdit;
-          }
-          if (selectedItem.FrequencyType != null) {
-              document.getElementById("FrequencyTypeEdit").value = selectedItem.FrequencyType;
-          }
-          if (selectedItem.CalFrequency != null) {
-              document.getElementById("FrequencyEdit").value = selectedItem.CalFrequency;
-          }
-          if (selectedItem.LAST_DONE_DATE != null) {
-              document.getElementById("LastDoneDateEdit").value = lastDoneDateEdit;
-          }
-          if (selectedItem.NEXT_DUE_DATE != null) {
-              document.getElementById("NextDueDateEdit").value = nextDueDateEdit;
-          }
-          //if (selectedItem.FrequencyType != null) {
-          //    document.getElementById("FrequencyType1Edit").value = FrequencyTypeEdit;
-          //}
-          if (selectedItem.Job_Type != null) {
-              document.getElementById("Job_TypeEdit").value = Job_TypeEdit;
-          }
-          if (selectedItem.JobDescription != null) {
-              document.getElementById("JobDescriptionEdit").value = JobDescriptionEdit;
-          }
-          if (selectedItem.Priority != null) {
-              document.getElementById("PriorityEdit").value = PriorityEdit;
-          }
-          if (selectedItem.Rank != null) {
-              document.getElementById("RankEdit").value = RankEdit;
-          }
-          if (selectedItem.AssignedTo != null) {
-              document.getElementById("AssignedToEdit").value = AssignedToEdit;
-          }
-          //if (selectedItem.frequencyRhs != null) {
-          //    document.getElementById("frequencyRhsEdit").value = frequencyRhsEdit;
-          //}
-          if (selectedItem.PreviousReading != null) {
-              document.getElementById("PreviousReadingEdit").value = PreviousReadingEdit;
-          }
+            document.getElementById("JobTitleEdit").value = jobTitleEdit;
+        }
+        if (selectedItem.FrequencyType != null) {
+            document.getElementById("FrequencyTypeEdit").value = selectedItem.FrequencyType;
+        }
+        if (selectedItem.CalFrequency != null) {
+            document.getElementById("FrequencyEdit").value = selectedItem.CalFrequency;
+        }
+        if (selectedItem.LAST_DONE_DATE != null) {
+            document.getElementById("LastDoneDateEdit").value = lastDoneDateEdit;
+        }
+        if (selectedItem.NEXT_DUE_DATE != null) {
+            document.getElementById("NextDueDateEdit").value = nextDueDateEdit;
+        }
+        //if (selectedItem.FrequencyType != null) {
+        //    document.getElementById("FrequencyType1Edit").value = FrequencyTypeEdit;
+        //}
+        if (selectedItem.Job_Type != null) {
+            document.getElementById("Job_TypeEdit").value = Job_TypeEdit;
+        }
+        if (selectedItem.JobDescription != null) {
+            document.getElementById("JobDescriptionEdit").value = JobDescriptionEdit;
+        }
+        if (selectedItem.Priority != null) {
+            document.getElementById("PriorityEdit").value = PriorityEdit;
+        }
+        if (selectedItem.Rank != null) {
+            document.getElementById("RankEdit").value = RankEdit;
+        }
+        if (selectedItem.AssignedTo != null) {
+            document.getElementById("AssignedToEdit").value = AssignedToEdit;
+        }
+        //if (selectedItem.frequencyRhs != null) {
+        //    document.getElementById("frequencyRhsEdit").value = frequencyRhsEdit;
+        //}
+        if (selectedItem.PreviousReading != null) {
+            document.getElementById("PreviousReadingEdit").value = PreviousReadingEdit;
+        }
 
 
 
-      });
-     $('a[href="#sign_up"]').click(function () {
-                       
-        
-            
-            //var postData = {selectedIds: selectedIds};
-            //addAntiForgeryToken(postData);
+    });
+    $('a[href="#sign_up"]').click(function () {
 
-            // Look for all checkboxes that have a specific class and was checked
-            var chkArray = [];
-            $(".chk:checked").each(function ()
-            {
-                chkArray.push($(this).val());
-            });
 
-            // calling  via jquery
-            $.get("http://localhost:16582/Maintenance/Equipments/DeleteSelectedJobPlan?selectedIds='" + chkArray + "'");
-            window.location.reload();
-            return false;
-       });       
+
+        //var postData = {selectedIds: selectedIds};
+        //addAntiForgeryToken(postData);
+
+        // Look for all checkboxes that have a specific class and was checked
+        var chkArray = [];
+        $(".chk:checked").each(function () {
+            chkArray.push($(this).val());
+        });
+
+        // calling  via jquery
+        $.get("http://localhost:16582/Maintenance/Equipments/DeleteSelectedJobPlan?selectedIds='" + chkArray + "'");
+        window.location.reload();
+        return false;
+    });
 </script>
 
+<!-- Modal New -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-xl" style="width:1400px;">
+        <div class="modal-content">
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog" style="top:auto;color:#0e5679;">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
 
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <!---------------------------------------- Basic Details Start ---------------------------------------------->
+                <div class="col-md-3">
+                    <b>Equipment Name</b>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">turned_in_not</i>
+                        </span>
+                        <div class="form-line">
 
-        </div>
+                            <input type="text" id="Ename" readonly value="" class="form-control time24" placeholder="">
 
-        <div class="modal-body" style="height:350px;overflow:auto">
+                        </div>
+                    </div>
+                </div>
 
-            <div id="example">
-                <div class="demo-section k-content">
-                    <div id="tabstrip">
-                        <ul>
-                            <li class="k-state-active" style="width:10%">
-                                Basic Details
-                            </li>
-                            <li style="width:15%">
-                                Job Details(Calendar)
-                            </li>
-                            <li style="width:15%">
-                                Job Details(Rhs)
-                            </li>
-                            <li style="width:15%">
-                                Job Description
-                            </li>
-                            <li style="width:10%">
-                                Attachments
-                            </li>
-                            <li style="width:10%">
-                                Job History
-                            </li>
-                        </ul>
+                <div class="col-md-3">
+                    <b>Equipment Code</b>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">turned_in_not</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" id="ECode" readonly value="" class="form-control money-euro" placeholder="">
+                        </div>
+                    </div>
+                </div>
 
-                        <!---------------------------------------- Basic Details Start ---------------------------------------------->
-                        <div>
-                            <span class="rainy">&nbsp;</span>
-                            <div class="row clearfix" style="color:#0e5679;">
+                <div class="col-md-3">
+                    <b>Job Title</b>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">turned_in_not</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" id="JobTitle" readonly value="" class="form-control key" placeholder="">
+                        </div>
+                    </div>
+                </div>
 
-                                <div class="col-md-3">
-                                    <b>Job Order</b>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons">turned_in_not</i>
-                                        </span>
-                                        <div class="form-line">
-                                            <input type="text" id="JobOrder" name="JobOrder" readonly value="JobOrder" class="form-control time24" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <b>Equipment Name</b>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons">turned_in_not</i>
-                                        </span>
-                                        <div class="form-line">
-
-                                            <input type="text" id="Ename" readonly value="" class="form-control time24" placeholder="">
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-3">
-                                    <b>Equipment Code</b>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons">turned_in_not</i>
-                                        </span>
-                                        <div class="form-line">
-                                            <input type="text" id="ECode" readonly value="" class="form-control money-euro" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="col-md-3">
-                                    <b>Job Title</b>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons">turned_in_not</i>
-                                        </span>
-                                        <div class="form-line">
-                                            <input type="text" id="JobTitle" readonly value="" class="form-control key" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-3">
-                                    <b>Department</b>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons">turned_in_not</i>
-                                        </span>
-                                        <div class="form-line">
-                                            <input type="text" id="Department" readonly value="" class="form-control key" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="col-md-3">
+                    <b>Department</b>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">turned_in_not</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" id="Department" readonly value="" class="form-control key" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------- Basic Details Start ---------------------------------------------->
+                <!---------------------------------------- Job Details Calendar Start ---------------------------------------------->
+                <form action="EditJobplanCalendar" method="post">
+                    <div class="col-md-3">
+                        <b>Frequency</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="Frequency" readonly value="" class="form-control key" placeholder="">
                             </div>
                         </div>
-                        <!---------------------------------------- Basic Details End ------------------------------------------------------->
-                        <!---------------------------------------- Job Details Calendar Start ---------------------------------------------->
-                        <div>
-                            <div>
-                                <form action="EditJobplanCalendar" method="post">
-                                    <span class="sunny">&nbsp;</span>
+                    </div>
 
-                                    <div class="row clearfix" style="color:#0e5679;">
-                                        <input type="hidden" id="JobOrder2" name="JobOrder2" value="JobOrder">
-                                        <div class="col-md-3">
-                                            <b>Frequency</b>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">turned_in_not</i>
-                                                </span>
-                                                <div class="form-line">
-                                                    <input type="text" id="Frequency" readonly value="" class="form-control key" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <b>Frequency Type</b>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">turned_in_not</i>
-                                                </span>
-                                                <div class="form-line">
-                                                    <input type="text" id="FrequencyType" readonly value="" class="form-control key" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="col-md-3">
-                                            <b>Last Done Date</b>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">turned_in_not</i>
-                                                </span>
-                                                <div class="form-line">
-                                                    <input type="date" id="lastdone" name="lastdone" value="" class="form-control key" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <b>Due Date</b>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">turned_in_not</i>
-                                                </span>
-                                                <div class="form-line">
-                                                    <input type="text" id="NextDueDate" readonly value="" class="form-control key" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <b>Job Type</b>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">turned_in_not</i>
-                                                </span>
-                                                <div class="form-line">
-                                                    <input type="text" id="Job_Type" readonly value="" class="form-control key" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <b>Priority</b>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">turned_in_not</i>
-                                                </span>
-                                                <div class="form-line">
-                                                    <input type="text" id="Priority" readonly value="" class="form-control key" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <b>Rank</b>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">turned_in_not</i>
-                                                </span>
-                                                <div class="form-line">
-                                                    <input type="text" id="Rank" readonly value="" class="form-control key" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <b>Assigned To</b>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">turned_in_not</i>
-                                                </span>
-                                                <div class="form-line">
-                                                    <input type="text" id="AssignedTo" readonly value="" class="form-control key" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-
-                                        @Html.AntiForgeryToken()
-
-                                        <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Update" id="submit" style="float:right;background-color:#0e5679"/>
-
-                                    </div>
-
-                                </form>
+                    <div class="col-md-3">
+                        <b>Frequency Type</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="FrequencyType" readonly value="" class="form-control key" placeholder="">
                             </div>
                         </div>
+                    </div>
 
-                        <!---------------------------------------- Job Details Calendar End ---------------------------------------------->
-                        <!---------------------------------------- Job Details Rhs Start -------------------------------------------->
-
-                        <div>
-                            <form action="EditJobplanRhs" method="post">
-                                <span class="rr">&nbsp;</span>
-                                <div class="row clearfix" style="color:#0e5679;">
-
-
-                                    <input type="hidden" id="JobOrder3" name="JobOrder3" value="JobOrder">
-                                    <div class="col-md-3">
-                                        <b>Frequency</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">turned_in_not</i>
-                                            </span>
-                                            <div class="form-line">
-                                                <input type="text" id="frequencyRhs" readonly value="" class="form-control key" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <b>Frequency Type</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">turned_in_not</i>
-                                            </span>
-                                            <div class="form-line">
-                                                <input type="text" id="FrequencyType1" readonly value="" class="form-control key" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-md-3">
-                                        <b>Previous Rhs</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">turned_in_not</i>
-                                            </span>
-                                            <div class="form-line">
-                                                <input type="text" id="PreviousReading" readonly value="" class="form-control key" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <b>Current Rhs</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">turned_in_not</i>
-                                            </span>
-                                            <div class="form-line">
-                                                <input type="number" id="currentRhs" name="currentRhs" class="form-control key">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <b>Last Done Date</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">turned_in_not</i>
-                                            </span>
-                                            <div class="form-line">
-                                                <input type="date" id="lastdone" name="lastdone" value="" class="form-control key" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <b>Job Type</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">turned_in_not</i>
-                                            </span>
-                                            <div class="form-line">
-                                                <input type="text" id="Job_Type" readonly value="" class="form-control key" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <b>Priority</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">turned_in_not</i>
-                                            </span>
-                                            <div class="form-line">
-                                                <input type="text" id="Priority" readonly value="" class="form-control key" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <b>Rank</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">turned_in_not</i>
-                                            </span>
-                                            <div class="form-line">
-                                                <input type="text" id="Rank" readonly value="" class="form-control key" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <b>Assigned To</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">turned_in_not</i>
-                                            </span>
-                                            <div class="form-line">
-                                                <input type="text" id="AssignedTo" readonly value="" class="form-control key" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-
-                                    @Html.AntiForgeryToken()
-
-
-                                    <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Update" id="submit" />
-
-
-                                </div>
-                            </form>
+                    <div class="col-md-3">
+                        <b>Last Done Date</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="date" id="lastdone" name="lastdone" value="" class="form-control key" placeholder="">
+                            </div>
                         </div>
-                        <!---------------------------------------- Job Details Calendar End ---------------------------------------------->
-                        <!---------------------------------------- Job Description Start ------------------------------------------------->
+                    </div>
+
+                    <div class="col-md-3">
+                        <b>Due Date</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="NextDueDate" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Job Type</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="Job_Type" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Priority</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="Priority" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <b>Rank</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="Rank" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Assigned To</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="AssignedTo" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    @Html.AntiForgeryToken()
+                    <div class="col-md-3">
+                        @*<b>Assigned To</b>*@
+                        <div class="input-group">
+                            @*<span class="input-group-addon">
+                                    <i class="material-icons">turned_in_not</i>
+                                </span>*@
+                            <div class="form-line">
+                                <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Update" id="submit" style="float:right;background-color:#0e5679" />
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <!---------------------------------------- Job Details Calendar Start ---------------------------------------------->
+                <hr>
+
+                <!---------------------------------------- Job Details Rhs Start -------------------------------------------->
+                <form action="EditJobplanRhs" method="post">
+                    <div class="col-md-3">
+                        <b>Frequency</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="frequencyRhs" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <b>Frequency Type</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="FrequencyType1" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-3">
+                        <b>Previous Rhs</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="PreviousReading" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <b>Current Rhs</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="number" id="currentRhs" name="currentRhs" class="form-control key">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <b>Last Done Date</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="date" id="lastdone" name="lastdone" value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <b>Job Type</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="Job_Type" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Priority</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="Priority" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <b>Rank</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="Rank" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Assigned To</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">turned_in_not</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" id="AssignedTo" readonly value="" class="form-control key" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="col-md-3">
+                        <b></b>
+                        <div class="input-group">
+                            @*<span class="input-group-addon">
+                                    <i class="material-icons">turned_in_not</i>
+                                </span>*@
+                            <div class="form-line">
+                                <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Update" id="submit" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <b></b>
+                        <div class="input-group">
+                            @*<span class="input-group-addon">
+                                    <i class="material-icons">turned_in_not</i>
+                                </span>*@
+                            <div class="form-line">
+                                <span>.</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+                <!---------------------------------------- Job Details Rhs Start -------------------------------------------->
+                <!---------------------------------------- Job Description Start ------------------------------------------------->
+
+                <div class="col-md-8">
+                    <b>Description</b>
+                    <div class="input-group">
                         <div class="input-group" style="width:auto">
 
 
-                            <textarea id="JobDescription" readonly="" value="" class="form-control key" placeholder="" style="margin: 0px; height:200px"></textarea>
+                            <textarea id="JobDescription" readonly="" value="" class="form-control key" placeholder="" style="margin: 0px; height:217px; width:1343px;"></textarea>
 
                         </div>
-                        <!---------------------------------------- Job Description End -------------------------------------------------->
-                        <!---------------------------------------- Attachment Start -------------------------------------------------->
-                        <div>
-                            <span class="cloudy">&nbsp;</span>
-                            <div class="weather">
-                                <h2>16<span>&ordm;C</span></h2>
-                                <p>Cloudy weather in Moscow.</p>
-                            </div>
-                        </div>
-
-                        <!---------------------------------------- Attachment End -------------------------------------------------->
-                        <!---------------------------------------- Job History Start -------------------------------------------------->
-
-                        <div>
-
-                        </div>
-                        <!---------------------------------------- Job History End -------------------------------------------------->
-
                     </div>
-
                 </div>
+
+                <!---------------------------------------- Job Description End -------------------------------------------------->
+
+
+            </div>
+
+            <!-- Modal footer -->
+            <br /><br /><br />
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal New -->
+<!-- Modal -->
+
 
                 <style>
 
@@ -1049,25 +1016,24 @@
             $(".makeEditable").click(function () {
                 $('input:text').removeAttr("readonly");
             });
-            
+
         })
     </script>
 
 </div>
 
 
-        <script>
+<script>
     $(function () {
 
         $("#btn1").text();
     });
     function ViewCbm(data) {
         //alert("hai==" + data.text);
-        var myHeading ="";
+        var myHeading = "";
         var cbm = data.getAttribute("alt").split(',');
 
-        if (data.getAttribute("alt")!="")
-        {
+        if (data.getAttribute("alt") != "") {
             for (var i = 0; i < cbm.length - 1; i++) {
                 //  alert("hai==" + cbm[i]);
                 myHeading = myHeading + "<p>" + cbm[i] + "<p><hr>";
@@ -1075,28 +1041,27 @@
             }
 
         }
-        else
-        {
+        else {
             myHeading = myHeading + "<p style='color:red'>   No Cbm Parameter<p>";
         }
-    $("#modal-body").html(myHeading);
-     $('#modal').modal('show');
+        $("#modal-body").html(myHeading);
+        $('#modal').modal('show');
     }
-        </script>
-        <!----modal starts here--->
-        <div id="modal" class="modal fade" role='dialog' tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered" role="document" style="margin-left:50%;margin-top:15%">
-                <div class="modal-content" style="width:50%; height:50%; border:solid 2px #7273a3">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Cbm parameter</h4>
-                    </div>
-                    <div class="modal-body" id="modal-body">
-                        <p>Here the description starts here........</p>
-
-                    </div>
-
-                </div>
+</script>
+<!----modal starts here--->
+<div id="modal" class="modal fade" role='dialog' tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="margin-left:50%;margin-top:15%">
+        <div class="modal-content" style="width:50%; height:50%; border:solid 2px #7273a3">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Cbm parameter</h4>
             </div>
+            <div class="modal-body" id="modal-body">
+                <p>Here the description starts here........</p>
+
+            </div>
+
         </div>
-        <!--Modal ends here--->
+    </div>
+</div>
+<!--Modal ends here--->
