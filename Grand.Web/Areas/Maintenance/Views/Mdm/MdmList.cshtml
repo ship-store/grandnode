@@ -145,77 +145,42 @@
                 <i class="fa fa-cubes" style="color:#0E5679"></i>
                 Master Data Management
             </div>
-            <select class="js-example-basic-single" name="state" style="width:250px; padding-left: 10px;">
-                <option value="AL">Maker</option>
-                <option value="WY">Maker Model</option>
-                <option value="WY">Job Status</option>
-                <option value="WY">Equipment Type</option>
-                <option value="WY">Job Type</option>
-                <option value="WY">CBM</option>
-                <option value="WY">CBM Configure</option>
-                <option value="WY">Department</option>
-                <option value="WY">Location</option>
-                <option value="WY">Safety level</option>
-                <option value="WY">Equipment Status</option>
-                <option value="WY">Frequency</option>
-                <option value="WY">Frequency Type</option>
-                <option value="WY">Rank</option>
-                <option value="WY">Maintenance type</option>
-                <option value="WY">Priority</option>
-                <option value="WY">Critical</option>
+            <select class="js-example-basic-single" name="state" id="Cid" style="width:250px; padding-left: 10px;">
+                <option value="empty" id="empty" disabled selected>Select MDM</option>
+                <option value="tabMaker" id="tabMaker">Maker</option>
+                <option value="tabMakerModel" id="tabMakerModel">Maker Model</option>
+                <option value="JobStatus" id="JobStatus">Job Status</option>
+                <option value="reportedBy" id="reportedBy">Reported By</option>
+                <option value="EquipmentType" id="EquipmentType">Equipment Type</option>
+                <option value="JobType" id="JobType">Job Type</option>
+                <option value="CBM" id="CBM">CBM</option>
+                <option value="CBMConfigure" id="CBMConfigure">CBM Configure</option>
+                <option value="Department" id="Department">Department</option>
+                <option value="Location" id="Location">Location</option>
+                <option value="Safetylevel" id="Safetylevel">Safety level</option>
+                <option value="EquipmentStatus" id="EquipmentStatus">Equipment Status</option>
+                <option value="Frequency" id="Frequency">Frequency</option>
+                <option value="FrequencyType" id="FrequencyType">Frequency Type</option>
+                <option value="Rank" id="Rank">Rank</option>
+                <option value="MaintenanceType" id="MaintenanceType">Maintenance type</option>
+                <option value="Priority" id="Priority">Priority</option>
+                <option value="Critical" id="Critical">Critical</option>
             </select>
-            @*<div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-            <div id="myDropdown" class="dropdown-content">
-                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                <a href="#about">About</a>
-                <a href="#base">Base</a>
-                <a href="#blog">Blog</a>
-                <a href="#contact">Contact</a>
-                <a href="#custom">Custom</a>
-                <a href="#support">Support</a>
-                <a href="#tools">Tools</a>
-            </div>
-        </div>*@
-
-
-            @*<div class="actions btn-group btn-group-devided">
-            <a href="@Url.Action("AddBreakdownJob")" class="btn green"><i class="fa fa-plus"></i><span class="hidden-xs"> </span></a>
-
-            <vc:admin-widget widget-zone="vendor_list_buttons" additional-data="null" />
-            <button type="button" name="delete-selected" id="delete-selected" class="btn red">
-                <i class="fa fa-trash-o"></i>
-
-            </button>
-            <button type="button" id="btnSelectRow" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" aria-hidden="true"></i></button>
-
-            <button type="button" id="btnSelectRow1" value="GetValue" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Complete Job</button>
-        </div>*@
 
         </div>
-
 
         <div class="x_content">
             <div id="vessel-grid"></div>
         </div>
     </div>
 </div>
+<div id="example">
+   <div id="pWiewLoader">
+
+   </div>
+</div>
 
 @*<div style="height:100vh; overflow:auto">
-
-    <h4><font color="#0E5679">Master Data Management</font></h4>
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-        <div id="myDropdown" class="dropdown-content">
-            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-            <a href="#about">About</a>
-            <a href="#base">Base</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
-            <a href="#custom">Custom</a>
-            <a href="#support">Support</a>
-            <a href="#tools">Tools</a>
-        </div>
     </div>*@
 
 <script>
@@ -228,142 +193,89 @@
 <script>
     $(function () {
 
+        $("#Cid").on("change", function(){
 
-        $("#tabMakerModel").click(function () {
+            $("#pWiewLoader").empty();
+            var SelectedOptionId = $(this).children(":selected").attr("id");
+            console.log(SelectedOptionId);
+            if (SelectedOptionId == "tabMakerModel") {
 
-            $("#divMakerModel").load("MakerModelList");
-            $("#MakerModelGrid").empty();
-            // LoadMakerModelGrid();
+                $("#pWiewLoader").load("MakerModelList");
+            }
+            else if (SelectedOptionId == "JobStatus") {
 
-        });
+                $("#pWiewLoader").load("ReadJobStatusDetails");
+            }
+            else if (SelectedOptionId == "tabMakerModel") {
 
-        $("#tabReportedBy").click(function () {
-            $("#divReportedBy").load("ReadReportedByDetails");
-            $("#ReportedByGrid").empty();
-            // LoadReportedByGrid();
-        });
+                $("#pWiewLoader").load("MakerModelList");
+            }
+            else if (SelectedOptionId == "reportedBy") {
 
+                $("#pWiewLoader").load("ReadReportedByDetails");
+            }
+            else if (SelectedOptionId == "EquipmentType") {
 
-        $("#tabJobStatus").click(function () {
-            $("#divJobStatus").load("ReadJobStatusDetails");
-            $('#JobStatusGrid1').empty();
-            //  LoadJobStatusGrid1();
-        });
+                $("#pWiewLoader").load("ReadEquipmentTypeDetails");
+            }
+            else if (SelectedOptionId == "JobType") {
 
+                $("#pWiewLoader").load("ReadJobTypeDetails");
+            }
+            else if (SelectedOptionId == "CBM") {
 
-        $("#tabEquipmentType").click(function () {
-            $("#divEquipmentType").load("ReadEquipmentTypeDetails");
-            $('#EquipmentTypeGrid').empty();
-            // LoadEquipmentTypeGrid();
-        });
+                $("#pWiewLoader").load("CBMList");
+            }
+            else if (SelectedOptionId == "CBMConfigure") {
 
-        $("#tabjobType").click(function () {
-            $("#divJobType").load("ReadJobTypeDetails");
-            $('#JobTypeGrid').empty();
-            // LoadJobTypeGrid();
-        });
+                $("#pWiewLoader").load("CBMMappingList");
+            }
+            else if (SelectedOptionId == "Department") {
 
+                $("#pWiewLoader").load("ReadDepartment");
+            }
+            else if (SelectedOptionId == "Location") {
 
-        $("#tabCBM").click(function () {
-            $("#divCBM").load("CBMList");
-            $('.CBMGrid').empty();
-            // LoadCbmGrid();
-        });
+                $("#pWiewLoader").load("ReadLocation");
+            }
+            else if (SelectedOptionId == "Safetylevel") {
 
+                $("#pWiewLoader").load("ReadSafetyLevel");
+            }
+            else if (SelectedOptionId == "EquipmentStatus") {
 
-        $("#tabCbmConfigure").click(function () {
-            $("#divCbmConfigure").load("CBMMappingList");
-            $("#CBMMappingGrid").empty();
-            //  LoadCBMMappingGrid();
-        });
+                $("#pWiewLoader").load("ReadEquipmentStatusDetails");
+            }
+            else if (SelectedOptionId == "Frequency") {
 
+                $("#pWiewLoader").load("ReadFrequencyDetails");
+            }
+            else if (SelectedOptionId == "FrequencyType") {
 
-        $("#tabDepartment").click(function () {
-            $("#divDepartment").load("ReadDepartment");
-            $('#DepartmentGrid').empty();
-            // LoadDepartmentGrid();
-        });
+                $("#pWiewLoader").load("ReadFrequencyTypeDetails");
+            }
+            else if (SelectedOptionId == "Rank") {
 
+                $("#pWiewLoader").load("ReadRankDetails");
+            }
+            else if (SelectedOptionId == "MaintenanceType") {
 
+                $("#pWiewLoader").load("ReadMaintenanceTypeDetails");
+            }
+            else if (SelectedOptionId == "Priority") {
 
-        $("#tabLocation").click(function () {
-            $("#divLocation").load("ReadLocation");
-            $('#LocationGrid').empty();
-            // LoadLocationGrid();
-        });
+                $("#pWiewLoader").load("ReadPriorityDetails");
+            }
+            else if (SelectedOptionId == "Critical") {
 
+                $("#pWiewLoader").load("ReadCritical");
+            }
+            else if (SelectedOptionId == "tabMaker") {
 
+                $("#pWiewLoader").load("MakerList");
+            }
 
-        $("#tabSafetyLevel").click(function () {
-            $("#divSafetyLevel").load("ReadSafetyLevel");
-            $('#SafetyLevelGrid').empty();
-            //LoadSaftyGrid();
-        });
-
-
-
-
-        $("#tabEquipmentStatus").click(function () {
-            $("#divEquipmentStatus").load("ReadEquipmentStatusDetails");
-
-            $('#EquipmentStatusGrid').empty();
-            // LoadEquipmentStatusGrid();
-
-
-        });
-
-
-
-        $("#tabFrequency").click(function () {
-            $("#divFrequency").load("ReadFrequencyDetails");
-
-            $('#FrequencyGrid').empty();
-            $('.FrequencyGrids').empty();
-            //  LoadFrequencyGrid();
-
-        });
-
-
-        $("#tabFrequencyType").click(function () {
-            $("#divFrequencyType").load("ReadFrequencyTypeDetails");
-
-            $('#FrequencyTypeGrid').empty();
-            // LoadFrequencyTypeGrid();
-        });
-
-
-
-
-        $("#tabRank").click(function () {
-            $("#divRank").load("ReadRankDetails");
-
-            $('#RankGrid').empty();
-        });
-
-
-
-        $("#tabMaintenanceType").click(function () {
-            $("#divMaintenanceType").load("ReadMaintenanceTypeDetails");
-            $("#MaintenanceTypeGrid").empty();
-            //   LoadMaintenanceTypeGrid();
-        });
-
-
-
-        $("#tabPriority").click(function () {
-            $("#divPriority").load("ReadPriorityDetails");
-            $('#PriorityGrid').empty();
-            //  LoadPriorityGrid();
-        });
-
-
-        $("#tabCritical").click(function () {
-            $("#divCritical").load("ReadCritical");
-            $('#CriticalGrid').empty();
-            //LoadCriticalGrid();
-        });
-
-
+        })
 
     });
 </script>
